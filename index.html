@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abbas Zoeb | Visionary. Builder. Philosopher.</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">AZ</a>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link active" data-section="hero">Home</a>
+                <a href="#journey" class="nav-link" data-section="journey">Journey</a>
+                <a href="#projects" class="nav-link" data-section="projects">Projects</a>
+                <a href="#about" class="nav-link" data-section="about">About</a>
+                <a href="#writings" class="nav-link" data-section="writings">Writings</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#hero" class="mobile-link" data-section="hero">Home</a>
+        <a href="#journey" class="mobile-link" data-section="journey">Journey</a>
+        <a href="#projects" class="mobile-link" data-section="projects">Projects</a>
+        <a href="#about" class="mobile-link" data-section="about">About</a>
+        <a href="#writings" class="mobile-link" data-section="writings">Writings</a>
+        <a href="#contact" class="mobile-link" data-section="contact">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge animate-fade-up">
+                <span class="badge-dot"></span>
+                Building the future of human connection
+            </div>
+            <h1 class="hero-title animate-fade-up delay-1">
+                <span class="hero-greeting">Hello, I'm</span>
+                <span class="hero-name">Abbas Zoeb</span>
+                <span class="hero-tagline">
+                    <span class="typewriter" id="typewriter"></span>
+                    <span class="cursor">|</span>
+                </span>
+            </h1>
+            <p class="hero-description animate-fade-up delay-2">
+                Founder & CEO of <strong>MyPeople</strong> &mdash; an AI-powered platform transforming how humans connect.
+                Former <strong>Google</strong>. Senior Salesforce Architect. Philosopher.
+                Driven by the belief that technology should bring people closer, not further apart.
+            </p>
+            <div class="hero-cta animate-fade-up delay-3">
+                <a href="#journey" class="btn btn-primary">
+                    <span>Explore My Journey</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                    </svg>
+                </a>
+                <a href="#projects" class="btn btn-secondary">
+                    <span>View Projects</span>
+                </a>
+            </div>
+            <div class="hero-stats animate-fade-up delay-4">
+                <div class="stat">
+                    <span class="stat-number" data-count="3">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Companies Built</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="10">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Years in Tech</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="5">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Major Projects</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- Journey / Roadmap Section -->
+    <section class="section journey" id="journey">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag animate-on-scroll">Professional Journey</span>
+                <h2 class="section-title animate-on-scroll">The Road So Far</h2>
+                <p class="section-subtitle animate-on-scroll">
+                    A timeline of building, learning, and pushing boundaries across the tech landscape.
+                </p>
+            </div>
+
+            <div class="roadmap">
+                <!-- The animated SVG path -->
+                <div class="roadmap-path">
+                    <svg class="roadmap-svg" viewBox="0 0 100 2400" preserveAspectRatio="none">
+                        <path class="roadmap-line-bg" d="M50 0 V2400" />
+                        <path class="roadmap-line-progress" d="M50 0 V2400" id="roadmap-progress" />
+                    </svg>
+                </div>
+
+                <!-- Timeline Items -->
+                <div class="roadmap-item left animate-on-scroll" data-year="2023-Present">
+                    <div class="roadmap-node">
+                        <div class="node-ring"></div>
+                        <div class="node-dot"></div>
+                    </div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-card-glow"></div>
+                        <span class="roadmap-date">2023 &mdash; Present</span>
+                        <h3 class="roadmap-title">Founder & CEO</h3>
+                        <h4 class="roadmap-company">MyPeople</h4>
+                        <p class="roadmap-desc">
+                            Building a revolutionary AI-powered social platform that transforms how humans connect.
+                            Leading a team with world-class advisors from VC, product management, engineering,
+                            trust & safety, and linguistic anthropology. Developing precision matching algorithms
+                            that connect people based on shared passions, goals, and aspirations.
+                        </p>
+                        <div class="roadmap-tags">
+                            <span class="tag">AI/ML</span>
+                            <span class="tag">Startup</span>
+                            <span class="tag">Product Strategy</span>
+                            <span class="tag">Team Leadership</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item right animate-on-scroll" data-year="2021-2023">
+                    <div class="roadmap-node">
+                        <div class="node-ring"></div>
+                        <div class="node-dot"></div>
+                    </div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-card-glow"></div>
+                        <span class="roadmap-date">Senior Role</span>
+                        <h3 class="roadmap-title">Sr. Salesforce Lead Developer / Architect</h3>
+                        <h4 class="roadmap-company">Enterprise Solutions &bull; New Jersey</h4>
+                        <p class="roadmap-desc">
+                            Led complex Salesforce architecture and development initiatives. Analyzed intricate
+                            data and business processes related to legacy systems. Transformed business requirements
+                            into detailed technical specifications. Bridged the gap between technical teams and
+                            non-technical stakeholders at all levels.
+                        </p>
+                        <div class="roadmap-tags">
+                            <span class="tag">Salesforce</span>
+                            <span class="tag">Architecture</span>
+                            <span class="tag">Lead Developer</span>
+                            <span class="tag">Legacy Migration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item left animate-on-scroll" data-year="Google">
+                    <div class="roadmap-node">
+                        <div class="node-ring"></div>
+                        <div class="node-dot"></div>
+                    </div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-card-glow"></div>
+                        <span class="roadmap-date">Pivotal Role</span>
+                        <h3 class="roadmap-title">Software Engineer</h3>
+                        <h4 class="roadmap-company">Google</h4>
+                        <p class="roadmap-desc">
+                            Held a pivotal role at one of the world's most innovative technology companies.
+                            Gained deep exposure to world-class engineering practices, scalable systems,
+                            and the power of technology to impact billions of users. This experience laid
+                            the foundation for the vision behind MyPeople.
+                        </p>
+                        <div class="roadmap-tags">
+                            <span class="tag">Google</span>
+                            <span class="tag">Scalable Systems</span>
+                            <span class="tag">Engineering Excellence</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item right animate-on-scroll" data-year="Education">
+                    <div class="roadmap-node">
+                        <div class="node-ring"></div>
+                        <div class="node-dot"></div>
+                    </div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-card-glow"></div>
+                        <span class="roadmap-date">Foundation</span>
+                        <h3 class="roadmap-title">Computer Science / Software Development</h3>
+                        <h4 class="roadmap-company">Seneca College &bull; Toronto, Canada</h4>
+                        <p class="roadmap-desc">
+                            Built a strong technical foundation in computer science and software engineering.
+                            Developed skills in Java, Android development, and database systems.
+                            The rigorous program ignited a passion for building technology that
+                            serves humanity.
+                        </p>
+                        <div class="roadmap-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">Android</span>
+                            <span class="tag">SQLite</span>
+                            <span class="tag">CS Fundamentals</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Constellation -->
+            <div class="skills-section animate-on-scroll">
+                <h3 class="skills-title">Technical Universe</h3>
+                <div class="skills-grid">
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">AI / Machine Learning</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">Salesforce</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">JavaScript</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">Java</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">C# / .NET</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">Python</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">Android</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">System Architecture</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">Product Strategy</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">Cloud / Azure</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">Docker</span>
+                    </div>
+                    <div class="skill-orb">
+                        <div class="skill-orb-glow"></div>
+                        <span class="skill-name">Team Leadership</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag animate-on-scroll">Featured Work</span>
+                <h2 class="section-title animate-on-scroll">What I've Built</h2>
+                <p class="section-subtitle animate-on-scroll">
+                    From AI-powered social platforms to astrology computation engines &mdash;
+                    each project is a story of solving real problems.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- MyPeople -->
+                <div class="project-card featured animate-on-scroll">
+                    <div class="project-card-bg"></div>
+                    <div class="project-number">01</div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type">Startup &bull; Social Platform</span>
+                            <div class="project-links">
+                                <a href="https://themypeopleapp.com" target="_blank" rel="noopener" class="project-link" title="Visit Website">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                        <polyline points="15 3 21 3 21 9"/>
+                                        <line x1="10" y1="14" x2="21" y2="3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">MyPeople</h3>
+                        <p class="project-desc">
+                            A revolutionary AI-powered social media platform that places genuine human
+                            interactions at its core. MyPeople enables users to connect precisely and
+                            instantly based on shared passions, goals, and aspirations. The AI precision
+                            matching engine finds exactly who you want to connect with, diving deeper
+                            into niches never possible before.
+                        </p>
+                        <div class="project-why">
+                            <h4>Why I Built This</h4>
+                            <p>
+                                I envisioned a platform that transforms digital human interactions. In a world
+                                where social media often creates superficial connections, MyPeople was born from
+                                the dream of making technology bring people genuinely closer &mdash; deeper and faster.
+                                Think of Aria, a student arriving alone in a new country, instantly finding locals
+                                who share her exact passions. That's the future we're building.
+                            </p>
+                        </div>
+                        <div class="project-tech">
+                            <span>AI/ML</span>
+                            <span>Matching Algorithms</span>
+                            <span>Privacy-First</span>
+                            <span>Social Platform</span>
+                            <span>Mobile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VedAstro -->
+                <div class="project-card animate-on-scroll">
+                    <div class="project-card-bg"></div>
+                    <div class="project-number">02</div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type">Open Source &bull; Computation Platform</span>
+                            <div class="project-links">
+                                <a href="#" class="project-link coming-soon" title="Coming Soon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                    </svg>
+                                    <span class="coming-soon-badge">Coming Soon</span>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">VedAstro</h3>
+                        <p class="project-desc">
+                            Contributing to a 9-year-old open-source Vedic astrology computation platform
+                            that democratizes complex astrological calculations. Features include life event
+                            prediction, marriage compatibility analysis, horoscope generation with interactive
+                            sky charts, and the world's first open-source Vedic AI astrologer.
+                        </p>
+                        <div class="project-why">
+                            <h4>Why This Matters</h4>
+                            <p>
+                                Inspired by the principle that ancient sage Parashara taught astrology freely,
+                                this project makes advanced predictive astrology accessible to everyone. It bridges
+                                the ancient wisdom of Vedic traditions with modern computation, featuring
+                                ML-trained models on 15,000+ birth charts for accuracy.
+                            </p>
+                        </div>
+                        <div class="project-tech">
+                            <span>C# / .NET</span>
+                            <span>Blazor WASM</span>
+                            <span>Azure Functions</span>
+                            <span>Python</span>
+                            <span>Docker</span>
+                            <span>AI/ML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ai-Maps -->
+                <div class="project-card animate-on-scroll">
+                    <div class="project-card-bg"></div>
+                    <div class="project-number">03</div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type">Tool &bull; Data Intelligence</span>
+                            <div class="project-links">
+                                <a href="#" class="project-link coming-soon" title="Coming Soon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                    </svg>
+                                    <span class="coming-soon-badge">Coming Soon</span>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">AI Maps &mdash; Reviews Intelligence</h3>
+                        <p class="project-desc">
+                            An intelligent reviews scraping and analysis platform built with JavaScript.
+                            Designed to aggregate, analyze, and extract meaningful insights from review
+                            data across platforms, enabling data-driven decision making for businesses
+                            and consumers alike.
+                        </p>
+                        <div class="project-why">
+                            <h4>Why I Built This</h4>
+                            <p>
+                                In a world drowning in reviews, finding genuine signal in the noise is hard.
+                                This tool leverages AI to cut through the clutter, helping people and businesses
+                                understand real sentiment and make better decisions based on authentic feedback.
+                            </p>
+                        </div>
+                        <div class="project-tech">
+                            <span>JavaScript</span>
+                            <span>Web Scraping</span>
+                            <span>Data Analysis</span>
+                            <span>AI/NLP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salesforce Work -->
+                <div class="project-card animate-on-scroll">
+                    <div class="project-card-bg"></div>
+                    <div class="project-number">04</div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type">Enterprise &bull; CRM Architecture</span>
+                        </div>
+                        <h3 class="project-title">Enterprise Salesforce Solutions</h3>
+                        <p class="project-desc">
+                            Architected and led the development of complex Salesforce CRM solutions
+                            for enterprise clients. Designed intricate formulas, validation rules,
+                            and automated flows. Led legacy system migrations, transforming outdated
+                            business processes into streamlined digital workflows.
+                        </p>
+                        <div class="project-why">
+                            <h4>The Impact</h4>
+                            <p>
+                                Every enterprise carries the weight of legacy systems. My work focused on
+                                understanding architectures that had been built over decades, identifying
+                                inefficiencies, and designing improved workflows that saved teams countless
+                                hours while maintaining data integrity and business continuity.
+                            </p>
+                        </div>
+                        <div class="project-tech">
+                            <span>Salesforce</span>
+                            <span>Apex</span>
+                            <span>Lightning</span>
+                            <span>Integration</span>
+                            <span>Architecture</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Personal) -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag animate-on-scroll">Beyond the Code</span>
+                <h2 class="section-title animate-on-scroll">Who I Am</h2>
+                <p class="section-subtitle animate-on-scroll">
+                    The person behind the keyboard &mdash; philosopher, seeker, human.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-main animate-on-scroll">
+                    <div class="about-card glass-card">
+                        <h3 class="about-card-title">Philosopher & Visionary</h3>
+                        <p>
+                            I describe myself as a philosopher and a visionary with a deep inclination
+                            to learning &mdash; from fractal geometry to the Hindu concept of Brahman,
+                            from quantum mechanics to the cosmos. I believe the most profound truths
+                            lie at the intersection of science, spirituality, and human consciousness.
+                        </p>
+                        <p>
+                            My curiosity knows no boundaries. Whether I'm exploring panpsychism (the
+                            idea that consciousness is fundamental to all matter), studying the
+                            interconnected web of life across spiritual traditions, or building
+                            technology that connects humans &mdash; I'm driven by the same question:
+                            <em>How do we make deeper, more authentic connections?</em>
+                        </p>
+                    </div>
+
+                    <div class="about-card glass-card">
+                        <h3 class="about-card-title">A Writer's Mind</h3>
+                        <p>
+                            I write to make sense of the world. My Medium articles explore the
+                            landscapes where science meets spirituality, where modern culture
+                            collides with ancient wisdom. Topics range from the spectrum of
+                            consciousness and the harmonic universe to reflections on generational
+                            shifts and the complexities of human relationships.
+                        </p>
+                        <p>
+                            Writing is how I process the cosmos-sized questions that keep me up
+                            at night. It's my way of contributing to the conversations that matter.
+                        </p>
+                    </div>
+
+                    <div class="about-card glass-card">
+                        <h3 class="about-card-title">Roots & Identity</h3>
+                        <p>
+                            Coming from the Bohra community, I carry a rich cultural heritage that
+                            shapes my worldview. My journey from studying in Toronto to building in the
+                            United States has given me a global perspective that I bring into everything
+                            I create. I believe that understanding diverse cultures and traditions
+                            is essential to building technology that truly serves everyone.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="about-sidebar animate-on-scroll">
+                    <div class="about-interests glass-card">
+                        <h3 class="about-card-title">What Fascinates Me</h3>
+                        <ul class="interest-list">
+                            <li>
+                                <span class="interest-icon">&#9672;</span>
+                                <div>
+                                    <strong>Fractal Geometry</strong>
+                                    <span>The infinite patterns within patterns</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="interest-icon">&#9672;</span>
+                                <div>
+                                    <strong>Quantum Physics</strong>
+                                    <span>The fundamental fabric of reality</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="interest-icon">&#9672;</span>
+                                <div>
+                                    <strong>Consciousness Studies</strong>
+                                    <span>Brahman, panpsychism, and the Tao</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="interest-icon">&#9672;</span>
+                                <div>
+                                    <strong>Vedic Sciences</strong>
+                                    <span>Ancient computational wisdom</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="interest-icon">&#9672;</span>
+                                <div>
+                                    <strong>Cosmology</strong>
+                                    <span>From quantum to cosmos</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="interest-icon">&#9672;</span>
+                                <div>
+                                    <strong>Photography</strong>
+                                    <span>Capturing moments of wonder</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="interest-icon">&#9672;</span>
+                                <div>
+                                    <strong>Creative Arts</strong>
+                                    <span>Acting, modeling, expression</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="about-quote glass-card">
+                        <blockquote>
+                            "Connecting humans, deeper & faster &mdash; that's not just a mission,
+                            it's a way of seeing the world."
+                        </blockquote>
+                        <cite>&mdash; Abbas Zoeb</cite>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Writings Section -->
+    <section class="section writings" id="writings">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag animate-on-scroll">Thoughts & Ideas</span>
+                <h2 class="section-title animate-on-scroll">My Writings</h2>
+                <p class="section-subtitle animate-on-scroll">
+                    Explorations at the intersection of science, spirituality, and the human experience.
+                </p>
+            </div>
+
+            <div class="writings-grid">
+                <a href="https://medium.com/@azoeb27/the-harmonic-universe-science-spirituality-and-the-spectrum-of-consciousness-9d6bfd063960"
+                   target="_blank" rel="noopener" class="writing-card animate-on-scroll">
+                    <div class="writing-card-bg"></div>
+                    <span class="writing-date">September 2023</span>
+                    <h3 class="writing-title">The Harmonic Universe: Science, Spirituality, and the Spectrum of Consciousness</h3>
+                    <p class="writing-excerpt">
+                        Exploring panpsychism and the philosophical perspective that everything possesses
+                        a degree of consciousness &mdash; from rivers and rocks to subatomic particles.
+                        A journey through Brahman, Tao, and the interconnected web of life.
+                    </p>
+                    <span class="writing-read-more">Read on Medium &rarr;</span>
+                </a>
+
+                <a href="https://medium.com/@azoeb27/the-young-witches-of-generation-z-5b079132636"
+                   target="_blank" rel="noopener" class="writing-card animate-on-scroll">
+                    <div class="writing-card-bg"></div>
+                    <span class="writing-date">September 2023</span>
+                    <h3 class="writing-title">The Young Witches of Generation Z</h3>
+                    <p class="writing-excerpt">
+                        A deep dive into how Generation Z is reshaping spiritual practices and ancient
+                        wisdom traditions, blending modern culture with mystical exploration in unprecedented ways.
+                    </p>
+                    <span class="writing-read-more">Read on Medium &rarr;</span>
+                </a>
+
+                <a href="https://medium.com/@azoeb27/why-so-many-of-us-still-arent-married-8f9cdda3aebc"
+                   target="_blank" rel="noopener" class="writing-card animate-on-scroll">
+                    <div class="writing-card-bg"></div>
+                    <span class="writing-date">August 2025</span>
+                    <h3 class="writing-title">Emotionally Unavailable &mdash; The Marriage Problem</h3>
+                    <p class="writing-excerpt">
+                        A mirror for the Bohra community. A candid reflection on modern relationships,
+                        emotional availability, and the evolving landscape of marriage in today's world.
+                    </p>
+                    <span class="writing-read-more">Read on Medium &rarr;</span>
+                </a>
+            </div>
+
+            <div class="writings-cta animate-on-scroll">
+                <a href="https://medium.com/@azoeb27" target="_blank" rel="noopener" class="btn btn-secondary">
+                    <span>Read All Articles on Medium</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="section-header">
+                    <span class="section-tag animate-on-scroll">Get in Touch</span>
+                    <h2 class="section-title animate-on-scroll">Let's Connect</h2>
+                    <p class="section-subtitle animate-on-scroll">
+                        Whether you want to collaborate, discuss ideas, or just say hello &mdash;
+                        I'd love to hear from you.
+                    </p>
+                </div>
+
+                <div class="contact-links animate-on-scroll">
+                    <a href="https://www.linkedin.com/in/abbas-zoeb-5633b513a/" target="_blank" rel="noopener" class="contact-card glass-card">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/abbas-MyPeople" target="_blank" rel="noopener" class="contact-card glass-card">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://medium.com/@azoeb27" target="_blank" rel="noopener" class="contact-card glass-card">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+                        </svg>
+                        <span>Medium</span>
+                    </a>
+                    <a href="https://themypeopleapp.com" target="_blank" rel="noopener" class="contact-card glass-card">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        <span>MyPeople</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <span class="footer-logo">AZ</span>
+                <p class="footer-text">
+                    Designed & built by Abbas Zoeb &mdash; connecting humans, deeper & faster.
+                </p>
+                <p class="footer-copyright">&copy; 2024 Abbas Zoeb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
