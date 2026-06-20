@@ -7,13 +7,19 @@ transparent costs, savings, and fees — starting with the restaurant industry.
 
 ## Stack
 
-Plain, dependency-free static site — fast and host-anywhere:
+Plain, dependency-free static site — fast and host-anywhere. **No build step, no frameworks** — yet it ships flagship-tier effects, all hand-written in vanilla JS/CSS:
 
 - `index.html` — page content & structure
-- `styles.css` — design system & responsive layout
-- `script.js` — sticky nav, mobile menu, scroll-reveal animations
+- `styles.css` — design system, bento grids, responsive layout
+- `script.js` — interaction engine
 
-No build step. No frameworks.
+### Effects (all dependency-free, 60fps, `prefers-reduced-motion` aware)
+- **Live WebGL aurora shader** hero background (cursor-reactive simplex-noise flow; auto CSS-gradient fallback if WebGL is unavailable; pauses when off-screen)
+- **Bento-grid** about & services sections
+- **Spotlight cards** (glow follows cursor) + subtle **3D tilt**
+- **Magnetic buttons** + **custom cursor** glow (desktop / fine-pointer only)
+- **Kinetic rotating headline**, **count-up stats**, **infinite marquees**
+- **Scroll-progress bar**, staggered **scroll-reveal**, glassmorphic sticky nav
 
 ## Run locally
 
