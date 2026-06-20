@@ -9,9 +9,15 @@ transparent costs, savings, and fees — starting with the restaurant industry.
 
 Plain, dependency-free static site — fast and host-anywhere. **No build step, no frameworks** — yet it ships flagship-tier effects, all hand-written in vanilla JS/CSS:
 
-- `index.html` — page content & structure
-- `styles.css` — design system, bento grids, responsive layout
-- `script.js` — interaction engine
+**Pages**
+- `index.html` — Home (hook + routing, WebGL hero)
+- `about.html` — About / Why Abbas (story, career timeline, principles)
+- `restaurants.html` — For Restaurants (use-cases, process, transparency, case study, FAQ)
+
+**Shared**
+- `styles.css` — design system, bento grids, components, responsive/mobile layout
+- `script.js` — interaction engine (shared across all pages)
+- `assets/` — optimized headshot (`abbas-800/480.{webp,jpg}`, `abbas.png` master)
 
 ### Effects (all dependency-free, 60fps, `prefers-reduced-motion` aware)
 - **Live WebGL aurora shader** hero background (cursor-reactive simplex-noise flow; auto CSS-gradient fallback if WebGL is unavailable; pauses when off-screen)
@@ -56,9 +62,18 @@ The form currently uses a `mailto:` action as a no-backend fallback. For reliabl
 delivery, point it at a form service (Formspree, Netlify Forms, Basin, etc.) by
 changing the `<form action="...">` in `index.html`.
 
+## Mobile
+
+Mobile is treated as the primary experience:
+- WebGL hero renders at lower internal resolution on phones; falls back to a CSS
+  gradient on reduced-motion, data-saver, or low-memory devices.
+- Cursor/tilt/magnetic effects auto-disable on touch.
+- 16px form inputs (no iOS zoom-on-focus), 44px minimum tap targets.
+- FAQ uses native `<details>` accordions — accessible and reliable on touch.
+- Verified: no horizontal overflow at 360 / 390 / 768px.
+
 ## TODO / placeholders to confirm
 
-- [ ] Real LinkedIn profile URL (currently `linkedin.com/in/abbas-zoeb`)
-- [ ] Final business email once the custom domain is ready
-- [ ] Add a real headshot in the About card (replaces the "AZ" monogram)
-- [ ] Confirm which client logos may be displayed (only Hard Rock Cafe is currently shown by name)
+- [ ] Final business email once the custom domain is ready (currently `azoeb27@gmail.com`)
+- [ ] Confirm which additional client logos may be displayed (only Hard Rock Cafe is named)
+- [ ] Wire the contact form to a delivery service (Formspree/Netlify) for reliability

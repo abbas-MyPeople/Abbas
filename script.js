@@ -168,9 +168,15 @@
       '#070a12';
   };
 
+  // Skip the shader on reduced-motion, data-saver, or low-memory devices.
+  const lowEnd =
+    (navigator.connection && navigator.connection.saveData) ||
+    (navigator.deviceMemory && navigator.deviceMemory < 4);
+
   let gl;
-  try { gl = canvas.getContext('webgl', { antialias: true, alpha: false }); } catch (_) {}
-  if (!gl || reduce) { cssFallback(); return; }
+  if (!canvas) return;
+  try { gl = canvas.getContext('webgl', { antialias: true, alpha: false, powerPreference: 'low-power' }); } catch (_) {}
+  if (!gl || reduce || lowEnd) { cssFallback(); return; }
 
   const vsrc = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`;
   const fsrc = `
@@ -248,10 +254,12 @@
   let mx = 0.5, my = 0.5, tmx = 0.5, tmy = 0.5;
   addEventListener('mousemove', (e) => { tmx = e.clientX / innerWidth; tmy = 1 - e.clientY / innerHeight; }, { passive: true });
 
-  const dpr = Math.min(devicePixelRatio || 1, 1.5);
+  // Mobile renders at a lower internal resolution (gradient upscales cleanly) to save battery/GPU.
+  const mobile = innerWidth < 820 || !fine;
+  const pxr = Math.min(devicePixelRatio || 1, mobile ? 1 : 1.5) * (mobile ? 0.7 : 1);
   const resize = () => {
     const w = canvas.clientWidth, h = canvas.clientHeight;
-    canvas.width = Math.floor(w * dpr); canvas.height = Math.floor(h * dpr);
+    canvas.width = Math.max(1, Math.floor(w * pxr)); canvas.height = Math.max(1, Math.floor(h * pxr));
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.uniform2f(uRes, canvas.width, canvas.height);
   };
