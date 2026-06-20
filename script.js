@@ -218,52 +218,107 @@
     catSel.appendChild(o);
   });
 
+  // Price shown as a tier ($ / $$ / $$$), derived from the cheapest budget the tool fits.
+  // (Exact figures change constantly; tiers stay accurate and carry no per-vendor liability.)
+  const TIERS = ['$', '$$', '$$$'];
+  const TIER_WORD = { '$':'budget-friendly', '$$':'mid-range', '$$$':'premium / enterprise' };
+  const tierOf = (t) => TIERS[Math.min(...t.b.map((x) => BUDGET_RANK[x]))];
+
+  let captured = false; // once a visitor shares an email, the finder stays unlocked for them
+
   function card(t, type, budget) {
+    const tier = tierOf(t);
     const cautions = [t.not];
     if (!t.t.includes(type)) cautions.push(`more commonly a fit for ${t.t.map((x) => TYPE_LABEL[x]).slice(0, 2).join(' / ')}`);
     if (BUDGET_RANK[budget] < Math.min(...t.b.map((x) => BUDGET_RANK[x]))) cautions.push('may stretch a ' + budget + ' budget');
     return `<div class="tool">
         <span class="tool__name">${t.n}</span>
-        <span class="tool__price">${t.p}</span>
+        <span class="tool__price" title="${TIER_WORD[tier]}">${tier} · ${TIER_WORD[tier]}</span>
         <p class="tool__what">${t.w}</p>
         <p class="tool__why"><span class="yes">Why it fits:</span> ${t.fit}</p>
         <p class="tool__why"><span class="no">Watch-out:</span> ${cautions.join(' · ')}</p>
-        <a class="tool__link" href="${t.u}" target="_blank" rel="noopener">Visit ${t.n} →</a>
+        <a class="tool__link" href="${t.u}" target="_blank" rel="noopener nofollow">Visit ${t.n} →</a>
       </div>`;
+  }
+
+  function matchList(type, size, problem, goal, budget) {
+    return TOOLS
+      .filter((t) => t.pr.includes(problem))
+      .map((t) => {
+        let score = 4;
+        if (t.t.includes(type)) score += 2;
+        if (t.s.includes(size)) score += 1;
+        if (t.g.includes(goal)) score += 1;
+        if (t.b.includes(budget)) score += 1;
+        return { t, score };
+      })
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5);
   }
 
   function render() {
     const [type, size, problem, goal, comfort, budget] = sels.map((s) => s.value);
     const category = catSel.value;
+    const browse = category !== 'any';
 
-    let list, lead;
-    if (category !== 'any') {
-      list = TOOLS
+    if (browse) {
+      const list = TOOLS
         .filter((t) => t.c === category)
         .map((t) => ({ t, score: (t.t.includes(type) ? 2 : 0) + (t.s.includes(size) ? 1 : 0) + (t.b.includes(budget) ? 1 : 0) }))
         .sort((a, b) => b.score - a.score)
         .slice(0, 8);
-      lead = `<p class="finder__lead">${category} — options worth a look (sorted for a ${TYPE_LABEL[type]} restaurant):</p>`;
+      resultsEl.innerHTML =
+        `<p class="finder__lead">${category} — options worth a look (sorted for a ${TYPE_LABEL[type]} restaurant):</p>` +
+        list.map(({ t }) => card(t, type, budget)).join('');
     } else {
-      list = TOOLS
-        .filter((t) => t.pr.includes(problem))
-        .map((t) => {
-          let score = 4;
-          if (t.t.includes(type)) score += 2;
-          if (t.s.includes(size)) score += 1;
-          if (t.g.includes(goal)) score += 1;
-          if (t.b.includes(budget)) score += 1;
-          return { t, score };
-        })
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 5);
-      lead = `<p class="finder__lead">For a ${TYPE_LABEL[type]} restaurant focused on ${PROBLEM_LABEL[problem]}, here's what's worth a look:</p>`;
-    }
+      const list = matchList(type, size, problem, goal, budget);
+      const lead = `<p class="finder__lead">Based on that, I matched ${list.length} tool${list.length !== 1 ? 's' : ''} for a ${TYPE_LABEL[type]} restaurant focused on ${PROBLEM_LABEL[problem]}.</p>`;
 
-    const cards = list.map(({ t }) => card(t, type, budget)).join('');
-    resultsEl.innerHTML = list.length
-      ? lead + cards
-      : '<p class="finder__empty">Adjust the options above and I’ll show matching tools.</p>';
+      if (!captured) {
+        resultsEl.innerHTML = lead +
+          `<div class="teaser">${list.map(({ t }) => `<span class="teaser__chip">${t.n}</span>`).join('')}</div>` +
+          `<form class="lead-capture" id="leadCapture" novalidate>
+             <p class="lead-capture__pitch">Enter your email and I'll send your full shortlist — what each tool does, its price tier, the catch, and a link — and personally set up your free video call.</p>
+             <div class="lead-capture__row">
+               <input type="email" id="leadEmail" required placeholder="you@restaurant.com" aria-label="Your email" />
+               <button type="submit" class="btn btn--primary" id="leadBtn">Email me my shortlist</button>
+             </div>
+             <p class="lead-capture__note" id="leadNote">Free. No spam. I read every one personally.</p>
+           </form>`;
+        const lf = document.getElementById('leadCapture');
+        lf.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const email = document.getElementById('leadEmail').value.trim();
+          const note = document.getElementById('leadNote');
+          const lb = document.getElementById('leadBtn');
+          if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { note.textContent = 'Please enter a valid email.'; note.classList.add('error'); return; }
+          lb.disabled = true; lb.textContent = 'Sending…'; note.classList.remove('error');
+          const payload = {
+            email,
+            profile: `${TYPE_LABEL[type]} · ${size} · challenge: ${PROBLEM_LABEL[problem]} · goal: ${goal} · tech comfort: ${comfort} · budget: ${budget}`,
+            matched_tools: list.map((x) => x.t.n).join(', '),
+            _subject: 'Tool-finder lead — AZ Integrations', _template: 'table', _captcha: 'false',
+          };
+          try {
+            const res = await fetch('https://formsubmit.co/ajax/azoeb27@gmail.com', {
+              method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || data.success === false || data.success === 'false') throw new Error('x');
+            captured = true; render();
+          } catch (err) {
+            lb.disabled = false; lb.textContent = 'Email me my shortlist';
+            note.classList.add('error');
+            note.innerHTML = 'Couldn’t send just now — email me at <a href="mailto:azoeb27@gmail.com">azoeb27@gmail.com</a> and I’ll send your shortlist.';
+          }
+        });
+      } else {
+        resultsEl.innerHTML = lead +
+          '<p class="finder__sent">Here’s your shortlist (also on its way to your inbox):</p>' +
+          list.map(({ t }) => card(t, type, budget)).join('');
+      }
+    }
 
     const closeMsg = {
       low: "Honestly? Wiring these together, integrating your POS, and keeping them running is a lot — and easy to get wrong. That's exactly why my team and I exist: we do it end to end, then stay with you as it evolves.",
