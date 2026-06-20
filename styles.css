@@ -198,7 +198,9 @@ em { font-style: italic; color: var(--accent); }
 .finder__sel:hover { background-color: rgba(192,73,43,0.14); }
 .finder__sel:focus { outline: none; box-shadow: 0 3px 0 -1px var(--accent-deep); }
 
-.finder__results { margin-top: 36px; display: grid; gap: 14px; }
+.finder__browse { margin-top: 22px; font-size: 1rem; color: var(--muted); }
+.finder__browse .finder__sel { font-size: 1rem; }
+.finder__results { margin-top: 30px; display: grid; gap: 14px; }
 .finder__lead { font-family: "Fraunces", serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 4px; }
 .tool { display: grid; grid-template-columns: 1fr auto; gap: 6px 18px; padding: 20px 22px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; align-items: start; }
 .tool__name { font-family: "Fraunces", serif; font-size: 1.12rem; font-weight: 600; color: var(--ink); }
