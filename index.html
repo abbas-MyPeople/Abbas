@@ -3,235 +3,182 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AZ Integrations — AI that earns its keep, for restaurants</title>
-  <meta name="description" content="AZ Integrations helps restaurants adopt the right AI tools — implemented for you, with every cost and saving on the table. Founded by Abbas Zoeb (ex-Google, WSO2), owner of Wok & Karahi Texas." />
-  <meta name="theme-color" content="#070a12" />
-  <meta property="og:title" content="AZ Integrations — AI that earns its keep" />
-  <meta property="og:description" content="The human who makes AI practical for your restaurant. Transparent costs, real savings, done-for-you." />
+  <title>AZ Integrations — Restaurant technology, done for you by Abbas Zoeb</title>
+  <meta name="description" content="An engineer who also owns a restaurant. I cut through the AI hype and set up only the technology that pays off — phone, ordering, reviews, marketing, operations — and manage it for you. Spring, TX." />
+  <meta name="theme-color" content="#f4eee2" />
+  <meta property="og:title" content="AZ Integrations — Restaurant technology, done for you" />
+  <meta property="og:description" content="A software engineer who owns a restaurant. I pick what's worth it, build it, and run it — every cost and saving in plain English." />
   <meta property="og:type" content="website" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070a12'/%3E%3Ctext x='50%25' y='54%25' font-family='Arial,Helvetica,sans-serif' font-size='30' font-weight='700' fill='%2338e1c4' text-anchor='middle' dominant-baseline='middle'%3EAZ%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b1a17'/%3E%3Ctext x='50%25' y='55%25' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23c0492b' text-anchor='middle' dominant-baseline='middle'%3EA%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-  <div class="cursor" id="cursor" aria-hidden="true"></div>
-  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
-
   <!-- NAV -->
   <header class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="index.html" class="brand brand--word" aria-label="AZ Integrations home" data-magnetic><span class="az">AZ</span><span class="int">Integrations</span></a>
+    <div class="wrap nav__inner">
+      <a href="#top" class="brand" aria-label="AZ Integrations">AZ&nbsp;Integrations</a>
       <nav class="nav__links" aria-label="Primary">
-        <a href="about.html">About Abbas</a>
-        <a href="restaurants.html">For Restaurants</a>
-        <a href="#contact">Contact</a>
-        <a href="#contact" class="btn btn--primary nav__cta" data-magnetic>Book a free consult</a>
+        <a href="#services">What I do</a>
+        <a href="#approach">How it works</a>
+        <a href="#contact" class="nav__cta">Book a free call</a>
       </nav>
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
 
   <main id="top">
     <!-- HERO -->
     <section class="hero">
-      <canvas class="hero__canvas" id="gl" aria-hidden="true"></canvas>
-      <div class="hero__veil" aria-hidden="true"></div>
-      <div class="container hero__inner">
-        <p class="pill reveal"><span class="pill__dot"></span> AI integrations for restaurants · Spring, TX</p>
-        <h1 class="hero__title reveal">
-          AI that<br />
-          <span class="grad rotator">
-            <span class="rotator__static">earns its keep for</span>
-            <span class="rotator__words" id="rotator" aria-hidden="true">
-              <span>restaurants.</span>
-              <span>your floor.</span>
-              <span>your phone.</span>
-              <span>your margins.</span>
-            </span>
-          </span>
-        </h1>
-        <p class="hero__sub reveal">
-          Your restaurant is pitched a dozen "AI" tools a week. I'm the human who cuts through
-          the noise — choosing what's worth it, setting it up for you, and putting every cost,
-          saving, and fee on a single transparent page. You run the restaurant. I handle the tech.
-        </p>
-        <div class="hero__actions reveal">
-          <a href="#contact" class="btn btn--primary" data-magnetic>Book a free consultation</a>
-          <a href="restaurants.html" class="btn btn--ghost" data-magnetic>See what I do for restaurants <span class="arrow">→</span></a>
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="kicker reveal">AI &amp; automation for restaurants</p>
+          <h1 class="hero__title reveal">The technology your restaurant needs — handled by someone who <em>runs one.</em></h1>
+          <p class="hero__lead reveal">You get pitched "AI" every week and never have time to sort the hype from the useful. I'm a software engineer who also owns a restaurant — so I choose only what actually pays off, set it all up, and keep it running. Every cost and saving laid out in plain English.</p>
+          <div class="hero__cta reveal">
+            <a href="#contact" class="btn btn--primary">Book a free consultation</a>
+            <a href="#services" class="btn btn--text">See what I do <span aria-hidden="true">→</span></a>
+          </div>
+          <ul class="creds reveal">
+            <li><strong>Ex-Google</strong> software engineer</li>
+            <li><strong>10+ years</strong> building integrations</li>
+            <li><strong>Owner</strong> of an award-winning restaurant</li>
+          </ul>
         </div>
-        <div class="hero__trust reveal">
-          <span class="hero__trust-label">Built on experience from</span>
-          <div class="marquee marquee--hero" aria-label="Background and clients">
-            <div class="marquee__track">
-              <span>Google</span><span>·</span><span>WSO2</span><span>·</span><span>Hard Rock Cafe</span><span>·</span><span>Universities</span><span>·</span><span>Government</span><span>·</span><span>Healthcare</span><span>·</span>
-              <span>Google</span><span>·</span><span>WSO2</span><span>·</span><span>Hard Rock Cafe</span><span>·</span><span>Universities</span><span>·</span><span>Government</span><span>·</span><span>Healthcare</span><span>·</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a href="#stats" class="scroll-cue" aria-label="Scroll down"><span></span></a>
-    </section>
-
-    <!-- STATS -->
-    <section class="stats-band" id="stats">
-      <div class="container stats-grid">
-        <div class="statc reveal"><span class="statc__num" data-count="30" data-suffix="+">0</span><span class="statc__lbl">Enterprise accounts served</span></div>
-        <div class="statc reveal"><span class="statc__num" data-count="10" data-suffix="+">0</span><span class="statc__lbl">Years in solutions &amp; integration</span></div>
-        <div class="statc reveal"><span class="statc__num" data-count="24" data-suffix="/7">0</span><span class="statc__lbl">AI working while you sleep</span></div>
-        <div class="statc reveal"><span class="statc__num" data-count="100" data-suffix="%">0</span><span class="statc__lbl">Transparent costs &amp; fees</span></div>
-      </div>
-    </section>
-
-    <!-- THE DIFFERENCE -->
-    <section class="section" id="why">
-      <div class="container">
-        <div class="section__head reveal">
-          <p class="eyebrow">Why AZ Integrations</p>
-          <h2 class="section__title">Not a vendor. An operator who happens to be an engineer.</h2>
-          <p class="lead lead--center">Most "AI for restaurants" pitches come from salespeople. This comes from someone who has shipped integrations for global enterprises <em>and</em> runs a busy restaurant of his own.</p>
-        </div>
-        <div class="cards3">
-          <div class="card reveal" data-spotlight data-tilt>
-            <div class="card__icon">🍽️</div>
-            <h3>I run a real restaurant</h3>
-            <p>I own Wok &amp; Karahi in Spring, TX. Every tool is proven in my own kitchen before it ever reaches yours.</p>
-          </div>
-          <div class="card reveal" data-spotlight data-tilt>
-            <div class="card__icon">🏢</div>
-            <h3>Enterprise-grade rigor</h3>
-            <p>Day job: Senior Lead Solutions Architect at WSO2, ex-Google. The same discipline used by Hard Rock and universities — applied to your shop.</p>
-          </div>
-          <div class="card reveal" data-spotlight data-tilt>
-            <div class="card__icon">🧾</div>
-            <h3>Total transparency</h3>
-            <p>Tool costs, expected savings, and my fee — all on one page, before you commit. No black boxes, no surprise invoices.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES OVERVIEW -->
-    <section class="section section--alt" id="services">
-      <div class="container">
-        <div class="section__head reveal">
-          <p class="eyebrow">What we do</p>
-          <h2 class="section__title">Done-for-you AI integrations</h2>
-          <p class="lead lead--center">I connect the AI tools that matter to the systems you already run — so they actually work together.</p>
-        </div>
-        <div class="svc-bento">
-          <div class="card card--svc card--wide reveal" data-spotlight data-tilt>
-            <div class="card__icon">📞</div>
-            <h3>AI phone, ordering &amp; reservations</h3>
-            <p>Never miss a call or booking. AI answering agents (think Lumen-style) that take orders, answer FAQs, and book tables 24/7 — wired into your POS and ordering so menus and prices stay in sync everywhere.</p>
-          </div>
-          <div class="card card--svc reveal" data-spotlight data-tilt>
-            <div class="card__icon">⭐</div>
-            <h3>Reviews &amp; reputation</h3>
-            <p>Automated review requests and AI-assisted replies that grow your rating and bring customers back.</p>
-          </div>
-          <div class="card card--svc reveal" data-spotlight data-tilt>
-            <div class="card__icon">💬</div>
-            <h3>Messaging &amp; marketing</h3>
-            <p>AI-driven SMS, email, and loyalty campaigns that fill slow shifts — without you lifting a finger.</p>
-          </div>
-          <div class="card card--svc reveal" data-spotlight data-tilt>
-            <div class="card__icon">📦</div>
-            <h3>Inventory &amp; operations</h3>
-            <p>Forecasting, scheduling, and back-office automation that cut waste and free your team's time.</p>
-          </div>
-          <div class="card card--svc card--wide reveal" data-spotlight data-tilt>
-            <div class="card__icon">🔗</div>
-            <h3>Custom integrations</h3>
-            <p>Got a unique system or idea? Enterprise-grade, secure integration is my day job — we'll connect anything to anything, the right way.</p>
-          </div>
-        </div>
-        <div class="section__head reveal" style="margin-top:48px;margin-bottom:0">
-          <a href="restaurants.html" class="btn btn--ghost" data-magnetic>See the full restaurant playbook <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- TEASERS -->
-    <section class="section" id="explore">
-      <div class="container">
-        <div class="teasers">
-          <a href="about.html" class="teaser teaser--photo reveal">
+        <div class="hero__portrait reveal">
+          <div class="portrait">
             <picture>
-              <source srcset="assets/abbas-480.webp" type="image/webp" />
-              <img src="assets/abbas-480.jpg" alt="Abbas Zoeb, founder of AZ Integrations" class="photo" width="480" height="480" loading="lazy" />
+              <source srcset="assets/abbas-800.webp" type="image/webp" />
+              <img src="assets/abbas-800.jpg" alt="Abbas Zoeb, founder of AZ Integrations" width="800" height="800" loading="eager" />
             </picture>
-            <div class="teaser__body">
-              <p class="eyebrow">Meet the founder</p>
-              <h3>Abbas Zoeb</h3>
-              <p>Google → enterprise solutions architect → restaurant owner. See the full story and why it matters for your business.</p>
-              <span class="teaser__link">Read my story <span class="arrow">→</span></span>
-            </div>
-          </a>
-          <a href="restaurants.html" class="teaser reveal" data-spotlight>
-            <p class="eyebrow">For restaurant owners</p>
-            <h3>The restaurant playbook</h3>
-            <p>Exactly what I do, why it works, how the engagement runs, what it costs — and answers to every question you'd want to ask before saying yes.</p>
-            <span class="teaser__link">Explore the offering <span class="arrow">→</span></span>
-          </a>
+          </div>
+          <span class="portrait__tag">Abbas Zoeb — Founder</span>
         </div>
       </div>
     </section>
 
-    <!-- PROOF -->
-    <section class="section section--proof section--alt" id="proof">
-      <div class="container section__head reveal">
-        <p class="eyebrow">Credibility</p>
-        <h2 class="section__title">The person who's helped global brands is the one helping you.</h2>
+    <!-- PROBLEM -->
+    <section class="band">
+      <div class="wrap band__inner reveal">
+        <h2 class="h2">Great tools exist. Nobody behind the counter has time to figure them out.</h2>
+        <p class="lead">Thin margins. Hard-to-find staff. Phones ringing through the dinner rush. Reviews quietly deciding whether a stranger walks in. And a new vendor calling every week — each one a separate login, a separate bill, a separate headache. Most owners do nothing, because trusting the wrong one is expensive. That's the gap I close.</p>
       </div>
-      <div class="marquee marquee--big reveal" aria-label="Experience and clients">
-        <div class="marquee__track">
-          <span>Google</span><span class="sep">✦</span><span>WSO2</span><span class="sep">✦</span><span>Hard Rock Cafe</span><span class="sep">✦</span><span>Universities</span><span class="sep">✦</span><span>Government</span><span class="sep">✦</span><span>Healthcare</span><span class="sep">✦</span>
-          <span>Google</span><span class="sep">✦</span><span>WSO2</span><span class="sep">✦</span><span>Hard Rock Cafe</span><span class="sep">✦</span><span>Universities</span><span class="sep">✦</span><span>Government</span><span class="sep">✦</span><span>Healthcare</span><span class="sep">✦</span>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="kicker">What I do</p>
+          <h2 class="h2">A few high-impact things, done properly.</h2>
+        </div>
+        <div class="svc">
+          <article class="svc__item reveal">
+            <span class="svc__num">01</span>
+            <h3>AI phone &amp; online ordering</h3>
+            <p>An AI voice agent answers every call instantly, 24/7 — takes orders, answers the usual questions, books tables — and stays in sync with your POS so nothing is missed or double-entered.</p>
+          </article>
+          <article class="svc__item reveal">
+            <span class="svc__num">02</span>
+            <h3>Reviews &amp; marketing</h3>
+            <p>More 5-star reviews on autopilot, AI-drafted replies in your voice, and win-back texts and emails that quietly fill your slowest shifts — without discount-dumping.</p>
+          </article>
+          <article class="svc__item reveal">
+            <span class="svc__num">03</span>
+            <h3>Operations &amp; automation</h3>
+            <p>Use your own sales data to forecast demand, order smarter, cut food waste, and build schedules that match how busy you'll actually be. Hours of back-office time, gone.</p>
+          </article>
+          <article class="svc__item reveal">
+            <span class="svc__num">04</span>
+            <h3>Custom integrations</h3>
+            <p>Make the apps you already use finally talk to each other — ordering, delivery, POS, accounting — in one tidy, secure flow. Connecting systems is what I do for a living.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY (dark band) -->
+    <section class="story">
+      <div class="wrap story__grid">
+        <div class="reveal">
+          <p class="kicker kicker--light">Why me</p>
+          <h2 class="h2 h2--light">I speak both languages: the kitchen and the code.</h2>
+          <p class="story__p">For over a decade I've built software and integrations — including at <strong>Google</strong> and for brands like <strong>Hard Rock Cafe</strong>. Then I opened <strong>Wok &amp; Karahi</strong>, my own restaurant here in Spring, Texas. We earned a loyal following, strong reviews, and recognition as the <strong>Best Halal Chinese Indo-Pak in Houston (2024)</strong>.</p>
+          <p class="story__p">Running it taught me what no software demo ever could: owners don't need more apps — they need someone who understands the technology <em>and</em> the 7-day-a-week reality of the floor. So I prove every tool in my own restaurant first, then bring you only what's worth it. No hype, no jargon, no surprises.</p>
+        </div>
+        <aside class="quote reveal">
+          <p class="quote__mark" aria-hidden="true">“</p>
+          <p class="quote__text">An engineer who also runs a restaurant. That's a rare thing — and exactly who you want handling your technology.</p>
+          <p class="quote__by">— The idea behind AZ Integrations</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="section" id="approach">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="kicker">How it works</p>
+          <h2 class="h2">Simple, transparent, off your plate.</h2>
+        </div>
+        <ol class="steps">
+          <li class="step reveal"><span class="step__n">1</span><h3>A free conversation</h3><p>We talk through your restaurant and where technology can genuinely help. No cost, no obligation.</p></li>
+          <li class="step reveal"><span class="step__n">2</span><h3>An honest plan</h3><p>One clear page: what each tool costs, what it should save, and my fee — separately and up front. You decide.</p></li>
+          <li class="step reveal"><span class="step__n">3</span><h3>I build it and run it</h3><p>I set everything up, connect it to what you already use, and keep it working. You get back to running the restaurant.</p></li>
+        </ol>
+        <p class="promise reveal">You'll always know exactly what you're paying, what you're saving, and what's my fee — <strong>before</strong> you commit to anything.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--alt" id="faq">
+      <div class="wrap wrap--narrow">
+        <div class="section__head reveal">
+          <p class="kicker">Good questions</p>
+          <h2 class="h2">Everything you'd want to ask first.</h2>
+        </div>
+        <div class="faq reveal">
+          <details><summary>I'm not technical at all. Is this for me?</summary><p>Especially for you. The whole point is that you don't have to understand any of it — that's what you're hiring me for. I explain things in plain language and hand you tools that simply work.</p></details>
+          <details><summary>What will it cost?</summary><p>It depends on what you actually need, and you'll see the full breakdown before committing: each tool's monthly cost, the expected savings, and my fee, listed separately. I'm a premium service, not the cheapest — the goal is for it to clearly pay for itself.</p></details>
+          <details><summary>Will this replace my staff?</summary><p>No — it removes the annoying parts so your team can focus on guests. The AI answers the phone during a rush and handles repetitive admin; your people do the hospitality.</p></details>
+          <details><summary>Is my data and my customers' information safe?</summary><p>Yes. Security is core to my engineering background, and I bring that same standard here — reputable platforms, proper access controls, privacy respected. Your data stays yours.</p></details>
+          <details><summary>Why you, and not the software company directly?</summary><p>A vendor sells you their one product and leaves you to figure it out. I'm independent: I pick the best tools for <em>you</em>, make them work together, prove them in my own restaurant first, and stay accountable for the result.</p></details>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="section section--cta" id="contact">
-      <div class="container cta">
+    <section class="section contact" id="contact">
+      <div class="wrap contact__grid">
         <div class="reveal">
-          <p class="eyebrow">Let's talk</p>
-          <h2 class="section__title">Book a free consultation</h2>
-          <p class="lead">Tell me about your restaurant. I'll come back with where AI can genuinely help — and what it would cost and save. No pressure, no jargon.</p>
+          <p class="kicker">Let's talk</p>
+          <h2 class="h2">Find one thing technology can fix in your restaurant this month.</h2>
+          <p class="lead">Tell me a little about your place. I'll come back with where it can genuinely help — and what it would cost and save. No pressure, no jargon.</p>
           <ul class="contact__list">
-            <li><span>Email</span><a href="mailto:azoeb27@gmail.com" data-magnetic>azoeb27@gmail.com</a></li>
-            <li><span>Phone</span><a href="tel:+14083936716" data-magnetic>(408) 393-6716</a></li>
-            <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/abbas-zoeb-5633b513a" target="_blank" rel="noopener" data-magnetic>linkedin.com/in/abbas-zoeb</a></li>
+            <li><span>Email</span><a href="mailto:azoeb27@gmail.com">azoeb27@gmail.com</a></li>
+            <li><span>Phone</span><a href="tel:+14083936716">(408) 393-6716</a></li>
+            <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/abbas-zoeb-5633b513a" target="_blank" rel="noopener">Abbas Zoeb</a></li>
           </ul>
         </div>
-        <form class="contact__form reveal glow-border" id="contactForm" action="mailto:azoeb27@gmail.com" method="post" enctype="text/plain">
-          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Your name" /></div>
-          <div class="field"><label for="business">Restaurant / business</label><input id="business" name="business" type="text" placeholder="e.g. My Restaurant, Spring TX" /></div>
-          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@business.com" /></div>
-          <div class="field"><label for="message">What would you like help with?</label><textarea id="message" name="message" rows="4" placeholder="Tell me about your restaurant and what you're hoping to improve."></textarea></div>
-          <button type="submit" class="btn btn--primary btn--full" data-magnetic>Send &amp; book my consult</button>
-          <p class="form__note">Prefer email? Reach me directly at <a href="mailto:azoeb27@gmail.com">azoeb27@gmail.com</a>.</p>
+        <form class="form reveal" action="mailto:azoeb27@gmail.com" method="post" enctype="text/plain">
+          <label>Name<input type="text" name="name" required placeholder="Your name" /></label>
+          <label>Restaurant<input type="text" name="restaurant" placeholder="Name &amp; city" /></label>
+          <label>Email<input type="email" name="email" required placeholder="you@restaurant.com" /></label>
+          <label>What's on your mind?<textarea name="message" rows="4" placeholder="A line or two about your restaurant and what you'd like to improve."></textarea></label>
+          <button type="submit" class="btn btn--primary btn--full">Send &amp; book my call</button>
+          <p class="form__note">Or just email me at <a href="mailto:azoeb27@gmail.com">azoeb27@gmail.com</a>.</p>
         </form>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
-    <div class="container footer__inner">
-      <a href="index.html" class="brand brand--word" data-magnetic><span class="az">AZ</span><span class="int">Integrations</span></a>
-      <p class="footer__tag">AI that earns its keep — for restaurants and the businesses that feed their communities.</p>
-      <nav class="footer__links" aria-label="Footer">
-        <a href="about.html">About Abbas</a>
-        <a href="restaurants.html">For Restaurants</a>
-        <a href="#contact">Contact</a>
-        <a href="https://www.linkedin.com/in/abbas-zoeb-5633b513a" target="_blank" rel="noopener">LinkedIn</a>
-      </nav>
-      <p class="footer__copy">© <span id="year"></span> AZ Integrations · Founded by Abbas Zoeb · Spring, TX</p>
+    <div class="wrap footer__inner">
+      <span class="brand">AZ&nbsp;Integrations</span>
+      <p>Restaurant technology, done for you. Founded by Abbas Zoeb · Spring, TX.</p>
+      <p class="footer__copy">© <span id="year"></span> AZ Integrations</p>
     </div>
   </footer>
 

@@ -1,79 +1,40 @@
 # AZ Integrations — Website
 
-Marketing website for **AZ Integrations**, an AI integration consultancy founded by
-Abbas Zoeb (ex-Google Solutions Engineer, Senior Lead Solutions Architect at WSO2).
-The site helps restaurants and small businesses adopt the right AI tools with fully
-transparent costs, savings, and fees — starting with the restaurant industry.
+A single-page site for **AZ Integrations** — restaurant technology consulting by
+Abbas Zoeb, a software engineer (ex-Google) who also owns an award-winning
+restaurant (Wok & Karahi, Spring TX).
 
-## Stack
+Positioning: *an engineer who runs a restaurant himself, so he cuts the AI hype
+and sets up only what pays off — transparently, and done for you.*
 
-Plain, dependency-free static site — fast and host-anywhere. **No build step, no frameworks** — yet it ships flagship-tier effects, all hand-written in vanilla JS/CSS:
+## Design
 
-**Pages**
-- `index.html` — Home (hook + routing, WebGL hero)
-- `about.html` — About / Why Abbas (story, career timeline, principles)
-- `restaurants.html` — For Restaurants (use-cases, process, transparency, case study, FAQ)
+Warm, editorial, light — not a generic dark "AI SaaS" template:
+- Cream paper, ink text, a single ember accent
+- Fraunces (serif display) + Inter (body)
+- Real portrait, generous whitespace, quiet fade-ins only — no gimmicks
 
-**Shared**
-- `styles.css` — design system, bento grids, components, responsive/mobile layout
-- `script.js` — interaction engine (shared across all pages)
-- `assets/` — optimized headshot (`abbas-800/480.{webp,jpg}`, `abbas.png` master)
+## Files
 
-### Effects (all dependency-free, 60fps, `prefers-reduced-motion` aware)
-- **Live WebGL aurora shader** hero background (cursor-reactive simplex-noise flow; auto CSS-gradient fallback if WebGL is unavailable; pauses when off-screen)
-- **Bento-grid** about & services sections
-- **Spotlight cards** (glow follows cursor) + subtle **3D tilt**
-- **Magnetic buttons** + **custom cursor** glow (desktop / fine-pointer only)
-- **Kinetic rotating headline**, **count-up stats**, **infinite marquees**
-- **Scroll-progress bar**, staggered **scroll-reveal**, glassmorphic sticky nav
+- `index.html` — the whole page
+- `styles.css` — design system + responsive/mobile layout
+- `script.js` — sticky nav, mobile menu, scroll reveal (minimal)
+- `assets/` — optimized headshot (`abbas-800/480.{webp,jpg}`)
+
+No build step, no frameworks. Mobile-first; verified no horizontal overflow.
 
 ## Run locally
 
-Just open `index.html` in a browser, or serve it:
-
 ```bash
-python3 -m http.server 8000
-# then visit http://localhost:8000
+python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-## Deploy
+## Deploy (GitHub Pages)
 
-Any static host works. Easiest options:
+Repo Settings → Pages → "Deploy from a branch" → this branch, `/ (root)` → Save.
+Live at `https://abbas-mypeople.github.io/Abbas/`. (`.nojekyll` is included.)
 
-- **GitHub Pages** — Settings → Pages → deploy from this branch (root).
-- **Netlify / Vercel** — drag-and-drop the folder, or connect the repo (no build command, publish directory = root).
-- **Cloudflare Pages** — connect repo, framework preset "None".
+## To confirm later
 
-## Customize
-
-Common edits, all in `index.html` unless noted:
-
-| What | Where |
-| --- | --- |
-| Company name / brand | search `AZ Integrations` |
-| Contact email | search `azoeb27@gmail.com` |
-| Phone | search `4083936716` / `(408) 393-6716` |
-| LinkedIn URL | search `linkedin.com/in/abbas-zoeb` *(verify/replace with your real profile URL)* |
-| Colors / fonts | `:root` tokens in `styles.css` |
-| Services, steps, copy | the respective `<section>` blocks |
-
-### Contact form
-The form currently uses a `mailto:` action as a no-backend fallback. For reliable
-delivery, point it at a form service (Formspree, Netlify Forms, Basin, etc.) by
-changing the `<form action="...">` in `index.html`.
-
-## Mobile
-
-Mobile is treated as the primary experience:
-- WebGL hero renders at lower internal resolution on phones; falls back to a CSS
-  gradient on reduced-motion, data-saver, or low-memory devices.
-- Cursor/tilt/magnetic effects auto-disable on touch.
-- 16px form inputs (no iOS zoom-on-focus), 44px minimum tap targets.
-- FAQ uses native `<details>` accordions — accessible and reliable on touch.
-- Verified: no horizontal overflow at 360 / 390 / 768px.
-
-## TODO / placeholders to confirm
-
-- [ ] Final business email once the custom domain is ready (currently `azoeb27@gmail.com`)
-- [ ] Confirm which additional client logos may be displayed (only Hard Rock Cafe is named)
-- [ ] Wire the contact form to a delivery service (Formspree/Netlify) for reliability
+- Final business email once a custom domain is ready (currently `azoeb27@gmail.com`)
+- Wire the contact form to a delivery service (Formspree/Netlify) for reliability
