@@ -46,7 +46,7 @@ Ranked most-behind → least.
 
 ## 2. Payments & fintech evolution in restaurants
 
-The convergence pattern restated at the register. (Dedicated BNPL/split, surcharging, and embedded-lending sub-streams were still running at time of writing; coverage below draws on the cross-industry, wallets, payouts, crypto, and tipping streams.)
+The convergence pattern restated at the register, drawn from the cross-industry, wallets, payouts, crypto, and tipping streams plus social listening.
 
 **Contactless / wallets — past the tipping point.** Contactless is **~60% of US in-store payments** (Mastercard's network >75%); **~28% of POS** is a phone/watch wallet tap [IND]. **Tap-to-Pay on phone** (softPOS) is the fastest-growing acceptance vector (Visa +200% YoY), great for pop-ups/food-trucks/line-busting [VENDOR]. **Branded app wallets are the "restaurant-as-quasi-bank" play:** **Starbucks holds ~$1.8–2.1B of customer money** parked in its app (interest-free float, ~$207M/yr breakage); Rewards drive ~59% of US sales [VENDOR/SEC]. *This is the embedded-finance + owned-customer pattern done right — and it's available to anyone with a loyalty + stored-value program.*
 
@@ -94,4 +94,4 @@ The convergence pattern restated at the register. (Dedicated BNPL/split, surchar
 
 ---
 
-*Synthesized from four research streams: cross-industry convergence patterns, restaurant payments/fintech evolution (digital wallets, faster payouts/cash-flow, crypto/stablecoin, tipping; BNPL/surcharging/embedded-lending sub-streams pending), and social listening. Reliability-tagged throughout. Key sources: Gartner, eMarketer, PYMNTS, McKinsey/BCG, Klarna & Starbucks SEC filings, Visa/Mastercard, Kansas City Fed, Bankrate/Pew/WalletHub, NRA State of the Industry. Full URLs in research transcripts.*
+*Synthesized from four research streams: cross-industry convergence patterns, restaurant payments/fintech evolution (digital wallets, faster payouts/cash-flow, crypto/stablecoin, tipping, plus BNPL/split/surcharging/embedded-lending from the cross-industry and social streams), and social listening. Reliability-tagged throughout. Key sources: Gartner, eMarketer, PYMNTS, McKinsey/BCG, Klarna & Starbucks SEC filings, Visa/Mastercard, Kansas City Fed, Bankrate/Pew/WalletHub, NRA State of the Industry. Full URLs in research transcripts.*
