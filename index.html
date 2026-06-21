@@ -53,6 +53,15 @@
             <a href="#contact" class="btn btn--primary">Book your free call</a>
             <a href="#finder" class="btn btn--text">Find your fit <span aria-hidden="true">→</span></a>
           </div>
+          <div class="who reveal" id="who">
+            <span class="who__label">Which sounds like you?</span>
+            <div class="who__opts">
+              <button type="button" class="who__opt is-active" data-who="p1">One small spot</button>
+              <button type="button" class="who__opt" data-who="p2">A family restaurant</button>
+              <button type="button" class="who__opt" data-who="p3">2–10 locations</button>
+            </div>
+            <p class="who__msg" id="whoMsg">We start by stopping the apps from keeping your customers, getting every call answered, and ending the tablet chaos — money back in your pocket, fast.</p>
+          </div>
         </div>
         <div class="hero__portrait reveal">
           <div class="portrait">
@@ -71,7 +80,7 @@
       <div class="wrap creds__inner reveal">
         <div class="creds__item"><strong>A restaurant family</strong><span>15+ years in hospitality — Canada, India &amp; Texas</span></div>
         <div class="creds__item"><strong>We run our own</strong><span>Wok &amp; Karahi, Houston — highly rated &amp; profitable every year</span></div>
-        <div class="creds__item"><strong>Real engineering muscle</strong><span>Enterprise-grade team led by an ex-Google architect</span></div>
+        <div class="creds__item"><strong>Serious tech, on your side</strong><span>The same engineers big companies rely on — building for your restaurant</span></div>
         <div class="creds__item"><strong>Only on your side</strong><span>We take no app or vendor commissions</span></div>
       </div>
     </section>
@@ -80,7 +89,14 @@
     <section class="band">
       <div class="wrap band__inner reveal">
         <h2 class="h2">Here's where the money actually goes.</h2>
-        <p class="lead">You cook the food; the app keeps 15–30% — some nights more than you clear on the plate. The guest who ordered becomes the app's customer, not yours, so you can't even see your own regulars. The phone rings through dinner with no one free to grab it. Three tablets sit on the counter, re-keyed by hand. <em>None of it is permanent.</em> The apps are fine for getting discovered — the trick is not letting them keep the customer. We've done exactly this on our own restaurant, and we'll do it for yours: turn app guests into your own regulars, connect the tools, and keep what you earn.</p>
+        <p class="lead">You cook the food — then watch the money walk out the door:</p>
+        <ul class="band__list reveal">
+          <li>The app keeps <strong>15–30%</strong> of the order — some nights more than you make.</li>
+          <li>The guest who ordered is <strong>the app's customer, not yours</strong> — you can't even see your own regulars.</li>
+          <li>The phone rings through dinner with <strong>no one free to grab it</strong>.</li>
+          <li>Three tablets on the counter, <strong>re-keyed by hand</strong>.</li>
+        </ul>
+        <p class="lead"><em>None of it is permanent.</em> The apps are great for getting you <em>discovered</em> — the trick is not letting them keep the customer. We've done exactly this on our own restaurant, and we'll do it for yours: turn app guests into your own regulars, connect the tools, and keep what you earn.</p>
       </div>
     </section>
 
@@ -91,26 +107,6 @@
         <div class="stat"><strong>~3%</strong><span>what it costs to take an order on your own site — versus up to 30% the delivery apps keep.</span></div>
         <div class="stat"><strong>5–9%</strong><span>more revenue for an independent with each one-star rating bump <em>(Harvard Business School)</em>.</span></div>
         <div class="stat"><strong>28%</strong><span>only 28% of operators say tech ever improved their profit — we're built to be the exception <em>(National Restaurant Association)</em>.</span></div>
-      </div>
-    </section>
-
-    <!-- HOW WE WORK -->
-    <section class="section" id="how">
-      <div class="wrap">
-        <div class="section__head reveal">
-          <p class="kicker">How we work</p>
-          <h2 class="h2">One team, end to end — and we never really leave.</h2>
-          <p class="lead" style="margin-top:14px">You get one person who knows your restaurant, and a full team behind them doing the work. We take you the whole way — from the first leak to the long run.</p>
-        </div>
-        <ol class="lifecycle">
-          <li class="reveal"><span>01</span><h3>Find the leaks</h3><p>We dig into how your restaurant actually runs — operations, staff, the numbers — and show you exactly where money is slipping out. The real cause, not just the obvious symptom.</p></li>
-          <li class="reveal"><span>02</span><h3>The plan &amp; the numbers</h3><p>You see the fix, the cost, and the expected return in plain English — before a single dollar is spent. You decide what's worth it.</p></li>
-          <li class="reveal"><span>03</span><h3>Stop the bleed</h3><p>We start with the fastest, highest-payback fixes — keep more of every order, catch every call, lift your rating — so the work pays for itself early.</p></li>
-          <li class="reveal"><span>04</span><h3>Optimize</h3><p>Then we connect your systems, capture your guests and their data, and tighten the parts quietly costing you — so steady sales finally turn into steady profit.</p></li>
-          <li class="reveal"><span>05</span><h3>Make you future-ready</h3><p>When it earns its place, we bring the AI and automation the big chains use — on your terms, proven by ROI, never as hype.</p></li>
-          <li class="reveal"><span>06</span><h3>Stay as your team</h3><p>We don't hand off and disappear. We stay on as the tech team you'd never be able to hire on your own — because it never stops evolving, and neither do we.</p></li>
-        </ol>
-        <p class="promise reveal">Our goal isn't to sell you software and walk away. It's to be the team that keeps <strong>your restaurant winning</strong> — this year, and every year after.</p>
       </div>
     </section>
 
@@ -138,6 +134,26 @@
             <p class="quote__by">— What AZ Restaurant Partners stands for</p>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <!-- HOW WE WORK -->
+    <section class="section" id="how">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="kicker">How we work</p>
+          <h2 class="h2">One team, end to end — and we never really leave.</h2>
+          <p class="lead" style="margin-top:14px">You get one person who knows your restaurant, and a full team behind them doing the work. We take you the whole way — from the first leak to the long run.</p>
+        </div>
+        <ol class="lifecycle">
+          <li class="reveal"><span>01</span><h3>Find the leaks</h3><p>We dig into how your restaurant actually runs — operations, staff, the numbers — and show you exactly where money is slipping out. The real cause, not just the obvious symptom.</p></li>
+          <li class="reveal"><span>02</span><h3>The plan &amp; the numbers</h3><p>You see the fix, the cost, and the expected return in plain English — before a single dollar is spent. You decide what's worth it.</p></li>
+          <li class="reveal"><span>03</span><h3>Stop the bleed</h3><p>We start with the fastest, highest-payback fixes — keep more of every order, catch every call, lift your rating — so the work pays for itself early.</p></li>
+          <li class="reveal"><span>04</span><h3>Optimize</h3><p>Then we connect your systems, capture your guests and their data, and tighten the parts quietly costing you — so steady sales finally turn into steady profit.</p></li>
+          <li class="reveal"><span>05</span><h3>Make you future-ready</h3><p>When it earns its place, we bring the AI and automation the big chains use — on your terms, proven by ROI, never as hype.</p></li>
+          <li class="reveal"><span>06</span><h3>Stay as your team</h3><p>We don't hand off and disappear. We stay on as the tech team you'd never be able to hire on your own — because it never stops evolving, and neither do we.</p></li>
+        </ol>
+        <p class="promise reveal">Our goal isn't to sell you software and walk away. It's to be the team that keeps <strong>your restaurant winning</strong> — this year, and every year after.</p>
       </div>
     </section>
 
@@ -312,7 +328,13 @@
             <p>Month to month. No long contracts, no bricked hardware, no surprise fees. You keep your guests, your data, and your tools — and can walk anytime.</p>
           </article>
         </div>
-        <p class="possible__cta reveal">The first call is free — and you'll leave it with at least one concrete way to keep more of what you earn. <a href="#contact">Book it here →</a></p>
+        <div class="pilot reveal">
+          <span class="pilot__tag">Founding 5 · performance-first pilot</span>
+          <h3>We make you money before we take a dollar.</h3>
+          <p>We're hand-picking <strong>five founding restaurants</strong>. For them, we put real money back in your pocket <em>first</em> — if we don't, you pay nothing. In return you get <strong>founding pricing locked for life</strong>, a direct line to the founder, and first access to everything we build. We only win when you do.</p>
+          <a href="#contact" class="btn btn--primary">Apply to be one of the 5</a>
+        </div>
+        <p class="possible__cta reveal">Not ready to apply? The first call is still free — and you'll leave with at least one concrete way to keep more of what you earn. <a href="#contact">Book it here →</a></p>
       </div>
     </section>
 

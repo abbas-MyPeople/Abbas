@@ -388,3 +388,22 @@
   catSel.addEventListener('change', render);
   render();
 })();
+
+/* ===== Persona toggle (hero) ===== */
+(() => {
+  const wrap = document.getElementById('who');
+  if (!wrap) return;
+  const msgEl = document.getElementById('whoMsg');
+  const MSG = {
+    p1: "We start by stopping the apps from keeping your customers, getting every call answered, and ending the tablet chaos — money back in your pocket, fast.",
+    p2: "We start by bringing your regulars back, lifting your reviews, and making your numbers clear — so steady nights turn into steady profit.",
+    p3: "We connect your locations into one clear view and standardize what's working — so you stop flying blind and scale what's winning.",
+  };
+  wrap.querySelectorAll('.who__opt').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      wrap.querySelectorAll('.who__opt').forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      msgEl.textContent = MSG[btn.dataset.who] || MSG.p1;
+    });
+  });
+})();

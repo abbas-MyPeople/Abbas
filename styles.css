@@ -289,3 +289,27 @@ em { font-style: italic; color: var(--accent); }
   .hero { padding: 110px 0 56px; }
   .creds { gap: 8px 20px; }
 }
+
+/* Persona toggle (hero) */
+.who { margin-top: 30px; }
+.who__label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.who__opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.who__opt { font-family: inherit; font-size: 0.92rem; font-weight: 500; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.who__opt:hover { border-color: var(--accent); }
+.who__opt.is-active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.who__msg { margin-top: 14px; font-size: 1.02rem; line-height: 1.5; color: var(--body); max-width: 48ch; }
+
+/* Skimmable problem list */
+.band__list { list-style: none; display: grid; gap: 11px; margin: 18px 0 22px; }
+.band__list li { position: relative; padding-left: 24px; font-size: 1.1rem; line-height: 1.45; color: var(--body); }
+.band__list li::before { content: ""; position: absolute; left: 2px; top: 0.62em; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
+.band__list strong { color: var(--ink); font-weight: 600; }
+
+/* Pilot offer callout */
+.pilot { margin-top: 36px; background: var(--ink); color: #cfc8ba; border-radius: 18px; padding: 32px 34px; display: flex; flex-direction: column; gap: 12px; }
+.pilot__tag { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #f0a888; }
+.pilot h3 { color: #fff; font-size: 1.55rem; line-height: 1.15; }
+.pilot p { color: #cfc8ba; font-size: 1.05rem; line-height: 1.5; max-width: 62ch; }
+.pilot strong { color: #fff; font-weight: 600; }
+.pilot em { color: #f0a888; font-style: italic; }
+.pilot .btn { align-self: flex-start; margin-top: 6px; }
