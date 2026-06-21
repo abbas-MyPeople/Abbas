@@ -386,7 +386,9 @@
 
   sels.forEach((s) => s.addEventListener('change', render));
   catSel.addEventListener('change', render);
-  render();
+  // Collapsed by default to keep the page short — reveal the diagnosis on demand
+  resultsEl.innerHTML = '<div class="finder__hint"><p>Set the sentence above to match your place — then see what fits.</p><button type="button" class="btn btn--primary" id="finderGo">See what fits my restaurant →</button></div>';
+  document.getElementById('finderGo').addEventListener('click', render);
 })();
 
 /* ===== Persona toggle (strategies) — tailors intro + flags "start here" cards ===== */
