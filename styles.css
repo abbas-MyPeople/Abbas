@@ -126,6 +126,10 @@ em { font-style: italic; color: var(--accent); }
 .quote__mark { font-family: "Fraunces", serif; font-size: 3.5rem; line-height: 0.5; color: var(--accent); height: 1.6rem; }
 .quote__text { font-family: "Fraunces", serif; font-size: 1.45rem; line-height: 1.3; color: var(--paper); font-style: italic; }
 .quote__by { margin-top: 18px; font-size: 0.9rem; color: #9a9183; }
+.story__aside { display: flex; flex-direction: column; gap: 34px; }
+.story__photo { margin: 0; }
+.story__photo img { width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 24px 48px -24px rgba(0,0,0,0.7); }
+.story__photo figcaption { margin-top: 12px; font-size: 0.85rem; line-height: 1.4; color: #9a9183; letter-spacing: 0.01em; }
 
 /* ===================== STEPS ===================== */
 .steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
