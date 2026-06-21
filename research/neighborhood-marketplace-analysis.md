@@ -75,6 +75,8 @@ These let a restaurant take the order on **its own** site/app and pay a flat las
 | **Olo Dispatch / Cartwheel / Burq / Nash** | DSP quote + platform fee (not flat) | Aggregators | Route across many DSPs for best price/reliability; less lock-in; need platform subscription |
 | **Metrobi** | Flat driver-pool access fee; you set route price | Local courier | No % commission |
 
+**Mainstream-validation signal:** In Dec 2024, **Toast switched its *default* white-label delivery partner to Uber Direct** — when the largest restaurant POS makes white-label last-mile the default, the model is proven and trusted, not fringe. [IND — NRN/Food On Demand] And the regulatory risk of owning a fleet is concrete: **Seattle's delivery minimum-pay law caused ~33,000 fewer DoorDash orders in two weeks (~$1M in lost restaurant sales)** with no lasting rise in driver earnings. [IND — Reason/Manhattan Institute]
+
 **Caveat:** "flat fee" is rarely truly flat — distance overages, wait fees, undeliverable-return fees (merchant bears them), and middleware add-ons (Shipday +3%, aggregator subscriptions) apply. Treat advertised rates as a floor. And critically: **white-label delivers only — it brings zero discovery.** That discovery gap is exactly what the local layer adds.
 
 ---
