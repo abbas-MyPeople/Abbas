@@ -387,8 +387,15 @@
   sels.forEach((s) => s.addEventListener('change', render));
   catSel.addEventListener('change', render);
   // Collapsed by default to keep the page short — reveal the diagnosis on demand
-  resultsEl.innerHTML = '<div class="finder__hint"><p>Set the sentence above to match your place — then see what fits.</p><button type="button" class="btn btn--primary" id="finderGo">See what fits my restaurant →</button></div>';
-  document.getElementById('finderGo').addEventListener('click', render);
+  function showHint() {
+    const lang = (window.AZL && window.AZL.lang) || 'en';
+    const h = (window.AZL && (window.AZL.finderHint[lang] || window.AZL.finderHint.en)) ||
+      { p: 'Set the sentence above to match your place — then see what fits.', btn: 'See what fits my restaurant →' };
+    resultsEl.innerHTML = '<div class="finder__hint"><p>' + h.p + '</p><button type="button" class="btn btn--primary" id="finderGo">' + h.btn + '</button></div>';
+    document.getElementById('finderGo').addEventListener('click', render);
+  }
+  showHint();
+  window.addEventListener('azlang', () => { if (resultsEl.querySelector('.finder__hint')) showHint(); });
 })();
 
 /* ===== Persona toggle (strategies) — tailors intro + flags "start here" cards ===== */
@@ -397,13 +404,12 @@
   if (!wrap) return;
   const msgEl = document.getElementById('whoMsg');
   const grid = document.getElementById('possible');
-  const MSG = {
-    p1: "For a single neighborhood spot, the fastest money is defensive: turn the customers the apps bring you into your own repeat orders, get every call answered, and end the tablet chaos — wins you feel within weeks. <strong>Start with the three marked below.</strong>",
-    p2: "For an established family restaurant, the money is in your regulars and your reputation: bring lapsed guests back, lift your reviews, and grow a higher-margin catering channel. <strong>Start with the three marked below.</strong>",
-    p3: "For 2–10 locations, it's visibility and consistency: recover what the apps owe you across stores, get found everywhere new guests look, and win the customers the apps send you. <strong>Start with the three marked below.</strong>",
-  };
+  let current = 'p1';
   const apply = (who) => {
-    msgEl.innerHTML = MSG[who] || MSG.p1;
+    current = who;
+    const lang = (window.AZL && window.AZL.lang) || 'en';
+    const map = (window.AZL && (window.AZL.persona[lang] || window.AZL.persona.en)) || {};
+    msgEl.innerHTML = map[who] || '';
     if (grid) grid.querySelectorAll('.poss').forEach((c) => {
       c.classList.toggle('poss--first', (c.dataset.who || '').split(' ').includes(who));
     });
@@ -416,6 +422,7 @@
     });
   });
   apply('p1');
+  window.addEventListener('azlang', () => apply(current));
 })();
 
 /* ===== Sticky mobile CTA + strategies "see all plays" ===== */

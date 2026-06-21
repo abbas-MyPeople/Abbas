@@ -24,6 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -37,6 +38,11 @@
         <a href="#finder">Find your fit</a>
         <a href="#contact" class="nav__cta">Book a free call</a>
       </nav>
+      <div class="lang" id="lang" role="group" aria-label="Language">
+        <button type="button" class="lang__opt is-active" data-lang="en">EN</button>
+        <button type="button" class="lang__opt" data-lang="hi" lang="hi">हिं</button>
+        <button type="button" class="lang__opt" data-lang="ur" lang="ur">اردو</button>
+      </div>
       <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
@@ -360,11 +366,11 @@
         </div>
         <form class="form" id="leadForm" novalidate>
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          <label>Name<input type="text" name="name" required placeholder="Your name" /></label>
-          <label>Restaurant<input type="text" name="restaurant" placeholder="Name &amp; city" /></label>
-          <label>Email<input type="email" name="email" required placeholder="you@restaurant.com" /></label>
-          <label>Phone <span class="opt">(optional)</span><input type="tel" name="phone" placeholder="Best number to reach you" /></label>
-          <label>What would you like to change?<textarea name="message" rows="4" placeholder="A line or two about your restaurant and what's on your mind."></textarea></label>
+          <label><span>Name</span><input type="text" name="name" required placeholder="Your name" /></label>
+          <label><span>Restaurant</span><input type="text" name="restaurant" placeholder="Name &amp; city" /></label>
+          <label><span>Email</span><input type="email" name="email" required placeholder="you@restaurant.com" /></label>
+          <label><span>Phone <span class="opt">(optional)</span></span><input type="tel" name="phone" placeholder="Best number to reach you" /></label>
+          <label><span>What would you like to change?</span><textarea name="message" rows="4" placeholder="A line or two about your restaurant and what's on your mind."></textarea></label>
           <button type="submit" class="btn btn--primary btn--full" id="formSubmit">Request my free call</button>
           <p class="form__note" id="formNote">Free &amp; no obligation. We read every message personally.</p>
           <p class="form__note">Your details are used only to reply to you — never shared or sold.</p>
@@ -386,6 +392,7 @@
     <a href="#contact" class="btn btn--primary btn--full">Book your free call</a>
   </div>
 
+  <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

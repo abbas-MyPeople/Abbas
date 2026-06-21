@@ -347,3 +347,29 @@ em { font-style: italic; color: var(--accent); }
     font-family: inherit; font-size: 0.96rem; font-weight: 600; color: var(--accent);
     background: none; border: 1px solid var(--line); border-radius: 999px; padding: 11px 20px; cursor: pointer; }
 }
+
+/* ===================== LANGUAGE SWITCHER + i18n ===================== */
+.lang { display: flex; gap: 4px; align-items: center; margin-left: 16px; }
+.lang__opt { font-family: "Inter", sans-serif; font-size: 0.82rem; font-weight: 600; line-height: 1; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.lang__opt:hover { border-color: var(--accent); }
+.lang__opt.is-active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.lang__opt[lang="hi"] { font-family: "Noto Sans Devanagari", sans-serif; }
+.lang__opt[lang="ur"] { font-family: "Noto Nastaliq Urdu", serif; font-size: 0.95rem; }
+
+/* Script-specific fonts when a language is active */
+html.lang-hi body, html.lang-hi h1, html.lang-hi h2, html.lang-hi h3, html.lang-hi .brand, html.lang-hi .btn { font-family: "Noto Sans Devanagari", "Inter", sans-serif; }
+html.lang-hi em, html.lang-hi .hero__title em, html.lang-hi .quote__text { font-style: normal; }
+html.lang-ur body, html.lang-ur h1, html.lang-ur h2, html.lang-ur h3, html.lang-ur .brand, html.lang-ur .btn { font-family: "Noto Nastaliq Urdu", "Inter", serif; }
+html.lang-ur { line-height: 2; }
+html.lang-ur em { font-style: normal; }
+
+/* Right-to-left (Urdu) */
+html[dir="rtl"] .creds__item, html[dir="rtl"] .stat { padding-left: 0; padding-right: 18px; }
+html[dir="rtl"] .creds__item::before, html[dir="rtl"] .stat::before { left: auto; right: 0; }
+html[dir="rtl"] .band__list li { padding-left: 0; padding-right: 24px; }
+html[dir="rtl"] .band__list li::before { left: auto; right: 2px; }
+html[dir="rtl"] .quote { border-left: 0; border-right: 2px solid var(--accent); padding-left: 0; padding-right: 26px; }
+html[dir="rtl"] .story__result { border-left: 0; border-right: 2px solid var(--accent); border-radius: 10px 0 0 10px; }
+html[dir="rtl"] .poss--first::before { left: auto; right: 22px; }
+html[dir="rtl"] .lang { margin-left: 0; margin-right: 16px; }
+html[dir="rtl"] .btn--text span { transform: scaleX(-1); }
