@@ -329,3 +329,21 @@ em { font-style: italic; color: var(--accent); }
 /* Collapsed finder hint */
 .finder__hint { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: 4px 0; }
 .finder__hint p { color: var(--body); font-size: 1.02rem; }
+
+/* Sticky mobile CTA bar */
+.mobilecta { display: none; }
+.possible__more { display: none; }
+@media (max-width: 760px) {
+  .mobilecta { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(244,238,226,0.94);
+    backdrop-filter: blur(10px); border-top: 1px solid var(--line-soft);
+    transform: translateY(120%); transition: transform .3s var(--ease); }
+  .mobilecta.show { transform: translateY(0); }
+
+  /* Strategies: show only the persona's "Start here" cards; expand for the rest */
+  #possible .possible > .poss:not(.poss--first) { display: none; }
+  #possible .possible.show-all > .poss { display: block; }
+  .possible__more { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px;
+    font-family: inherit; font-size: 0.96rem; font-weight: 600; color: var(--accent);
+    background: none; border: 1px solid var(--line); border-radius: 999px; padding: 11px 20px; cursor: pointer; }
+}

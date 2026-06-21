@@ -417,3 +417,27 @@
   });
   apply('p1');
 })();
+
+/* ===== Sticky mobile CTA + strategies "see all plays" ===== */
+(() => {
+  const mcta = document.getElementById('mobilecta');
+  const contact = document.getElementById('contact');
+  if (mcta) {
+    const onScroll = () => {
+      let reached = false;
+      if (contact) reached = contact.getBoundingClientRect().top < window.innerHeight * 0.9;
+      mcta.classList.toggle('show', window.scrollY > 520 && !reached);
+    };
+    onScroll();
+    addEventListener('scroll', onScroll, { passive: true });
+    mcta.querySelector('a').addEventListener('click', () => mcta.classList.remove('show'));
+  }
+  const grid = document.querySelector('#possible .possible');
+  const moreBtn = document.getElementById('moreplays');
+  if (grid && moreBtn) {
+    moreBtn.addEventListener('click', () => {
+      const open = grid.classList.toggle('show-all');
+      moreBtn.textContent = open ? 'Show fewer' : 'See all plays';
+    });
+  }
+})();
