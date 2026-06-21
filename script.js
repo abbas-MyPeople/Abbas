@@ -1,4 +1,4 @@
-/* AZ Integrations — interactions + self-service tool finder */
+/* AZ Restaurant Partners — interactions + self-service tool finder */
 (() => {
   const nav = document.getElementById('nav');
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
@@ -36,7 +36,7 @@
       e.preventDefault();
       if (form._honey && form._honey.value) return;
       if (!form.name.value.trim() || !form.email.value.trim()) {
-        note.textContent = 'Please add your name and email so I can reach you.';
+        note.textContent = 'Please add your name and email so we can reach you.';
         note.classList.add('error'); return;
       }
       btn.disabled = true; const original = btn.textContent; btn.textContent = 'Sending…';
@@ -44,7 +44,7 @@
       const payload = {
         name: form.name.value, restaurant: form.restaurant.value, email: form.email.value,
         phone: form.phone.value, message: form.message.value,
-        _subject: 'New free-call request — AZ Integrations', _template: 'table', _captcha: 'false',
+        _subject: 'New free-call request — AZ Restaurant Partners', _template: 'table', _captcha: 'false',
       };
       try {
         const res = await fetch('https://formsubmit.co/ajax/azoeb27@gmail.com', {
@@ -56,12 +56,12 @@
         const ok = document.createElement('div');
         ok.className = 'form__success';
         ok.innerHTML = '<h3>Thank you — message sent.</h3>' +
-          "<p>I'll personally reply to set up your free video call, usually within a day.</p>";
+          "<p>We'll personally reply to set up your free call, usually within a day.</p>";
         form.appendChild(ok);
       } catch (err) {
         btn.disabled = false; btn.textContent = original;
         note.classList.add('error');
-        note.innerHTML = 'Something went wrong sending the form. Please email me directly at ' +
+        note.innerHTML = 'Something went wrong sending the form. Please email us directly at ' +
           '<a href="mailto:azoeb27@gmail.com">azoeb27@gmail.com</a>.';
       }
     });
@@ -274,9 +274,9 @@
   };
 
   const DIY = {
-    low: "Spotting this is one thing; fixing it properly is another — and that's exactly what my team and I do, end to end.",
+    low: "Spotting this is one thing; fixing it properly is another — and that's exactly what we do, end to end.",
     mid: "You could tackle parts of this yourself — but pinning down the real number and wiring the fix into your POS is where it gets hard. That's where we come in.",
-    high: "You could likely build the fix yourself — the real work is doing it to a production standard and proving the ROI. That's where my team and I turn it into an edge.",
+    high: "You could likely build the fix yourself — the real work is doing it to a production standard and proving the ROI. That's where our team turns it into an edge.",
   };
 
   const miniTool = (t) => {
@@ -328,12 +328,12 @@
       if (!captured) {
         resultsEl.innerHTML = leadin + diag +
           `<form class="lead-capture" id="leadCapture" novalidate>
-             <p class="lead-capture__pitch">Want the full breakdown — a closer estimate for your restaurant, plus the kinds of tools that solve this? Enter your email and I'll send it and personally set up your free call.</p>
+             <p class="lead-capture__pitch">Want the full breakdown — a closer estimate for your restaurant, plus the kinds of tools that solve this? Enter your email and we'll send it and set up your free call.</p>
              <div class="lead-capture__row">
                <input type="email" id="leadEmail" required placeholder="you@restaurant.com" aria-label="Your email" />
                <button type="submit" class="btn btn--primary" id="leadBtn">Send my breakdown</button>
              </div>
-             <p class="lead-capture__note" id="leadNote">Free. No spam. I read every one personally.</p>
+             <p class="lead-capture__note" id="leadNote">Free. No spam. We read every one personally.</p>
            </form>`;
         const lf = document.getElementById('leadCapture');
         lf.addEventListener('submit', async (e) => {
@@ -347,7 +347,7 @@
             email,
             profile: `${TYPE_LABEL[type]} · ${SIZE_LABEL[size]} · challenge: ${PROBLEM_LABEL[problem]} · goal: ${goal} · tech comfort: ${comfort} · budget: ${budget}`,
             matched_tools: matchList(type, size, problem, goal, budget).slice(0, 5).map((x) => x.t.n).join(', '),
-            _subject: 'Finder lead — AZ Integrations', _template: 'table', _captcha: 'false',
+            _subject: 'Finder lead — AZ Restaurant Partners', _template: 'table', _captcha: 'false',
           };
           try {
             const res = await fetch('https://formsubmit.co/ajax/azoeb27@gmail.com', {
@@ -360,7 +360,7 @@
           } catch (err) {
             lb.disabled = false; lb.textContent = 'Send my breakdown';
             note.classList.add('error');
-            note.innerHTML = 'Couldn’t send just now — email me at <a href="mailto:azoeb27@gmail.com">azoeb27@gmail.com</a> and I’ll send it.';
+            note.innerHTML = 'Couldn’t send just now — email us at <a href="mailto:azoeb27@gmail.com">azoeb27@gmail.com</a> and we’ll send it.';
           }
         });
       } else {
@@ -372,9 +372,9 @@
     }
 
     const closeMsg = {
-      low: "Honestly? Wiring this up, integrating your POS, and keeping it running is a lot — and easy to get wrong. That's exactly why my team and I exist: we do it end to end, then stay with you as it evolves.",
-      mid: "You could set this up yourself — but choosing the right fix, integrating your POS, and proving the ROI is the hard part. That's what my team and I do, end to end — and we stay with you for the long run.",
-      high: "You could clearly build this yourself. The real work is making it production-grade, secure, and ROI-proven over time. That's where my team and I turn a good idea into a real edge.",
+      low: "Honestly? Wiring this up, integrating your POS, and keeping it running is a lot — and easy to get wrong. That's exactly why we exist: we do it end to end, then stay on as your team.",
+      mid: "You could set this up yourself — but choosing the right fix, integrating your POS, and proving the ROI is the hard part. That's what we do, end to end — and we stay with you for the long run.",
+      high: "You could clearly build this yourself. The real work is making it production-grade, secure, and ROI-proven over time. That's where our team turns a good idea into a real edge.",
     }[comfort];
 
     closeEl.innerHTML = `<div class="finder__closebox">
