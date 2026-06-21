@@ -389,21 +389,29 @@
   render();
 })();
 
-/* ===== Persona toggle (hero) ===== */
+/* ===== Persona toggle (strategies) — tailors intro + flags "start here" cards ===== */
 (() => {
   const wrap = document.getElementById('who');
   if (!wrap) return;
   const msgEl = document.getElementById('whoMsg');
+  const grid = document.getElementById('possible');
   const MSG = {
-    p1: "We start by stopping the apps from keeping your customers, getting every call answered, and ending the tablet chaos — money back in your pocket, fast.",
-    p2: "We start by bringing your regulars back, lifting your reviews, and making your numbers clear — so steady nights turn into steady profit.",
-    p3: "We connect your locations into one clear view and standardize what's working — so you stop flying blind and scale what's winning.",
+    p1: "For a single neighborhood spot, the fastest money is defensive: turn the customers the apps bring you into your own repeat orders, get every call answered, and end the tablet chaos — wins you feel within weeks. <strong>Start with the three marked below.</strong>",
+    p2: "For an established family restaurant, the money is in your regulars and your reputation: bring lapsed guests back, lift your reviews, and grow a higher-margin catering channel. <strong>Start with the three marked below.</strong>",
+    p3: "For 2–10 locations, it's visibility and consistency: recover what the apps owe you across stores, get found everywhere new guests look, and win the customers the apps send you. <strong>Start with the three marked below.</strong>",
+  };
+  const apply = (who) => {
+    msgEl.innerHTML = MSG[who] || MSG.p1;
+    if (grid) grid.querySelectorAll('.poss').forEach((c) => {
+      c.classList.toggle('poss--first', (c.dataset.who || '').split(' ').includes(who));
+    });
   };
   wrap.querySelectorAll('.who__opt').forEach((btn) => {
     btn.addEventListener('click', () => {
       wrap.querySelectorAll('.who__opt').forEach((b) => b.classList.remove('is-active'));
       btn.classList.add('is-active');
-      msgEl.textContent = MSG[btn.dataset.who] || MSG.p1;
+      apply(btn.dataset.who);
     });
   });
+  apply('p1');
 })();
