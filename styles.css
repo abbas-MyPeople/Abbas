@@ -373,3 +373,16 @@ html[dir="rtl"] .story__result { border-left: 0; border-right: 2px solid var(--a
 html[dir="rtl"] .poss--first::before { left: auto; right: 22px; }
 html[dir="rtl"] .lang { margin-left: 0; margin-right: 16px; }
 html[dir="rtl"] .btn--text span { transform: scaleX(-1); }
+
+/* Foldable "how it works" steps */
+.steps { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.steps details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.steps summary { cursor: pointer; list-style: none; padding: 20px 24px; font-family: "Fraunces", Georgia, serif; font-size: 1.16rem; color: var(--ink); display: flex; align-items: center; gap: 14px; }
+.steps summary::-webkit-details-marker { display: none; }
+.steps summary::after { content: "+"; margin-left: auto; color: var(--accent); font-size: 1.5rem; line-height: 1; font-family: "Inter", sans-serif; }
+.steps details[open] summary::after { content: "–"; }
+.steps__n { display: inline-grid; place-items: center; min-width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-family: "Fraunces", serif; font-size: 0.95rem; flex: none; }
+.steps details > p { padding: 0 24px 22px 68px; color: var(--body); font-size: 1.02rem; line-height: 1.55; }
+html[dir="rtl"] .steps summary::after { margin-left: 0; margin-right: auto; }
+html[dir="rtl"] .steps details > p { padding: 0 68px 22px 24px; }
+@media (max-width: 600px) { .steps details > p { padding-left: 24px; } html[dir="rtl"] .steps details > p { padding-right: 24px; } }
