@@ -222,23 +222,75 @@
 
   let captured = false; // once a visitor shares an email, the finder stays unlocked for them
 
-  function card(t, type, budget) {
+  const SIZE_LABEL = { single:'one location', small:'a few locations', multi:'many locations' };
+
+  // Plain-language diagnosis per challenge — speaks money & outcomes, not brand names.
+  const DIAG = {
+    'missed-calls': {
+      whats: "When the phone rings mid-rush nobody can grab it — and most callers won't leave a message or try again. What feels like a slow night is often just demand you never saw.",
+      cost: "Missing even a few order or reservation calls a week quietly adds up — for a busy independent that's often hundreds to a few thousand dollars a month.",
+      fix: "Every call answered 24/7 — orders taken, tables booked, questions handled — so the demand you already create actually lands, and you can see exactly how many calls were saved.",
+    },
+    'slow-service': {
+      whats: "Slow service is usually a symptom, not the cause — it traces back to kitchen workflow, ticket routing, or a clunky payment step, not your team not trying.",
+      cost: "Every extra minute per table caps how many guests you can serve at peak — on a full night that's real covers and tips left on the floor.",
+      fix: "Tighten the actual bottleneck so tickets flow and tables turn — more covers in the same hours, with less stress on the line.",
+    },
+    labor: {
+      whats: "High labor cost is rarely lazy scheduling — it's scheduling by gut instead of by demand, so you're overstaffed on slow shifts and slammed on busy ones.",
+      cost: "Trimming labor by even a point or two of sales is real money on a restaurant's thin margins — plus the manager hours lost building schedules by hand.",
+      fix: "Staff to predicted demand hour by hour — fewer dead payroll hours, fewer understaffed rushes, and hours of admin off your plate.",
+    },
+    waste: {
+      whats: "Food waste hides in over-prep and over-ordering — you can't fix what you can't see, and most kitchens are guessing.",
+      cost: "Waste commonly runs a few percent of food cost straight into the bin — on real food spend that's thousands a year.",
+      fix: "See exactly what's wasted and why, and order and prep to actual demand — lower food cost without touching the menu.",
+    },
+    retention: {
+      whats: "If guests come once and don't return, the leak isn't traffic — it's the lack of a reason and a nudge to come back.",
+      cost: "Most first-timers never return, yet regulars drive the bulk of sales — winning back even a slice of lapsed guests is found money.",
+      fix: "Capture guests and bring them back automatically with offers that fit how they actually order — more repeat visits without discount-dumping.",
+    },
+    reviews: {
+      whats: "Your rating quietly decides whether a stranger walks in. Thin or slipping reviews lose you bookings before anyone tastes the food.",
+      cost: "For an independent, a one-star rating increase is linked to roughly 5–9% more revenue — reputation moves real money.",
+      fix: "Steadily earn more genuine reviews and answer them on time, so your rating climbs and more searches turn into visits.",
+    },
+    'delivery-cost': {
+      whats: "If delivery feels busy but unprofitable, the apps' 15–30% commissions are eating the order — you're renting customers you could own.",
+      cost: "On thin margins a 25–30% commission can mean the platform makes more on an order than your kitchen does.",
+      fix: "Move repeat customers to your own commission-free ordering and tame the apps — keep more of every order you're already making.",
+    },
+    margins: {
+      whats: "Shrinking margins on steady sales means a leak you can't see — food-cost creep, delivery dilution, or money walking out the back — not a sales problem.",
+      cost: "A couple of points of margin is the difference between a good year and a scary one at restaurant-level profitability.",
+      fix: "Find the real leak — food cost, channel mix, or loss — and close it, so steady sales finally turn into steady profit.",
+    },
+    visibility: {
+      whats: "Flying blind on your numbers means problems surface on the P&L a month too late — by then the money's already gone.",
+      cost: "Decisions made on gut instead of data quietly cost you across labor, food, and pricing every single week.",
+      fix: "One clear view of what's working, what's costing you, and where the next dollar of profit is — so you act in time, not after.",
+    },
+  };
+
+  const DIY = {
+    low: "Spotting this is one thing; fixing it properly is another — and that's exactly what my team and I do, end to end.",
+    mid: "You could tackle parts of this yourself — but pinning down the real number and wiring the fix into your POS is where it gets hard. That's where we come in.",
+    high: "You could likely build the fix yourself — the real work is doing it to a production standard and proving the ROI. That's where my team and I turn it into an edge.",
+  };
+
+  const miniTool = (t) => {
     const tier = tierOf(t);
-    const cautions = [t.not];
-    if (!t.t.includes(type)) cautions.push(`more commonly a fit for ${t.t.map((x) => TYPE_LABEL[x]).slice(0, 2).join(' / ')}`);
-    if (BUDGET_RANK[budget] < Math.min(...t.b.map((x) => BUDGET_RANK[x]))) cautions.push('may stretch a ' + budget + ' budget');
-    return `<div class="tool">
+    return `<div class="tool tool--mini">
         <span class="tool__name">${t.n}</span>
-        <span class="tool__price" title="${TIER_WORD[tier]}">${tier} · ${TIER_WORD[tier]}</span>
+        <span class="tool__price" title="${TIER_WORD[tier]}">${tier}</span>
         <p class="tool__what">${t.w}</p>
-        <p class="tool__why"><span class="yes">Why it fits:</span> ${t.fit}</p>
-        <p class="tool__why"><span class="no">Watch-out:</span> ${cautions.join(' · ')}</p>
         <a class="tool__link" href="${t.u}" target="_blank" rel="noopener nofollow">Visit ${t.n} →</a>
       </div>`;
-  }
+  };
 
-  function matchList(type, size, problem, goal, budget) {
-    return TOOLS
+  const matchList = (type, size, problem, goal, budget) =>
+    TOOLS
       .filter((t) => t.pr.includes(problem))
       .map((t) => {
         let score = 4;
@@ -248,36 +300,38 @@
         if (t.b.includes(budget)) score += 1;
         return { t, score };
       })
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 5);
-  }
+      .sort((a, b) => b.score - a.score);
 
   function render() {
     const [type, size, problem, goal, comfort, budget] = sels.map((s) => s.value);
     const category = catSel.value;
-    const browse = category !== 'any';
 
-    if (browse) {
+    if (category !== 'any') {
       const list = TOOLS
         .filter((t) => t.c === category)
         .map((t) => ({ t, score: (t.t.includes(type) ? 2 : 0) + (t.s.includes(size) ? 1 : 0) + (t.b.includes(budget) ? 1 : 0) }))
         .sort((a, b) => b.score - a.score)
         .slice(0, 8);
       resultsEl.innerHTML =
-        `<p class="finder__lead">${category} — options worth a look (sorted for a ${TYPE_LABEL[type]} restaurant):</p>` +
-        list.map(({ t }) => card(t, type, budget)).join('');
+        `<p class="finder__lead">${category} — the toolbox (sorted for a ${TYPE_LABEL[type]} restaurant):</p>` +
+        list.map(({ t }) => miniTool(t)).join('');
     } else {
-      const list = matchList(type, size, problem, goal, budget);
-      const lead = `<p class="finder__lead">Based on that, I matched ${list.length} tool${list.length !== 1 ? 's' : ''} for a ${TYPE_LABEL[type]} restaurant focused on ${PROBLEM_LABEL[problem]}.</p>`;
+      const d = DIAG[problem];
+      const leadin = `<p class="diag__leadin">For a ${TYPE_LABEL[type]} restaurant with ${SIZE_LABEL[size]}, focused on ${PROBLEM_LABEL[problem]} —</p>`;
+      const diag = `<div class="diag">
+          <div class="diag__row"><p class="diag__label">What's likely really going on</p><p>${d.whats}</p></div>
+          <div class="diag__row"><p class="diag__label">What it's probably costing you</p><p>${d.cost}</p><p class="diag__cost-note">Illustrative — we pin down your real number on the call.</p></div>
+          <div class="diag__row"><p class="diag__label">What fixing it looks like</p><p>${d.fix}</p></div>
+          <p class="diag__diy">${DIY[comfort]}</p>
+        </div>`;
 
       if (!captured) {
-        resultsEl.innerHTML = lead +
-          `<div class="teaser">${list.map(({ t }) => `<span class="teaser__chip">${t.n}</span>`).join('')}</div>` +
+        resultsEl.innerHTML = leadin + diag +
           `<form class="lead-capture" id="leadCapture" novalidate>
-             <p class="lead-capture__pitch">Enter your email and I'll send your full shortlist — what each tool does, its price tier, the catch, and a link — and personally set up your free video call.</p>
+             <p class="lead-capture__pitch">Want the full breakdown — a closer estimate for your restaurant, plus the kinds of tools that solve this? Enter your email and I'll send it and personally set up your free call.</p>
              <div class="lead-capture__row">
                <input type="email" id="leadEmail" required placeholder="you@restaurant.com" aria-label="Your email" />
-               <button type="submit" class="btn btn--primary" id="leadBtn">Email me my shortlist</button>
+               <button type="submit" class="btn btn--primary" id="leadBtn">Send my breakdown</button>
              </div>
              <p class="lead-capture__note" id="leadNote">Free. No spam. I read every one personally.</p>
            </form>`;
@@ -291,9 +345,9 @@
           lb.disabled = true; lb.textContent = 'Sending…'; note.classList.remove('error');
           const payload = {
             email,
-            profile: `${TYPE_LABEL[type]} · ${size} · challenge: ${PROBLEM_LABEL[problem]} · goal: ${goal} · tech comfort: ${comfort} · budget: ${budget}`,
-            matched_tools: list.map((x) => x.t.n).join(', '),
-            _subject: 'Tool-finder lead — AZ Integrations', _template: 'table', _captcha: 'false',
+            profile: `${TYPE_LABEL[type]} · ${SIZE_LABEL[size]} · challenge: ${PROBLEM_LABEL[problem]} · goal: ${goal} · tech comfort: ${comfort} · budget: ${budget}`,
+            matched_tools: matchList(type, size, problem, goal, budget).slice(0, 5).map((x) => x.t.n).join(', '),
+            _subject: 'Finder lead — AZ Integrations', _template: 'table', _captcha: 'false',
           };
           try {
             const res = await fetch('https://formsubmit.co/ajax/azoeb27@gmail.com', {
@@ -304,22 +358,23 @@
             if (!res.ok || data.success === false || data.success === 'false') throw new Error('x');
             captured = true; render();
           } catch (err) {
-            lb.disabled = false; lb.textContent = 'Email me my shortlist';
+            lb.disabled = false; lb.textContent = 'Send my breakdown';
             note.classList.add('error');
-            note.innerHTML = 'Couldn’t send just now — email me at <a href="mailto:azoeb27@gmail.com">azoeb27@gmail.com</a> and I’ll send your shortlist.';
+            note.innerHTML = 'Couldn’t send just now — email me at <a href="mailto:azoeb27@gmail.com">azoeb27@gmail.com</a> and I’ll send it.';
           }
         });
       } else {
-        resultsEl.innerHTML = lead +
-          '<p class="finder__sent">Here’s your shortlist (also on its way to your inbox):</p>' +
-          list.map(({ t }) => card(t, type, budget)).join('');
+        const tools = matchList(type, size, problem, goal, budget).slice(0, 4);
+        resultsEl.innerHTML = leadin + diag +
+          '<p class="finder__sent">Sent — check your inbox. The kinds of tools that solve this:</p>' +
+          tools.map(({ t }) => miniTool(t)).join('');
       }
     }
 
     const closeMsg = {
-      low: "Honestly? Wiring these together, integrating your POS, and keeping them running is a lot — and easy to get wrong. That's exactly why my team and I exist: we do it end to end, then stay with you as it evolves.",
-      mid: "You could set these up yourself — the links are right there. But choosing among them, integrating your POS, and proving the ROI is the hard part. That's what my team and I do, end to end — and we stay with you for the long run.",
-      high: "You could clearly wire these up yourself. The real work is making them play together, securing them, and proving the ROI over time — to a production standard. That's where my team and I turn good tools into a real edge.",
+      low: "Honestly? Wiring this up, integrating your POS, and keeping it running is a lot — and easy to get wrong. That's exactly why my team and I exist: we do it end to end, then stay with you as it evolves.",
+      mid: "You could set this up yourself — but choosing the right fix, integrating your POS, and proving the ROI is the hard part. That's what my team and I do, end to end — and we stay with you for the long run.",
+      high: "You could clearly build this yourself. The real work is making it production-grade, secure, and ROI-proven over time. That's where my team and I turn a good idea into a real edge.",
     }[comfort];
 
     closeEl.innerHTML = `<div class="finder__closebox">
