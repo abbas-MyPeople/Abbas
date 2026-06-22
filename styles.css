@@ -386,3 +386,19 @@ html[dir="rtl"] .btn--text span { transform: scaleX(-1); }
 html[dir="rtl"] .steps summary::after { margin-left: 0; margin-right: auto; }
 html[dir="rtl"] .steps details > p { padding: 0 68px 22px 24px; }
 @media (max-width: 600px) { .steps details > p { padding-left: 24px; } html[dir="rtl"] .steps details > p { padding-right: 24px; } }
+
+/* Lean homepage clarity block */
+.clarity__p + .clarity__p { margin-top: 16px; }
+.clarity__p strong { color: var(--ink); font-weight: 600; }
+
+/* Print / PDF packet (generated from details.html) */
+@media print {
+  .nav, .mobilecta, .lang, .nav__toggle, .finder, .possible__more, .ctaband { display: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .section, .stats { padding: 22px 0 !important; }
+  .section__head { margin-bottom: 22px; }
+  body { font-size: 11.5pt; background: #fff; }
+  .possible { grid-template-columns: 1fr 1fr !important; }
+  .poss, .stat { break-inside: avoid; }
+  a { color: inherit; }
+}
