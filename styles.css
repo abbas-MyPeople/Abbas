@@ -402,3 +402,8 @@ html[dir="rtl"] .steps details > p { padding: 0 68px 22px 24px; }
   .poss, .stat { break-inside: avoid; }
   a { color: inherit; }
 }
+
+/* One-line step list (homepage) */
+.steplist { list-style: none; display: grid; gap: 14px; margin-bottom: 26px; }
+.steplist li { display: flex; align-items: center; gap: 14px; font-family: "Fraunces", Georgia, serif; font-size: 1.16rem; color: var(--ink); }
+html[dir="rtl"] .steplist li { text-align: right; }
