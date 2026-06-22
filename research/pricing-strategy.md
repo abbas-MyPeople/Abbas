@@ -111,3 +111,112 @@ Our own audit flagged that "no price anywhere" reads as "expensive," and the buy
 ---
 
 *Sources: Monetizely / ClicksGeek / Scopic / SevenFigureAgency (agency retainers); Geisheker / FractionalCMOPartners / RyanHolck (fractional exec rates); DojoAI / Yuktis / AIMCLEAR (performance & rev-share models); Momos / EmbedMyReviews / Synup (reputation pricing); Checkmate / Voosh / IQ BackOffice / Restaurant365 / LoopAI (delivery recovery); ChowNow / Sauce / WebFX / SBA (restaurant marketing budgets). Figures are 2025–2026 market ranges; treat AZ numbers as recommended starting points to reconcile against real costs.*
+
+---
+
+## 8) The full catalog — everything you can do and how to charge for it
+
+Organized by lifecycle stage. Each line is sellable **on its own** (one-off) **or** folded into a monthly plan. "Charge" = the mechanism from §3.
+
+### Stage 0 · Diagnose (the door)
+| Service | Who | Charge | Price |
+|---|---|---|---|
+| Discovery call + on-site walkthrough | all | free (lead magnet) | $0 |
+| Deep Leak & Opportunity Audit (written plan + dollar map) | skeptics who won't commit yet (Giovanni, Chen) | one-time, credited to setup | **$300** |
+| Tech-stack & vendor-cost teardown (what you overpay for today) | P2/P3 with tool sprawl | one-time or bundled | **$300–500** |
+
+### Stage 1 · Stop the bleed (defensive — the P1 wedge, fastest payback)
+| Service | Who | Charge | Price |
+|---|---|---|---|
+| Commission Rescue: first-party ordering + Google profile + tablet→POS consolidation | P1, Sal, Aisha | setup + plan | **$750–1,500** setup |
+| App chargeback / deduction recovery | anyone with delivery volume | **contingency** | **20–25% of recovered** |
+| Delivery menu re-pricing (offset the apps' cut) | delivery-heavy | one-time | **$300** |
+| Payment-processing / card-fee review | all | one-time or **share of savings** | $300 or 1st-yr savings split |
+| AI phone agent (stop sending calls to voicemail) | P1/P2 | setup + monthly mgmt | **$500–1,000** + $99–149/mo |
+
+### Stage 2 · Optimize (margins & operations — the P2 core)
+| Service | Who | Charge | Price |
+|---|---|---|---|
+| Own-your-guests: CRM + first-party data capture | P2, Denise | setup + plan | **$750–1,500** |
+| Loyalty / win-back automation | P2 | setup + plan | included in plan |
+| Reputation / reviews engine | P2, Denise | setup + plan | **$300–750** setup |
+| Reservations + **no-show deposits** | Theo, full-service | setup | **$300–750** |
+| **Labor scheduling / optimization** (the #1 industry cost) | P2/P3, Theo | setup + plan | **$500–1,000** |
+| Inventory / food-cost control | P2/P3 | setup + plan | **$750–1,500** |
+| KDS / order-flow speed-up | full-service, QSR | setup | **$500–1,000** |
+| Single-location analytics dashboard | P2 | setup + plan | included in plan |
+
+### Stage 3 · Grow (revenue)
+| Service | Who | Charge | Price |
+|---|---|---|---|
+| Catering & corporate-lunch channel | Rana, P2 | project **+ rev-share** | **$1,000–2,500** + 5–10% of catering sales (6–12 mo) |
+| Get found: local SEO + **AI/GEO discoverability** | all | setup + plan | **$500–1,000** + monthly |
+| Website / brand build | dated-site owners | project | **$1,000–3,000** |
+| Email / SMS marketing engine | P2/P3 | setup + plan | included in plan |
+| Gift cards / merch / subscriptions / dayparts | growth-minded | project | **$500–1,500** |
+| Virtual brand / new daypart launch | Aisha, ghost kitchens | project **+ rev-share** | project + % of new-line sales |
+
+### Stage 4 · Scale (multi-unit — the P3 core)
+| Service | Who | Charge | Price |
+|---|---|---|---|
+| Cross-location dashboard / BI | Priya, P3 | setup + per-loc monthly | **$1,000–2,500** + $99–149/loc |
+| "Systematize before #3" launch playbook | the Nguyens | project | **$1,500–3,000** |
+| Multi-brand / multi-concept unified view | Marcus | project + per-brand | project + per-brand monthly |
+| Franchise-constraint package (marketing + local SEO + labor only) | Carlos | monthly (works inside franchisor rules) | **plan-priced** |
+| Repeatable new-location launch kit | expanding | per launch | **$1,000–2,500 / location** |
+
+### Stage 5 · Future-ready (premium — the differentiator nobody else sells independents)
+| Service | Who | Charge | Price |
+|---|---|---|---|
+| **Agentic-commerce readiness** (be orderable by ChatGPT/AI agents) | forward operators | setup + monthly | **premium** add-on |
+| Ongoing AI-search / GEO positioning | all | monthly | part of plan or premium |
+| Bespoke automation / custom build | P3, ambitious | project (engineering premium) | scoped |
+| "Stay ahead" advisory (quarterly strategy) | P2/P3 | part of plan or premium tier | included in top plans |
+
+---
+
+## 9) Scenario playbook — all 15 buyer situations → package → price
+
+| # | Buyer & situation | Entry move | Package | Charge & ballpark |
+|---|---|---|---|---|
+| 1A | **Imran** — halal takeout, son left for college | Commission Rescue | Starter | $750 setup + **$149/mo** (FN5 $79) |
+| 1B | **Lupe & Marco** — burned by a 3-yr POS lease | lead with no-lock-in | Starter, month-to-month | low setup + **$99–149/mo** |
+| 1C | **Mr & Mrs Chen** — exhausted, near retirement | single-fix only, no plan | À la carte (ordering OR reviews) | one-time **$500–1,000**, tiny/no monthly |
+| 1D | **Linh** — 2nd-gen, wants her hours back | automate her workload | Starter + AI phone | setup + **$149/mo** + phone mgmt |
+| 1E | **Sal** — 70% DoorDash, scared to leave | discovery-not-divorce framing | Commission Rescue + recovery | setup + **20–25% of recovered** |
+| 2A | **Giovanni** — burned by a $2k/mo agency | paid audit to prove value first | Growth, no retainer feel | **$300 audit** → $349/mo + guarantee |
+| 2B | **Rana** — banquet/catering is his money | catering channel build | Growth + catering | $1,000–2,500 + **5–10% catering sales** |
+| 2C | **Denise** — soul food, reviews/regulars | reviews + win-back | Growth | $1,500 setup + **$349/mo** (FN5 $199) |
+| 2D | **Theo** — steakhouse, no-shows/labor | reservations+deposits + labor | Growth | setup + **$349/mo** |
+| 2E | **Yusuf** — kids push digital, he holds wallet | start small, prove, expand | Starter → Growth | low setup + **$149→349/mo** |
+| 3A | **Priya** — 3-unit, can't see across stores | cross-location dashboard | Multi-unit | $2,000 setup + **$299×3/mo** (FN5 $179) |
+| 3B | **Carlos** — franchisee, locked tech | work inside the rules | Franchise package | **$299/loc/mo** (mktg+SEO+labor) |
+| 3C | **The Nguyens** — just opened #2 | systematize before #3 | Multi-unit + launch playbook | $1,500–3,000 project + **$299×2/mo** |
+| 3D | **Marcus** — two concepts, no unified view | one pane of glass | Multi-brand | project + **per-brand monthly** |
+| 3E | **Aisha** — ghost kitchen + 1 storefront | recovery + first-party data | Starter/Growth + recovery | setup + plan + **20–25% recovered** |
+
+**Cross-cutting scenarios (any persona):**
+- **"I have $0 to spend right now."** → Pure performance: recovery contingency + savings-guaranteed plan. They pay only from money we find/save. (This *is* the Founding 5 ethos — offer it selectively beyond the 5 to win a marquee logo.)
+- **"Just do one thing for me."** → À la carte single-fix, one-time fee, optional $0–49/mo maintenance.
+- **"Set it up, I'll run it."** → Done-with-you: full setup fee, reduced "advisory" monthly (quarterly check-ins instead of full management).
+- **"Do everything, I don't want to think."** → Full plan, top tier, + Future-ready add-on.
+
+---
+
+## 10) Extra charging levers (beyond the core)
+
+- **Annual prepay:** ~2 months free (≈15% off) — improves cash flow and retention.
+- **Setup credited:** the $300 audit and sometimes part of setup credit toward the plan — lowers the "start" barrier without discounting the plan.
+- **Referral credits:** owner refers a peer → 1 month free each. (Our buyers trust peers above all — turn it into a channel.)
+- **Hardware/vendor passthrough at cost**, always itemized — never a markup, never a kickback.
+- **Per-location volume pricing** for P3 (the $299 vs $349 step-down) — rewards scale, matches "fix 1% across 6 stores" math.
+- **Founding-rate scarcity:** only 5, locked for life, then closed — the engine that makes "locked for life" mean something.
+- **Done-with-you discount** for the DIY-curious (Linh) — lower monthly, they own day-to-day, we advise.
+- **Future-ready premium** — agentic commerce / custom builds carry an engineering premium (this is where the ex-Google capability is worth real money and chains-level pricing is defensible).
+
+---
+
+## 11) Site decision (locked): show full plan tiers
+
+Per Abbas: publish **Starter / Growth / Multi-unit** with monthly prices on the details page, with "from $99/mo," the setup-quoted-on-call note, the savings guarantee, no-lock-in, and the Founding 5 locked-rate callout. Full à-la-carte menu stays a sales-conversation tool (this doc). *Still needs Abbas's cost-floor confirmation before these are contractually final.*
+
