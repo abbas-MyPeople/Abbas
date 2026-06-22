@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AZ Restaurant Partners — leave-behind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{ --paper:#f4eee2; --ink:#1b1a17; --muted:#6f685c; --accent:#c0492b; --accent-deep:#97361e; --card:#fbf7ee; --line:rgba(27,26,23,.14); }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html,body{ background:#fff; color:var(--ink); font-family:"Inter",system-ui,sans-serif; }
+    .page{ width:8.5in; min-height:11in; padding:0.6in 0.62in; margin:0 auto; background:var(--paper); display:flex; flex-direction:column; }
+    h1,h2,h3,.brand{ font-family:"Fraunces",Georgia,serif; line-height:1.05; }
+    em{ font-style:italic; color:var(--accent); }
+
+    .top{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--ink); padding-bottom:12px; }
+    .brand{ font-size:23pt; font-weight:600; letter-spacing:-.01em; }
+    .tag{ font-size:11pt; font-style:italic; color:var(--accent-deep); font-family:"Fraunces",serif; }
+
+    .hero{ display:flex; gap:22px; align-items:center; margin-top:22px; }
+    .hero__photo{ width:1.55in; height:1.55in; border-radius:14px; object-fit:cover; flex:none; box-shadow:0 8px 20px -10px rgba(0,0,0,.4); }
+    .hero h1{ font-size:27pt; font-weight:600; }
+    .hero .who{ margin-top:9px; font-size:10.5pt; color:var(--muted); line-height:1.4; }
+    .hero .who strong{ color:var(--ink); }
+
+    .leaks{ margin-top:24px; }
+    .leaks__head{ font-size:10pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+    .leak{ display:flex; gap:13px; align-items:flex-start; padding:11px 0; border-top:1px solid var(--line); }
+    .leak:last-child{ border-bottom:1px solid var(--line); }
+    .leak__n{ font-family:"Fraunces",serif; font-size:14pt; font-weight:600; color:#fff; background:var(--accent); width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; }
+    .leak__t{ font-size:12.5pt; line-height:1.4; }
+    .leak__t b{ font-weight:600; }
+
+    .deal{ margin-top:22px; background:var(--ink); color:#f1e9da; border-radius:16px; padding:20px 22px; }
+    .deal h2{ font-size:16pt; color:#fff; margin-bottom:7px; }
+    .deal h2 em{ color:#f0a888; }
+    .deal p{ font-size:11pt; line-height:1.5; color:#d9d0c0; }
+    .deal p strong{ color:#fff; }
+
+    .cta{ margin-top:auto; padding-top:22px; display:flex; gap:22px; align-items:center; }
+    .cta__qr{ width:1.5in; height:1.5in; flex:none; border:1px solid var(--line); border-radius:12px; padding:7px; background:#fff; }
+    .cta__txt h3{ font-size:15pt; font-weight:600; }
+    .cta__txt h3 em{ color:var(--accent); }
+    .cta__txt p{ font-size:11pt; color:var(--muted); margin-top:6px; line-height:1.5; }
+    .cta__url{ font-weight:600; color:var(--accent-deep); }
+    .cta__contact{ margin-top:9px; font-size:11pt; color:var(--ink); }
+    .cta__contact b{ font-weight:600; }
+
+    .foot{ margin-top:16px; padding-top:10px; border-top:1px solid var(--line); font-size:8.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+
+    @media print{ @page{ size:Letter; margin:0; } body{ background:#fff; } .page{ box-shadow:none; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top">
+      <span class="brand">AZ&nbsp;Restaurant&nbsp;Partners</span>
+      <span class="tag">Keep more of what you earn.</span>
+    </div>
+
+    <div class="hero">
+      <img class="hero__photo" src="assets/abbas-800.jpg" alt="Abbas Zoeb" />
+      <div>
+        <h1>Your restaurant is quietly losing money. <em>Let's find it — free.</em></h1>
+        <p class="who"><strong>Abbas Zoeb</strong> — Owner, Wok &amp; Karahi (Spring, TX). A fellow restaurant owner, not a vendor — with the engineering team big chains rely on. <strong>15+ years</strong> in hospitality; our own place profitable every year it's been open.</p>
+      </div>
+    </div>
+
+    <div class="leaks">
+      <p class="leaks__head">Where independents quietly bleed money</p>
+      <div class="leak"><span class="leak__n">1</span><p class="leak__t"><b>The delivery apps take 15–30% of every order</b> — and walk off with your customer. You're renting guests you could own.</p></div>
+      <div class="leak"><span class="leak__n">2</span><p class="leak__t"><b>The phone rings through the rush with no one free to answer</b> — missed orders and reservations you never even saw.</p></div>
+      <div class="leak"><span class="leak__n">3</span><p class="leak__t"><b>A dozen tools that don't talk — and no real strategy</b>, the way the big chains have one. Money leaks where you don't have time to look.</p></div>
+    </div>
+
+    <div class="deal">
+      <h2>We make you money <em>before</em> we take a dollar.</h2>
+      <p>We come to you, find every leak, and do all the work. <strong>You only pay once you're saving — guaranteed.</strong> We're hand-picking just <strong>five founding restaurants</strong> for our performance-first pilot, with <strong>founding pricing locked for life</strong>. No commissions from any vendor — our only side is yours.</p>
+    </div>
+
+    <div class="cta">
+      <img class="cta__qr" src="assets/finder-qr.svg" alt="Scan to find your money leaks" />
+      <div class="cta__txt">
+        <h3>Scan it. See your money leaks in <em>2 minutes</em> — free.</h3>
+        <p>Point your phone camera at the code, or go to<br><span class="cta__url">abbas-mypeople.github.io/Abbas/toolbox.html</span></p>
+        <p class="cta__contact"><b>Call or text Abbas:</b> (408) 393-6716 &nbsp;·&nbsp; azoeb27@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span>AZ Restaurant Partners · For independent, family-run restaurants · Spring &amp; Greater Houston, TX</span>
+      <span>You only pay after you save.</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -27,6 +27,29 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  /* ---- Campaign attribution: capture UTMs + referrer once, persist across pages for the visit ---- */
+  const ATTR = (() => {
+    const KEY = 'azattr';
+    let saved = {};
+    try { saved = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (e) {}
+    const qs = new URLSearchParams(location.search);
+    let changed = false;
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach((k) => {
+      const v = qs.get(k); if (v && !saved[k]) { saved[k] = v; changed = true; }
+    });
+    if (!saved.landing) { saved.landing = (location.pathname.split('/').pop() || 'index.html'); changed = true; }
+    if (!saved.referrer && document.referrer && !document.referrer.includes(location.host)) { saved.referrer = document.referrer; changed = true; }
+    if (changed) { try { sessionStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} }
+    return saved;
+  })();
+  const attrString = () => {
+    const parts = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']
+      .filter((k) => ATTR[k]).map((k) => k.replace('utm_', '') + '=' + ATTR[k]);
+    if (ATTR.referrer) parts.push('referrer=' + ATTR.referrer);
+    if (ATTR.landing) parts.push('landing=' + ATTR.landing);
+    return parts.length ? parts.join(' · ') : 'direct / none';
+  };
+
   /* ---- Lead form → emails azoeb27@gmail.com via FormSubmit ---- */
   const form = document.getElementById('leadForm');
   if (form) {
@@ -44,6 +67,7 @@
       const payload = {
         name: form.name.value, restaurant: form.restaurant.value, email: form.email.value,
         phone: form.phone.value, message: form.message.value,
+        source: attrString(),
         _subject: 'New free-call request — AZ Restaurant Partners', _template: 'table', _captcha: 'false',
       };
       try {
@@ -377,6 +401,7 @@
             estimated_monthly_leak: estRange(problem, size),
             profile: `${TYPE_LABEL[type]} · ${SIZE_LABEL[size]} · challenge: ${PROBLEM_LABEL[problem]} · goal: ${goal} · tech comfort: ${comfort} · budget: ${budget}`,
             matched_tools: matchList(type, size, problem, goal, budget).slice(0, 5).map((x) => x.t.n).join(', '),
+            source: attrString(),
             _subject: 'Finder lead — AZ Restaurant Partners', _template: 'table', _captcha: 'false',
           };
           try {
