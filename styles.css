@@ -246,6 +246,8 @@ em { font-style: italic; color: var(--accent); }
 .diag__label { font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 5px; }
 .diag__row p { color: var(--body); font-size: 1.04rem; }
 .diag__cost-note { font-size: 0.82rem !important; color: var(--muted) !important; font-style: italic; margin-top: 5px; }
+.diag__figure { font-family: "Fraunces", Georgia, serif; font-size: 1.18rem; color: var(--ink); margin-bottom: 4px; }
+.diag__figure strong { color: var(--accent-deep); font-weight: 600; white-space: nowrap; }
 .diag__diy { background: var(--paper); border-left: 2px solid var(--accent); border-radius: 0 8px 8px 0; padding: 14px 16px; color: var(--ink); font-size: 1rem; }
 .tool--mini { padding: 16px 20px; }
 .tool--mini .tool__what { font-size: 0.94rem; }

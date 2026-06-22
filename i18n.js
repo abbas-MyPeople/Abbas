@@ -195,6 +195,7 @@
 
     // --- lean homepage ---
     [`Full details`, `पूरी जानकारी`, `پوری تفصیل`],
+    [`Home`, `होम`, `ہوم`],
     [`How it works <span aria-hidden="true">→</span>`, `यह कैसे काम करता है <span aria-hidden="true">→</span>`, `یہ کیسے کام کرتا ہے <span aria-hidden="true">→</span>`],
     [`In plain words.`, `सीधे शब्दों में।`, `سیدھے الفاظ میں۔`],
     [`<strong>The problem:</strong> big chains have whole teams for technology and strategy. You've got a kitchen to run — so money quietly leaks out: the apps' cut, missed calls, a dozen tools that don't talk, and no real strategy.`, `<strong>समस्या:</strong> बड़ी चेन के पास टेक्नोलॉजी और रणनीति के लिए पूरी टीमें होती हैं। आपके पास तो एक किचन चलाना है — इसलिए पैसा चुपचाप रिसता रहता है: ऐप्स का हिस्सा, छूटे कॉल, दर्जनों टूल जो आपस में बात नहीं करते, और कोई असली रणनीति नहीं।`, `<strong>مسئلہ:</strong> بڑی چینز کے پاس ٹیکنالوجی اور حکمتِ عملی کے لیے پوری ٹیمیں ہوتی ہیں۔ آپ کے پاس تو ایک کچن چلانا ہے — اس لیے پیسہ خاموشی سے رِستا رہتا ہے: ایپس کا حصہ، چھوٹی کالیں، درجنوں ٹولز جو آپس میں بات نہیں کرتے، اور کوئی اصل حکمتِ عملی نہیں۔`],

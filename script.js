@@ -201,11 +201,15 @@
   const BUDGET_RANK = { lean:0, modest:1, serious:2 };
 
   const finder = document.getElementById('finder');
-  if (!finder) return;
+  const catSel = document.getElementById('f-category');
+  // The finder needs its full set of controls. On pages that only link to it
+  // (e.g. details.html keeps an id="finder" section as an anchor) we bail safely.
+  if (!finder || !catSel || !document.getElementById('f-type')) return;
   const resultsEl = document.getElementById('finderResults');
   const closeEl = document.getElementById('finderClose');
-  const catSel = document.getElementById('f-category');
   const sels = ['f-type','f-size','f-problem','f-goal','f-comfort','f-budget'].map((id) => document.getElementById(id));
+  // Booking lives on the homepage; link there when this finder is on its own page.
+  const CONTACT = document.getElementById('contact') ? '#contact' : 'index.html#contact';
 
   // Populate the "browse by category" dropdown from the dataset
   [...new Set(TOOLS.map((t) => t.c))].sort().forEach((cat) => {
@@ -223,6 +227,28 @@
   let captured = false; // once a visitor shares an email, the finder stays unlocked for them
 
   const SIZE_LABEL = { single:'one location', small:'a few locations', multi:'many locations' };
+
+  // Rough monthly $ leak ranges for a SINGLE location — deliberately conservative and
+  // grounded in the research (e.g. ~$79k/yr in app commissions at high volume, 5–9% revenue
+  // per review star). Shown only as an illustrative range; the real number is pinned on the call.
+  const COST_EST = {
+    'missed-calls': [300, 1500],
+    'slow-service': [400, 2000],
+    labor: [500, 2500],
+    waste: [300, 1800],
+    retention: [500, 3000],
+    reviews: [400, 2500],
+    'delivery-cost': [900, 5000],
+    margins: [600, 3000],
+    visibility: [300, 2000],
+  };
+  const SIZE_MULT = { single: 1, small: 2.5, multi: 6 };
+  const money = (n) => '$' + (Math.round(n / 50) * 50).toLocaleString('en-US');
+  const estRange = (problem, size) => {
+    const [lo, hi] = COST_EST[problem] || [300, 2000];
+    const m = SIZE_MULT[size] || 1;
+    return money(lo * m) + '–' + money(hi * m);
+  };
 
   // Plain-language diagnosis per challenge — speaks money & outcomes, not brand names.
   const DIAG = {
@@ -320,7 +346,7 @@
       const leadin = `<p class="diag__leadin">For a ${TYPE_LABEL[type]} restaurant with ${SIZE_LABEL[size]}, focused on ${PROBLEM_LABEL[problem]} —</p>`;
       const diag = `<div class="diag">
           <div class="diag__row"><p class="diag__label">What's likely really going on</p><p>${d.whats}</p></div>
-          <div class="diag__row"><p class="diag__label">What it's probably costing you</p><p>${d.cost}</p><p class="diag__cost-note">Illustrative — we pin down your real number on the call.</p></div>
+          <div class="diag__row"><p class="diag__label">What it's probably costing you</p><p class="diag__figure">Likely leaking <strong>~${estRange(problem, size)}/month</strong> on this</p><p>${d.cost}</p><p class="diag__cost-note">Rough estimate from typical independents — we pin down your real number on the call.</p></div>
           <div class="diag__row"><p class="diag__label">What fixing it looks like</p><p>${d.fix}</p></div>
           <p class="diag__diy">${DIY[comfort]}</p>
         </div>`;
@@ -328,23 +354,27 @@
       if (!captured) {
         resultsEl.innerHTML = leadin + diag +
           `<form class="lead-capture" id="leadCapture" novalidate>
-             <p class="lead-capture__pitch">Want the full breakdown — a closer estimate for your restaurant, plus the kinds of tools that solve this? Enter your email and we'll send it and set up your free call.</p>
+             <p class="lead-capture__pitch">Want the full breakdown — a closer estimate for your restaurant, plus the kinds of tools that solve this? Leave your email and phone, and we'll send it over and set up your free call.</p>
              <div class="lead-capture__row">
                <input type="email" id="leadEmail" required placeholder="you@restaurant.com" aria-label="Your email" />
+               <input type="tel" id="leadPhone" required placeholder="Best phone number" aria-label="Your phone number" />
                <button type="submit" class="btn btn--primary" id="leadBtn">Send my breakdown</button>
              </div>
-             <p class="lead-capture__note" id="leadNote">Free. No spam. We read every one personally.</p>
+             <p class="lead-capture__note" id="leadNote">Free. No spam. We'll text or email it and only call if you want us to.</p>
            </form>`;
         const lf = document.getElementById('leadCapture');
         lf.addEventListener('submit', async (e) => {
           e.preventDefault();
           const email = document.getElementById('leadEmail').value.trim();
+          const phone = document.getElementById('leadPhone').value.trim();
           const note = document.getElementById('leadNote');
           const lb = document.getElementById('leadBtn');
           if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { note.textContent = 'Please enter a valid email.'; note.classList.add('error'); return; }
+          if (phone.replace(/\D/g, '').length < 7) { note.textContent = 'Please enter a phone number we can reach you at.'; note.classList.add('error'); return; }
           lb.disabled = true; lb.textContent = 'Sending…'; note.classList.remove('error');
           const payload = {
-            email,
+            email, phone,
+            estimated_monthly_leak: estRange(problem, size),
             profile: `${TYPE_LABEL[type]} · ${SIZE_LABEL[size]} · challenge: ${PROBLEM_LABEL[problem]} · goal: ${goal} · tech comfort: ${comfort} · budget: ${budget}`,
             matched_tools: matchList(type, size, problem, goal, budget).slice(0, 5).map((x) => x.t.n).join(', '),
             _subject: 'Finder lead — AZ Restaurant Partners', _template: 'table', _captcha: 'false',
@@ -380,7 +410,7 @@
     closeEl.innerHTML = `<div class="finder__closebox">
       <h3>Do it yourself — or let us make it a game-changer.</h3>
       <p>${closeMsg}</p>
-      <a href="#contact" class="btn btn--primary">Book a free video call</a>
+      <a href="${CONTACT}" class="btn btn--primary">Book a free video call</a>
     </div>`;
   }
 
