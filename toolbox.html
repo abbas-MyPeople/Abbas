@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Restaurant Tool Finder — AZ Restaurant Partners</title>
+  <meta name="description" content="Answer a few quick questions and see which of 100+ restaurant tools actually fit your place — what they cost, what to skip, and where you're likely losing money. Free, no signup to start." />
+  <meta name="theme-color" content="#f4eee2" />
+  <meta property="og:title" content="Free Restaurant Tool Finder — see what actually fits your place" />
+  <meta property="og:description" content="There's a tool for everything. You only need the right few. Answer a few questions and we'll show you what fits, what it costs, and what to skip — free." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://abbas-mypeople.github.io/Abbas/toolbox.html" />
+  <meta property="og:image" content="https://abbas-mypeople.github.io/Abbas/assets/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Restaurant Tool Finder — see what actually fits your place" />
+  <meta name="twitter:description" content="There's a tool for everything. You only need the right few. Find your fit — free." />
+  <meta name="twitter:image" content="https://abbas-mypeople.github.io/Abbas/assets/og.png" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b1a17'/%3E%3Ctext x='50%25' y='55%25' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23c0492b' text-anchor='middle' dominant-baseline='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="wrap nav__inner">
+      <a href="index.html" class="brand" aria-label="AZ Restaurant Partners">AZ&nbsp;Restaurant&nbsp;Partners</a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#contact" class="nav__cta">Book a free call</a>
+      </nav>
+      <div class="lang" id="lang" role="group" aria-label="Language">
+        <button type="button" class="lang__opt is-active" data-lang="en">EN</button>
+        <button type="button" class="lang__opt" data-lang="hi" lang="hi">हिं</button>
+        <button type="button" class="lang__opt" data-lang="ur" lang="ur">اردو</button>
+      </div>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO (lead magnet) -->
+    <section class="tbhero">
+      <div class="wrap tbhero__inner reveal">
+        <p class="kicker">Free · about 2 minutes · no signup to start</p>
+        <h1 class="tbhero__title">Find the money your restaurant is losing.</h1>
+        <p class="tbhero__sub">There's a tool for everything. You only need the right few.</p>
+        <p class="tbhero__lead">There are <strong>100+ tools</strong> out there promising to fix your restaurant — and most owners have never heard of the handful that would actually move their numbers. Answer a few quick questions and we'll show you, free: <strong>what likely fits your place, what it tends to cost, and what to skip.</strong></p>
+        <a href="#finder" class="btn btn--primary tbhero__btn">See what fits my restaurant <span aria-hidden="true">↓</span></a>
+        <p class="tbhero__trust">From a restaurant family whose own place has been profitable every year it's been open — and <strong>we only get paid once you're saving</strong>.</p>
+      </div>
+    </section>
+
+    <!-- FINDER -->
+    <section class="section" id="finder">
+      <div class="wrap wrap--narrow">
+        <div class="finder reveal">
+          <p class="finder__sentence">
+            I run a
+            <select id="f-type" class="finder__sel" aria-label="Restaurant type">
+              <option value="qsr">quick-service</option>
+              <option value="fast-casual">fast-casual</option>
+              <option value="full-service" selected>full-service</option>
+              <option value="fine-dining">fine-dining</option>
+              <option value="ghost">delivery-only</option>
+            </select>
+            restaurant with
+            <select id="f-size" class="finder__sel" aria-label="Number of locations">
+              <option value="single" selected>one location</option>
+              <option value="small">a few locations</option>
+              <option value="multi">many locations</option>
+            </select>.
+            My biggest challenge is
+            <select id="f-problem" class="finder__sel" aria-label="Biggest challenge">
+              <option value="missed-calls" selected>missed phone orders</option>
+              <option value="slow-service">slow service</option>
+              <option value="labor">high labor cost</option>
+              <option value="waste">food waste</option>
+              <option value="retention">too few repeat guests</option>
+              <option value="reviews">weak online reviews</option>
+              <option value="delivery-cost">high delivery commissions</option>
+              <option value="margins">shrinking margins</option>
+              <option value="visibility">no clear view of my numbers</option>
+            </select>,
+            and what I'd love most is to
+            <select id="f-goal" class="finder__sel" aria-label="Primary goal">
+              <option value="guests" selected>bring in more guests</option>
+              <option value="costs">cut my costs</option>
+              <option value="time">save time</option>
+              <option value="connect">connect my systems</option>
+            </select>.
+            With tech I'm
+            <select id="f-comfort" class="finder__sel" aria-label="Tech comfort">
+              <option value="low">not very comfortable</option>
+              <option value="mid" selected>fairly comfortable</option>
+              <option value="high">very comfortable</option>
+            </select>,
+            and my budget is
+            <select id="f-budget" class="finder__sel" aria-label="Budget">
+              <option value="lean">lean</option>
+              <option value="modest" selected>modest</option>
+              <option value="serious">ready to invest</option>
+            </select>.
+          </p>
+          <p class="finder__browse">Or browse the whole toolbox — 100+ tools, by category:
+            <select id="f-category" class="finder__sel" aria-label="Browse by category">
+              <option value="any" selected>use my sentence above</option>
+            </select>
+          </p>
+          <div class="finder__results" id="finderResults" aria-live="polite"></div>
+          <div class="finder__close" id="finderClose"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT HAPPENS NEXT -->
+    <section class="section section--alt" id="tbnext">
+      <div class="wrap wrap--narrow">
+        <div class="section__head reveal">
+          <p class="kicker">After the finder</p>
+          <h2 class="h2">This is just the starting map. We do the hard part.</h2>
+        </div>
+        <ol class="steplist reveal">
+          <li><span class="steps__n">1</span> You see what fits — free, no obligation</li>
+          <li><span class="steps__n">2</span> We send the full breakdown to your inbox</li>
+          <li><span class="steps__n">3</span> One free call — we tailor it to your place</li>
+          <li><span class="steps__n">4</span> We set it all up — you only pay after you're saving</li>
+        </ol>
+        <p class="possible__cta reveal">Knowing which tool to pick is the easy part. Choosing right, wiring it into your POS, and proving it actually made you money — that's what we do, end to end. <a href="index.html#how">See how it works →</a> · <a href="index.html#contact">book your free call →</a></p>
+        <p class="tb-scarcity reveal"><strong>Founding 5:</strong> we're hand-picking five restaurants we make money for <em>before</em> we take a dollar — founding pricing locked for life. <a href="index.html#pilot">See the pilot →</a></p>
+      </div>
+    </section>
+
+    <!-- SHARE -->
+    <section class="tb-share">
+      <div class="wrap reveal">
+        <p class="tb-share__txt">Know another owner getting squeezed by the apps?</p>
+        <a class="btn btn--text tb-share__btn" id="tbShare" href="https://wa.me/?text=Found%20this%20free%20tool%20%E2%80%94%20it%20shows%20which%20restaurant%20tools%20actually%20fit%20your%20place%20and%20where%20you%27re%20losing%20money%3A%20https%3A%2F%2Fabbas-mypeople.github.io%2FAbbas%2Ftoolbox.html" target="_blank" rel="noopener">Send them this finder <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="brand">AZ&nbsp;Restaurant&nbsp;Partners</span>
+      <p><strong>Keep more of what you earn.</strong> For independent, family-run restaurants — a restaurant family + an engineering team · Spring &amp; Greater Houston, TX.</p>
+      <p class="footer__copy">© <span id="year"></span> AZ Restaurant Partners · <a href="index.html">Home</a> · <a href="details.html">Full details</a></p>
+    </div>
+  </footer>
+
+  <!-- Sticky mobile CTA -->
+  <div class="mobilecta" id="mobilecta">
+    <a href="index.html#contact" class="btn btn--primary btn--full">Book your free call</a>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -119,14 +119,14 @@
       </div>
     </section>
 
-    <!-- TOOLBOX TEASER (opens modal) -->
+    <!-- TOOLBOX TEASER (links to standalone finder page) -->
     <section class="toolbox-teaser">
       <div class="wrap reveal">
-        <button type="button" class="toolbox-trigger" id="toolboxOpen" aria-haspopup="dialog">
+        <a class="toolbox-trigger" href="toolbox.html">
           <span class="toolbox-trigger__n">100+</span>
-          <span class="toolbox-trigger__txt" data-i18n>tools, 22 categories — most owners never find the few that fit. <strong>Tap to see what fits your restaurant.</strong></span>
+          <span class="toolbox-trigger__txt" data-i18n>tools, 22 categories — most owners never find the few that fit. <strong>Take the free 2-minute finder — see what fits your restaurant.</strong></span>
           <span class="toolbox-trigger__arrow" aria-hidden="true">→</span>
-        </button>
+        </a>
       </div>
     </section>
 
@@ -178,79 +178,6 @@
       <p class="footer__copy">© <span id="year"></span> AZ Restaurant Partners · <a href="details.html">Full details</a></p>
     </div>
   </footer>
-
-  <!-- TOOLBOX MODAL -->
-  <div class="modal" id="toolboxModal" aria-hidden="true">
-    <div class="modal__backdrop" data-close></div>
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Toolbox finder">
-      <button type="button" class="modal__close" id="toolboxClose" aria-label="Close">&times;</button>
-      <div class="modal__body">
-        <div id="finder">
-          <div class="section__head">
-            <p class="kicker">What's out there — and what fits you</p>
-            <h2 class="h2">There's a tool for everything. You only need the right few.</h2>
-            <p class="lead" style="margin-top:14px">We track <strong>100+ restaurant tools across 22 categories</strong> — and most owners have never heard of the handful that would actually move their numbers. Tap the <span class="finder__hintword">highlighted words</span> to describe your place, and we'll show you what likely fits, what it tends to cost, and what to skip — then send the full breakdown and set up your free call.</p>
-          </div>
-          <div class="finder">
-            <p class="finder__sentence">
-              I run a
-              <select id="f-type" class="finder__sel" aria-label="Restaurant type">
-                <option value="qsr">quick-service</option>
-                <option value="fast-casual">fast-casual</option>
-                <option value="full-service" selected>full-service</option>
-                <option value="fine-dining">fine-dining</option>
-                <option value="ghost">delivery-only</option>
-              </select>
-              restaurant with
-              <select id="f-size" class="finder__sel" aria-label="Number of locations">
-                <option value="single" selected>one location</option>
-                <option value="small">a few locations</option>
-                <option value="multi">many locations</option>
-              </select>.
-              My biggest challenge is
-              <select id="f-problem" class="finder__sel" aria-label="Biggest challenge">
-                <option value="missed-calls" selected>missed phone orders</option>
-                <option value="slow-service">slow service</option>
-                <option value="labor">high labor cost</option>
-                <option value="waste">food waste</option>
-                <option value="retention">too few repeat guests</option>
-                <option value="reviews">weak online reviews</option>
-                <option value="delivery-cost">high delivery commissions</option>
-                <option value="margins">shrinking margins</option>
-                <option value="visibility">no clear view of my numbers</option>
-              </select>,
-              and what I'd love most is to
-              <select id="f-goal" class="finder__sel" aria-label="Primary goal">
-                <option value="guests" selected>bring in more guests</option>
-                <option value="costs">cut my costs</option>
-                <option value="time">save time</option>
-                <option value="connect">connect my systems</option>
-              </select>.
-              With tech I'm
-              <select id="f-comfort" class="finder__sel" aria-label="Tech comfort">
-                <option value="low">not very comfortable</option>
-                <option value="mid" selected>fairly comfortable</option>
-                <option value="high">very comfortable</option>
-              </select>,
-              and my budget is
-              <select id="f-budget" class="finder__sel" aria-label="Budget">
-                <option value="lean">lean</option>
-                <option value="modest" selected>modest</option>
-                <option value="serious">ready to invest</option>
-              </select>.
-            </p>
-            <p class="finder__browse">Or browse the whole toolbox — 100+ tools, by category:
-              <select id="f-category" class="finder__sel" aria-label="Browse by category">
-                <option value="any" selected>use my sentence above</option>
-              </select>
-            </p>
-            <div class="finder__results" id="finderResults" aria-live="polite"></div>
-            <div class="finder__close" id="finderClose"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Sticky mobile CTA -->
   <div class="mobilecta" id="mobilecta">

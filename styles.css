@@ -393,7 +393,7 @@ html[dir="rtl"] .steps details > p { padding: 0 68px 22px 24px; }
 
 /* Print / PDF packet (generated from details.html) */
 @media print {
-  .nav, .mobilecta, .lang, .nav__toggle, .finder, .possible__more, .ctaband { display: none !important; }
+  .nav, .mobilecta, .lang, .nav__toggle, .finder, .toolbox-trigger, .possible__more, .ctaband { display: none !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
   .section, .stats { padding: 22px 0 !important; }
   .section__head { margin-bottom: 22px; }
@@ -403,10 +403,14 @@ html[dir="rtl"] .steps details > p { padding: 0 68px 22px 24px; }
   a { color: inherit; }
 }
 
-/* One-line step list (homepage) */
-.steplist { list-style: none; display: grid; gap: 14px; margin-bottom: 26px; }
-.steplist li { display: flex; align-items: center; gap: 14px; font-family: "Fraunces", Georgia, serif; font-size: 1.16rem; color: var(--ink); }
+/* Smart timeline (homepage steps) — one line each, connected by a vertical thread */
+.steplist { list-style: none; margin: 0 0 28px; padding: 0; }
+.steplist li { position: relative; display: flex; align-items: center; gap: 16px; min-height: 50px; font-family: "Fraunces", Georgia, serif; font-size: 1.14rem; line-height: 1.3; color: var(--ink); }
+.steplist li .steps__n { position: relative; z-index: 1; transition: transform .2s var(--ease); }
+.steplist li:not(:last-child)::before { content: ""; position: absolute; left: 14px; top: 50%; height: 100%; width: 2px; background: rgba(192,73,43,.35); z-index: 0; }
+.steplist li:hover .steps__n { transform: scale(1.08); }
 html[dir="rtl"] .steplist li { text-align: right; }
+html[dir="rtl"] .steplist li:not(:last-child)::before { left: auto; right: 14px; }
 
 /* Toolbox teaser bar + modal */
 .toolbox-teaser { padding: 0 0 8px; }
@@ -428,3 +432,24 @@ html[dir="rtl"] .toolbox-trigger__arrow { margin-left: 0; margin-right: auto; tr
 .modal__close { position: absolute; top: 14px; right: 16px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: 1.5rem; line-height: 1; cursor: pointer; z-index: 2; }
 html[dir="rtl"] .modal__close { right: auto; left: 16px; }
 .modal__body .section__head { margin-bottom: 26px; max-width: none; }
+
+/* Make the toolbox bar work as a link too */
+a.toolbox-trigger { text-decoration: none; color: #cfc8ba; }
+
+/* ===== Standalone toolbox / finder funnel page ===== */
+.tbhero { padding: 130px 0 28px; background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%); }
+.tbhero__inner { max-width: 720px; }
+.tbhero__title { font-size: clamp(2.1rem, 6vw, 3.4rem); line-height: 1.04; }
+.tbhero__sub { font-family: "Fraunces", Georgia, serif; font-style: italic; font-size: clamp(1.15rem, 3vw, 1.5rem); color: var(--accent); margin-top: 12px; }
+.tbhero__lead { font-size: 1.12rem; line-height: 1.6; color: var(--ink); margin-top: 18px; max-width: 640px; }
+.tbhero__btn { margin-top: 24px; }
+.tbhero__trust { margin-top: 18px; font-size: 0.96rem; color: var(--muted); max-width: 560px; }
+.tbhero__trust strong { color: var(--ink); }
+
+.tb-scarcity { margin-top: 16px; padding: 16px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; font-size: 1rem; line-height: 1.5; color: var(--ink); }
+html[dir="rtl"] .tb-scarcity { text-align: right; }
+
+.tb-share { padding: 0 0 70px; }
+.tb-share .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+.tb-share__txt { font-family: "Fraunces", Georgia, serif; font-size: 1.12rem; color: var(--ink); }
+.tb-share__btn { color: var(--accent); font-weight: 600; }
