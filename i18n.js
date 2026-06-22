@@ -204,7 +204,8 @@
     [`Five simple steps. You barely lift a finger.`, `पाँच आसान क़दम। आपको कुछ ख़ास नहीं करना पड़ता।`, `پانچ آسان قدم۔ آپ کو کچھ خاص نہیں کرنا پڑتا۔`],
     [`Tap any step for the detail — or just book the call and we'll walk you through it.`, `विस्तार के लिए किसी भी क़दम पर टैप करें — या बस कॉल बुक करें और हम आपको सब समझा देंगे।`, `تفصیل کے لیے کسی بھی قدم پر ٹیپ کریں — یا بس کال بُک کریں اور ہم آپ کو سب سمجھا دیں گے۔`],
     [`Want every detail — the plays, the 100+-tool toolbox, the pricing? <a href="details.html">See the full details →</a>`, `हर विवरण चाहिए — सारे तरीक़े, 100+ टूल्स का टूलबॉक्स, कीमत? <a href="details.html">पूरी जानकारी देखें →</a>`, `ہر تفصیل چاہیے — سارے طریقے، 100+ ٹولز کا ٹول باکس، قیمت؟ <a href="details.html">پوری تفصیل دیکھیں →</a>`],
-    [`See exactly how each step works — plus the plays, the toolbox, and pricing: <a href="details.html">full details</a> · <a href="AZ-Restaurant-Partners.pdf" download>download the PDF</a>`, `देखिए हर क़दम असल में कैसे काम करता है — साथ ही सारे तरीक़े, टूलबॉक्स और कीमत: <a href="details.html">पूरी जानकारी</a> · <a href="AZ-Restaurant-Partners.pdf" download>PDF डाउनलोड करें</a>`, `دیکھیے ہر قدم اصل میں کیسے کام کرتا ہے — ساتھ ہی سارے طریقے، ٹول باکس اور قیمت: <a href="details.html">پوری تفصیل</a> · <a href="AZ-Restaurant-Partners.pdf" download>PDF ڈاؤن لوڈ کریں</a>`],
+    [`See exactly how each step works — plus the plays, the toolbox, and pricing: <a href="details.html">full details</a> · <a href="AZ-Restaurant-Partners.pdf" download="">download the PDF</a>`, `देखिए हर क़दम असल में कैसे काम करता है — साथ ही सारे तरीक़े, टूलबॉक्स और कीमत: <a href="details.html">पूरी जानकारी</a> · <a href="AZ-Restaurant-Partners.pdf" download>PDF डाउनलोड करें</a>`, `دیکھیے ہر قدم اصل میں کیسے کام کرتا ہے — ساتھ ہی سارے طریقے، ٹول باکس اور قیمت: <a href="details.html">پوری تفصیل</a> · <a href="AZ-Restaurant-Partners.pdf" download>PDF ڈاؤن لوڈ کریں</a>`],
+    [`tools, 22 categories — most owners never find the few that fit. <strong>Tap to see what fits your restaurant.</strong>`, `टूल, 22 श्रेणियाँ — ज़्यादातर मालिक वही चंद कभी नहीं ढूँढ पाते जो सही बैठें। <strong>टैप करें और देखें आपके रेस्तराँ पर क्या सही बैठता है।</strong>`, `ٹولز، 22 زمرے — زیادہ تر مالکان وہی چند کبھی نہیں ڈھونڈ پاتے جو صحیح بیٹھیں۔ <strong>ٹیپ کریں اور دیکھیں آپ کے ریستوران پر کیا صحیح بیٹھتا ہے۔</strong>`],
   ];
 
   const TX = { hi: {}, ur: {} };
@@ -233,6 +234,7 @@
     '.contact__list li span',
     '.form label > span', '#formSubmit', '.form__note',
     '.footer__inner p:not(.footer__copy)',
+    '.toolbox-trigger__txt',
     '.mobilecta a',
   ].join(', ');
 

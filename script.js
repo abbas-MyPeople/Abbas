@@ -448,3 +448,15 @@
     });
   }
 })();
+
+/* ===== Toolbox modal ===== */
+(() => {
+  const openBtn = document.getElementById('toolboxOpen');
+  const modal = document.getElementById('toolboxModal');
+  if (!openBtn || !modal) return;
+  const open = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; };
+  const close = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
+  openBtn.addEventListener('click', open);
+  modal.querySelectorAll('[data-close], #toolboxClose').forEach((el) => el.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+})();

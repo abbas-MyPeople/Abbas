@@ -407,3 +407,24 @@ html[dir="rtl"] .steps details > p { padding: 0 68px 22px 24px; }
 .steplist { list-style: none; display: grid; gap: 14px; margin-bottom: 26px; }
 .steplist li { display: flex; align-items: center; gap: 14px; font-family: "Fraunces", Georgia, serif; font-size: 1.16rem; color: var(--ink); }
 html[dir="rtl"] .steplist li { text-align: right; }
+
+/* Toolbox teaser bar + modal */
+.toolbox-teaser { padding: 0 0 8px; }
+.toolbox-trigger { width: 100%; display: flex; align-items: center; gap: 18px; text-align: left; background: var(--ink); color: #cfc8ba; border: 0; border-radius: 16px; padding: 20px 24px; cursor: pointer; font-family: "Inter", sans-serif; transition: transform .2s var(--ease); }
+.toolbox-trigger:hover { transform: translateY(-2px); }
+.toolbox-trigger__n { font-family: "Fraunces", serif; font-size: 1.9rem; font-weight: 600; color: #f0a888; flex: none; line-height: 1; }
+.toolbox-trigger__txt { font-size: 1.02rem; line-height: 1.4; }
+.toolbox-trigger__txt strong { color: #fff; }
+.toolbox-trigger__arrow { margin-left: auto; color: #f0a888; font-size: 1.4rem; flex: none; }
+html[dir="rtl"] .toolbox-trigger { text-align: right; }
+html[dir="rtl"] .toolbox-trigger__arrow { margin-left: 0; margin-right: auto; transform: scaleX(-1); }
+@media (max-width: 600px) { .toolbox-trigger { flex-wrap: wrap; gap: 10px; } .toolbox-trigger__arrow { display: none; } }
+
+.modal { position: fixed; inset: 0; z-index: 100; display: none; }
+.modal.open { display: block; }
+.modal__backdrop { position: absolute; inset: 0; background: rgba(27,26,23,0.6); backdrop-filter: blur(3px); }
+.modal__panel { position: absolute; left: 0; right: 0; bottom: 0; max-height: 92vh; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--paper); border-radius: 20px 20px 0 0; padding: 26px 22px 40px; box-shadow: 0 -20px 60px -20px rgba(0,0,0,0.5); }
+@media (min-width: 760px) { .modal__panel { left: 50%; right: auto; bottom: auto; top: 50%; transform: translate(-50%,-50%); width: min(780px, 92vw); max-height: 88vh; border-radius: 20px; padding: 34px; } }
+.modal__close { position: absolute; top: 14px; right: 16px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: 1.5rem; line-height: 1; cursor: pointer; z-index: 2; }
+html[dir="rtl"] .modal__close { right: auto; left: 16px; }
+.modal__body .section__head { margin-bottom: 26px; max-width: none; }
