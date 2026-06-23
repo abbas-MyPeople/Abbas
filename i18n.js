@@ -188,6 +188,7 @@
 
     // --- lean homepage ---
     [`Full details`, `पूरी जानकारी`, `پوری تفصیل`],
+    [`Guides`, `गाइड`, `گائیڈز`],
     [`Home`, `होम`, `ہوم`],
     [`How it works <span aria-hidden="true">→</span>`, `यह कैसे काम करता है <span aria-hidden="true">→</span>`, `یہ کیسے کام کرتا ہے <span aria-hidden="true">→</span>`],
     [`In plain words.`, `सीधे शब्दों में।`, `سیدھے الفاظ میں۔`],
