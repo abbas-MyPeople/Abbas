@@ -1,0 +1,642 @@
+[
+  {
+    "n": "Klaviyo",
+    "category": "Marketing",
+    "pricing": "Free tier (up to 250 profiles, 500 emails/mo). Email plans scale by active profiles: ~$20/mo at 500 contacts, ~$100/mo at 5,000, ~$150/mo at 10,000, ~$720/mo at 50,000. SMS is a separate add-on subscription. Note: since Feb 2025 billing is based on all active profiles, not just contacts you email.",
+    "bestFor": "Independents and small groups that want serious email + SMS automation (win-backs, segmentation) without an enterprise contract.",
+    "pros": [
+      "Genuinely free to start and grow into",
+      "Best-in-class segmentation and automated flows (win-back, birthday, lapsed)",
+      "Combined email + SMS with strong reporting",
+      "Wide POS/ecommerce integrations"
+    ],
+    "cons": [
+      "Active-profile billing means a big list costs you even when you don't email everyone",
+      "SMS is billed as a separate subscription plus per-message credits",
+      "Built for ecommerce first; restaurant features are not native"
+    ],
+    "integrations": "Connects to many POS and online-ordering/ecommerce platforms; Shopify and Square among the most common. SMS, email, and WhatsApp run under the platform.",
+    "alternatives": ["Attentive", "Marsello", "SlickText"],
+    "verdict": "The most capable email + SMS engine you can start free, but watch the active-profile billing as your list grows. Great for operators willing to learn it; overkill if you just want simple texts."
+  },
+  {
+    "n": "Attentive",
+    "category": "Marketing",
+    "pricing": "Quote-only. Typically ~$300/mo base plus ~$0.01/SMS and carrier fees, with quarterly minimums of roughly $2,000-$3,000 (about $667-$1,000/mo before you send anything). A dedicated short code adds ~$500/mo. Contracts usually run 6-12 months; reported annual deals range widely (median around $40k).",
+    "bestFor": "High-volume, multi-location brands where SMS already drives a meaningful share of revenue.",
+    "pros": [
+      "Enterprise-grade SMS deliverability and list growth tools",
+      "Strong AI-assisted campaign and audience features",
+      "Scales to very large subscriber bases",
+      "Adds email alongside SMS"
+    ],
+    "cons": [
+      "High minimums and multi-month contracts",
+      "Opaque, sales-led pricing",
+      "Too costly for a single independent location"
+    ],
+    "integrations": "Integrates with major ecommerce and marketing stacks; restaurant fit depends on your POS/ordering connections.",
+    "alternatives": ["Klaviyo", "SlickText", "Marsello"],
+    "verdict": "Powerful SMS at scale, but the minimums and contracts make it a multi-unit play. A single family restaurant will get more value from Klaviyo or SlickText."
+  },
+  {
+    "n": "SlickText",
+    "category": "Marketing",
+    "pricing": "Plans start around $29/mo for ~500 credits, ~$49/mo for double that, $129-$169/mo tiers with onboarding for growing senders, up to ~$939/mo for 50,000 credits. Annual billing adds two free months and a year of rollover. Short codes and dedicated numbers cost extra.",
+    "bestFor": "Single sites and small groups that want straightforward, affordable text marketing without contracts.",
+    "pros": [
+      "Transparent, low-cost entry pricing",
+      "Simple keywords and automation that are easy to learn",
+      "Rollover credits so you don't lose what you pay for",
+      "No enterprise contract required"
+    ],
+    "cons": [
+      "SMS-focused; email is light or absent",
+      "Per-credit model penalizes very high send volume",
+      "Fewer advanced segmentation/automation features than Klaviyo"
+    ],
+    "integrations": "Connects to common business tools and offers an API; restaurant POS integration is more limited than restaurant-native platforms.",
+    "alternatives": ["Klaviyo", "Attentive", "Marsello"],
+    "verdict": "An honest, affordable way to run text campaigns for an independent. If you also need email and deep automation, look at Klaviyo or a loyalty-bundled tool like Marsello."
+  },
+  {
+    "n": "Marsello",
+    "category": "Marketing",
+    "pricing": "Loyalty Launch around $60/mo and Loyalty Accelerate around $120/mo (prices quoted in NZD; SMS billed in USD), with an Enterprise tier. Marketing, SMS, and Social are paid add-ons that stack. Each extra location adds roughly $100-$200/mo depending on plan. 14-day free trial.",
+    "bestFor": "Hospitality and retail operators who want loyalty plus email/SMS marketing in one POS-connected tool.",
+    "pros": [
+      "Loyalty and marketing live together, so campaigns target real spend",
+      "Connects to common POS and ecommerce systems",
+      "Reasonable entry price for an all-in-one",
+      "No long contract; cancel anytime"
+    ],
+    "cons": [
+      "Marketing and SMS are add-ons that raise the real monthly cost",
+      "Per-location pricing climbs for multi-site",
+      "Strongest as a loyalty tool; pure-marketing depth trails specialists"
+    ],
+    "integrations": "Integrates with Lightspeed, Square, Shopify and other POS/ecommerce platforms; built for retail and hospitality.",
+    "alternatives": ["Klaviyo", "TapMango", "SlickText"],
+    "verdict": "A tidy way to combine loyalty and marketing if you're already on a supported POS. Just price out the add-ons before you commit, because they stack."
+  },
+  {
+    "n": "GatherUp",
+    "category": "Reviews",
+    "pricing": "Published rates: $99/mo for a single location, or about $60/mo per location for 2-10 locations, dropping toward $25/mo per location at 100+ (higher tiers quoted). Includes ~3,000 email and ~300 SMS credits per location monthly. Add-ons: Listings Hub ~$40/mo per location, promotional SMS ~$10/mo per location.",
+    "bestFor": "Independents and small groups that want transparent, affordable review generation with on-brand reply help.",
+    "pros": [
+      "Publishes its prices upfront, which is rare in this category",
+      "Generates reviews and drafts replies you can approve",
+      "Email and SMS credits included in the base plan",
+      "Per-location cost drops sharply as you add sites"
+    ],
+    "cons": [
+      "Add-ons (listings, promo SMS) push the real cost higher",
+      "Less restaurant-specific than survey-first tools",
+      "Bigger brands see less rating-to-revenue lift than independents"
+    ],
+    "integrations": "Connects to Google and other review/listing platforms; offers white-label options for agencies.",
+    "alternatives": ["Marqii", "Birdeye", "Podium"],
+    "verdict": "One of the few review tools that shows its pricing, and it's fair for a small operator. For an independent, a one-star rating lift can mean real revenue, so the payback is easy to justify."
+  },
+  {
+    "n": "Ovation",
+    "category": "Reviews",
+    "pricing": "Quote-only (existing public estimates put it around $79-$259/mo per location; confirm on a live quote). Custom quotes typically returned within 24 hours; multi-location and ghost-kitchen pricing available.",
+    "bestFor": "Restaurants that want to catch unhappy guests privately before they post and steer happy ones to public reviews.",
+    "pros": [
+      "Two-question SMS survey drives very high response rates",
+      "Routes unhappy guests to private recovery, happy ones to public reviews",
+      "AI insights and (as of late 2025) built-in reputation/listings management",
+      "Integrates with 50+ POS, ordering, and loyalty systems"
+    ],
+    "cons": [
+      "Pricing is quote-only, so you need a sales conversation",
+      "Lower tiers historically gate review-response and deeper insights",
+      "Best value when you actively work the guest-recovery flow"
+    ],
+    "integrations": "Connects to 50+ POS, online-ordering, and loyalty platforms; recently added reviews, listings, and social into one ecosystem.",
+    "alternatives": ["Tattle", "Marqii", "GatherUp"],
+    "verdict": "A strong guest-recovery and review-generation tool, especially the two-question SMS approach. The main friction is having to get a quote, but it pays back when you actually use the recovery loop."
+  },
+  {
+    "n": "Marqii",
+    "category": "Reviews",
+    "pricing": "Base ~$74.99/mo per location, Pro ~$119.99/mo, Pro+Advanced ~$149.99/mo, with custom pricing for 5+ locations. Optional done-for-you review-response bundles (AI + human) priced by review volume, up to ~500 responses/mo.",
+    "bestFor": "Operators who want listings, menus, and reviews kept accurate and answered across every platform from one dashboard.",
+    "pros": [
+      "Syncs menus and listings to Google, Yelp, Facebook, Apple Maps and 50+ platforms",
+      "POS menu changes update everywhere automatically",
+      "AI + human review responses available as a bundle",
+      "Transparent per-location pricing"
+    ],
+    "cons": [
+      "Listings/menu-first; lighter on structured guest surveys",
+      "Review-response volume bundles add cost",
+      "Per-location pricing adds up for many sites"
+    ],
+    "integrations": "Direct POS and online-ordering integrations plus a Yext partnership for listings; pushes to Google, Yelp, Facebook, Apple Maps and more.",
+    "alternatives": ["Birdeye", "GatherUp", "Ovation"],
+    "verdict": "The best pick if your real pain is wrong hours and stale menus across the web as much as reviews. It keeps your digital presence consistent, but pair it with a survey tool if guest feedback is the priority."
+  },
+  {
+    "n": "Podium",
+    "category": "Reviews",
+    "pricing": "Quote-only. Reported plans start around $399/mo (Core), $599/mo (Pro), and $999+/mo (Enterprise). AI review replies add ~$99/mo; extra locations ~$50/mo each and extra users ~$25-$30/mo. Most single sites end up around $500-$800/mo after add-ons.",
+    "bestFor": "Operators who want reviews and all customer messaging (SMS, web chat, Google, Facebook) consolidated with AI in one inbox.",
+    "pros": [
+      "Unified inbox for reviews and two-way customer messaging",
+      "Automated SMS review requests that convert well",
+      "AI replies and an AI phone/answer agent on higher tiers",
+      "Pulls reviews from Google, Facebook and more into one place"
+    ],
+    "cons": [
+      "Add-ons (AI replies, 10DLC, extra users/locations) push the real cost well past the base",
+      "No public pricing; sales-led",
+      "Pricey for a single independent versus simpler review tools"
+    ],
+    "integrations": "Connects to Google Business, Facebook, and SMS/web-chat channels; integrates with many CRMs and business tools.",
+    "alternatives": ["Birdeye", "GatherUp", "Marqii"],
+    "verdict": "A capable reviews-plus-messaging hub, but the true cost lands higher than the headline once you add AI and extra seats. Best for businesses that genuinely want to centralize all customer texting, not just reviews."
+  },
+  {
+    "n": "Birdeye",
+    "category": "Reviews",
+    "pricing": "Quote-only with prepaid annual tiers: Starter ~$299/mo per location, Growth ~$399/mo, Dominate ~$499/mo. Monthly billing runs higher. Per-location cost drops with more locations; onboarding may apply.",
+    "bestFor": "Multi-location brands that need review generation, monitoring, and listings managed across many sites.",
+    "pros": [
+      "Built for managing reputation across many locations",
+      "Strong review generation, monitoring, and AI replies",
+      "Adds listings, surveys, social listening, and competitor monitoring at higher tiers",
+      "Well-rated enterprise platform with deep reporting"
+    ],
+    "cons": [
+      "Per-location pricing plus onboarding is heavy for a single site",
+      "Initial setup complexity",
+      "Quote-based; no transparent self-serve pricing"
+    ],
+    "integrations": "Integrates with Google, Yelp, Facebook and 200+ review/listing sites, plus many CRM and business systems.",
+    "alternatives": ["Podium", "Marqii", "GatherUp"],
+    "verdict": "A robust, enterprise-leaning reputation platform that shines across multiple locations. For one independent restaurant it's likely more tool and cost than you need."
+  },
+  {
+    "n": "Tattle",
+    "category": "Reviews",
+    "pricing": "Per location per month, starting from $59/location, with lower per-location rates as you add sites. White-glove onboarding (setup specialist, custom surveys, integration, training) included; billing adjusts automatically as you add or remove locations.",
+    "bestFor": "Multi-unit fast-casual and full-service operators who want to pinpoint exactly what to fix to lift satisfaction.",
+    "pros": [
+      "Causation-based surveys tie feedback to specific operational drivers",
+      "Transparent per-location pricing from $59",
+      "Integrates with POS, ordering, and loyalty for higher response",
+      "Onboarding and mobile app included at no extra cost"
+    ],
+    "cons": [
+      "Feedback/analytics focus, not public-review generation",
+      "Most valuable at multi-unit scale where you can act on patterns",
+      "Newer reputation/review-management features still maturing"
+    ],
+    "integrations": "Connects to POS, online-ordering, and loyalty systems; integrates with platforms like Incentivio.",
+    "alternatives": ["Ovation", "GatherUp", "Birdeye"],
+    "verdict": "The right tool when you want to know precisely what's dragging scores down, not just collect star ratings. Pair it with a review-generation tool if growing public reviews is also a goal."
+  },
+  {
+    "n": "Toast / Square Loyalty",
+    "category": "Loyalty & CRM",
+    "pricing": "Square Loyalty runs ~$45/mo as a POS add-on (Square Marketing/email is a further ~$15/mo). Toast Loyalty is bundled into Toast's Marketing package at ~$185/mo on top of your Toast POS subscription, so all-in is often $250-$350+/mo.",
+    "bestFor": "Restaurants already on Toast or Square that want simple, no-fuss loyalty tied to the POS.",
+    "pros": [
+      "Native to your POS, so setup and tracking are easy",
+      "Square's add-on is genuinely cheap to start",
+      "Points/visits loyalty that drives repeat visits",
+      "One vendor, one bill"
+    ],
+    "cons": [
+      "Basic feature set; no real AI personalization",
+      "Data is locked to that POS, and switching loses it",
+      "Toast's loyalty is bundled into a pricier marketing package"
+    ],
+    "integrations": "Tightly integrated with Toast POS or Square POS respectively; limited use outside that ecosystem.",
+    "alternatives": ["TapMango", "Marsello", "Como"],
+    "verdict": "The path of least resistance if you're already on Toast or Square. It's basic, but for a small shop that just wants a points program, that's often enough."
+  },
+  {
+    "n": "TapMango",
+    "category": "Loyalty & CRM",
+    "pricing": "Quote-only; widely cited starting around $79/mo, with the real cost rising as you add features like mobile ordering, flash sales, and SMS. No transparent public tiers.",
+    "bestFor": "Independent restaurants and small chains that want a feature-rich, fully branded loyalty program.",
+    "pros": [
+      "Branded loyalty with promotions, flash sales, and surveys",
+      "Includes mobile-ordering and review-management options",
+      "Flexible enough for single sites and small multi-location",
+      "Customer-friendly, hardware-supported tablet experience"
+    ],
+    "cons": [
+      "No public pricing; you must talk to sales",
+      "Real cost climbs as add-ons stack",
+      "Can be more than a tiny shop needs"
+    ],
+    "integrations": "Integrates with many POS systems and supports its own mobile ordering and marketing channels.",
+    "alternatives": ["Marsello", "Como", "Toast / Square Loyalty"],
+    "verdict": "A capable, customizable loyalty platform for independents who want more than a basic points card. Get a full quote with the add-ons you actually need before comparing."
+  },
+  {
+    "n": "Incentivio",
+    "category": "Loyalty & CRM",
+    "pricing": "Starts around $249/mo plus setup fees; higher tiers and custom pricing for multi-unit. Combines online ordering, loyalty, marketing automation, and analytics in one platform.",
+    "bestFor": "Multi-unit restaurants that want a branded app, ordering, and loyalty unified in one commission-free platform.",
+    "pros": [
+      "White-label app and web ordering plus loyalty in one system",
+      "Points-, visit-, or spend-based rewards with tiers",
+      "Marketing automation and guest analytics included",
+      "Commission-free ordering keeps more of each sale"
+    ],
+    "cons": [
+      "Setup fees on top of the monthly cost",
+      "Depth and price overshoot most single-unit operators",
+      "Best ROI requires meaningful digital-order volume"
+    ],
+    "integrations": "Integrates with POS systems and delivery/ordering channels; built to centralize digital ordering and guest data.",
+    "alternatives": ["Como", "Thanx", "Paytronix"],
+    "verdict": "A solid all-in-one for small chains wanting their own ordering app plus loyalty without enterprise pricing. A single independent should weigh the setup fee and monthly against simpler options."
+  },
+  {
+    "n": "Como",
+    "category": "Loyalty & CRM",
+    "pricing": "Quote-only; existing estimates put it roughly $100-$300/mo per location, depending on features and number of locations. No public tiers; price set after a sales consultation.",
+    "bestFor": "Restaurants wanting AI-personalized, gamified loyalty and a branded app without jumping to full enterprise scale.",
+    "pros": [
+      "Personalized, data-driven offers (cashback, spin-to-win, targeted deals)",
+      "Branded app and deep POS integration",
+      "Gamified mechanics that drive engagement",
+      "Scales from single sites to multi-unit"
+    ],
+    "cons": [
+      "Quote-only pricing requires a sales process",
+      "Can be more platform than a very small shop needs",
+      "Setup and configuration take some effort"
+    ],
+    "integrations": "Deep POS integrations; positioned for food-and-beverage operators across single and multi-unit.",
+    "alternatives": ["TapMango", "Incentivio", "Paytronix"],
+    "verdict": "A strong middle option: more personalization and gamification than POS-native loyalty, without the enterprise price of Paytronix or Thanx. The catch is you'll need a quote to evaluate it."
+  },
+  {
+    "n": "Paytronix",
+    "category": "Loyalty & CRM",
+    "pricing": "Quote-only, custom-priced by location count, modules, and contract terms; no free plan. Existing estimates put it in the high-hundreds to low-thousands per month per location for full suites.",
+    "bestFor": "High-frequency, multi-unit brands that want loyalty, CRM, ordering, and AI personalization in one deep platform.",
+    "pros": [
+      "Among the deepest loyalty and CRM capabilities available",
+      "Unifies loyalty, online ordering, and AI personalization",
+      "Strong one-to-one offer targeting at scale",
+      "Proven with large restaurant and convenience brands"
+    ],
+    "cons": [
+      "Enterprise-oriented; opaque, custom pricing",
+      "Implementation and ongoing support add to total cost",
+      "Overkill for single independents"
+    ],
+    "integrations": "Broad POS and online-ordering integrations; built as the data and loyalty backbone for multi-unit brands.",
+    "alternatives": ["Thanx", "Como", "Incentivio"],
+    "verdict": "A gold-standard enterprise loyalty and CRM suite for brands with scale and a marketing team to run it. Not aimed at a single family restaurant."
+  },
+  {
+    "n": "Thanx",
+    "category": "Loyalty & CRM",
+    "pricing": "Quote-only, subscription/quotation-based; typically multi-year (often 3-year) commitments with extra fees for dedicated success management and support. No free plan.",
+    "bestFor": "Established restaurant chains (roughly 40+ locations) wanting agentic AI marketing and frictionless data capture.",
+    "pros": [
+      "Frictionless in-store data capture via credit-card linking",
+      "Agentic AI that runs personalized campaigns autonomously",
+      "Strong loyalty + CRM + digital experience in one",
+      "Restaurant-specific design and deep integrations"
+    ],
+    "cons": [
+      "Long (often 3-year) contracts",
+      "Enterprise pricing; support tiers cost extra",
+      "Not aimed at single independents"
+    ],
+    "integrations": "Integrates with Toast and other POS systems, web/app ordering, and via API into existing digital experiences.",
+    "alternatives": ["Paytronix", "Como", "Incentivio"],
+    "verdict": "Powerful, modern loyalty for chains that want AI to run campaigns for them. The multi-year contract and enterprise focus rule it out for small operators."
+  },
+  {
+    "n": "Bikky",
+    "category": "Loyalty & CRM",
+    "pricing": "Quote-only, per-store per-month subscription with no integration or implementation fees (a free trial is available). Existing estimate is around $200/mo per location; confirm on a quote.",
+    "bestFor": "Multi-unit brands that want one customer data platform unifying POS, ordering, payments, and loyalty data.",
+    "pros": [
+      "Restaurant-specific CDP that ties marketing/menu decisions to guest behavior",
+      "No integration or implementation fees",
+      "Unifies fragmented data into one guest view",
+      "Free trial to evaluate"
+    ],
+    "cons": [
+      "CDP/analytics, not a loyalty or marketing engine on its own",
+      "Built for multi-unit brands, not single shops",
+      "Public pricing not disclosed"
+    ],
+    "integrations": "Connects to POS, online-ordering, payments, and loyalty systems to centralize guest data.",
+    "alternatives": ["Paytronix", "Thanx", "Como"],
+    "verdict": "The data backbone for serious multi-unit marketing, valuable precisely because it has no setup fees. For a single location it's the wrong layer of the stack."
+  },
+  {
+    "n": "MarketMan",
+    "category": "Inventory & purchasing",
+    "pricing": "Tiered per location: Operator/Starter around $179-$199/mo (50 invoice scans/mo), Growth around $249/mo (unlimited scans, advanced automation), Enterprise custom. Annual billing discounts apply; setup fees and add-ons increase total. A Square-bundled version runs ~$99/mo per location.",
+    "bestFor": "Full-service and fast-casual operators who want to tighten ordering, recipe costing, and food cost across vendors.",
+    "pros": [
+      "Inventory, purchasing, and recipe costing in one POS-synced system",
+      "Invoice scanning and vendor management automate back-office work",
+      "Real-time food cost visibility",
+      "Available as a lower-cost Square add-on"
+    ],
+    "cons": [
+      "Install/setup fee plus per-location cost stings a tiny single shop",
+      "Invoice-scan limits on the lower tier",
+      "Best automation features gated to higher tiers"
+    ],
+    "integrations": "Syncs with major POS systems and suppliers; available as Square Restaurant Inventory by MarketMan.",
+    "alternatives": ["MarginEdge", "Crunchtime", "BlueCart"],
+    "verdict": "A strong inventory and purchasing platform that pays back through tighter ordering and food cost. Just price the setup fee and the right tier, since scan limits matter."
+  },
+  {
+    "n": "MarginEdge",
+    "category": "Inventory & purchasing",
+    "pricing": "Flat $350/mo per location (10% off with annual billing). Bill Pay is free and unlimited for US clients; no traditional setup fees (onboarding packages instead). Optional Freepour add-on ~$150/mo per location. Toast users pay Toast ~$50/mo per location for API access.",
+    "bestFor": "Single sites and small groups that want invoice automation, live food cost, and bill pay without per-unit games.",
+    "pros": [
+      "Flat, predictable per-location pricing",
+      "Automates invoice entry and shows daily food cost",
+      "Free, unlimited bill pay for US clients",
+      "No traditional setup fees"
+    ],
+    "cons": [
+      "Flat fee can outrun savings for a very small, low-volume QSR",
+      "Toast users incur an extra Toast API fee",
+      "Beverage/Freepour costing is a paid add-on"
+    ],
+    "integrations": "Integrates with most major POS systems (with a small extra fee on Toast) and accounting platforms like QuickBooks and Sage Intacct.",
+    "alternatives": ["MarketMan", "xtraCHEF (by Toast)", "Crunchtime"],
+    "verdict": "Excellent at killing back-office hours and shaving food cost, with refreshingly simple flat pricing. Best once your volume is high enough that the savings clear the $350/mo."
+  },
+  {
+    "n": "BlueCart",
+    "category": "Inventory & purchasing",
+    "pricing": "Very low entry: listing/access plans cited around $10/mo, with a higher tier around $200/mo, plus custom plans. Pricing is not fully transparent for the buyer side; confirm scope on a quote.",
+    "bestFor": "Operators who mainly want to streamline supplier ordering and procurement at a low entry price.",
+    "pros": [
+      "Low cost to get started",
+      "Centralizes ordering across multiple suppliers in one place",
+      "Order, delivery, and invoice matching automated",
+      "Adds inventory plus newer predictive ordering and menu-profitability tools"
+    ],
+    "cons": [
+      "Procurement-first; lighter on deep recipe/food-cost analysis",
+      "Pricing scope not fully transparent",
+      "Best value depends on your suppliers being on the platform"
+    ],
+    "integrations": "Connects buyers and food-and-beverage distributors on one platform; integrates ordering, inventory, and invoicing.",
+    "alternatives": ["Notch", "MarketMan", "MarginEdge"],
+    "verdict": "A cheap, practical way to consolidate supplier ordering, especially if your vendors already use it. If costing depth is the goal, pair it with MarketMan or MarginEdge."
+  },
+  {
+    "n": "Notch",
+    "category": "Inventory & purchasing",
+    "pricing": "Quote-only. Marketplace per-order fees were discontinued in 2023; pricing now centers on its software modules (Order Manager, Invoice Manager, AP Manager). Contact sales for current rates.",
+    "bestFor": "Operators (especially in Canada) who want supplier ordering, invoicing, and AP automation in one place.",
+    "pros": [
+      "Centralizes supplier catalogs, ordering, and reorders",
+      "Automates invoice and AP workflows for better cash flow",
+      "Full line-of-sight into purchases and order status",
+      "No per-order marketplace fees"
+    ],
+    "cons": [
+      "Strongest in Canada; US coverage thinner",
+      "Ordering/AP-focused, lighter on recipe costing",
+      "Opaque, quote-only pricing"
+    ],
+    "integrations": "Works with existing distributor systems; connects restaurants and distributors plus AP/accounting workflows.",
+    "alternatives": ["BlueCart", "MarketMan", "Ottimate (Plate IQ)"],
+    "verdict": "A clean choice for centralizing supplier ordering and accounts payable, particularly for Canadian operators. Get a quote and confirm your suppliers are on it before committing."
+  },
+  {
+    "n": "Crunchtime",
+    "category": "Inventory & purchasing",
+    "pricing": "Quote-only, custom by location count and modules. Existing estimates put it roughly $400-$800/mo per location for full deployments; used across 100,000+ locations worldwide.",
+    "bestFor": "Large chains and franchises that need enterprise-grade inventory, ordering, and food-cost (AvT) control at scale.",
+    "pros": [
+      "Gold-standard inventory and food-cost control for big operators",
+      "Actual-vs-theoretical (AvT) food cost management",
+      "Unifies inventory, labor/scheduling, learning, and food safety",
+      "Proven with major national brands"
+    ],
+    "cons": [
+      "Built for large chains, not small shops",
+      "Custom pricing and longer implementation",
+      "Some users find the cost hard to justify below scale"
+    ],
+    "integrations": "Integrates with major POS systems and supplier networks; part of a broader restaurant operations suite (which now includes QSR Automations).",
+    "alternatives": ["MarketMan", "Restaurant365", "MarginEdge"],
+    "verdict": "The enterprise standard for controlling food and labor at scale across many locations. Overkill and overpriced for an independent or a handful of sites."
+  },
+  {
+    "n": "Lineup.ai",
+    "category": "Forecasting",
+    "pricing": "Standard plan around $149/mo per location, with lower entry pricing reportedly from ~$79/mo. Free trial with no credit card required; per-location subscription model.",
+    "bestFor": "QSR, fast-casual, and full-service operators who want AI sales and labor forecasts to staff and prep to real demand.",
+    "pros": [
+      "AI forecasts of sales, labor, and item-level demand",
+      "Factors in weather, events, and history",
+      "Affordable per-location pricing with a free trial",
+      "Real-time dashboards and variance analytics"
+    ],
+    "cons": [
+      "Forecasting-focused; not a full inventory or scheduling suite",
+      "Needs roughly six months of data for best accuracy",
+      "Value depends on acting on the forecasts"
+    ],
+    "integrations": "Connects to POS systems and labor-scheduling tools to pull history and push forecasts.",
+    "alternatives": ["5-Out", "Tenzo", "7shifts"],
+    "verdict": "An affordable, restaurant-specific forecasting tool that helps you stop staffing and prepping by gut. Worth it once you have the history to feed it and a plan to act on the numbers."
+  },
+  {
+    "n": "Tenzo",
+    "category": "Forecasting",
+    "pricing": "Starts around $600/year; priced per module and per location, so cost climbs with scale. Most operators recoup it by catching one area of waste; typically live within two weeks.",
+    "bestFor": "Multi-site fast-casual and full-service operators who want analytics plus demand forecasting in one dashboard.",
+    "pros": [
+      "Machine-learning forecasts up to three weeks out, more accurate than rolling averages",
+      "Unifies sales, labor, inventory, and reviews into one view",
+      "Pulls in weather, holidays, and local events",
+      "Quick setup and low entry price"
+    ],
+    "cons": [
+      "Needs at least ~90 days of history to forecast",
+      "Per-module, per-location pricing climbs",
+      "Analytics-led; not a scheduling or inventory system itself"
+    ],
+    "integrations": "Aggregates data from POS, labor planners, inventory tools, review platforms, and external weather/events feeds.",
+    "alternatives": ["Lineup.ai", "5-Out", "Avero"],
+    "verdict": "A strong one-pane-of-glass for operators who want forecasting and analytics together. The pricing grows with modules and sites, so scope what you actually need."
+  },
+  {
+    "n": "5-Out",
+    "category": "Forecasting",
+    "pricing": "Quote-only; no transparent public tiers. Existing estimates put it roughly $150-$400/mo. Newer, smaller vendor; request a demo for current pricing.",
+    "bestFor": "Operators who want ML demand forecasts translated into concrete labor and purchasing decisions.",
+    "pros": [
+      "Forecasts sales up to ~21 days out with high stated accuracy",
+      "Turns forecasts into specific staffing and ordering calls",
+      "Integrates with POS and labor-scheduling systems",
+      "Positioned as affordable for what it does"
+    ],
+    "cons": [
+      "No public pricing",
+      "Newer and smaller than established rivals",
+      "Best results require clean integrated data"
+    ],
+    "integrations": "Integrates with POS and labor-scheduling/purchasing systems to act on its forecasts.",
+    "alternatives": ["Lineup.ai", "Tenzo", "7shifts"],
+    "verdict": "Appealing because it pushes past forecasts into actual staffing and ordering recommendations. As a younger vendor with quote-only pricing, get a demo and check the integrations you need."
+  },
+  {
+    "n": "7shifts",
+    "category": "Scheduling",
+    "pricing": "Free Comp plan (up to 15 employees, one location). Paid per location/month: Essentials ~$39.99 (up to 30 employees), Pro ~$79.99 (unlimited), Premium ~$134.99 plus $6/employee for payroll. Add-ons like tip pooling (~$24.99) and task management (~$12.99) stack. Prices rose in late 2025.",
+    "bestFor": "Restaurants of any size that want scheduling, labor forecasting, tips, and team chat in one restaurant-native app.",
+    "pros": [
+      "Free tier covers a small single-location team",
+      "Restaurant-specific scheduling with labor forecasting",
+      "Team chat, availability, and time-off built in",
+      "Fast payback from less overtime and saved admin time"
+    ],
+    "cons": [
+      "Add-ons (tips, tasks, payroll) stack cost per location",
+      "Per-location pricing climbs for multi-unit",
+      "Prices increased in 2025"
+    ],
+    "integrations": "Integrates with major POS systems (Toast, Square, Clover and others) and payroll providers.",
+    "alternatives": ["Homebase", "Deputy", "Sling"],
+    "verdict": "The most restaurant-focused scheduler, with a genuinely useful free tier to start. Watch the add-ons, since tips and tasks can quietly double the per-location bill."
+  },
+  {
+    "n": "Homebase",
+    "category": "Scheduling",
+    "pricing": "Free plan for one location (basic scheduling and time tracking). Paid per location/month: Essentials ~$24.95, Plus ~$59.95, All-in-One ~$99.95 (all unlimited employees). Payroll add-on ~$39/mo base plus $6/active employee.",
+    "bestFor": "Single-location small businesses that want free scheduling and time tracking plus optional payroll and hiring.",
+    "pros": [
+      "Free for one location, covering the basics well",
+      "Per-location pricing with unlimited employees (no per-head fee on core plans)",
+      "Adds time tracking, hiring, and payroll as you grow",
+      "Easy for non-technical owners"
+    ],
+    "cons": [
+      "Per-location pricing jumps the moment you add a second site",
+      "Less restaurant-specific forecasting than 7shifts",
+      "Best HR/compliance features only on the top tier"
+    ],
+    "integrations": "Integrates with common POS systems and payroll providers; broad small-business tool support.",
+    "alternatives": ["7shifts", "Sling", "Deputy"],
+    "verdict": "Hard to beat for a single location thanks to the free tier and unlimited employees. If you run multiple sites, the per-location cost adds up fast, so compare with Deputy or Sling."
+  },
+  {
+    "n": "Deputy",
+    "category": "Scheduling",
+    "pricing": "Per user/month: Scheduling ~$4.50, Premium ~$6 (scheduling + time/attendance), Pro ~$9, plus Enterprise custom. Minimum ~$30/mo per invoice (from Sept 2025). Analytics+ add-on ~$1.50/user/mo. A weekly per-active-user option can lower cost for variable teams.",
+    "bestFor": "Fast-casual and full-service operators who want demand-based auto-scheduling at a low per-user price.",
+    "pros": [
+      "Low per-user entry pricing",
+      "Demand-based auto-scheduling and forecasting",
+      "Biometric/kiosk clock-ins and attendance",
+      "Flexible weekly billing for variable staffing"
+    ],
+    "cons": [
+      "Per-user cost rises with large hourly teams",
+      "Minimum monthly spend introduced in 2025",
+      "Some advanced reporting is a paid add-on"
+    ],
+    "integrations": "Integrates with major POS and payroll systems; broad app ecosystem.",
+    "alternatives": ["7shifts", "Homebase", "Sling"],
+    "verdict": "Strong demand-based scheduling at a friendly per-user price for smaller teams. The math flips for large hourly rosters, where per-location tools may be cheaper."
+  },
+  {
+    "n": "Sling",
+    "category": "Scheduling",
+    "pricing": "Free plan for up to 30 users (scheduling and communication). Premium ~$1.70/user/mo and Business ~$4/user/mo ($3.40 with annual billing); 15% off annual on paid plans. You only pay for users on the platform.",
+    "bestFor": "Single sites and small teams that want free or very cheap scheduling and labor-cost tracking.",
+    "pros": [
+      "Generous free tier (up to 30 users)",
+      "Very low per-user paid pricing",
+      "Shift swaps, time-off, and labor-cost tools",
+      "Cheap to scale as the team grows"
+    ],
+    "cons": [
+      "Lighter forecasting and analytics than rivals",
+      "Free plan's mobile app is view-only",
+      "Less restaurant-specific than 7shifts"
+    ],
+    "integrations": "Integrates with common POS and payroll tools; part of the Toast family of products.",
+    "alternatives": ["Homebase", "7shifts", "Deputy"],
+    "verdict": "The cheapest credible way to run scheduling for a small team, with a strong free tier. Step up to 7shifts or Deputy if you need real demand forecasting."
+  },
+  {
+    "n": "Fresh KDS",
+    "category": "Kitchen display (KDS)",
+    "pricing": "Subscription from about $16/mo per screen (existing estimate $15-$39/screen depending on tier). Runs on standard tablets (iOS 13+/Android 7+), so you can avoid proprietary hardware costs.",
+    "bestFor": "Independents and small shops that want an affordable, flexible kitchen display that works with their existing POS.",
+    "pros": [
+      "Very low per-screen pricing",
+      "Runs on off-the-shelf tablets, cutting hardware cost",
+      "Works with Square, Clover and other POS systems",
+      "Quick payback from fewer mistakes and faster tickets"
+    ],
+    "cons": [
+      "Fewer enterprise/multi-unit controls",
+      "Lighter analytics than high-end KDS",
+      "You supply and maintain the tablets"
+    ],
+    "integrations": "Integrates with Square, Clover, and other POS platforms; hardware-agnostic on common tablets.",
+    "alternatives": ["Toast KDS", "QSR Automations ConnectSmart", "Square KDS"],
+    "verdict": "The best-value KDS for an independent: cheap, flexible, and POS-agnostic. If you need deep multi-unit prep timing and analytics, look at ConnectSmart instead."
+  },
+  {
+    "n": "Toast KDS",
+    "category": "Kitchen display (KDS)",
+    "pricing": "Quote-only and tied to your Toast POS plan ($0-$69/mo, custom plans available; many restaurants run $165+/mo per terminal). Runs on Toast displays (~$799+) or iPad; KDS is bundled into higher Toast packages and priced via quote.",
+    "bestFor": "Restaurants already running Toast POS that want a deeply integrated kitchen display.",
+    "pros": [
+      "Seamless if you already use Toast POS",
+      "Routes POS, online, and handheld orders to kitchen screens",
+      "One vendor and one support line",
+      "Tight ticket flow across order channels"
+    ],
+    "cons": [
+      "Locked to the Toast ecosystem",
+      "Opaque, quote-only pricing",
+      "Proprietary hardware adds upfront and replacement cost"
+    ],
+    "integrations": "Native to Toast POS, online ordering, and handhelds; not designed to work outside Toast.",
+    "alternatives": ["Fresh KDS", "QSR Automations ConnectSmart", "Square KDS"],
+    "verdict": "The obvious choice if you're committed to Toast, with the smoothest integration. If you're not on Toast, the lock-in and hardware cost make standalone options more sensible."
+  },
+  {
+    "n": "QSR Automations ConnectSmart",
+    "category": "Kitchen display (KDS)",
+    "pricing": "Quote-only; custom by restaurant size and features. Existing estimate is roughly $50-$150/mo per screen. Now part of Crunchtime; integrates with 80+ POS partners.",
+    "bestFor": "Full-service and multi-unit operations that need sophisticated ticket routing, prep timing, and kitchen analytics.",
+    "pros": [
+      "Enterprise-grade kitchen coordination and ticket routing",
+      "Prep timing and detailed kitchen analytics",
+      "Integrates with 80+ POS systems",
+      "Backed by Crunchtime's operations suite"
+    ],
+    "cons": [
+      "Cost and complexity are high for small shops",
+      "Quote-only pricing",
+      "Some users find the price hard to justify below scale"
+    ],
+    "integrations": "Integrates with 80+ POS partners (Revel, Lightspeed and others); part of the Crunchtime ecosystem.",
+    "alternatives": ["Toast KDS", "Fresh KDS", "Crunchtime"],
+    "verdict": "The most sophisticated KDS here, ideal for complex or multi-unit kitchens that need precise coordination. For a single small restaurant, it's more system and cost than necessary."
+  }
+]

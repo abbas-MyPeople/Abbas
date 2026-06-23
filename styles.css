@@ -421,6 +421,18 @@ html[dir="rtl"] .tooldir__tag { margin-right: 0; margin-left: 5px; }
 .tooldir__guides a { display: inline-block; margin: 0 16px 9px 0; color: var(--accent); border-bottom: 1px solid rgba(192,73,43,0.35); font-size: 0.98rem; }
 @media (max-width: 600px) { .guide { padding-top: 100px; } }
 
+/* Tool directory "more" link + per-tool detail pages */
+.tooldir__more { display: inline-block; margin-top: 4px; font-size: 0.86rem; font-weight: 600; color: var(--accent); border-bottom: 1px solid transparent; }
+.tooldir__more:hover { border-bottom-color: var(--accent); }
+.tool-detail__price { font-size: 1.02rem; color: var(--accent-deep); font-weight: 600; margin: -2px 0 16px; }
+.tool-detail__list { list-style: none; padding: 0; margin: 0 0 8px; display: grid; gap: 10px; }
+.tool-detail__list li { position: relative; padding-left: 26px; font-size: 1.05rem; line-height: 1.55; color: var(--ink); }
+.tool-detail__pros li::before { content: "✓"; position: absolute; left: 0; top: -1px; color: #2e6e50; font-weight: 700; }
+.tool-detail__cons li::before { content: "✕"; position: absolute; left: 0; top: -1px; color: var(--accent-deep); font-weight: 700; }
+.tool-detail__disc { margin-top: 20px; font-size: 0.85rem; color: var(--muted); font-style: italic; }
+html[dir="rtl"] .tool-detail__list li { padding-left: 0; padding-right: 26px; }
+html[dir="rtl"] .tool-detail__pros li::before, html[dir="rtl"] .tool-detail__cons li::before { left: auto; right: 0; }
+
 /* "Start here" flag on persona-matched strategy cards */
 .poss { position: relative; }
 .poss--first { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
