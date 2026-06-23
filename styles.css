@@ -79,8 +79,8 @@ em { font-style: italic; color: var(--accent); }
 .creds__item span { font-size: 0.86rem; color: #a89f90; line-height: 1.4; }
 
 .hero__portrait { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.hero__portrait::before { content: ""; position: absolute; z-index: 0; width: 88%; max-width: 320px; aspect-ratio: 1/1; right: -14px; top: 22px; border-radius: 18px; background: var(--accent); opacity: 0.16; }
-.portrait { position: relative; z-index: 1; width: 100%; max-width: 360px; border-radius: 18px; overflow: hidden; aspect-ratio: 1/1; box-shadow: 0 30px 60px -30px rgba(27,26,23,0.5); }
+.hero__portrait::before { content: ""; position: absolute; z-index: 0; width: 88%; max-width: 360px; aspect-ratio: 1/1; right: -14px; top: 22px; border-radius: 18px; background: var(--accent); opacity: 0.16; }
+.portrait { position: relative; z-index: 1; width: 100%; max-width: 400px; border-radius: 18px; overflow: hidden; aspect-ratio: 1/1; box-shadow: 0 30px 60px -30px rgba(27,26,23,0.5); }
 .portrait::before { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(27,26,23,0.08); pointer-events: none; }
 .portrait img { width: 100%; height: 100%; object-fit: cover; }
 .portrait__tag { position: relative; z-index: 1; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
@@ -118,7 +118,8 @@ em { font-style: italic; color: var(--accent); }
 
 /* ===================== STORY (dark) ===================== */
 .story { background: var(--ink); color: #cfc8ba; padding: 100px 0; }
-.story__grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 56px; align-items: start; }
+.story__grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 56px; align-items: center; }
+.story__photo img { max-height: 560px; object-fit: cover; object-position: center 30%; }
 .story__p { font-size: 1.12rem; margin-top: 20px; color: #cfc8ba; }
 .story__p strong { color: #fff; font-weight: 600; }
 .story em { color: #f0a888; }
