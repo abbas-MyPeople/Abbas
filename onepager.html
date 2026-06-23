@@ -10,47 +10,58 @@
   <style>
     :root{ --paper:#f4eee2; --ink:#1b1a17; --muted:#6f685c; --accent:#c0492b; --accent-deep:#97361e; --card:#fbf7ee; --line:rgba(27,26,23,.14); }
     *{ box-sizing:border-box; margin:0; padding:0; }
-    html,body{ background:#fff; color:var(--ink); font-family:"Inter",system-ui,sans-serif; }
-    .page{ width:8.5in; min-height:11in; padding:0.6in 0.62in; margin:0 auto; background:var(--paper); display:flex; flex-direction:column; }
+    html,body{ background:#fff; color:var(--ink); font-family:"Inter",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    .page{ width:8.5in; height:11in; padding:0.5in 0.55in; margin:0 auto; background:var(--paper); display:flex; flex-direction:column; overflow:hidden; }
     h1,h2,h3,.brand{ font-family:"Fraunces",Georgia,serif; line-height:1.05; }
     em{ font-style:italic; color:var(--accent); }
 
-    .top{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--ink); padding-bottom:12px; }
-    .brand{ font-size:23pt; font-weight:600; letter-spacing:-.01em; }
-    .tag{ font-size:11pt; font-style:italic; color:var(--accent-deep); font-family:"Fraunces",serif; }
+    .top{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--ink); padding-bottom:10px; }
+    .brand{ font-size:21pt; font-weight:600; letter-spacing:-.01em; }
+    .tag{ font-size:10.5pt; font-style:italic; color:var(--accent-deep); font-family:"Fraunces",serif; }
 
-    .hero{ display:flex; gap:22px; align-items:center; margin-top:22px; }
-    .hero__photo{ width:1.55in; height:1.55in; border-radius:14px; object-fit:cover; flex:none; box-shadow:0 8px 20px -10px rgba(0,0,0,.4); }
-    .hero h1{ font-size:27pt; font-weight:600; }
-    .hero .who{ margin-top:9px; font-size:10.5pt; color:var(--muted); line-height:1.4; }
+    .hero{ display:flex; gap:20px; align-items:center; margin-top:16px; }
+    .hero__photo{ width:1.4in; height:1.4in; border-radius:14px; object-fit:cover; flex:none; box-shadow:0 8px 20px -10px rgba(0,0,0,.4); }
+    .hero h1{ font-size:23pt; font-weight:600; }
+    .hero .who{ margin-top:8px; font-size:10pt; color:var(--muted); line-height:1.4; }
     .hero .who strong{ color:var(--ink); }
 
-    .leaks{ margin-top:24px; }
-    .leaks__head{ font-size:10pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
-    .leak{ display:flex; gap:13px; align-items:flex-start; padding:11px 0; border-top:1px solid var(--line); }
+    .problem{ margin-top:16px; font-size:11pt; line-height:1.5; color:var(--ink); }
+    .problem strong{ font-weight:600; }
+
+    .leaks{ margin-top:14px; }
+    .leaks__head{ font-size:9.5pt; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+    .leak{ display:flex; gap:12px; align-items:flex-start; padding:8px 0; border-top:1px solid var(--line); }
     .leak:last-child{ border-bottom:1px solid var(--line); }
-    .leak__n{ font-family:"Fraunces",serif; font-size:14pt; font-weight:600; color:#fff; background:var(--accent); width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; }
-    .leak__t{ font-size:12.5pt; line-height:1.4; }
+    .leak__n{ font-family:"Fraunces",serif; font-size:13pt; font-weight:600; color:#fff; background:var(--accent); width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; }
+    .leak__t{ font-size:11pt; line-height:1.38; }
     .leak__t b{ font-weight:600; }
 
-    .deal{ margin-top:22px; background:var(--ink); color:#f1e9da; border-radius:16px; padding:20px 22px; }
-    .deal h2{ font-size:16pt; color:#fff; margin-bottom:7px; }
+    .deal{ margin-top:16px; background:var(--ink); color:#f1e9da; border-radius:14px; padding:16px 18px; }
+    .deal h2{ font-size:15pt; color:#fff; margin-bottom:6px; }
     .deal h2 em{ color:#f0a888; }
-    .deal p{ font-size:11pt; line-height:1.5; color:#d9d0c0; }
+    .deal p{ font-size:10.5pt; line-height:1.46; color:#d9d0c0; }
     .deal p strong{ color:#fff; }
 
-    .cta{ margin-top:auto; padding-top:22px; display:flex; gap:22px; align-items:center; }
-    .cta__qr{ width:1.5in; height:1.5in; flex:none; border:1px solid var(--line); border-radius:12px; padding:7px; background:#fff; }
-    .cta__txt h3{ font-size:15pt; font-weight:600; }
+    .offer{ margin-top:14px; display:flex; gap:16px; }
+    .offer__col{ flex:1; }
+    .offer__head{ font-size:9.5pt; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:6px; }
+    .offer ul{ list-style:none; }
+    .offer li{ font-size:10pt; line-height:1.34; padding:3px 0 3px 15px; position:relative; color:var(--ink); }
+    .offer li::before{ content:"›"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+    .offer li b{ font-weight:600; }
+
+    .cta{ margin-top:auto; padding-top:16px; display:flex; gap:20px; align-items:center; }
+    .cta__qr{ width:1.3in; height:1.3in; flex:none; border:1px solid var(--line); border-radius:12px; padding:7px; background:#fff; }
+    .cta__txt h3{ font-size:14pt; font-weight:600; }
     .cta__txt h3 em{ color:var(--accent); }
-    .cta__txt p{ font-size:11pt; color:var(--muted); margin-top:6px; line-height:1.5; }
+    .cta__txt p{ font-size:10.5pt; color:var(--muted); margin-top:5px; line-height:1.45; }
     .cta__url{ font-weight:600; color:var(--accent-deep); }
-    .cta__contact{ margin-top:9px; font-size:11pt; color:var(--ink); }
+    .cta__contact{ margin-top:8px; font-size:10.5pt; color:var(--ink); }
     .cta__contact b{ font-weight:600; }
 
-    .foot{ margin-top:16px; padding-top:10px; border-top:1px solid var(--line); font-size:8.5pt; color:var(--muted); display:flex; justify-content:space-between; }
+    .foot{ margin-top:12px; padding-top:9px; border-top:1px solid var(--line); font-size:8.5pt; color:var(--muted); display:flex; justify-content:space-between; }
 
-    @media print{ @page{ size:Letter; margin:0; } body{ background:#fff; } .page{ box-shadow:none; } }
+    @media print{ @page{ size:Letter; margin:0; } html,body{ background:#fff; } .page{ box-shadow:none; } }
   </style>
 </head>
 <body>
@@ -68,16 +79,35 @@
       </div>
     </div>
 
+    <p class="problem">You're working harder than ever — so why is someone else keeping the profit? The apps take <strong>15–30% of every order</strong> and own the customer you earned, calls go to voicemail in the rush, a dozen tools don't talk to each other, and you can't see your real numbers. You're one person against a system built for giants. <strong>We even the odds.</strong></p>
+
     <div class="leaks">
       <p class="leaks__head">From stopping the bleed to staying ahead — we cover all of it</p>
       <div class="leak"><span class="leak__n">1</span><p class="leak__t"><b>Stop the bleed.</b> Cut the apps' 15–30% commissions, answer every call 24/7, end the tablet chaos, and claw back the money the apps quietly owe you.</p></div>
       <div class="leak"><span class="leak__n">2</span><p class="leak__t"><b>Win back &amp; grow.</b> Turn app guests into your own repeat customers, climb your reviews the smart way, get found on Google <em>and</em> AI search, and open a high-margin catering channel.</p></div>
-      <div class="leak"><span class="leak__n">3</span><p class="leak__t"><b>See clearly &amp; stay ahead.</b> One real view of your numbers, an actual strategy like the chains run, and a team that keeps you ahead as everything keeps changing.</p></div>
+      <div class="leak"><span class="leak__n">3</span><p class="leak__t"><b>See clearly &amp; stay ahead.</b> One real view of your numbers, an actual strategy like the chains run, and a team that keeps you ahead as everything keeps changing — from 100+ tools, we set up only the few that fit you.</p></div>
     </div>
 
     <div class="deal">
       <h2>We make you money <em>before</em> we take a dollar.</h2>
-      <p>We come to you, find every leak, and do all the work. <strong>You only pay once you're saving — guaranteed.</strong> We're hand-picking just <strong>five founding restaurants</strong> for our performance-first pilot, with <strong>founding pricing locked for life</strong>. No commissions from any vendor — our only side is yours.</p>
+      <p>We come to you, find every leak, and do all the work. <strong>You only pay once you're saving — we don't get paid until you keep more. Guaranteed.</strong> No commissions from any vendor — our only side is yours.</p>
+    </div>
+
+    <div class="offer">
+      <div class="offer__col">
+        <p class="offer__head">Founding 5 — 5 restaurants only</p>
+        <ul>
+          <li><b>Money back first</b> — if we don't deliver, you pay nothing</li>
+          <li><b>Founding pricing locked for life</b> — it never goes up</li>
+        </ul>
+      </div>
+      <div class="offer__col">
+        <p class="offer__head">What you also get</p>
+        <ul>
+          <li>A <b>direct line to the founder</b>, not a support queue</li>
+          <li>First access to everything we build</li>
+        </ul>
+      </div>
     </div>
 
     <div class="cta">
