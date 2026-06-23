@@ -1,0 +1,802 @@
+[
+  {
+    "n": "Miso Robotics Flippy",
+    "category": "Robotics",
+    "pricing": "Robotics-as-a-Service (RaaS): roughly $3,000-$3,500/mo per unit on a multi-year contract, plus an installation fee (commonly cited around $11,000). The monthly fee bundles hardware, software updates, maintenance and support, so there's no big upfront purchase.",
+    "bestFor": "High-volume QSRs that run the fryer hard and want to take crew off the hottest, highest-turnover station.",
+    "pros": [
+      "No large capital outlay; predictable monthly fee covers service and upgrades",
+      "Frees staff from a dangerous, hard-to-staff station and runs consistently through a rush",
+      "Newer Flippy is smaller and faster, fitting into existing fry stations",
+      "Backed by major-chain pilots (White Castle, Jack in the Box)"
+    ],
+    "cons": [
+      "Frying-focused; ROI only works with heavy, steady throughput",
+      "Multi-year contract plus install fee is a real commitment",
+      "Needs kitchen space and layout that can accommodate the arm"
+    ],
+    "integrations": "Integrates with POS/kitchen systems for order data; installation and maintenance handled by Miso and partners.",
+    "alternatives": ["Chef Robotics", "Hyphen Makeline", "PreciTaste"],
+    "verdict": "A genuine fix for the fryer staffing headache at high volume, but the contract and install cost mean it only pays off if your lane or counter is consistently slammed."
+  },
+  {
+    "n": "Hyphen Makeline",
+    "category": "Robotics",
+    "pricing": "Capital purchase roughly $50,000-$100,000 per makeline. Hyphen says many customers reach payback in under a year through labor savings.",
+    "bestFor": "Fast-casual and ghost kitchens with bowl/salad/burrito formats doing high digital order volume.",
+    "pros": [
+      "Automates the lower assembly line while staff still work the top, cutting makeline labor sharply",
+      "High throughput (350+ meals/hour claimed) for digital and delivery orders",
+      "Backed by Chipotle and Cava investment, signaling real-world validation",
+      "Designed to slot in where a conventional makeline already sits"
+    ],
+    "cons": [
+      "Large upfront capital cost, not a low-risk monthly subscription",
+      "Bowl/salad/assembly format only; not for plated or made-to-order complexity",
+      "Best ROI requires high digital order volume to justify"
+    ],
+    "integrations": "Pulls digital orders from your website, app and third-party delivery; paired with Hyphen's CulinaryOS software.",
+    "alternatives": ["Chef Robotics", "Miso Robotics Flippy", "PreciTaste"],
+    "verdict": "A strong bet for high-volume bowl concepts that can afford the capex, but the format limits and six-figure price tag put it out of reach for most single independents."
+  },
+  {
+    "n": "Bear Robotics Servi",
+    "category": "Robotics",
+    "pricing": "Buy outright around $11,990 (Servi) or ~$16,000 (Servi+), or lease via RaaS from roughly $293-$1,500/mo depending on model and term (12/24/36 months). Operating cost often cited near $15/day.",
+    "bestFor": "Full-service and fast-casual rooms with open layouts that want to take running and bussing off servers.",
+    "pros": [
+      "Affordable entry compared with cooking robots; clear buy-or-lease options",
+      "Cuts steps for servers so they spend more time with guests",
+      "Low daily operating cost versus an extra hire",
+      "Lease includes software updates, warranty and analytics"
+    ],
+    "cons": [
+      "Runs and busses food but doesn't cook anything",
+      "Needs wide aisles and a fairly open floor plan to navigate",
+      "Novelty can wear off; not a fix for kitchen bottlenecks"
+    ],
+    "integrations": "Largely standalone; calls and routing managed through Bear's app and floor mapping rather than deep POS ties.",
+    "alternatives": ["Pudu Robotics", "Keenon Robotics", "Richtech Robotics"],
+    "verdict": "The most realistic robot for an independent full-service spot, easing server workload at a fair price, as long as your dining room layout suits it."
+  },
+  {
+    "n": "Chef Robotics",
+    "category": "Robotics",
+    "pricing": "RaaS model with a flat annual fee, pitched as less than the labor cost of the station it replaces; no public dollar figure. Fee covers hardware, software, updates and maintenance, with no upfront capex.",
+    "bestFor": "High-volume food manufacturers, commissaries and prepared-meal producers automating tray and meal assembly.",
+    "pros": [
+      "No upfront capital; flat fee designed to undercut current per-station labor cost",
+      "Fully managed: 24/7 support, parts, software and hardware upgrades included free",
+      "Handles fresh, frozen, baked goods and meatpacking applications",
+      "AI vision adapts to varied ingredients and portioning"
+    ],
+    "cons": [
+      "Aimed at commissary/manufacturing, not in-store front lines",
+      "No published pricing; requires a sales process to evaluate",
+      "Overkill for a single restaurant location"
+    ],
+    "integrations": "Self-contained assembly system; Chef handles hardware, software and service end to end.",
+    "alternatives": ["Hyphen Makeline", "Miso Robotics Flippy", "PreciTaste"],
+    "verdict": "Excellent for high-volume meal-assembly operations that want labor savings without capex, but it's built for production kitchens rather than your dining-room line."
+  },
+  {
+    "n": "meez",
+    "category": "Recipe & food cost",
+    "pricing": "Free tier for organizing and costing recipes; paid Business, Premium and Premium Plus tiers are quote-only and scale with users and features (invoice processing, sales data imports drive cost). Independent estimates land roughly in the $49-$150/mo range.",
+    "bestFor": "Chefs and culinary teams who want recipes digitized, scaled and costed consistently across the team.",
+    "pros": [
+      "Free plan lets you start digitizing and costing with no risk",
+      "Strong recipe scaling, prep and training consistency across staff",
+      "Chef-friendly interface built around how kitchens actually work",
+      "Costing updates as ingredient prices change"
+    ],
+    "cons": [
+      "Paid pricing is quote-only, so budgeting takes a sales call",
+      "Lighter on full inventory management",
+      "Advanced costing automation sits in higher tiers"
+    ],
+    "integrations": "Connects to POS for sales data and supports invoice/ingredient cost imports on paid tiers.",
+    "alternatives": ["Parsley", "xtraCHEF (by Toast)", "MarginEdge"],
+    "verdict": "A clean, chef-first way to lock in plate costs and recipe consistency; the free tier is a genuinely low-risk place to start before paying for automation."
+  },
+  {
+    "n": "Parsley",
+    "category": "Recipe & food cost",
+    "pricing": "Chef $99/mo, Chef Plus $149/mo, Business ~$249-$299/mo, Enterprise custom. Label printing add-on around $59/mo. 14-day free trial.",
+    "bestFor": "Independent full-service and fine-dining kitchens that want affordable, hands-on plate costing and recipe control.",
+    "pros": [
+      "Transparent published pricing with a clear tier ladder",
+      "Combines recipe management, costing, inventory and nutrition",
+      "Affordable entry point for a single independent kitchen",
+      "Free trial to test before committing"
+    ],
+    "cons": [
+      "Less suited to large multi-unit chains",
+      "Label printing is a paid add-on",
+      "Not a full back-office accounting or AP suite"
+    ],
+    "integrations": "Cloud platform with POS connectivity and inventory/production planning tools.",
+    "alternatives": ["meez", "ReciPal", "xtraCHEF (by Toast)"],
+    "verdict": "One of the more affordable, transparent recipe-costing tools for independents; great if plate costing is your focus and you don't need enterprise scale."
+  },
+  {
+    "n": "ReciPal",
+    "category": "Recipe & food cost",
+    "pricing": "Pay-as-you-go at $29 per recipe, or unlimited subscriptions from $59/mo. Inventory add-on from $50/mo. No commitment, cancel anytime; free trial available.",
+    "bestFor": "Ghost kitchens, packaged-food makers and small operators needing recipe costing plus FDA/CFIA-compliant nutrition labels.",
+    "pros": [
+      "Cheapest path to costing plus compliant nutrition labels",
+      "Flexible pay-per-recipe or month-to-month with no contract",
+      "Tracks ingredient and recipe cost changes over time",
+      "Good fit for CPG, bakeries, beverages and meal prep"
+    ],
+    "cons": [
+      "Label/CPG-leaning; not a full restaurant ops suite",
+      "Inventory is a separate paid add-on",
+      "Lighter on POS-driven live food cost than rivals"
+    ],
+    "integrations": "Recipe and labeling focused; inventory module available; lighter on POS integrations than full restaurant platforms.",
+    "alternatives": ["Parsley", "meez", "xtraCHEF (by Toast)"],
+    "verdict": "Hard to beat on price if you need recipe costing and compliant nutrition labels; less relevant if you want a connected, POS-driven food-cost system."
+  },
+  {
+    "n": "xtraCHEF (by Toast)",
+    "category": "Recipe & food cost",
+    "pricing": "Free tier available; paid plans up to roughly $349/mo. Best value when paired with Toast POS.",
+    "bestFor": "Toast users (and others) who want invoice OCR and line-item food cost without a heavy back-office system.",
+    "pros": [
+      "Free tier makes starting on food-cost control low-risk",
+      "Automates invoice capture and line-item cost tracking",
+      "Recipe analytics tie costs back to menu items",
+      "Deep value if you already run Toast"
+    ],
+    "cons": [
+      "Best value is really only realized on Toast",
+      "Less powerful for non-Toast multi-vendor shops",
+      "Not a full accounting or inventory platform on its own"
+    ],
+    "integrations": "Tight integration with Toast POS; also accepts invoices from many vendors and exports to accounting tools.",
+    "alternatives": ["MarginEdge", "MarketMan", "Parsley"],
+    "verdict": "A smart, low-risk first step into food-cost control, especially for Toast restaurants; standalone shops may find more neutral options like MarginEdge a better fit."
+  },
+  {
+    "n": "Restaurant365",
+    "category": "Accounting & payroll",
+    "pricing": "Tiered per location per month: Core Operations around $249/mo, Professional around $459/mo, and full plans starting near $469-$499/location/mo, plus implementation/setup. Unlimited users per account.",
+    "bestFor": "Multi-unit operators who want accounting, inventory, scheduling and payroll on one ledger.",
+    "pros": [
+      "One unified system across accounting, inventory and labor",
+      "Unlimited users avoids per-seat cost creep",
+      "Built specifically for restaurant financials and multi-location reporting",
+      "Reduces back-office juggling between disconnected tools"
+    ],
+    "cons": [
+      "Heavy and pricey; overkill for a single independent",
+      "Setup/implementation cost and learning curve are significant",
+      "Per-location billing adds up across a portfolio"
+    ],
+    "integrations": "Broad POS, vendor, banking and payroll integrations; acts as the financial hub of the stack.",
+    "alternatives": ["MarginEdge", "Crunchtime", "QuickBooks plus Gusto"],
+    "verdict": "The gold standard for serious multi-unit financial control, but its cost and complexity make it a poor fit for a single small restaurant."
+  },
+  {
+    "n": "Ottimate (Plate IQ)",
+    "category": "Accounting & payroll",
+    "pricing": "Quote-only with one flat monthly fee covering unlimited transactions and approvers; independent estimates start around $200/mo. Contact sales for a tailored quote.",
+    "bestFor": "Restaurants drowning in supplier invoices that want AP coding, approvals and payments automated.",
+    "pros": [
+      "AI reads and codes invoices, cutting manual data entry",
+      "Flat fee with unlimited transactions and approvers",
+      "Streamlines approvals and vendor payments in one flow",
+      "Restaurant/hospitality roots with broad accounting integrations"
+    ],
+    "cons": [
+      "AP-only; you still need accounting and payroll elsewhere",
+      "Pricing is quote-only, so budgeting needs a sales call",
+      "Lower value if your invoice volume is small"
+    ],
+    "integrations": "Connects to major accounting/ERP platforms (QuickBooks, Sage Intacct, Acumatica, NetSuite and more).",
+    "alternatives": ["MarginEdge", "Restaurant365", "BILL"],
+    "verdict": "A strong fix for the invoice pile if AP is your bottleneck, but remember it's one piece of the puzzle, not a full accounting or payroll system."
+  },
+  {
+    "n": "Gusto",
+    "category": "Accounting & payroll",
+    "pricing": "Simple plan $49/mo + $6/employee; Plus $80/mo + $12/employee; Premium $180/mo + $22/employee. Contractor-only from $35/mo + $6/contractor. Add-ons (time tracking, benefits, multi-state) add $10-$30/employee.",
+    "bestFor": "Small to mid-size restaurants that want painless, full-service payroll, benefits and HR without restaurant-specific complexity.",
+    "pros": [
+      "Easy, full-service payroll with automatic tax filing",
+      "Transparent published pricing and a low base cost",
+      "Handles benefits, onboarding and contractor pay",
+      "Scales from a single shop to multi-location"
+    ],
+    "cons": [
+      "Generic, not built for restaurant tips or POS-native hours",
+      "Per-employee and add-on fees stack with a large hourly team",
+      "Lacks deep tip-pooling features of restaurant-specific payroll"
+    ],
+    "integrations": "Integrates with many POS, scheduling and accounting tools (including QuickBooks and various restaurant platforms).",
+    "alternatives": ["Toast Payroll", "7shifts Payroll", "Homebase Payroll"],
+    "verdict": "A reliable, easy payroll choice for most small restaurants; if tip pooling and POS-native hours are critical, a restaurant-specific payroll may serve you better."
+  },
+  {
+    "n": "Toast Payroll",
+    "category": "Accounting & payroll",
+    "pricing": "Roughly $69-$90/mo base plus about $9/employee; pricing is bundled into Toast and typically quoted with your overall package.",
+    "bestFor": "Restaurants already on Toast POS that want payroll pulling hours and tips straight from the system.",
+    "pros": [
+      "Hours and tips flow automatically from the Toast POS",
+      "Built for restaurant pay rules and tip pooling",
+      "One vendor for POS, scheduling and payroll",
+      "Reduces manual re-keying and tip reconciliation"
+    ],
+    "cons": [
+      "Locked to the Toast ecosystem",
+      "Pricing is bundled and less transparent",
+      "Switching away from Toast means switching payroll too"
+    ],
+    "integrations": "Native to Toast POS and scheduling; limited value outside the Toast ecosystem.",
+    "alternatives": ["Gusto", "7shifts Payroll", "Restaurant365 Payroll"],
+    "verdict": "The obvious payroll pick if you're committed to Toast, thanks to seamless tip and hours flow; less compelling if you want to stay POS-agnostic."
+  },
+  {
+    "n": "DAVO by Avalara",
+    "category": "Accounting & payroll",
+    "pricing": "About $57.99/mo per location (some sources cite ~$49.99). First monthly filing is a free trial; no separate setup fee.",
+    "bestFor": "Any restaurant that wants sales tax set aside daily, filed and paid automatically so the money's always there.",
+    "pros": [
+      "Automatically sets aside the exact daily sales tax collected",
+      "Files and pays sales tax on time, on autopilot",
+      "Integrates directly with your POS",
+      "Low, transparent flat monthly price"
+    ],
+    "cons": [
+      "Single-purpose: sales tax only",
+      "Per-location fee adds up across many sites",
+      "Requires a supported POS integration"
+    ],
+    "integrations": "Connects to major POS systems to pull daily sales and tax data automatically.",
+    "alternatives": ["Avalara AvaTax", "TaxJar", "manual accountant filing"],
+    "verdict": "A cheap, set-and-forget way to never scramble for sales-tax money again; it does one job, but it does it well."
+  },
+  {
+    "n": "Solink",
+    "category": "Loss prevention",
+    "pricing": "Custom/quote-based subscription, commonly cited from around $175/mo per location, scaling with cameras and package. Works with your existing compatible cameras.",
+    "bestFor": "Single and multi-location operators who want to tie security video to POS transactions to catch theft and voids.",
+    "pros": [
+      "Pairs video with the exact receipt/transaction for fast review",
+      "Works with existing compatible cameras and many POS systems",
+      "Cloud access to footage and alerts from anywhere",
+      "Useful for both loss prevention and operational coaching"
+    ],
+    "cons": [
+      "Needs compatible cameras; may require hardware",
+      "Pricing is quote-based, not published per location",
+      "Real value requires actually reviewing the flagged events"
+    ],
+    "integrations": "Integrates POS data, access control and business intelligence with video; broad POS compatibility.",
+    "alternatives": ["DTiQ", "Envysion", "Delaget"],
+    "verdict": "The most accessible video-plus-POS loss prevention tool for independents, catching theft you'd otherwise miss, provided your cameras are compatible."
+  },
+  {
+    "n": "Delaget",
+    "category": "Loss prevention",
+    "pricing": "Quote-only (now part of PAR Technology, branded PAR OPS Detect); independent estimates run roughly $300-$600/mo per location. Often sold as part of a broader back-office suite.",
+    "bestFor": "Franchise and multi-unit QSR operators wanting loss prevention plus back-office analytics across many stores.",
+    "pros": [
+      "Ticket-level transaction detail with configurable loss alerts",
+      "Searches across all stores and systems in one place",
+      "Bundles loss prevention with back-office and AP automation",
+      "Proven at large scale across tens of thousands of locations"
+    ],
+    "cons": [
+      "Built for franchise/multi-unit; overkill for one store",
+      "Pricing is quote-only and not transparent",
+      "Most value comes when bundled into the wider suite"
+    ],
+    "integrations": "Integrates with QSR POS systems and PAR's back-office, payroll and food-cost tools.",
+    "alternatives": ["Solink", "DTiQ", "Agilence"],
+    "verdict": "A capable multi-unit loss-prevention-plus-analytics platform for franchise operators; single independents will find it heavier and pricier than they need."
+  },
+  {
+    "n": "DTiQ",
+    "category": "Loss prevention",
+    "pricing": "Quote-only subscription (no upfront capex); independent estimates around $300-$700/mo per location depending on cameras and managed-service level.",
+    "bestFor": "Operators who want outsourced video surveillance plus POS exception analytics with human-reviewed audits.",
+    "pros": [
+      "Managed service combines video, POS data and human SmartAudit reviews",
+      "Subscription model avoids big upfront hardware spend",
+      "Integrates with major POS platforms (Square, Toast, Revel)",
+      "Real-time insights for loss prevention and operations"
+    ],
+    "cons": [
+      "Managed service plus hardware means higher ongoing cost",
+      "Typically contract-based",
+      "Pricing not published; requires a sales conversation"
+    ],
+    "integrations": "Integrates with leading POS systems; combines its 360iQ, VIDEOiQ and AI tools with managed audit services.",
+    "alternatives": ["Solink", "Delaget", "Envysion"],
+    "verdict": "Good for operators who'd rather outsource video review to experts than do it themselves, but the managed-service model carries a higher, contract-based cost."
+  },
+  {
+    "n": "Agilence",
+    "category": "Loss prevention",
+    "pricing": "Enterprise, quote-only subscription based on number of locations/users. An Analytics Plus tier adds outsourced consultant support for teams without in-house loss-prevention staff.",
+    "bestFor": "Large multi-unit retail and restaurant operators needing deep exception-based reporting across many sites.",
+    "pros": [
+      "Powerful exception-based reporting that adapts to your patterns with AI",
+      "Connects reporting, case management and store audits in one flow",
+      "Optional outsourced expert service for lean teams",
+      "Scales to thousands of locations"
+    ],
+    "cons": [
+      "Enterprise-oriented; overkill for a single site",
+      "Pricing is custom and not transparent",
+      "Gets the most value with dedicated loss-prevention staff or the Plus service"
+    ],
+    "integrations": "Ingests POS, transaction and operational data; integrates with analytics platforms and case/audit workflows.",
+    "alternatives": ["Delaget", "Solink", "DTiQ"],
+    "verdict": "Best-in-class exception reporting for enterprise loss-prevention teams; far more firepower (and cost) than an independent restaurant needs."
+  },
+  {
+    "n": "Ecotrak",
+    "category": "Energy & maintenance",
+    "pricing": "Ecotrak Build (self-service CMMS) at $25/mo per location with a 30-day free trial; enterprise tiers quoted separately.",
+    "bestFor": "QSRs, franchisees and small operators who want a cheap way to track assets, work orders and preventive maintenance.",
+    "pros": [
+      "Very low entry price for a self-service CMMS",
+      "Tracks assets, work orders, preventive maintenance and vendors",
+      "Helps avoid surprise equipment failures and repair costs",
+      "Free trial and quick setup for small businesses"
+    ],
+    "cons": [
+      "Maintenance management, not real-time energy metering",
+      "Per-location fee scales across many sites",
+      "Lighter analytics than enterprise energy platforms"
+    ],
+    "integrations": "Asset/facility platform with vendor management; connects equipment records and service workflows.",
+    "alternatives": ["UpKeep", "Powerhouse Dynamics Open Kitchen", "ServiceChannel"],
+    "verdict": "An affordable, practical way to stop surprise repair bills and keep equipment records straight; just know it's maintenance tracking, not live energy monitoring."
+  },
+  {
+    "n": "Powerhouse Dynamics Open Kitchen",
+    "category": "Energy & maintenance",
+    "pricing": "Subscription as-a-service: a single monthly fee bundles hardware, installation, onboarding, managed services and software; no public figure (independent estimates ~$150-$400/mo per location). Vendor positions the fee as less than the energy savings delivered.",
+    "bestFor": "Multi-site foodservice operators wanting to monitor and control HVAC, refrigeration and equipment to cut energy use.",
+    "pros": [
+      "Connects and controls HVAC, refrigeration and kitchen equipment via IoT",
+      "Claimed energy savings up to ~20% and peak demand cuts up to ~15%",
+      "All-in monthly fee covers hardware, install and managed services",
+      "Adds temperature monitoring and sanitation compliance"
+    ],
+    "cons": [
+      "Built for chains; overkill for a single location",
+      "Pricing not published; requires a quote",
+      "Requires equipment connectivity and install"
+    ],
+    "integrations": "Connects a wide range of HVAC, refrigeration and kitchen equipment brands; includes DemandSmart electricity-cost AI.",
+    "alternatives": ["GridPoint", "Verdigris", "Ecotrak"],
+    "verdict": "A proven energy-and-equipment platform that can pay for itself across a portfolio, but it's aimed at multi-site operators, not a single independent."
+  },
+  {
+    "n": "GridPoint",
+    "category": "Energy & maintenance",
+    "pricing": "Enterprise, quote-only with hardware install; no public pricing. Sold as a managed energy-intelligence solution for portfolios.",
+    "bestFor": "Multi-location operators wanting energy intelligence plus predictive HVAC and refrigeration alerts across sites.",
+    "pros": [
+      "Energy monitoring with predictive equipment alerts",
+      "Helps trim energy spend and prevent costly equipment failures",
+      "Designed for multi-site visibility and control",
+      "Managed approach reduces in-house workload"
+    ],
+    "cons": [
+      "Enterprise-leaning; not aimed at single locations",
+      "Requires hardware install",
+      "Opaque, quote-only pricing"
+    ],
+    "integrations": "Connects building systems (HVAC, lighting, refrigeration) with energy analytics and utility data.",
+    "alternatives": ["Powerhouse Dynamics Open Kitchen", "Verdigris", "Ecotrak"],
+    "verdict": "Solid energy and equipment intelligence for chains with real portfolio energy spend; the install and enterprise pricing rule it out for small independents."
+  },
+  {
+    "n": "Verdigris",
+    "category": "Energy & maintenance",
+    "pricing": "Panel-installed meters plus cloud subscription; older public references cited ~$99-$225/mo, but the company now skews toward larger sites/data centers, so expect a custom quote (independent estimates ~$200-$500/mo per location).",
+    "bestFor": "Energy-intensive single sites or portfolios wanting circuit-level visibility into exactly where power is wasted.",
+    "pros": [
+      "Circuit-level monitoring pinpoints where power and money leak",
+      "AI optimizes HVAC and cooling automatically",
+      "Fast ROI claimed through 20%+ energy cost cuts",
+      "Detects power-quality issues and equipment anomalies"
+    ],
+    "cons": [
+      "Requires panel-level hardware install by an electrician",
+      "Increasingly focused on data centers and large portfolios",
+      "Pricing is now largely quote-based"
+    ],
+    "integrations": "EV2 panel meters feed cloud analytics; integrates with building management for adaptive HVAC automation.",
+    "alternatives": ["GridPoint", "Powerhouse Dynamics Open Kitchen", "Ecotrak"],
+    "verdict": "Unmatched circuit-level detail on where your power goes, but the panel install and enterprise focus make it a fit mainly for energy-heavy or multi-site operators."
+  },
+  {
+    "n": "Therma",
+    "category": "Food safety",
+    "pricing": "From $10/mo per sensor, no minimum order. Buy only the sensors you need; hardware, 4G connectivity and alerts included.",
+    "bestFor": "Any restaurant or ghost kitchen wanting cheap 24/7 temperature monitoring on coolers and freezers.",
+    "pros": [
+      "Very low per-sensor cost with no minimum order",
+      "24/7 wireless monitoring with SMS, dashboard and app alerts",
+      "Long-range LoRa sensors reach through walls and freezers",
+      "One avoided walk-in failure can pay for years of service"
+    ],
+    "cons": [
+      "Monitoring only; not a full HACCP checklist workflow",
+      "You add sensors per fridge/freezer, so cost scales with units",
+      "Less of an all-in-one ops tool than rivals"
+    ],
+    "integrations": "Standalone sensor network with app/dashboard alerts; focused on temperature and humidity monitoring.",
+    "alternatives": ["ComplianceMate", "SmartSense by Digi", "Squadle"],
+    "verdict": "The simplest, cheapest insurance against a spoiled walk-in; pair it with a checklist tool if you also need full HACCP logging."
+  },
+  {
+    "n": "FreshCheq",
+    "category": "Food safety",
+    "pricing": "About $45-$50/mo per location, or roughly $449-$499/year (lifetime pricing, no setup fee). Free trial; volume pricing at 10+ locations.",
+    "bestFor": "Budget-conscious QSRs and small operators wanting to digitize line checks, logs and checklists.",
+    "pros": [
+      "Cheapest way to go paperless on food-safety checklists and logs",
+      "No setup fee, no hardware required, works on Android/iOS",
+      "Simple enough that staff actually use it",
+      "Annual plan delivers a clear discount"
+    ],
+    "cons": [
+      "Manual temperature entry; no built-in sensors",
+      "Lighter feature set than full ops platforms",
+      "Best for smaller operations"
+    ],
+    "integrations": "Mobile-first checklist app; minimal hardware dependencies, runs on standard tablets/phones.",
+    "alternatives": ["Jolt", "Squadle", "Therma"],
+    "verdict": "A genuinely affordable way to ditch paper logs and tighten line checks; just expect manual temp entry unless you add separate sensors."
+  },
+  {
+    "n": "Jolt",
+    "category": "Food safety",
+    "pricing": "Quote-only; a single-location full bundle (checklists, time clock, scheduling, comms) was quoted around $296/mo plus a ~$549 one-time setup, often discounted. Multi-location runs roughly $150-$200/location/mo. Hardware (label printers, probes) sold separately.",
+    "bestFor": "Operators who want food safety plus daily operations (tasks, labels, scheduling) in one app.",
+    "pros": [
+      "Combines food safety with broader daily operations and tasks",
+      "Label printing and temp probe hardware available",
+      "Volume and annual-billing discounts for multi-location",
+      "Flexible modules you can mix to fit your needs"
+    ],
+    "cons": [
+      "Pricing is quote-only with a setup fee",
+      "Manual temps unless you add sensor hardware",
+      "Module-based pricing can stack up"
+    ],
+    "integrations": "Integrates with label printers and temperature probes/sensors; broad ops feature set beyond food safety.",
+    "alternatives": ["FreshCheq", "Squadle", "ComplianceMate"],
+    "verdict": "A solid all-in-one for operators who want food safety and daily ops in a single app; just budget for setup fees and any sensor hardware."
+  },
+  {
+    "n": "ComplianceMate",
+    "category": "Food safety",
+    "pricing": "Quote-only (now under the Ladle brand); independent estimates around $70-$160/mo. Requires LoRaWAN sensor hardware.",
+    "bestFor": "Multi-location operators wanting automated wireless temp logging plus HACCP workflows that satisfy inspectors.",
+    "pros": [
+      "LoRaWAN sensors penetrate steel, insulation and concrete",
+      "Automated temp logs plus digital HACCP checklists",
+      "Real-time SMS/email/call alerts when temps drift",
+      "Used across thousands of locations internationally"
+    ],
+    "cons": [
+      "Requires sensor hardware investment",
+      "Pricing not public; needs a quote",
+      "More than a single small site typically needs"
+    ],
+    "integrations": "Wireless LoRaWAN sensor network plus digital checklist workflows; standalone food-safety platform.",
+    "alternatives": ["Therma", "SmartSense by Digi", "Squadle"],
+    "verdict": "Strong automated temp monitoring plus HACCP for operators who want inspector-ready logs; the sensor hardware and quote-only pricing add friction for the smallest shops."
+  },
+  {
+    "n": "SmartSense by Digi",
+    "category": "Food safety",
+    "pricing": "Sensing-as-a-Service: hardware/install plus subscription, sales-led with no public self-serve pricing (one institutional quote showed ~$34k install plus ~$4,250/year monitoring; restaurant pricing varies widely, est. ~$100-$300/mo per location).",
+    "bestFor": "Multi-unit and enterprise operators needing rigorous, audit-ready temperature monitoring across the food flow.",
+    "pros": [
+      "Monitors temperature across receiving, storage, prep and service",
+      "Built for HACCP/FDA/USDA compliance and audit trails",
+      "Enterprise-grade reliability and reporting",
+      "Backed by Digi's hardware and connectivity"
+    ],
+    "cons": [
+      "Sales-led with no self-serve pricing",
+      "Hardware and install costs can be substantial",
+      "Aimed at larger operators, not single shops"
+    ],
+    "integrations": "Wireless sensor network plus cloud platform; Sensing-as-a-Service model spanning the full food flow.",
+    "alternatives": ["ComplianceMate", "Therma", "Squadle"],
+    "verdict": "Enterprise-grade monitoring and audit trails for serious multi-unit operators; the install cost and sales process make it heavy for an independent restaurant."
+  },
+  {
+    "n": "Squadle",
+    "category": "Food safety",
+    "pricing": "Quote-only (part of Crunchtime). Bundles digital food safety, shift management, equipment maintenance and remote temp monitoring; ZeroTouch sensor hardware included in deployments.",
+    "bestFor": "Multi-location operators wanting digital checklists and automated temperature monitoring in one food-safety suite.",
+    "pros": [
+      "Digital checklists plus automated ZeroTouch temp logging",
+      "Real-time alerts when temps drift out of range",
+      "Saves crews ~20 minutes per shift on manual checks",
+      "Backed by Crunchtime's broader ops platform"
+    ],
+    "cons": [
+      "Custom pricing; no public figures",
+      "Full suite may exceed a single site's needs",
+      "Requires sensor hardware for automated monitoring"
+    ],
+    "integrations": "Part of the Crunchtime ecosystem; integrates food safety, scheduling, maintenance and temp sensors.",
+    "alternatives": ["Jolt", "ComplianceMate", "Therma"],
+    "verdict": "A capable checklists-plus-sensors suite for multi-unit operators, especially Crunchtime users; single sites may find the suite and quote-only pricing more than they need."
+  },
+  {
+    "n": "Otter",
+    "category": "Delivery & aggregators",
+    "pricing": "Order aggregation from roughly $100+/mo per location (two tiers), plus a one-time ~$100 activation fee per location for certain products. Pricing varies by feature mix.",
+    "bestFor": "Delivery-heavy QSRs and ghost kitchens drowning in tablets who want all apps on one screen, injected into the POS.",
+    "pros": [
+      "Consolidates all delivery apps into one dashboard",
+      "Auto-accepts orders to reduce missed tickets during a rush",
+      "Syncs menus across channels and unifies reporting",
+      "Ends the tablet-juggling and re-keying chaos"
+    ],
+    "cons": [
+      "Aggressively upsells a broader POS/ordering suite",
+      "Low value at low delivery volume",
+      "Setup fees apply to some products"
+    ],
+    "integrations": "Injects third-party delivery orders into your POS; broad delivery-channel and ordering integrations.",
+    "alternatives": ["ItsaCheckmate", "Deliverect", "Chowly"],
+    "verdict": "Ends tablet chaos for delivery-heavy kitchens, but you'll want meaningful order volume to justify the cost and to fend off the upsells."
+  },
+  {
+    "n": "ItsaCheckmate",
+    "category": "Delivery & aggregators",
+    "pricing": "$85/mo per location for up to 2 delivery services, or $100/mo per location for unlimited services. No setup fees; month-to-month with 24/7 support.",
+    "bestFor": "Multi-channel operators wanting one menu pushed everywhere with orders flowing straight into the POS.",
+    "pros": [
+      "Transparent, simple per-location pricing",
+      "No setup fee and month-to-month, low-commitment",
+      "Connects 30+ delivery/ordering channels to the POS",
+      "Cited average savings of ~$247/mo versus manual entry"
+    ],
+    "cons": [
+      "Only pays back at meaningful delivery volume",
+      "Unlimited-channel tier costs more",
+      "Focused on aggregation rather than broader marketing tools"
+    ],
+    "integrations": "Connects 30+ delivery and ordering platforms into major POS systems (including Heartland Restaurant).",
+    "alternatives": ["Otter", "Deliverect", "Chowly"],
+    "verdict": "One of the clearest, most transparently priced ways to push one menu everywhere and stop re-keying orders; great value once delivery volume is real."
+  },
+  {
+    "n": "Deliverect",
+    "category": "Delivery & aggregators",
+    "pricing": "Custom/quote-based, scaling with locations, digital volume and modules (Restaurants, Retail, Direct, Dispatch). Independent estimates start around $99+/mo per location; no free plan.",
+    "bestFor": "Delivery-heavy and multi-location operators wanting robust order injection, menu sync and dispatch across channels.",
+    "pros": [
+      "Strong multi-channel order injection and menu sync",
+      "Scales from a handful to thousands of locations",
+      "Adds dispatch and direct-ordering options",
+      "Mature platform with wide channel coverage"
+    ],
+    "cons": [
+      "Custom pricing; add-on modules raise true cost",
+      "No free plan and no fully public pricing",
+      "More than a low-volume single shop needs"
+    ],
+    "integrations": "Injects delivery-app orders into POS, syncs menus and supports dispatch; broad POS and channel coverage.",
+    "alternatives": ["Otter", "ItsaCheckmate", "Chowly"],
+    "verdict": "A robust, scalable middleware for delivery-heavy operators; just watch how add-on modules stack up the real monthly cost."
+  },
+  {
+    "n": "Chowly",
+    "category": "Delivery & aggregators",
+    "pricing": "Quote-only, varying by components and scale; no public figure (independent estimates ~$150-$300/mo per location). Includes AI Delivery and Pricing agents.",
+    "bestFor": "Independents wanting delivery aggregation plus AI dynamic pricing and marketing in one platform.",
+    "pros": [
+      "Connects POS to third-party ordering and injects orders automatically",
+      "AI Pricing agent lifts prices in high demand to recover margin",
+      "Delivery agent routes orders to the best fulfillment option",
+      "Aimed at independents, not just chains"
+    ],
+    "cons": [
+      "Opaque, quote-only pricing",
+      "Feature creep beyond simple aggregation",
+      "Value depends on delivery volume and adoption of the AI tools"
+    ],
+    "integrations": "Connects POS systems to third-party marketplaces; bundles AI pricing, delivery and marketing agents.",
+    "alternatives": ["Otter", "ItsaCheckmate", "Deliverect"],
+    "verdict": "Aggregation plus smart pricing tuned for independents, with real margin-recovery potential; the quote-only pricing and broadening feature set warrant a careful look."
+  },
+  {
+    "n": "CloudKitchens",
+    "category": "Delivery & aggregators",
+    "pricing": "Lease-based ghost-kitchen space, typically ~$3,000-$15,000/mo (often quoted from ~$4,300/mo) depending on market, plus utilities, deposits and platform fees. Leases can be as short as 12 months.",
+    "bestFor": "Delivery-only operators wanting turnkey kitchen space and tooling without signing a full restaurant lease.",
+    "pros": [
+      "Turnkey delivery-only kitchen space with shared amenities",
+      "Shorter lease terms than a traditional storefront",
+      "Lower upfront commitment than building out your own space",
+      "Included order-management tooling in some facilities"
+    ],
+    "cons": [
+      "Requires committing to their facilities and locations",
+      "Opaque fee structure beyond base rent",
+      "Delivery-app commissions still apply on top"
+    ],
+    "integrations": "Provides facility plus order-management tech; you still connect your own delivery-app accounts and brands.",
+    "alternatives": ["CloudKitchens competitors (local commissaries)", "Ghost Kitchen Brands", "REEF Kitchens"],
+    "verdict": "A fast on-ramp to delivery-only operations without a storefront buildout, but read the fees carefully and remember app commissions still eat each order."
+  },
+  {
+    "n": "Avero",
+    "category": "Analytics & BI",
+    "pricing": "Starter free; Essentials from ~$300/location/year; Professional from ~$600/location/year. Implementation, integrations and training can add meaningful one-time cost.",
+    "bestFor": "Full-service restaurants and groups wanting deep sales, labor and server-performance analytics with benchmarking.",
+    "pros": [
+      "Deep operational analytics for sales, labor and server performance",
+      "Benchmarking to compare locations and staff",
+      "Free Starter tier to test the waters",
+      "Restaurant-specific reporting, not generic BI"
+    ],
+    "cons": [
+      "Implementation and integration costs add up",
+      "Strongest value at multi-unit/full-service scale",
+      "More than a small QSR typically needs"
+    ],
+    "integrations": "Connects to POS and labor systems to pull sales, labor and server-level data for analysis.",
+    "alternatives": ["Tenzo (BI)", "Mirus", "Restaurant365"],
+    "verdict": "Powerful operational analytics for full-service groups, with a free tier to start; the real value (and cost) shows up at multi-unit scale."
+  },
+  {
+    "n": "Tenzo (BI)",
+    "category": "Analytics & BI",
+    "pricing": "From around $600/year; scales by modules and locations. Free trial available.",
+    "bestFor": "Fast-casual, full-service and ghost-kitchen operators wanting sales, labor, inventory and reviews in one dashboard.",
+    "pros": [
+      "Unifies POS, labor, inventory and review data in one view",
+      "AI-powered analytics and sales forecasting",
+      "Dashboards for both GMs and head office",
+      "Free trial and relatively quick time-to-value"
+    ],
+    "cons": [
+      "Per-module and per-location pricing climbs as you add",
+      "Analytics-led; not an operations or accounting system",
+      "Best value at multi-location scale"
+    ],
+    "integrations": "Aggregates data from POS, scheduling/labor, inventory and review platforms, plus weather and events.",
+    "alternatives": ["Avero", "Mirus", "Restaurant365"],
+    "verdict": "A genuinely useful single pane of glass across your operation that starts affordably; just watch how per-module, per-location pricing adds up as you grow."
+  },
+  {
+    "n": "Mirus",
+    "category": "Analytics & BI",
+    "pricing": "Enterprise Unlimited at $95 per unit per month (unlimited data sources, users and custom reports). Minimum fee under 20 units; volume discounts begin around 100 units.",
+    "bestFor": "Multi-unit operators with complex data who need a custom warehouse and flexible, code-free reporting.",
+    "pros": [
+      "Integrates POS, labor, payroll, inventory and accounting into one warehouse",
+      "Unlimited users and custom reports for a flat per-unit fee",
+      "Code-free ad-hoc report writer",
+      "Established since 1999 with deep restaurant focus"
+    ],
+    "cons": [
+      "Needs analyst time to build and maintain reports",
+      "Chain-oriented; minimum fee under 20 units",
+      "Less turnkey than dashboard-first tools"
+    ],
+    "integrations": "Builds a custom data warehouse pulling from POS, labor, payroll, inventory, accounting and spreadsheets.",
+    "alternatives": ["Avero", "Tenzo (BI)", "Restaurant365"],
+    "verdict": "A flexible, transparently priced data warehouse for multi-unit groups that want tailored reporting; you'll need someone willing to build the reports to get full value."
+  },
+  {
+    "n": "Loop AI",
+    "category": "Emerging AI",
+    "pricing": "Quote-based; commonly structured around a share of recovered funds and/or subscription. No public flat figure. Value scales with delivery volume.",
+    "bestFor": "Delivery-heavy multi-unit brands losing money to third-party errors, chargebacks and reconciliation gaps.",
+    "pros": [
+      "Automates third-party delivery financial reconciliation and journal entries",
+      "Identifies and disputes delivery errors and friendly fraud to recover funds",
+      "Real-time insights on store performance, uptime and delivery ROI",
+      "Integrates delivery data with ERP/accounting systems"
+    ],
+    "cons": [
+      "Value tied to high delivery volume",
+      "Pricing not transparent",
+      "Most relevant for chains, not low-volume single shops"
+    ],
+    "integrations": "Connects Uber Eats, DoorDash and other platforms to ERP/accounting tools like NetSuite and Restaurant365.",
+    "alternatives": ["Voosh", "Otter (financials)", "manual delivery reconciliation"],
+    "verdict": "A smart way to recover money the delivery apps quietly owe you and kill manual reconciliation, but the payoff depends on having serious delivery volume."
+  },
+  {
+    "n": "Toast Sous Chef",
+    "category": "Emerging AI",
+    "pricing": "Bundled within Toast (now part of the Toast IQ intelligence ecosystem); no separate standalone price.",
+    "bestFor": "Toast restaurants that want plain-language answers and proactive insights from their own sales and labor data.",
+    "pros": [
+      "Turns Toast data into plain-language answers and recommendations",
+      "Proactively surfaces insights via a personalized feed",
+      "Can take actions like updating menus or editing shifts in Toast",
+      "Menu upsell features have lifted average order volume in trials"
+    ],
+    "cons": [
+      "Toast-only; useless outside the Toast ecosystem",
+      "An assistant, not an autonomous agent",
+      "Now folded into the broader Toast IQ branding"
+    ],
+    "integrations": "Native to Toast POS and the Toast IQ ecosystem; works across menus, scheduling and reporting within Toast.",
+    "alternatives": ["Tenzo (BI)", "Avero", "Restaurant365 analytics"],
+    "verdict": "A handy, increasingly capable AI layer if you already run Toast; there's no reason to consider it otherwise."
+  },
+  {
+    "n": "Voosh",
+    "category": "Emerging AI",
+    "pricing": "Quote-based, varying by number of locations; vendor claims ROI typically 4-5x the cost. Sweet spot is mid-market brands of ~20-30 locations, though it serves single sites too.",
+    "bestFor": "Delivery-heavy operators wanting to automate third-party disputes, finances and review responses in one place.",
+    "pros": [
+      "AI dispute management with a high reported win rate (~80-90%)",
+      "Recovers disputed delivery funds and reconciles payouts",
+      "AI review responses across delivery apps and local search",
+      "One screen for finances, disputes, promotions and downtime"
+    ],
+    "cons": [
+      "More a delivery-ops tool than a guest-facing chatbot",
+      "Pricing is quote-only",
+      "Best value concentrated in mid-market multi-unit brands"
+    ],
+    "integrations": "Connects to DoorDash, Uber Eats, Grubhub and other delivery platforms plus review sources.",
+    "alternatives": ["Loop AI", "Otter", "Birdeye (reviews)"],
+    "verdict": "A strong delivery-ops recovery and review tool for off-premise-heavy brands; just understand it's about disputes and finances, not guest chat."
+  },
+  {
+    "n": "Agot AI",
+    "category": "Emerging AI",
+    "pricing": "Quote-only, enterprise/chain-oriented; no public pricing (independent estimates ~$500-$1,500/mo per location). Integration-heavy camera deployment.",
+    "bestFor": "QSR and fast-casual chains wanting kitchen-camera computer vision to catch order errors before they reach guests.",
+    "pros": [
+      "Computer vision spots 85%+ of order errors in real time",
+      "Real-time line-worker prompts down to the ingredient level",
+      "Also addresses food waste and speed of service",
+      "Catches mistakes before food leaves the kitchen"
+    ],
+    "cons": [
+      "Chain-scale and integration-heavy to deploy",
+      "Requires kitchen camera installation",
+      "No public pricing; built for large operators"
+    ],
+    "integrations": "Camera-based vision system integrated with kitchen workflow; real-time prompts to staff displays.",
+    "alternatives": ["PreciTaste", "Miso Robotics Flippy", "Agot competitors (Kitchen vision tools)"],
+    "verdict": "Impressive accuracy tech that can cut remakes and complaints at scale, but the camera install and chain focus put it well beyond a single independent."
+  },
+  {
+    "n": "PreciTaste",
+    "category": "Emerging AI",
+    "pricing": "Quote-only, enterprise/chain-oriented; no public pricing (independent estimates ~$1,000+/mo per location). Vision-AI deployment with cameras and sensors.",
+    "bestFor": "QSR and fast-casual chains wanting AI to predict prep and manage production so the line stays ahead of demand.",
+    "pros": [
+      "Predicts prep and production to keep the line ahead of demand",
+      "Claimed ~7% lower food cost, ~50% less waste and labor savings",
+      "Live inventory sensing via computer vision",
+      "Proven at scale (Chipotle and others, 2,500+ systems)"
+    ],
+    "cons": [
+      "Enterprise/chain focus; complex back-of-house integration",
+      "No public pricing; high estimated cost per location",
+      "Requires cameras and sensors installed in the kitchen"
+    ],
+    "integrations": "Vision-AI platform with Prep, Planner and Station Assistants; integrates with kitchen equipment and inventory.",
+    "alternatives": ["Agot AI", "Lineup.ai", "5-Out"],
+    "verdict": "Powerful demand-driven prep and waste reduction proven at major chains; the install complexity and enterprise pricing make it unrealistic for independents."
+  }
+]
