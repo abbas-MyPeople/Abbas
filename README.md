@@ -32,7 +32,7 @@ python3 -m http.server 8000   # then open http://localhost:8000
 ## Deploy (GitHub Pages)
 
 Repo Settings → Pages → "Deploy from a branch" → this branch, `/ (root)` → Save.
-Live at `https://abbas-mypeople.github.io/Abbas/`. (`.nojekyll` is included.)
+Live at `https://azrestaurantpartners.com/`. (`.nojekyll` is included.)
 
 ## To confirm later
 

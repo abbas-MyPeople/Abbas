@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://abbas-mypeople.github.io/Abbas/sitemap.xml
+Sitemap: https://azrestaurantpartners.com/sitemap.xml

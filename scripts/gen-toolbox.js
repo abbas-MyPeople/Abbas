@@ -14,7 +14,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SCRIPT = path.join(ROOT, 'script.js');
 const HTML = path.join(ROOT, 'toolbox.html');
-const SITE = 'https://abbas-mypeople.github.io/Abbas/toolbox.html';
+const SITE = 'https://azrestaurantpartners.com/toolbox.html';
 
 // --- pull TOOLS array out of script.js and evaluate it ---
 const src = fs.readFileSync(SCRIPT, 'utf8');
