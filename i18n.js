@@ -139,6 +139,11 @@
     [`Founding 5: <strong>$179/mo, locked for life</strong>`, `फ़ाउंडिंग 5: <strong>$179/माह, हमेशा के लिए तय</strong>`, `فاؤنڈنگ 5: <strong>$179/ماہ، ہمیشہ کے لیے طے</strong>`],
     [`Plans from <strong>$99/mo</strong>. Setup is a one-time fee quoted on your call — and with strategy work you <strong>only start paying once you're saving</strong>. Month to month, no lock-in, no vendor commissions.`, `प्लान <strong>$99/माह से</strong>। सेटअप एक बार का शुल्क है जो आपकी कॉल पर बताया जाता है — और रणनीति वाले काम में आप <strong>तभी पैसे देना शुरू करते हैं जब बचत होने लगे</strong>। महीने-दर-महीने, कोई बंधन नहीं, कोई वेंडर कमीशन नहीं।`, `پلانز <strong>$99/ماہ سے</strong>۔ سیٹ اپ ایک بار کی فیس ہے جو آپ کی کال پر بتائی جاتی ہے — اور حکمتِ عملی والے کام میں آپ <strong>تبھی پیسے دینا شروع کرتے ہیں جب بچت ہونے لگے</strong>۔ مہینہ بہ مہینہ، کوئی پابندی نہیں، کوئی وینڈر کمیشن نہیں۔`],
 
+    // TOOL DIRECTORY (heading only — the 101 tool entries are an English SEO asset)
+    [`The full toolbox`, `पूरा टूलबॉक्स`, `پورا ٹول باکس`],
+    [`Every restaurant tool worth knowing — 100+, by category.`, `जानने लायक हर रेस्तराँ टूल — 100+, श्रेणी के हिसाब से।`, `جاننے کے لائق ہر ریستوران ٹول — 100+، زمرے کے حساب سے۔`],
+    [`A plain-English map of the whole restaurant-tech landscape: what each tool does, what it tends to cost, who it fits, and what to watch out for. Researched and kept current — no signup, nothing hidden. Use the finder above for a personalized shortlist, or browse everything below.`, `पूरे रेस्तराँ-टेक परिदृश्य का आसान भाषा में नक्शा: हर टूल क्या करता है, उसकी आम कीमत क्या है, किसके लिए सही है, और किस बात से सावधान रहें। रिसर्च किया हुआ और अपडेट रखा जाता है — कोई साइनअप नहीं, कुछ छिपा नहीं। ऊपर दिए फ़ाइंडर से अपनी पसंद की छोटी सूची पाएँ, या नीचे सब कुछ देखें।`, `پورے ریستوران-ٹیک منظرنامے کا آسان زبان میں نقشہ: ہر ٹول کیا کرتا ہے، اس کی عام قیمت کیا ہے، کس کے لیے صحیح ہے، اور کس بات سے ہوشیار رہیں۔ ریسرچ کیا ہوا اور اپ ڈیٹ رکھا جاتا ہے — کوئی سائن اپ نہیں، کچھ چھپا نہیں۔ اوپر دیے فائنڈر سے اپنی پسند کی چھوٹی فہرست پائیں، یا نیچے سب کچھ دیکھیں۔`],
+
     // CONTACT
     [`Let's find the money your restaurant is leaving on the table.`, `आइए वह पैसा खोजें जो आपका रेस्तराँ यूँ ही छोड़ रहा है।`, `آئیے وہ پیسہ تلاش کریں جو آپ کا ریستوران یونہی چھوڑ رہا ہے۔`],
     [`Tell us a little about your place. We'll personally reply to set up a short call — and you'll leave with at least one concrete way to keep more of what you earn. Free, no obligation.`, `अपनी जगह के बारे में थोड़ा बताइए। हम ख़ुद जवाब देकर एक छोटी कॉल तय करेंगे — और आप कम से कम एक ठोस तरीक़ा लेकर जाएँगे जिससे आप अपनी कमाई ज़्यादा बचा सकें। मुफ़्त, बिना किसी बाध्यता के।`, `اپنی جگہ کے بارے میں تھوڑا بتائیے۔ ہم خود جواب دے کر ایک مختصر کال طے کریں گے — اور آپ کم از کم ایک ٹھوس طریقہ لے کر جائیں گے جس سے آپ اپنی کمائی زیادہ بچا سکیں۔ مفت، بغیر کسی پابندی کے۔`],
@@ -241,6 +246,7 @@
     '.footer__inner p:not(.footer__copy)',
     '.toolbox-trigger__txt',
     '.tbhero .kicker', '.tbhero__title', '.tbhero__sub', '.tbhero__lead', '.tbhero__btn', '.tbhero__trust',
+    '#directory .kicker', '#directory .h2', '#directory .section__head .lead',
     '#tbnext .kicker', '#tbnext .h2', '#tbnext .possible__cta', '.tb-scarcity',
     '.tb-share__txt', '.tb-share__btn',
     '.mobilecta a',

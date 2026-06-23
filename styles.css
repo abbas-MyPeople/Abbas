@@ -359,6 +359,32 @@ html[dir="rtl"] .pilot__col--get li::before, html[dir="rtl"] .pilot__col--give l
 html[dir="rtl"] .pilot__note { border-left: 0; border-right: 2px solid var(--accent); padding-left: 0; padding-right: 18px; }
 @media (max-width: 720px) { .pilot__cols { grid-template-columns: 1fr; } }
 
+/* Tool directory (crawlable SEO/GEO listing) */
+.tooldir__nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--line-soft); }
+.tooldir__nav-label { font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-right: 4px; }
+.tooldir__nav a { font-size: 0.86rem; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; transition: background .2s, color .2s, border-color .2s; }
+.tooldir__nav a:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.tooldir__cat { margin-bottom: 46px; scroll-margin-top: 90px; }
+.tooldir__cat-title { font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.tooldir__count { font-family: "Inter", sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--accent); background: rgba(192,73,43,0.1); border-radius: 999px; padding: 2px 9px; }
+.tooldir__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.tooldir__tool { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 9px; }
+.tooldir__tool-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.tooldir__name { font-size: 1.06rem; font-family: "Fraunces", serif; font-weight: 600; line-height: 1.15; }
+.tooldir__name a { color: var(--ink); border-bottom: 1px solid transparent; transition: color .15s, border-color .15s; }
+.tooldir__name a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.tooldir__price { font-size: 0.78rem; font-weight: 600; color: var(--accent-deep); flex-shrink: 0; text-align: right; line-height: 1.3; }
+.tooldir__what { font-size: 0.92rem; color: var(--body); line-height: 1.45; }
+.tooldir__fit, .tooldir__watch { font-size: 0.86rem; line-height: 1.45; color: var(--ink); margin: 0; }
+.tooldir__tag { display: inline-block; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 7px; border-radius: 999px; margin-right: 5px; }
+.tooldir__tag--fit { background: rgba(46,110,80,0.12); color: #2e6e50; }
+.tooldir__tag--watch { background: rgba(192,73,43,0.12); color: var(--accent-deep); }
+.tooldir__foot { margin-top: 22px; font-size: 0.86rem; color: var(--muted); font-style: italic; }
+html[dir="rtl"] .tooldir__nav-label { margin-right: 0; margin-left: 4px; }
+html[dir="rtl"] .tooldir__tag { margin-right: 0; margin-left: 5px; }
+@media (max-width: 900px) { .tooldir__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .tooldir__grid { grid-template-columns: 1fr; } }
+
 /* "Start here" flag on persona-matched strategy cards */
 .poss { position: relative; }
 .poss--first { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
