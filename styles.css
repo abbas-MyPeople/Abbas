@@ -338,6 +338,26 @@ html[dir="rtl"] .plan__price span { margin-left: 0; margin-right: 4px; }
 .pilot strong { color: #fff; font-weight: 600; }
 .pilot em { color: #f0a888; font-style: italic; }
 .pilot .btn { align-self: flex-start; margin-top: 6px; }
+.pilot__head { display: flex; flex-direction: column; gap: 10px; }
+.pilot__intro { margin: 0; }
+.pilot__spots { margin: 4px 0; }
+.pilot__bar { height: 8px; background: rgba(255,255,255,0.12); border-radius: 999px; overflow: hidden; }
+.pilot__bar span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.pilot__spots-label { font-size: 0.85rem !important; color: #f0a888 !important; margin-top: 9px; letter-spacing: 0.02em; }
+.pilot__cols { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; }
+.pilot__col { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 12px; padding: 20px 22px; }
+.pilot__col h4 { color: #fff; font-family: "Fraunces", serif; font-weight: 600; font-size: 1.06rem; margin-bottom: 13px; letter-spacing: -0.01em; }
+.pilot__col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.pilot__col li { position: relative; padding-left: 25px; color: #cfc8ba; font-size: 0.96rem; line-height: 1.45; }
+.pilot__col--get li::before { content: "✓"; position: absolute; left: 0; top: -1px; color: #6fcf97; font-weight: 700; }
+.pilot__col--give li::before { content: "›"; position: absolute; left: 3px; top: -2px; color: #f0a888; font-weight: 700; font-size: 1.1rem; }
+.pilot__note { border-left: 2px solid var(--accent); padding: 2px 0 2px 18px; margin: 4px 0; }
+.pilot__note p { font-style: italic; color: #e7e0d4; font-size: 1.04rem; line-height: 1.55; max-width: 66ch; }
+.pilot__note cite { display: block; margin-top: 9px; font-style: normal; color: #f0a888; font-size: 0.9rem; letter-spacing: 0.02em; }
+html[dir="rtl"] .pilot__col li { padding-left: 0; padding-right: 25px; }
+html[dir="rtl"] .pilot__col--get li::before, html[dir="rtl"] .pilot__col--give li::before { left: auto; right: 0; }
+html[dir="rtl"] .pilot__note { border-left: 0; border-right: 2px solid var(--accent); padding-left: 0; padding-right: 18px; }
+@media (max-width: 720px) { .pilot__cols { grid-template-columns: 1fr; } }
 
 /* "Start here" flag on persona-matched strategy cards */
 .poss { position: relative; }
