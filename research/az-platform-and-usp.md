@@ -19,10 +19,17 @@ rush, and lived the margins. Every other option the owner has is a *specialist w
 - a consultant who advises and leaves,
 - 20 point tools that don't talk to each other (the fragmentation wound from `restaurant-tech-market-research.md`).
 
-AZ is the opposite: **one integrated platform, run by one person who understands the nuances *and* the
+AZ is the opposite: **one integrated platform, led by one person who understands the nuances *and* the
 optimizations at every level** — from the kitchen ticket to the customer's feeling to the unit economics.
 That's why the layers actually connect. **The platform *is* a person, and that's the moat a competitor
 can't copy.**
+
+**Important nuance (owner's steer):** the USP is *the person* — but the pitch must not read as "it's
+literally one guy doing everything," which sounds small and risky to a buyer. The correct framing is:
+**one mind sets the standard and leads every engagement, with a team behind him building and running it.**
+So the buyer gets the singular, cross-domain expertise *and* real execution horsepower — no single point
+of failure. Don't deny the team (the old copy did); don't dilute the singular-expert differentiator into
+"we're an agency" either. Hold both.
 
 ## 2. The platform architecture (the WSO2-APIM analogy, made restaurant-native)
 WSO2 API Manager isn't sold as "a gateway, and also a portal, and also analytics." It's sold as **one
@@ -73,8 +80,10 @@ expert-in-AI + perception control — not "answers the phone."
 - No proof. → add a proof strip from the flagship (e.g. ~400→800 reviews, all 5★; site AI-readable) once owner-approved.
 
 **Details (`details.html`)** — thorough and clear. Weaknesses:
-- **The "Is this just one person? No…" FAQ actively fights the USP.** → flip it to *own* it: yes, and
-  that's the point — one person who's both the engineer and the operator, with the horsepower to deliver.
+- **The "Is this just one person? No…" FAQ actively fights the USP.** → reframe to *own the person* while
+  keeping the team: the differentiator is Abbas (engineer + operator) who sets the standard and leads,
+  **with a full team behind him** building and running it — singular expertise AND horsepower, no single
+  point of failure.
 - The 9 "plays" are a flat list with no structure. → group them under the platform layers so they read as
   one integrated system, not a menu of disconnected services.
 - Voice is one small card among nine. → elevate it.
