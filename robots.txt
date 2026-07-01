@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /flagship/
+Disallow: /research/
 
 Sitemap: https://azrestaurantpartners.com/sitemap.xml
