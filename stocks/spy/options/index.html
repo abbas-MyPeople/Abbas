@@ -29,7 +29,7 @@
       <div>
         <div class="eyebrow"><a href="../" class="dim">← SPY desk</a></div>
         <h1 style="font-size:30px;margin:6px 0 2px">SPY Options <span class="muted" style="font-size:16px">· expiring ≤ 7 days</span></h1>
-        <p class="muted" style="margin:0">Spot <span class="mono" id="spot">—</span> · chain as of <span id="asof">—</span>. On SPY, this desk never dates further out than a week.</p>
+        <p class="muted" style="margin:0">Spot <span class="mono" id="spot">—</span> · chain as of <span id="asof">—</span> · auto-updates silently. On SPY, this desk never dates further out than a week.</p>
       </div>
       <a class="btn" href="../">📊 Charts</a>
     </div>
@@ -76,93 +76,59 @@
 </main>
 
 <script type="module">
-import { loadJSON, fmt, mountNav, mountFooter, initTheme } from '../../assets/js/app.js';
+import { loadJSON, fmt, mountNav, mountFooter, initTheme, autoRefresh, setText, setHTML } from '../../assets/js/app.js';
 import { derive, score, verdict } from '../../assets/js/options.js';
 
 initTheme();
 mountNav('spy-options');
 
-const data = await loadJSON('data/spy/options/latest.json');
 const detailEl = document.getElementById('detail');
+const expTabs = document.getElementById('expTabs');
+const sideTabs = document.getElementById('sideTabs');
+const chainBody = document.getElementById('chainBody');
+const recsEl = document.getElementById('recs');
 
-if (!data || !data.contracts?.length) {
-  document.getElementById('recs').innerHTML =
-    `<div class="card" style="grid-column:1/-1"><h3>No chain loaded yet</h3>
-     <p class="muted">The options snapshot job commits <span class="mono">data/spy/options/latest.json</span> on a schedule during market hours.
-     Once it runs, the full chain, Greeks, and recommendations appear here.</p></div>`;
-} else {
-  const spot = data.spot;
-  const rf = data.riskFree ?? 0.043;
-  document.getElementById('spot').textContent = fmt.money(spot);
-  document.getElementById('asof').textContent = fmt.when(data.asOf) + ' · ' + fmt.ago(data.asOf);
+/* View state survives every background refresh: your selected expiry, side,
+   sort, and open contract stay put — only the numbers inside update. */
+let all = [], expiries = [], top = [];
+let side = 'call', exp = null, sortK = 'strike', sortDir = 1;
+let openId = null, lastAsOf = null, curAsOf = null;
 
-  // Enrich + score, keep <=7 DTE
-  const all = data.contracts
-    .filter(c => (c.dte ?? 99) <= (data.maxDTE ?? 7))
-    .map(c => { const d = derive(c, spot, rf); return { ...d, ...score(d) }; });
+const idOf = (c) => `${c.type}-${c.expiry}-${c.strike}`;
 
-  const expiries = [...new Set(all.map(c => c.expiry))].sort();
-  let side = 'call';
-  let exp = expiries[0];
+function rows() {
+  return all.filter(c => c.expiry === exp && c.type === side)
+    .sort((a, b) => (a[sortK] - b[sortK]) * sortDir);
+}
 
-  // Expiry tabs
-  const expTabs = document.getElementById('expTabs');
+function renderExpTabs() {
   const dteOf = (e) => all.find(c => c.expiry === e)?.dte ?? 0;
-  expTabs.innerHTML = expiries.map(e =>
-    `<button data-exp="${e}" class="${e === exp ? 'active' : ''}">${e.slice(5)} · ${dteOf(e)}d</button>`).join('');
+  setHTML(expTabs, expiries.map(e =>
+    `<button data-exp="${e}" class="${e === exp ? 'active' : ''}">${e.slice(5)} · ${dteOf(e)}d</button>`).join(''));
+}
 
-  let sortK = 'strike', sortDir = 1;
+function renderChain() {
+  setHTML(chainBody, rows().map(c => {
+    const itm = c.intrinsic > 0;
+    const v = verdict(c.score);
+    return `<tr data-id="${idOf(c)}" class="${itm ? 'itm' : ''} ${c.standout ? 'selected' : ''}">
+      <td style="text-align:left">${fmt.usd(c.strike)} ${c.standout ? '<span class="tag gold">★</span>' : ''}</td>
+      <td>${fmt.money(c.mid)}</td>
+      <td>${(c.delta).toFixed(2)}</td>
+      <td>${(c.iv * 100).toFixed(0)}%</td>
+      <td>${Math.round(c.probBE)}%</td>
+      <td class="${fmt.cls(-c.absMovePctBE)}">${c.absMovePctBE.toFixed(2)}%</td>
+      <td>${c.leverage.toFixed(0)}x</td>
+      <td class="down">${c.thetaPct.toFixed(1)}%</td>
+      <td>${fmt.compact(c.volume)}</td>
+      <td>${fmt.compact(c.openInterest)}</td>
+      <td><span class="badge ${v.cls}">${c.score}</span></td>
+    </tr>`;
+  }).join(''));
+}
 
-  function rows() {
-    return all.filter(c => c.expiry === exp && c.type === side)
-      .sort((a, b) => (a[sortK] - b[sortK]) * sortDir);
-  }
-
-  function renderChain() {
-    const body = document.getElementById('chainBody');
-    body.innerHTML = rows().map(c => {
-      const itm = c.intrinsic > 0;
-      const v = verdict(c.score);
-      return `<tr data-id="${c.type}-${c.expiry}-${c.strike}" class="${itm ? 'itm' : ''} ${c.standout ? 'selected' : ''}">
-        <td style="text-align:left">${fmt.usd(c.strike)} ${c.standout ? '<span class="tag gold">★</span>' : ''}</td>
-        <td>${fmt.money(c.mid)}</td>
-        <td>${(c.delta).toFixed(2)}</td>
-        <td>${(c.iv * 100).toFixed(0)}%</td>
-        <td>${Math.round(c.probBE)}%</td>
-        <td class="${fmt.cls(-c.absMovePctBE)}">${c.absMovePctBE.toFixed(2)}%</td>
-        <td>${c.leverage.toFixed(0)}x</td>
-        <td class="down">${c.thetaPct.toFixed(1)}%</td>
-        <td>${fmt.compact(c.volume)}</td>
-        <td>${fmt.compact(c.openInterest)}</td>
-        <td><span class="badge ${v.cls}">${c.score}</span></td>
-      </tr>`;
-    }).join('');
-    body.querySelectorAll('tr').forEach(tr => tr.addEventListener('click', () => {
-      const c = rows().find(x => `${x.type}-${x.expiry}-${x.strike}` === tr.dataset.id);
-      showDetail(c, all);
-    }));
-  }
-
-  document.querySelectorAll('#chain th').forEach(th => th.addEventListener('click', () => {
-    const k = th.dataset.k; if (!k) return;
-    if (sortK === k) sortDir *= -1; else { sortK = k; sortDir = k === 'strike' ? 1 : -1; }
-    renderChain();
-  }));
-  expTabs.addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b) return;
-    exp = b.dataset.exp; expTabs.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
-    renderChain();
-  });
-  document.getElementById('sideTabs').addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b) return;
-    side = b.dataset.side; document.getElementById('sideTabs').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
-    renderChain();
-  });
-
-  // Recommendations: top by score across all <=7DTE, prefer standouts
-  const ranked = [...all].sort((a, b) => b.score - a.score);
-  const top = ranked.slice(0, 6);
-  document.getElementById('recs').innerHTML = top.map(c => {
+function renderRecs() {
+  setHTML(recsEl, top.map(c => {
     const v = verdict(c.score);
     return `<div class="card rec">
       <div class="top">
@@ -181,99 +147,167 @@ if (!data || !data.contracts?.length) {
         <span>if 1σ→ <b class="mono up">${fmt.pct(c.retAtEM, 0)}</b></span>
       </div>
       <ul class="reasons" style="margin:4px 0 0;padding-left:16px">${c.reasons.slice(0, 3).map(r => `<li>${r}</li>`).join('')}</ul>
-      <button class="btn ghost" data-open="${c.type}-${c.expiry}-${c.strike}" style="margin-top:4px">Full synthesis →</button>
+      <button class="btn ghost" data-open="${idOf(c)}" style="margin-top:4px">Full synthesis →</button>
     </div>`;
-  }).join('');
-  document.querySelectorAll('#recs [data-open]').forEach(b => b.addEventListener('click', () => {
-    const c = all.find(x => `${x.type}-${x.expiry}-${x.strike}` === b.dataset.open);
-    showDetail(c, all); detailEl.scrollIntoView({ behavior: 'smooth' });
-  }));
-
-  function showDetail(c, universe) {
-    const v = verdict(c.score);
-    // Comparison peer: the top-ranked contract of the same type
-    const peer = [...universe].filter(x => x.type === c.type && !(x.strike === c.strike && x.expiry === c.expiry))
-      .sort((a, b) => b.score - a.score)[0];
-    detailEl.innerHTML = `
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="eyebrow">Contract synthesis</div>
-            <h2 style="margin-top:4px"><span class="tag ${c.type}">${c.type.toUpperCase()}</span> SPY $${fmt.usd(c.strike)} · ${c.expiry} <span class="muted">(${c.dte}d)</span></h2>
-          </div>
-          <div style="text-align:right"><span class="badge ${v.cls}">${v.txt} · ${c.score}/100</span>
-            ${c.standout ? '<div><span class="tag gold">★ Uniquely good</span></div>' : ''}</div>
-        </div>
-
-        <p style="font-size:14.5px;max-width:840px">${narrative(c)}</p>
-
-        <div class="synth" style="margin-top:8px">
-          <div>
-            <div class="eyebrow" style="margin-bottom:6px">The move it needs</div>
-            <div class="kv"><span>Breakeven at expiry</span><span class="mono">${fmt.money(c.breakeven)}</span></div>
-            <div class="kv"><span>Distance to breakeven</span><span class="mono ${fmt.cls(-c.absMovePctBE)}">${fmt.signed(c.movePctToBE)}% (${fmt.money(Math.abs(c.moveToBE))})</span></div>
-            <div class="kv"><span>1σ expected move (life)</span><span class="mono">±${fmt.pct(c.emPct, 2)} (${fmt.money(c.sigma$)})</span></div>
-            <div class="kv"><span>Move to ~2× premium</span><span class="mono">${c.retToDouble != null ? fmt.signed(c.retToDouble, 1) + '%' : '>12% / unlikely'}</span></div>
-            <div class="kv"><span>Return per +1% favorable</span><span class="mono up">${fmt.pct(c.retAt1pct, 0)}</span></div>
-            <div class="kv"><span>Return if 1σ move (by next session)</span><span class="mono up">${fmt.pct(c.retAtEM, 0)}</span></div>
-          </div>
-          <div>
-            <div class="eyebrow" style="margin-bottom:6px">How fast &amp; the greeks</div>
-            <div class="kv"><span>Prob. past breakeven (POP)</span><span class="mono">${Math.round(c.probBE)}%</span></div>
-            <div class="kv"><span>Prob. ITM (≈|Δ|)</span><span class="mono">${Math.round(c.probITM)}%</span></div>
-            <div class="kv"><span>Delta / Gamma</span><span class="mono">${c.delta.toFixed(3)} / ${c.gamma.toFixed(4)}</span></div>
-            <div class="kv"><span>Theta (decay)</span><span class="mono down">${fmt.money(c.thetaDollars)}/day (${c.thetaPct.toFixed(1)}%)</span></div>
-            <div class="kv"><span>Vega (per 1 vol pt)</span><span class="mono">${fmt.money(c.vega * 100)}</span></div>
-            <div class="kv"><span>Days until time-value gone</span><span class="mono">${c.daysToZeroExtrinsic != null ? c.daysToZeroExtrinsic.toFixed(1) + 'd' : '—'}</span></div>
-          </div>
-        </div>
-
-        <div class="synth" style="margin-top:16px">
-          <div>
-            <div class="eyebrow" style="margin-bottom:6px">Pricing &amp; liquidity</div>
-            <div class="kv"><span>Bid / Mid / Ask</span><span class="mono">${fmt.money(c.bid)} / ${fmt.money(c.mid)} / ${fmt.money(c.ask)}</span></div>
-            <div class="kv"><span>Spread</span><span class="mono">${c.spreadPct != null ? fmt.pct(c.spreadPct * 100, 1) : '—'}</span></div>
-            <div class="kv"><span>Intrinsic / Extrinsic</span><span class="mono">${fmt.money(c.intrinsic)} / ${fmt.money(c.extrinsic)}</span></div>
-            <div class="kv"><span>Implied volatility</span><span class="mono">${fmt.pct(c.iv * 100, 1)}</span></div>
-            <div class="kv"><span>Notional leverage</span><span class="mono">${c.leverage.toFixed(1)}x</span></div>
-            <div class="kv"><span>Volume / OI</span><span class="mono">${fmt.compact(c.volume)} / ${fmt.compact(c.openInterest)}</span></div>
-          </div>
-          <div>
-            <div class="eyebrow" style="margin-bottom:6px">Why this score</div>
-            <ul class="reasons" style="padding-left:16px;margin:0 0 12px">${c.reasons.map(r => `<li>${r}</li>`).join('')}</ul>
-            ${peer ? `<div class="eyebrow" style="margin-bottom:6px">How it compares</div>
-            <div class="note">${compare(c, peer)}</div>` : ''}
-          </div>
-        </div>
-      </div>`;
-  }
-
-  function narrative(c) {
-    const dirWord = c.type === 'call' ? 'rise' : 'fall';
-    const fast = c.thetaPct < -8 ? 'quickly — decay is heavy, so it needs to happen soon'
-      : c.thetaPct < -4 ? 'at a steady pace' : 'with time on its side';
-    const odds = c.probBE >= 55 ? 'The odds favor it' : c.probBE >= 40 ? 'It\'s roughly a coin-flip' : 'It\'s a lower-probability, higher-payoff bet';
-    const cushion = c.cushion > 0.15 ? `the 1σ move the market is pricing (±${fmt.pct(c.emPct, 1)}) comfortably clears that`
-      : c.cushion > 0 ? `that\'s right around the 1σ move being priced (±${fmt.pct(c.emPct, 1)})`
-      : `that\'s more than the ±${fmt.pct(c.emPct, 1)} the market is currently pricing, so it needs a surprise`;
-    return `This ${c.type} pays if SPY can ${dirWord} about <b>${c.absMovePctBE.toFixed(2)}%</b> to <b>${fmt.money(c.breakeven)}</b> — and ${cushion}. ` +
-      `${odds} (~${Math.round(c.probBE)}% by model). It needs to move <b>${fast}</b>: theta bleeds <b>${fmt.money(Math.abs(c.thetaDollars))}/day</b> (${Math.abs(c.thetaPct).toFixed(1)}% of premium). ` +
-      `At ~${c.leverage.toFixed(0)}x notional leverage, a +1% favorable move in SPY is roughly <b>${fmt.pct(c.retAt1pct, 0)}</b> on the premium.`;
-  }
-
-  function compare(c, peer) {
-    const bits = [];
-    bits.push(`vs the top ${peer.type} ($${fmt.usd(peer.strike)}, ${peer.dte}d, score ${peer.score}): `);
-    bits.push(c.absMovePctBE < peer.absMovePctBE ? 'needs a <b>smaller</b> move to break even' : 'needs a <b>larger</b> move');
-    bits.push(c.probBE > peer.probBE ? ', <b>higher</b> odds' : ', lower odds');
-    bits.push(c.retAtEM > peer.retAtEM ? ', but <b>more</b> upside on a 1σ move.' : ', with less upside on a 1σ move.');
-    return bits.join('');
-  }
-
-  renderChain();
-  // Auto-open the top standout (or top ranked) for immediate insight
-  showDetail(top[0], all);
+  }).join(''));
 }
+
+function showDetail(c) {
+  if (!c) return;
+  openId = idOf(c);
+  const v = verdict(c.score);
+  // Comparison peer: the top-ranked contract of the same type
+  const peer = all.filter(x => x.type === c.type && idOf(x) !== openId)
+    .sort((a, b) => b.score - a.score)[0];
+  setHTML(detailEl, `
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="eyebrow">Contract synthesis</div>
+          <h2 style="margin-top:4px"><span class="tag ${c.type}">${c.type.toUpperCase()}</span> SPY $${fmt.usd(c.strike)} · ${c.expiry} <span class="muted">(${c.dte}d)</span></h2>
+        </div>
+        <div style="text-align:right"><span class="badge ${v.cls}">${v.txt} · ${c.score}/100</span>
+          ${c.standout ? '<div><span class="tag gold">★ Uniquely good</span></div>' : ''}</div>
+      </div>
+
+      <p style="font-size:14.5px;max-width:840px">${narrative(c)}</p>
+
+      <div class="synth" style="margin-top:8px">
+        <div>
+          <div class="eyebrow" style="margin-bottom:6px">The move it needs</div>
+          <div class="kv"><span>Breakeven at expiry</span><span class="mono">${fmt.money(c.breakeven)}</span></div>
+          <div class="kv"><span>Distance to breakeven</span><span class="mono ${fmt.cls(-c.absMovePctBE)}">${fmt.signed(c.movePctToBE)}% (${fmt.money(Math.abs(c.moveToBE))})</span></div>
+          <div class="kv"><span>1σ expected move (life)</span><span class="mono">±${fmt.pct(c.emPct, 2)} (${fmt.money(c.sigma$)})</span></div>
+          <div class="kv"><span>Move to ~2× premium</span><span class="mono">${c.retToDouble != null ? fmt.signed(c.retToDouble, 1) + '%' : '>12% / unlikely'}</span></div>
+          <div class="kv"><span>Return per +1% favorable</span><span class="mono up">${fmt.pct(c.retAt1pct, 0)}</span></div>
+          <div class="kv"><span>Return if 1σ move (by next session)</span><span class="mono up">${fmt.pct(c.retAtEM, 0)}</span></div>
+        </div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:6px">How fast &amp; the greeks</div>
+          <div class="kv"><span>Prob. past breakeven (POP)</span><span class="mono">${Math.round(c.probBE)}%</span></div>
+          <div class="kv"><span>Prob. ITM (≈|Δ|)</span><span class="mono">${Math.round(c.probITM)}%</span></div>
+          <div class="kv"><span>Delta / Gamma</span><span class="mono">${c.delta.toFixed(3)} / ${c.gamma.toFixed(4)}</span></div>
+          <div class="kv"><span>Theta (decay)</span><span class="mono down">${fmt.money(c.thetaDollars)}/day (${c.thetaPct.toFixed(1)}%)</span></div>
+          <div class="kv"><span>Vega (per 1 vol pt)</span><span class="mono">${fmt.money(c.vega * 100)}</span></div>
+          <div class="kv"><span>Days until time-value gone</span><span class="mono">${c.daysToZeroExtrinsic != null ? c.daysToZeroExtrinsic.toFixed(1) + 'd' : '—'}</span></div>
+        </div>
+      </div>
+
+      <div class="synth" style="margin-top:16px">
+        <div>
+          <div class="eyebrow" style="margin-bottom:6px">Pricing &amp; liquidity</div>
+          <div class="kv"><span>Bid / Mid / Ask</span><span class="mono">${fmt.money(c.bid)} / ${fmt.money(c.mid)} / ${fmt.money(c.ask)}</span></div>
+          <div class="kv"><span>Spread</span><span class="mono">${c.spreadPct != null ? fmt.pct(c.spreadPct * 100, 1) : '—'}</span></div>
+          <div class="kv"><span>Intrinsic / Extrinsic</span><span class="mono">${fmt.money(c.intrinsic)} / ${fmt.money(c.extrinsic)}</span></div>
+          <div class="kv"><span>Implied volatility</span><span class="mono">${fmt.pct(c.iv * 100, 1)}</span></div>
+          <div class="kv"><span>Notional leverage</span><span class="mono">${c.leverage.toFixed(1)}x</span></div>
+          <div class="kv"><span>Volume / OI</span><span class="mono">${fmt.compact(c.volume)} / ${fmt.compact(c.openInterest)}</span></div>
+        </div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:6px">Why this score</div>
+          <ul class="reasons" style="padding-left:16px;margin:0 0 12px">${c.reasons.map(r => `<li>${r}</li>`).join('')}</ul>
+          ${peer ? `<div class="eyebrow" style="margin-bottom:6px">How it compares</div>
+          <div class="note">${compare(c, peer)}</div>` : ''}
+        </div>
+      </div>
+    </div>`);
+}
+
+function narrative(c) {
+  const dirWord = c.type === 'call' ? 'rise' : 'fall';
+  const fast = c.thetaPct < -8 ? 'quickly — decay is heavy, so it needs to happen soon'
+    : c.thetaPct < -4 ? 'at a steady pace' : 'with time on its side';
+  const odds = c.probBE >= 55 ? 'The odds favor it' : c.probBE >= 40 ? 'It\'s roughly a coin-flip' : 'It\'s a lower-probability, higher-payoff bet';
+  const cushion = c.cushion > 0.15 ? `the 1σ move the market is pricing (±${fmt.pct(c.emPct, 1)}) comfortably clears that`
+    : c.cushion > 0 ? `that\'s right around the 1σ move being priced (±${fmt.pct(c.emPct, 1)})`
+    : `that\'s more than the ±${fmt.pct(c.emPct, 1)} the market is currently pricing, so it needs a surprise`;
+  return `This ${c.type} pays if SPY can ${dirWord} about <b>${c.absMovePctBE.toFixed(2)}%</b> to <b>${fmt.money(c.breakeven)}</b> — and ${cushion}. ` +
+    `${odds} (~${Math.round(c.probBE)}% by model). It needs to move <b>${fast}</b>: theta bleeds <b>${fmt.money(Math.abs(c.thetaDollars))}/day</b> (${Math.abs(c.thetaPct).toFixed(1)}% of premium). ` +
+    `At ~${c.leverage.toFixed(0)}x notional leverage, a +1% favorable move in SPY is roughly <b>${fmt.pct(c.retAt1pct, 0)}</b> on the premium.`;
+}
+
+function compare(c, peer) {
+  const bits = [];
+  bits.push(`vs the top ${peer.type} ($${fmt.usd(peer.strike)}, ${peer.dte}d, score ${peer.score}): `);
+  bits.push(c.absMovePctBE < peer.absMovePctBE ? 'needs a <b>smaller</b> move to break even' : 'needs a <b>larger</b> move');
+  bits.push(c.probBE > peer.probBE ? ', <b>higher</b> odds' : ', lower odds');
+  bits.push(c.retAtEM > peer.retAtEM ? ', but <b>more</b> upside on a 1σ move.' : ', with less upside on a 1σ move.');
+  return bits.join('');
+}
+
+/* Recompute everything from a fresh snapshot, preserving view state. */
+function hydrate(data) {
+  const spot = data.spot;
+  const rf = data.riskFree ?? 0.043;
+  curAsOf = data.asOf;
+  setText(document.getElementById('spot'), fmt.money(spot));
+  setText(document.getElementById('asof'), fmt.when(data.asOf) + ' · ' + fmt.ago(data.asOf));
+
+  all = data.contracts
+    .filter(c => (c.dte ?? 99) <= (data.maxDTE ?? 7))
+    .map(c => { const d = derive(c, spot, rf); return { ...d, ...score(d) }; });
+
+  expiries = [...new Set(all.map(c => c.expiry))].sort();
+  if (!exp || !expiries.includes(exp)) exp = expiries[0];
+
+  top = [...all].sort((a, b) => b.score - a.score).slice(0, 6);
+
+  renderExpTabs();
+  renderChain();
+  renderRecs();
+
+  // Keep the open synthesis pinned to the same contract with fresh numbers;
+  // fall back to the top-ranked pick if it aged out of the chain.
+  const open = (openId && all.find(x => idOf(x) === openId)) || top[0];
+  showDetail(open);
+}
+
+async function tick() {
+  const data = await loadJSON('data/spy/options/latest.json');
+  if (!data || !data.contracts?.length || data.asOf === lastAsOf) return;
+  lastAsOf = data.asOf;
+  hydrate(data);
+}
+
+/* Interactions (bound once; delegation survives every re-render) */
+expTabs.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  exp = b.dataset.exp;
+  expTabs.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+  renderChain();
+});
+sideTabs.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  side = b.dataset.side;
+  sideTabs.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+  renderChain();
+});
+document.querySelectorAll('#chain th').forEach(th => th.addEventListener('click', () => {
+  const k = th.dataset.k; if (!k) return;
+  if (sortK === k) sortDir *= -1; else { sortK = k; sortDir = k === 'strike' ? 1 : -1; }
+  renderChain();
+}));
+chainBody.addEventListener('click', e => {
+  const tr = e.target.closest('tr[data-id]'); if (!tr) return;
+  const c = all.find(x => idOf(x) === tr.dataset.id);
+  if (c) showDetail(c);
+});
+recsEl.addEventListener('click', e => {
+  const b = e.target.closest('[data-open]'); if (!b) return;
+  const c = all.find(x => idOf(x) === b.dataset.open);
+  if (c) { showDetail(c); detailEl.scrollIntoView({ behavior: 'smooth' }); }
+});
+
+await tick();
+if (!all.length) {
+  setHTML(recsEl,
+    `<div class="card" style="grid-column:1/-1"><h3>No chain loaded yet</h3>
+     <p class="muted">The options snapshot job commits <span class="mono">data/spy/options/latest.json</span> on a schedule during market hours.
+     Once it runs, the full chain, Greeks, and recommendations appear here.</p></div>`);
+}
+autoRefresh(tick);
+// Text-only tick so "as of" stays honest between snapshots.
+setInterval(() => { if (curAsOf) setText(document.getElementById('asof'), fmt.when(curAsOf) + ' · ' + fmt.ago(curAsOf)); }, 30_000);
 
 mountFooter();
 </script>

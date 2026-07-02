@@ -61,7 +61,7 @@
 </main>
 
 <script type="module">
-import { loadJSON, fmt, mountNav, mountFooter, initTheme, gauge } from '../assets/js/app.js';
+import { loadJSON, fmt, mountNav, mountFooter, initTheme, gauge, autoRefresh, setText, setHTML } from '../assets/js/app.js';
 import { mountTimeframeChart, mountTechnicals } from '../assets/js/charts.js';
 import { renderBrief } from '../assets/js/research.js';
 
@@ -72,14 +72,17 @@ const TV = 'AMEX:SPY';
 mountTimeframeChart('tfTabs', 'tvChart', TV, 'D');
 mountTechnicals('tvTech', TV, '1D');
 
-// Quote
-const q = await loadJSON('data/spy/quote/latest.json');
-if (q) {
-  document.getElementById('heroPrice').textContent = fmt.money(q.price);
+/* All data painting is idempotent and timestamp-guarded: repeated calls with
+   unchanged data touch nothing, so background refreshes are invisible. */
+let lastQuote = null, lastResearch = null, curQ = null;
+
+function paintQuote(q) {
+  curQ = q;
+  setText(document.getElementById('heroPrice'), fmt.money(q.price));
   const c = q.changePct ?? 0;
-  document.getElementById('heroChg').innerHTML =
+  setHTML(document.getElementById('heroChg'),
     `<span class="chip ${fmt.cls(c)}">${fmt.arrow(c)} ${fmt.signed(q.change)} (${fmt.pct(c)})</span>
-     <div class="note" style="margin-top:6px">as of ${fmt.ago(q.asOf)}</div>`;
+     <div class="note" style="margin-top:6px">as of <span id="qAgo">${fmt.ago(q.asOf)}</span> · auto-updates</div>`);
   const stats = [
     ['Open', fmt.money(q.open)], ['Prev close', fmt.money(q.prevClose)],
     ['Day range', `${fmt.usd(q.dayLow)}–${fmt.usd(q.dayHigh)}`], ['Volume', fmt.compact(q.volume)],
@@ -88,15 +91,14 @@ if (q) {
     ['ATR (14d)', q.atr ? fmt.money(q.atr) : '—'],
     ['Implied move / day', q.dailyMovePct ? '±' + fmt.pct(q.dailyMovePct) : '—']
   ];
-  document.getElementById('heroStats').innerHTML = stats.map(([k, v]) =>
-    `<div class="stat card pad-sm"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+  setHTML(document.getElementById('heroStats'), stats.map(([k, v]) =>
+    `<div class="stat card pad-sm"><span class="k">${k}</span><span class="v">${v}</span></div>`).join(''));
 }
 
-// Volatility box (reads research doc for regime; falls back to quote)
-const r = await loadJSON('data/spy/research/latest.json');
-const vol = r?.volatility || {};
-const em = r?.expectedMove || {};
-document.getElementById('volBox').innerHTML = `
+function paintVol(r, q) {
+  const vol = r?.volatility || {};
+  const em = r?.expectedMove || {};
+  setHTML(document.getElementById('volBox'), `
   <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
     <div style="text-align:center;flex:0 0 auto">${gauge(vol.score ?? 40, { label: (vol.regime || 'REGIME').toUpperCase() })}</div>
     <div style="flex:1;min-width:180px;display:flex;flex-direction:column;gap:10px">
@@ -106,9 +108,26 @@ document.getElementById('volBox').innerHTML = `
       <div class="stat"><span class="k">IV rank</span><span class="v">${vol.ivRank ?? '—'}</span><span class="sub">where current IV sits vs its 1y range</span></div>
     </div>
   </div>
-  <p class="note" style="margin-top:12px">Higher regime = bigger, faster swings — options gain value but decay and whipsaw risk rise. Size accordingly.</p>`;
+  <p class="note" style="margin-top:12px">Higher regime = bigger, faster swings — options gain value but decay and whipsaw risk rise. Size accordingly.</p>`);
+}
 
-renderBrief(document.getElementById('research'), r);
+async function tick() {
+  const [q, r] = await Promise.all([
+    loadJSON('data/spy/quote/latest.json'),
+    loadJSON('data/spy/research/latest.json')
+  ]);
+  if (q && q.asOf !== lastQuote) { lastQuote = q.asOf; paintQuote(q); }
+  if (r && (r.generatedAt || r.date) !== lastResearch) {
+    lastResearch = r.generatedAt || r.date;
+    paintVol(r, q || curQ);
+    renderBrief(document.getElementById('research'), r);
+  }
+}
+
+await tick();
+autoRefresh(tick);
+// Keep the "as of Xm ago" label honest between data changes (text-only tick).
+setInterval(() => { if (curQ) setText(document.getElementById('qAgo'), fmt.ago(curQ.asOf)); }, 30_000);
 
 mountFooter();
 </script>

@@ -51,7 +51,7 @@
 </main>
 
 <script type="module">
-import { BASE, loadJSON, fmt, mountNav, mountFooter, initTheme, sparkline } from './assets/js/app.js';
+import { BASE, loadJSON, fmt, mountNav, mountFooter, initTheme, sparkline, autoRefresh, setHTML } from './assets/js/app.js';
 initTheme();
 mountNav('home');
 
@@ -69,10 +69,12 @@ function chg(q) {
 }
 
 const featured = (reg?.symbols || []).find(s => s.featured);
-if (featured) {
+
+async function paintFeatured() {
+  if (!featured) return;
   const q = await quoteFor(featured);
   const c = chg(q);
-  document.getElementById('featured').innerHTML = `
+  setHTML(document.getElementById('featured'), `
     <a class="card" href="${BASE}/${featured.id}/" style="display:block">
       <div class="card-head">
         <span class="tag gold">Featured</span>
@@ -98,21 +100,22 @@ if (featured) {
         <span class="btn ghost">⛓ Options ≤${featured.maxDTE}d</span>
         <span class="btn ghost">📰 Morning brief</span>
       </div>
-    </a>`;
+    </a>`);
 }
 
 // Catalog grouped by category
-const cats = reg?.categories || [];
-const out = [];
-for (const cat of cats) {
-  const syms = (reg.symbols || []).filter(s => s.category === cat.id);
-  if (!syms.length) continue;
-  const cards = [];
-  for (const s of syms) {
-    const q = s.status === 'live' ? await quoteFor(s) : null;
-    const c = chg(q);
-    const planned = s.status !== 'live';
-    cards.push(`
+async function paintCatalog() {
+  const cats = reg?.categories || [];
+  const out = [];
+  for (const cat of cats) {
+    const syms = (reg?.symbols || []).filter(s => s.category === cat.id);
+    if (!syms.length) continue;
+    const cards = [];
+    for (const s of syms) {
+      const q = s.status === 'live' ? await quoteFor(s) : null;
+      const c = chg(q);
+      const planned = s.status !== 'live';
+      cards.push(`
       <a class="card sym-card ${planned ? '' : ''}" href="${planned ? '#' : BASE + '/' + s.id + '/'}" ${planned ? 'onclick="return false" style="opacity:.6;cursor:not-allowed"' : ''}>
         <div class="row">
           <div><div class="name">${s.symbol}</div><div class="cat">${cat.label}${planned ? ' · soon' : ''}</div></div>
@@ -124,10 +127,16 @@ for (const cat of cats) {
           ${s.options ? `<span class="tag gold">options ≤${s.maxDTE}d</span>` : '<span class="tag info">spot</span>'}
         </div>
       </a>`);
+    }
+    out.push(`<div style="margin:10px 0 6px" class="eyebrow">${cat.label}</div><div class="grid cols-3">${cards.join('')}</div>`);
   }
-  out.push(`<div style="margin:10px 0 6px" class="eyebrow">${cat.label}</div><div class="grid cols-3">${cards.join('')}</div>`);
+  // setHTML no-ops when nothing changed, so refreshes never flicker.
+  setHTML(document.getElementById('catalog'), out.join('<div class="divider"></div>'));
 }
-document.getElementById('catalog').innerHTML = out.join('<div class="divider"></div>');
+
+async function tick() { await Promise.all([paintFeatured(), paintCatalog()]); }
+await tick();
+autoRefresh(tick);
 
 mountFooter();
 </script>
