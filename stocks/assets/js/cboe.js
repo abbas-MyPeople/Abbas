@@ -9,6 +9,25 @@
 
 const CDN = 'https://cdn.cboe.com/api/global/delayed_quotes';
 
+/* Fetch JSON with a hard timeout; if the direct call fails (CORS, network),
+   retry once through a keyless CORS relay. Cache-busted per minute. */
+async function get(url, ms) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), ms);
+  try {
+    const r = await fetch(url, { cache: 'no-store', signal: ctl.signal });
+    if (!r.ok) throw new Error('http ' + r.status);
+    return await r.json();
+  } finally { clearTimeout(t); }
+}
+async function getJSON(path) {
+  const url = `${CDN}/${path}?_=${Math.floor(Date.now() / 60000)}`;
+  try { return await get(url, 7000); }
+  catch (e) {
+    return await get('https://api.allorigins.win/raw?url=' + encodeURIComponent(url), 10000);
+  }
+}
+
 /* Cboe stamps ET wall-clock strings; convert to a real UTC instant so
    fmt.ago() math is honest. */
 function etOffsetMs() {
@@ -39,9 +58,7 @@ function parseOcc(sym) {
 
 /* Full live pull: quote + near-dated chain in our snapshot schema. */
 export async function fetchLiveMarket(symbol = 'SPY', maxDTE = 7) {
-  const res = await fetch(`${CDN}/options/${symbol}.json`, { cache: 'no-store' });
-  if (!res.ok) throw new Error('cboe ' + res.status);
-  const j = await res.json();
+  const j = await getJSON(`options/${symbol}.json`);
   const d = j.data || {};
   const spot = d.current_price ?? d.close;
   if (!spot) throw new Error('cboe: no price');
@@ -81,8 +98,6 @@ export async function fetchLiveQuote(symbol = 'SPY') {
 }
 
 export async function fetchLiveVIX() {
-  const res = await fetch(`${CDN}/quotes/_VIX.json`, { cache: 'no-store' });
-  if (!res.ok) throw new Error('vix ' + res.status);
-  const d = (await res.json()).data || {};
+  const d = (await getJSON('quotes/_VIX.json')).data || {};
   return { vix: d.current_price ?? d.close, vixChg: d.price_change };
 }
