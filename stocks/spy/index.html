@@ -42,6 +42,9 @@
     </div>
   </section>
 
+  <!-- Structure & levels -->
+  <section class="section" id="structure"></section>
+
   <!-- Technicals + context -->
   <section class="section">
     <div class="grid cols-2">
@@ -64,7 +67,8 @@
 import { loadJSON, fmt, mountNav, mountFooter, initTheme, gauge, autoRefresh, setText, setHTML } from '../assets/js/app.js';
 import { mountTimeframeChart, mountTechnicals } from '../assets/js/charts.js';
 import { renderBrief } from '../assets/js/research.js';
-import { fetchLiveQuote, fetchLiveVIX, sourceLabel } from '../assets/js/cboe.js';
+import { fetchLiveQuote, fetchLiveVIX, fetchRealtimeQuote, sourceLabel } from '../assets/js/cboe.js';
+import { analyzeAll, renderStructurePanel, TF_SETS } from '../assets/js/levels.js';
 
 initTheme();
 mountNav('spy');
@@ -141,13 +145,31 @@ async function tick() {
     fetchLiveQuote('SPY').catch(() => null),
     fetchLiveVIX().catch(() => null)
   ]);
+  if (liveVix?.vix != null) lastVixCache = liveVix.vix;
   if (liveQ) {
     paintIfNewer({ ...(snapQCache || {}), ...liveQ, vix: liveVix?.vix ?? snapQCache?.vix });
   }
 }
 
+// FAST tick — real-time price only, every 5s while the market is open.
+let lastVixCache = null;
+async function fastTick() {
+  const liveQ = await fetchRealtimeQuote('SPY').catch(() => null);
+  if (liveQ) paintIfNewer({ ...(snapQCache || {}), ...liveQ, vix: lastVixCache ?? snapQCache?.vix });
+}
+
+// Structure & levels — heavier, every ~5 min.
+async function structureTick() {
+  const analyses = await analyzeAll('SPY', curQ?.price, TF_SETS);
+  if (analyses.some(a => !a.failed)) renderStructurePanel(document.getElementById('structure'), analyses);
+}
+
 await tick();
-autoRefresh(tick);
+lastVixCache = curQ?.vix ?? null;
+structureTick();
+autoRefresh(tick);                                                      // full refresh: 60s open
+autoRefresh(fastTick, { openMs: 5_000, extMs: 15_000, closedMs: 120_000 }); // price: 5s open
+autoRefresh(structureTick, { openMs: 300_000, extMs: 600_000, closedMs: 1_800_000 });
 // Keep the "as of Xm ago" label honest between data changes (text-only tick).
 setInterval(() => { if (curQ) setText(document.getElementById('qAgo'), fmt.ago(curQ.asOf)); }, 30_000);
 

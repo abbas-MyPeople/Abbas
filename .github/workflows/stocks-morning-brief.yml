@@ -6,6 +6,12 @@ name: Stocks · morning research brief (SPY)
 
 on:
   workflow_dispatch:
+  # Push trigger = on-demand regeneration lever (edit/touch the script on
+  # main). No-ops gracefully when the API key lacks credits.
+  push:
+    branches: [main]
+    paths:
+      - 'stocks/scripts/morning_research.py'
   schedule:
     # 12:00 UTC ≈ 8:00 AM ET (EDT), weekdays — ~90 min before the open.
     - cron: '0 12 * * 1-5'

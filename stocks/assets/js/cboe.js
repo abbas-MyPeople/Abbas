@@ -25,9 +25,10 @@ async function get(url, ms) {
   } finally { clearTimeout(t); }
 }
 
-/* Direct → corsproxy.io → allorigins. Cache-busted per minute. */
-async function getAny(url) {
-  const busted = url + (url.includes('?') ? '&' : '?') + '_=' + Math.floor(Date.now() / 60000);
+/* Direct → corsproxy.io → allorigins. bustMs controls cache granularity
+   (5s for the real-time price, 60s for heavier payloads). */
+export async function getAny(url, bustMs = 60000) {
+  const busted = url + (url.includes('?') ? '&' : '?') + '_=' + Math.floor(Date.now() / bustMs);
   try { return await get(busted, 6000); } catch (e) { /* next tier */ }
   try { return await get('https://corsproxy.io/?url=' + encodeURIComponent(busted), 8000); } catch (e) { /* next */ }
   return await get('https://api.allorigins.win/raw?url=' + encodeURIComponent(busted), 9000);
@@ -59,7 +60,7 @@ function etToday() {
 
 /* ---------- Tier 1: real-time quote (Yahoo) ---------- */
 export async function fetchRealtimeQuote(symbol = 'SPY') {
-  const j = await getAny(`${YAHOO}/${encodeURIComponent(symbol)}?interval=1m&range=1d&includePrePost=false`);
+  const j = await getAny(`${YAHOO}/${encodeURIComponent(symbol)}?interval=1m&range=1d&includePrePost=false`, 2500);
   const r = j.chart?.result?.[0];
   const m = r?.meta || {};
   const price = m.regularMarketPrice;

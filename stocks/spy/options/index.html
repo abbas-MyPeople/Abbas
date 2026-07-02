@@ -51,6 +51,10 @@
             <button data-side="call" class="active">Calls</button>
             <button data-side="put">Puts</button>
           </div>
+          <div class="tabs" id="liqTabs" title="Liquid = volume ≥ 100 or open interest ≥ 500, and a sane spread">
+            <button data-liq="1" class="active">Liquid only</button>
+            <button data-liq="0">All</button>
+          </div>
         </div>
         <span class="hint">click a strike for full synthesis</span>
       </div>
@@ -92,13 +96,17 @@ const recsEl = document.getElementById('recs');
 /* View state survives every background refresh: your selected expiry, side,
    sort, and open contract stay put — only the numbers inside update. */
 let all = [], expiries = [], top = [];
-let side = 'call', exp = null, sortK = 'strike', sortDir = 1;
+let side = 'call', exp = null, sortK = 'strike', sortDir = 1, liquidOnly = true;
 let openId = null, lastAsOf = null, curAsOf = null, curSource = '';
+let lastChain = null, lastLiveSpot = null;
 
 const idOf = (c) => `${c.type}-${c.expiry}-${c.strike}`;
+const isLiquid = (c) => ((c.volume ?? 0) >= 100 || (c.openInterest ?? 0) >= 500)
+  && (c.spreadPct == null || c.spreadPct <= 0.35) && (c.mid ?? 0) > 0.01;
+const pool = () => liquidOnly ? all.filter(isLiquid) : all;
 
 function rows() {
-  return all.filter(c => c.expiry === exp && c.type === side)
+  return pool().filter(c => c.expiry === exp && c.type === side)
     .sort((a, b) => (a[sortK] - b[sortK]) * sortDir);
 }
 
@@ -256,7 +264,10 @@ function hydrate(data, liveSpot) {
   expiries = [...new Set(all.map(c => c.expiry))].sort();
   if (!exp || !expiries.includes(exp)) exp = expiries[0];
 
-  top = [...all].sort((a, b) => b.score - a.score).slice(0, 6);
+  // Recommendations only ever come from liquid contracts — an "amazing"
+  // strike you can't actually get filled on is not a recommendation.
+  top = all.filter(isLiquid).sort((a, b) => b.score - a.score).slice(0, 6);
+  if (!top.length) top = [...all].sort((a, b) => b.score - a.score).slice(0, 6);
 
   renderExpTabs();
   renderChain();
@@ -285,11 +296,27 @@ async function tick() {
   const liveSpot = rtRes.status === 'fulfilled' ? rtRes.value.price : null;
   if (!data || !data.contracts?.length) data = await loadJSON('data/spy/options/latest.json');
   if (!data || !data.contracts?.length) return;
+  lastChain = data;
+  if (liveSpot != null) lastLiveSpot = liveSpot;
   // Re-render when the chain advances OR the real-time spot moved.
-  const sig = data.asOf + '|' + (liveSpot != null ? liveSpot.toFixed(2) : 'x');
+  const sig = data.asOf + '|' + (lastLiveSpot != null ? lastLiveSpot.toFixed(2) : 'x');
   if (sig === lastAsOf) return;
   lastAsOf = sig;
-  hydrate(data, liveSpot);
+  hydrate(data, lastLiveSpot);
+}
+
+// FAST tick — real-time spot only, every 5s; re-derives the whole synthesis
+// against the fresh spot using the cached chain (premiums stay as-is).
+async function fastTick() {
+  if (!lastChain) return;
+  const rt = await fetchRealtimeQuote('SPY').catch(() => null);
+  if (rt?.price == null) return;
+  if (lastLiveSpot != null && Math.abs(rt.price - lastLiveSpot) < 0.01) return;
+  lastLiveSpot = rt.price;
+  const sig = lastChain.asOf + '|' + lastLiveSpot.toFixed(2);
+  if (sig === lastAsOf) return;
+  lastAsOf = sig;
+  hydrate(lastChain, lastLiveSpot);
 }
 
 /* Interactions (bound once; delegation survives every re-render) */
@@ -303,6 +330,12 @@ sideTabs.addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   side = b.dataset.side;
   sideTabs.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+  renderChain();
+});
+document.getElementById('liqTabs').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  liquidOnly = b.dataset.liq === '1';
+  document.getElementById('liqTabs').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
   renderChain();
 });
 document.querySelectorAll('#chain th').forEach(th => th.addEventListener('click', () => {
@@ -328,7 +361,8 @@ if (!all.length) {
      <p class="muted">The options snapshot job commits <span class="mono">data/spy/options/latest.json</span> on a schedule during market hours.
      Once it runs, the full chain, Greeks, and recommendations appear here.</p></div>`);
 }
-autoRefresh(tick);
+autoRefresh(tick);                                                       // chain: 60s open
+autoRefresh(fastTick, { openMs: 5_000, extMs: 15_000, closedMs: 120_000 }); // spot: 5s open
 // Text-only tick so "as of" stays honest between snapshots.
 setInterval(() => { if (curAsOf) setText(document.getElementById('asof'), fmt.when(curAsOf) + ' · ' + fmt.ago(curAsOf)); }, 30_000);
 
