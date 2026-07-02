@@ -68,8 +68,9 @@ When we turned AZ's methods on our own place, we found exactly what the average 
 > "before/after revenue" window on those two doesn't exist yet. The tactics that have run for a year+
 > (reviews, thank-you notes, tablet consolidation) already have real results, below.
 
-- **Reviews doubled from ~400 to 800+ in about a year — and every one has been five-star since the
-  system started.** (Flagship's strongest proof point.)
+- **4.6★ across 872 Google reviews** — roughly double the count a year ago (~400), with new reviews
+  running five-star since the review system went in. (Flagship's strongest proof point; Google count
+  verifiable live.)
 - **Tablet consolidation eliminated manual re-entry** and the lost/late/incorrect orders that came with
   it — 1+ year live.
 - Website AI-readability: **403-to-bots → fully crawlable** (verifiable now).

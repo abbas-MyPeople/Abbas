@@ -611,3 +611,7 @@ html[dir="rtl"] .voice__points li::before { left: auto; right: 0; }
 .bubble--agent { background: var(--accent); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
 .callcard__cap { color: #8a8275; font-size: 0.82rem; margin-top: 14px; font-style: italic; line-height: 1.5; }
 @media (max-width: 820px) { .voice__grid { grid-template-columns: 1fr; gap: 34px; } }
+
+/* proof bar responsive */
+@media (max-width: 760px) { .creds__inner { grid-template-columns: 1fr 1fr; gap: 22px; } }
+@media (max-width: 440px) { .creds__inner { grid-template-columns: 1fr; } }
