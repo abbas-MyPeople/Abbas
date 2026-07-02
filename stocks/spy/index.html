@@ -87,7 +87,8 @@ function paintQuote(q) {
   const c = q.changePct ?? 0;
   setHTML(document.getElementById('heroChg'),
     `<span class="chip ${fmt.cls(c)}">${fmt.arrow(c)} ${fmt.signed(q.change)} (${fmt.pct(c)})</span>
-     <div class="note" style="margin-top:6px">as of <span id="qAgo">${fmt.ago(q.asOf)}</span> · ${sourceLabel(q.source)} · auto-updates</div>`);
+     <div class="note" style="margin-top:6px">as of <span id="qAgo">${fmt.ago(q.asOf)}</span> · ${sourceLabel(q.source)} · auto-updates
+       ${(Date.now() - Date.parse(q.asOf)) > 180_000 ? '<span class="tag gold" title="No fresh data for over 3 minutes — feed tiers may be blocked; check console">⚠ STALE</span>' : ''}</div>`);
   const stats = [
     ['Open', fmt.money(q.open)], ['Prev close', fmt.money(q.prevClose)],
     ['Day range', `${fmt.usd(q.dayLow)}–${fmt.usd(q.dayHigh)}`], ['Volume', fmt.compact(q.volume)],

@@ -25,13 +25,26 @@ async function get(url, ms) {
   } finally { clearTimeout(t); }
 }
 
-/* Direct → corsproxy.io → allorigins. bustMs controls cache granularity
-   (5s for the real-time price, 60s for heavier payloads). */
+/* Direct → relay chain. Remembers which route worked last and tries it
+   first, so a dead tier can't stall every subsequent tick behind full
+   timeouts. bustMs controls cache granularity (2.5s for the real-time
+   price, 60s for heavier payloads). */
+const ROUTES = [
+  (u) => get(u, 4500),
+  (u) => get('https://corsproxy.io/?url=' + encodeURIComponent(u), 6000),
+  (u) => get('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u), 6000),
+  (u) => get('https://api.allorigins.win/raw?url=' + encodeURIComponent(u), 6000)
+];
+let goodRoute = 0;
 export async function getAny(url, bustMs = 60000) {
   const busted = url + (url.includes('?') ? '&' : '?') + '_=' + Math.floor(Date.now() / bustMs);
-  try { return await get(busted, 6000); } catch (e) { /* next tier */ }
-  try { return await get('https://corsproxy.io/?url=' + encodeURIComponent(busted), 8000); } catch (e) { /* next */ }
-  return await get('https://api.allorigins.win/raw?url=' + encodeURIComponent(busted), 9000);
+  const order = [goodRoute, ...ROUTES.map((_, i) => i).filter(i => i !== goodRoute)];
+  let lastErr;
+  for (const i of order) {
+    try { const r = await ROUTES[i](busted); goodRoute = i; return r; }
+    catch (e) { lastErr = e; }
+  }
+  throw lastErr;
 }
 
 /* Drop undefined values so tier-merging via spread never clobbers a real

@@ -92,7 +92,7 @@ def call_claude(prompt):
     body = json.dumps({
         "model": MODEL,
         "max_tokens": 4000,
-        "tools": [{"type": "web_search_20250305", "name": "web_search", "max_uses": 8}],
+        "tools": [{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
         "messages": [{"role": "user", "content": prompt}],
     }).encode()
     req = urllib.request.Request(
@@ -116,6 +116,15 @@ def main():
     if not API_KEY:
         print("ANTHROPIC_API_KEY not set — skipping research generation.", file=sys.stderr)
         sys.exit(0)  # don't fail CI; the page shows the last good brief
+
+    # COST GUARD: at most ONE paid API run per day (~$0.10-0.25/run, so the
+    # daily API spend stays well under $1 no matter how often the workflow
+    # is triggered). FORCE=1 (manual dispatch) overrides for a same-day redo.
+    existing = load(os.path.join(ROOT, "data", "spy", "research", "latest.json"), {})
+    today = now_et().strftime("%Y-%m-%d")
+    if os.environ.get("FORCE") != "1" and existing.get("date") == today and "watchWindows" in existing:
+        print(f"brief for {today} already exists — skipping (cost guard: max 1 run/day).")
+        sys.exit(0)
 
     quote = load(os.path.join(ROOT, "data", "spy", "quote", "latest.json"), {})
     spot = quote.get("price")

@@ -29,6 +29,9 @@ jobs:
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       STOCKS_RESEARCH_MODEL: claude-sonnet-5
+      # Manual "Run workflow" = intentional same-day redo; scheduled/push
+      # runs respect the once-per-day cost guard in the script.
+      FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
