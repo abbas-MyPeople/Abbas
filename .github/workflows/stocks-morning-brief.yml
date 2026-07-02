@@ -1,0 +1,46 @@
+name: Stocks · morning research brief (SPY)
+
+# Every trading morning before the open: refresh the market snapshot, then run
+# deep web research with Claude and commit a synthesized briefing the dashboard
+# renders. Requires repo secret ANTHROPIC_API_KEY.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 12:00 UTC ≈ 8:00 AM ET (EDT), weekdays — ~90 min before the open.
+    - cron: '0 12 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stocks-morning-brief
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      STOCKS_RESEARCH_MODEL: claude-sonnet-5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Refresh market snapshot (grounding numbers)
+        run: python stocks/scripts/fetch_market.py
+        continue-on-error: true
+      - name: Generate morning research brief
+        run: python stocks/scripts/morning_research.py
+      - name: Commit if changed
+        run: |
+          git config user.name  "stocks-bot"
+          git config user.email "stocks-bot@users.noreply.github.com"
+          git add stocks/data/spy/research stocks/data/spy/quote stocks/data/spy/options
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore(stocks): SPY morning research brief [skip ci]"
+            git push
+          fi

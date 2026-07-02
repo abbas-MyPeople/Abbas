@@ -1,0 +1,44 @@
+{
+  "updated": "2026-07-02",
+  "categories": [
+    { "id": "stocks", "label": "Stocks & ETFs", "desc": "Equities and index ETFs" },
+    { "id": "crypto", "label": "Crypto", "desc": "Digital assets" }
+  ],
+  "symbols": [
+    {
+      "id": "spy",
+      "symbol": "SPY",
+      "name": "SPDR S&P 500 ETF",
+      "category": "stocks",
+      "tvSymbol": "AMEX:SPY",
+      "options": true,
+      "maxDTE": 7,
+      "featured": true,
+      "blurb": "The S&P 500 tracker. Deep, liquid weekly options — the core of this dashboard. Rule: never hold SPY options past 7 days.",
+      "status": "live"
+    },
+    {
+      "id": "qqq",
+      "symbol": "QQQ",
+      "name": "Invesco QQQ (Nasdaq-100)",
+      "category": "stocks",
+      "tvSymbol": "NASDAQ:QQQ",
+      "options": true,
+      "maxDTE": 7,
+      "featured": false,
+      "blurb": "Nasdaq-100 tracker. Placeholder — clone the SPY module to activate.",
+      "status": "planned"
+    },
+    {
+      "id": "btc",
+      "symbol": "BTCUSD",
+      "name": "Bitcoin",
+      "category": "crypto",
+      "tvSymbol": "CRYPTO:BTCUSD",
+      "options": false,
+      "featured": false,
+      "blurb": "Bitcoin spot. 24/7 charts. Placeholder — clone the SPY module to activate.",
+      "status": "planned"
+    }
+  ]
+}

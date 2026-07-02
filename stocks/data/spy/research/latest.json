@@ -1,0 +1,120 @@
+{
+  "symbol": "SPY",
+  "session": "pre-open",
+  "date": "2026-07-02",
+  "generatedAt": "2026-07-02T08:30:00Z",
+  "headline": "SPY steadies near highs as hot labor data cools cut bets and Warsh stays quiet",
+  "summary": "SPY opens Q3's second session just below record territory after Tuesday's tech-led pullback. Stronger-than-expected labor data has pushed rate-cut odds out, new Fed Chair Kevin Warsh gave no policy signal at the ECB forum, and the whole tape is coiling ahead of Friday's jobs report and the start of bank earnings.",
+  "bias": {
+    "direction": "neutral",
+    "confidence": "med",
+    "note": "Constructive trend intact (above 50-day EMA, bullish flag) but buyers are unlikely to commit hard into a binary jobs print."
+  },
+  "volatility": {
+    "vix": 15.1,
+    "vixChg": 0.6,
+    "ivRank": 28,
+    "regime": "normal",
+    "score": 17
+  },
+  "expectedMove": {
+    "pct": 0.602,
+    "dollarLow": 741.71,
+    "dollarHigh": 750.69,
+    "basis": "options-implied (ATM IV)"
+  },
+  "keyLevels": {
+    "support": [742.0, 735.0],
+    "resistance": [752.0, 761.6],
+    "pivot": 746.2
+  },
+  "drivers": [
+    {
+      "title": "Labor data cools near-term rate-cut hopes",
+      "type": "bear",
+      "impact": "high",
+      "confidence": "high",
+      "inferred": false,
+      "detail": "JOLTS openings held at ~7.6M (above forecast) and the openings-to-unemployed ratio ticked up to 1.03, even as ADP showed a soft 98k private hires. Net read: labor isn't loosening fast enough to justify imminent cuts, trimming the cut path priced for this year.",
+      "tags": ["Rates", "Macro", "Labor"],
+      "source": "https://247wallst.com/investing/2026/07/01/stock-market-live-july-1-2026-sp-500-spy-lower-as-investors-wait-on-the-fed-and-fresh-economic-data/"
+    },
+    {
+      "title": "Warsh offers no policy signal at ECB forum",
+      "type": "macro",
+      "impact": "high",
+      "confidence": "high",
+      "inferred": false,
+      "detail": "New Fed Chair Kevin Warsh spoke alongside global central-bank leaders and deliberately withheld any steer on the rate path. Absence of a dovish nudge leaves the market leaning on data — and keeps a lid on multiple expansion here.",
+      "tags": ["Fed", "Warsh"],
+      "source": "https://www.schwab.com/learn/story/stock-market-update-open"
+    },
+    {
+      "title": "Friday's jobs report is the week's binary",
+      "type": "macro",
+      "impact": "high",
+      "confidence": "high",
+      "inferred": false,
+      "detail": "Positioning is tightening into the nonfarm payrolls print. A hot number extends the 'no cuts soon' narrative and pressures long-duration tech; a soft number revives cut hopes and the melt-up. Expect muted conviction until it clears.",
+      "tags": ["Jobs", "Catalyst"],
+      "source": "https://www.troweprice.com/personal-investing/resources/insights/global-markets-weekly-update.html"
+    },
+    {
+      "title": "Bank earnings on deck to open Q3 season",
+      "type": "bull",
+      "impact": "med",
+      "confidence": "med",
+      "inferred": false,
+      "detail": "FactSet pegs ~22% blended EPS growth for the quarter, and the setup favors banks — Goldman, Morgan Stanley and JPMorgan seen benefiting from a hot investment-banking backdrop. Strong prints could re-broaden leadership beyond mega-cap tech.",
+      "tags": ["Earnings", "Financials"],
+      "source": "https://invezz.com/news/2026/07/01/sp-500-index-voo-and-spy-outlook-for-july-2026-key-catalysts-to-watch/"
+    },
+    {
+      "title": "Tech relief rally unwound to start the quarter",
+      "type": "bear",
+      "impact": "med",
+      "confidence": "med",
+      "inferred": false,
+      "detail": "The Nasdaq's two-day bounce reversed as Q3 began, dragging SPY off record highs. Leadership is fragile and rotation-prone, so index direction is hostage to a handful of mega-caps.",
+      "tags": ["Tech", "Rotation"],
+      "source": "https://finance.yahoo.com/markets/live/stock-market-today-dow-sp-500-nasdaq-sink-as-jobs-report-fuels-fed-hike-bets-chip-stocks-sell-off-230134285.html"
+    },
+    {
+      "title": "Firm yields cap high-multiple growth (inferred)",
+      "type": "bear",
+      "impact": "med",
+      "confidence": "med",
+      "inferred": true,
+      "detail": "With cut odds fading, the short end and 10-year stay firm — a quiet headwind for long-duration tech valuations even on green days. Watch yields as the real driver behind index wobbles this week.",
+      "tags": ["Yields", "Duration"],
+      "source": "https://www.schwab.com/learn/story/stock-market-update-open"
+    },
+    {
+      "title": "Trend structure still constructive",
+      "type": "bull",
+      "impact": "med",
+      "confidence": "med",
+      "inferred": false,
+      "detail": "SPX is holding above its 50-day EMA with a bullish flag and rising RSI; a clean break over the ~7,621 record (≈ $761–762 SPY) opens a path toward the 8,000 (≈ $800 SPY) base case. Losing the flag is the bear trigger.",
+      "tags": ["Technicals", "Levels"],
+      "source": "https://invezz.com/news/2026/07/01/sp-500-index-voo-and-spy-outlook-for-july-2026-key-catalysts-to-watch/"
+    }
+  ],
+  "calendar": [
+    { "time": "Wed", "event": "Fed speakers / ECB forum follow-through", "importance": "med" },
+    { "time": "8:30 ET", "event": "Weekly jobless claims", "importance": "med" },
+    { "time": "Fri 8:30", "event": "Nonfarm payrolls (the week's key print)", "importance": "high" }
+  ],
+  "watch": [
+    "10-year yield — the real tell behind tech wobbles; firmer = pressure on multiples",
+    "$752 then the $761–762 record zone as resistance; $742 / $735 as support",
+    "Bank earnings tone (GS, MS, JPM) for whether leadership broadens",
+    "Any dovish drift from Warsh or Fed speakers ahead of Friday's payrolls"
+  ],
+  "sources": [
+    { "title": "24/7 Wall St. — market live", "url": "https://247wallst.com/investing/2026/07/01/stock-market-live-july-1-2026-sp-500-spy-lower-as-investors-wait-on-the-fed-and-fresh-economic-data/" },
+    { "title": "Schwab — market open", "url": "https://www.schwab.com/learn/story/stock-market-update-open" },
+    { "title": "Invezz — SPY July catalysts", "url": "https://invezz.com/news/2026/07/01/sp-500-index-voo-and-spy-outlook-for-july-2026-key-catalysts-to-watch/" },
+    { "title": "Yahoo Finance — markets live", "url": "https://finance.yahoo.com/markets/live/stock-market-today-dow-sp-500-nasdaq-sink-as-jobs-report-fuels-fed-hike-bets-chip-stocks-sell-off-230134285.html" }
+  ]
+}

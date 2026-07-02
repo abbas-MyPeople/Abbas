@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPY · Stocks Dashboard</title>
+<meta name="description" content="SPY desk — live multi-timeframe charts, volatility context, and the automated morning research brief.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+<body>
+<main class="wrap">
+  <!-- Hero -->
+  <section class="section">
+    <div class="card">
+      <div class="card-head">
+        <div class="eyebrow">SPDR S&amp;P 500 ETF · AMEX:SPY</div>
+        <a class="btn primary" href="options/">⛓ Options ≤7 DTE →</a>
+      </div>
+      <div class="quote-hero" id="hero">
+        <div><div class="sym">SPY</div><div class="muted" style="font-size:13px">SPDR S&amp;P 500 ETF Trust</div></div>
+        <div><div class="price" id="heroPrice">—</div></div>
+        <div id="heroChg"></div>
+      </div>
+      <div class="grid cols-4" id="heroStats" style="margin-top:18px"></div>
+    </div>
+  </section>
+
+  <!-- Charts -->
+  <section class="section">
+    <div class="card">
+      <div class="card-head">
+        <h2>Live tape</h2>
+        <div class="tabs" id="tfTabs"></div>
+      </div>
+      <div id="tvChart" class="tradingview-widget-container" style="height:520px;width:100%"></div>
+      <p class="note" style="margin-top:8px">Near-real-time, exchange-colored candles with VWAP + volume. Switch timeframe above:
+        <span class="mono">1m · 5m · 15m · 1h · 1D · 1W · 1Mo</span>. Rule of the desk: <strong>never hold SPY options beyond 7 days.</strong></p>
+    </div>
+  </section>
+
+  <!-- Technicals + context -->
+  <section class="section">
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="card-head"><h3>Technical read (multi-timeframe)</h3><span class="hint">TradingView aggregate</span></div>
+        <div id="tvTech" class="tradingview-widget-container"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Volatility &amp; movement</h3><span class="hint">how fast, how far</span></div>
+        <div id="volBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Morning brief -->
+  <section class="section" id="research"></section>
+</main>
+
+<script type="module">
+import { loadJSON, fmt, mountNav, mountFooter, initTheme, gauge } from '../assets/js/app.js';
+import { mountTimeframeChart, mountTechnicals } from '../assets/js/charts.js';
+import { renderBrief } from '../assets/js/research.js';
+
+initTheme();
+mountNav('spy');
+
+const TV = 'AMEX:SPY';
+mountTimeframeChart('tfTabs', 'tvChart', TV, 'D');
+mountTechnicals('tvTech', TV, '1D');
+
+// Quote
+const q = await loadJSON('data/spy/quote/latest.json');
+if (q) {
+  document.getElementById('heroPrice').textContent = fmt.money(q.price);
+  const c = q.changePct ?? 0;
+  document.getElementById('heroChg').innerHTML =
+    `<span class="chip ${fmt.cls(c)}">${fmt.arrow(c)} ${fmt.signed(q.change)} (${fmt.pct(c)})</span>
+     <div class="note" style="margin-top:6px">as of ${fmt.ago(q.asOf)}</div>`;
+  const stats = [
+    ['Open', fmt.money(q.open)], ['Prev close', fmt.money(q.prevClose)],
+    ['Day range', `${fmt.usd(q.dayLow)}–${fmt.usd(q.dayHigh)}`], ['Volume', fmt.compact(q.volume)],
+    ['52w range', q.week52Low ? `${fmt.usd(q.week52Low)}–${fmt.usd(q.week52High)}` : '—'],
+    ['VIX', q.vix ? fmt.usd(q.vix, 1) : '—'],
+    ['ATR (14d)', q.atr ? fmt.money(q.atr) : '—'],
+    ['Implied move / day', q.dailyMovePct ? '±' + fmt.pct(q.dailyMovePct) : '—']
+  ];
+  document.getElementById('heroStats').innerHTML = stats.map(([k, v]) =>
+    `<div class="stat card pad-sm"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+}
+
+// Volatility box (reads research doc for regime; falls back to quote)
+const r = await loadJSON('data/spy/research/latest.json');
+const vol = r?.volatility || {};
+const em = r?.expectedMove || {};
+document.getElementById('volBox').innerHTML = `
+  <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+    <div style="text-align:center;flex:0 0 auto">${gauge(vol.score ?? 40, { label: (vol.regime || 'REGIME').toUpperCase() })}</div>
+    <div style="flex:1;min-width:180px;display:flex;flex-direction:column;gap:10px">
+      <div class="stat"><span class="k">Expected move today</span><span class="v">±${fmt.pct(em.pct ?? q?.dailyMovePct ?? 0)}</span>
+        <span class="sub">${em.dollarLow != null ? fmt.money(em.dollarLow) + ' – ' + fmt.money(em.dollarHigh) : '1σ session band'}</span></div>
+      <div class="stat"><span class="k">VIX</span><span class="v">${fmt.usd(vol.vix ?? q?.vix, 1)} <span class="${fmt.cls(vol.vixChg)}" style="font-size:13px">${vol.vixChg != null ? fmt.signed(vol.vixChg, 1) : ''}</span></span></div>
+      <div class="stat"><span class="k">IV rank</span><span class="v">${vol.ivRank ?? '—'}</span><span class="sub">where current IV sits vs its 1y range</span></div>
+    </div>
+  </div>
+  <p class="note" style="margin-top:12px">Higher regime = bigger, faster swings — options gain value but decay and whipsaw risk rise. Size accordingly.</p>`;
+
+renderBrief(document.getElementById('research'), r);
+
+mountFooter();
+</script>
+</body>
+</html>
