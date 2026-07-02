@@ -50,6 +50,70 @@
     return parts.length ? parts.join(' · ') : 'direct / none';
   };
 
+  /* ============ ANALYTICS: GA4 + granular auto-tracking ============ */
+  /* Mirrors the restaurant site's GA4 pattern, extended to auto-capture every click,
+     section view, and conversion so we see what people see and click — no hand-tagging.
+     TODO(owner): create a GA4 property for azrestaurantpartners.com and paste its
+     Measurement ID below. Until then this no-ops safely (nothing is sent). */
+  const GA4_ID = ''; // e.g. 'G-XXXXXXXXXX'
+  (() => {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    if (GA4_ID && GA4_ID.indexOf('G-') === 0) {
+      const s = document.createElement('script');
+      s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', GA4_ID, { transport_type: 'beacon' });
+    }
+  })();
+  const attrParams = () => {
+    const p = {};
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','referrer','landing'].forEach((k) => { if (ATTR[k]) p[k] = ATTR[k]; });
+    return p;
+  };
+  const track = (name, params) => {
+    try { if (typeof gtag === 'function') gtag('event', name, Object.assign({ page: location.pathname }, attrParams(), params || {})); } catch (e) {}
+  };
+  window.azTrack = track;
+  const sectionOf = (el) => { const s = el.closest && el.closest('section[id]'); return (s && s.id) || (el.closest('[id]') && el.closest('[id]').id) || ''; };
+
+  // Named conversions: any element with data-track="event" (+ data-track-* params)
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('[data-track]'); if (!el) return;
+    const params = {};
+    for (const a of el.attributes) if (a.name.indexOf('data-track-') === 0 && a.name !== 'data-track') params[a.name.slice(11).replace(/-/g, '_')] = a.value;
+    track(el.getAttribute('data-track'), params);
+  }, true);
+
+  // Auto-capture: every link/button click, granularly — no markup required
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('a, button'); if (!el || el.hasAttribute('data-track')) return;
+    const href = el.getAttribute('href') || '';
+    let name = 'click';
+    if (/^tel:/i.test(href)) name = 'call_click';
+    else if (/^mailto:/i.test(href)) name = 'email_click';
+    else if (/wa\.me|whatsapp/i.test(href)) name = 'whatsapp_click';
+    else if (/\.pdf($|\?)/i.test(href)) name = 'pdf_download';
+    else if (/^https?:/i.test(href) && href.indexOf(location.host) === -1) name = 'outbound_click';
+    track(name, {
+      text: (el.textContent || el.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ').slice(0, 60),
+      href: href.slice(0, 120),
+      section: sectionOf(el),
+    });
+  }, true);
+
+  // Section visibility: how far people get and what they actually see
+  (() => {
+    const secs = document.querySelectorAll('main section[id], section[id]');
+    if (!secs.length || !('IntersectionObserver' in window)) return;
+    const seen = new Set();
+    const so = new IntersectionObserver((ents) => ents.forEach((en) => {
+      if (en.isIntersecting && !seen.has(en.target.id)) { seen.add(en.target.id); track('section_view', { section: en.target.id }); }
+    }), { threshold: 0.4 });
+    secs.forEach((s) => so.observe(s));
+  })();
+
   /* ---- Lead form → emails azoeb27@gmail.com via FormSubmit ---- */
   const form = document.getElementById('leadForm');
   if (form) {
@@ -82,6 +146,7 @@
         ok.innerHTML = '<h3>Thank you — message sent.</h3>' +
           "<p>We'll personally reply to set up your free call, usually within a day.</p>";
         form.appendChild(ok);
+        track('lead_submit', { has_restaurant: !!form.restaurant.value.trim(), has_phone: !!form.phone.value.trim() });
       } catch (err) {
         btn.disabled = false; btn.textContent = original;
         note.classList.add('error');
@@ -411,6 +476,7 @@
             });
             const data = await res.json().catch(() => ({}));
             if (!res.ok || data.success === false || data.success === 'false') throw new Error('x');
+            track('finder_capture', { problem: PROBLEM_LABEL[problem], type: TYPE_LABEL[type], size: SIZE_LABEL[size], estimated_monthly_leak: estRange(problem, size) });
             captured = true; render();
           } catch (err) {
             lb.disabled = false; lb.textContent = 'Send my breakdown';
