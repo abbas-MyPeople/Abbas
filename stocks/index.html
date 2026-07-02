@@ -52,14 +52,21 @@
 
 <script type="module">
 import { BASE, loadJSON, fmt, mountNav, mountFooter, initTheme, sparkline, autoRefresh, setHTML } from './assets/js/app.js';
+import { fetchLiveQuote } from './assets/js/cboe.js';
 initTheme();
 mountNav('home');
 
 const reg = await loadJSON('data/registry.json');
 
-// Try to enrich each symbol with a quote snapshot (optional).
+// Try to enrich each symbol with a quote: live feed first, committed
+// snapshot as fallback (and as the source of the sparkline).
 async function quoteFor(sym) {
-  return await loadJSON(`data/${sym.id}/quote/latest.json`);
+  const snap = await loadJSON(`data/${sym.id}/quote/latest.json`);
+  if (sym.status === 'live' && sym.category !== 'crypto') {
+    const live = await fetchLiveQuote(sym.symbol).catch(() => null);
+    if (live) return { ...(snap || {}), ...live };
+  }
+  return snap;
 }
 
 function chg(q) {

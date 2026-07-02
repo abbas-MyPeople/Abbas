@@ -64,6 +64,7 @@
 import { loadJSON, fmt, mountNav, mountFooter, initTheme, gauge, autoRefresh, setText, setHTML } from '../assets/js/app.js';
 import { mountTimeframeChart, mountTechnicals } from '../assets/js/charts.js';
 import { renderBrief } from '../assets/js/research.js';
+import { fetchLiveQuote, fetchLiveVIX } from '../assets/js/cboe.js';
 
 initTheme();
 mountNav('spy');
@@ -82,7 +83,7 @@ function paintQuote(q) {
   const c = q.changePct ?? 0;
   setHTML(document.getElementById('heroChg'),
     `<span class="chip ${fmt.cls(c)}">${fmt.arrow(c)} ${fmt.signed(q.change)} (${fmt.pct(c)})</span>
-     <div class="note" style="margin-top:6px">as of <span id="qAgo">${fmt.ago(q.asOf)}</span> · auto-updates</div>`);
+     <div class="note" style="margin-top:6px">as of <span id="qAgo">${fmt.ago(q.asOf)}</span> · ${q.source === 'live' ? 'live feed' : 'snapshot'} · auto-updates</div>`);
   const stats = [
     ['Open', fmt.money(q.open)], ['Prev close', fmt.money(q.prevClose)],
     ['Day range', `${fmt.usd(q.dayLow)}–${fmt.usd(q.dayHigh)}`], ['Volume', fmt.compact(q.volume)],
@@ -112,10 +113,15 @@ function paintVol(r, q) {
 }
 
 async function tick() {
-  const [q, r] = await Promise.all([
+  const [snapQ, r, liveQ, liveVix] = await Promise.all([
     loadJSON('data/spy/quote/latest.json'),
-    loadJSON('data/spy/research/latest.json')
+    loadJSON('data/spy/research/latest.json'),
+    fetchLiveQuote('SPY').catch(() => null),
+    fetchLiveVIX().catch(() => null)
   ]);
+  // Live price wins; committed snapshot fills what the live feed lacks
+  // (ATR, 52w range, sparkline). VIX live if reachable.
+  const q = liveQ ? { ...(snapQ || {}), ...liveQ, vix: liveVix?.vix ?? snapQ?.vix } : snapQ;
   if (q && q.asOf !== lastQuote) { lastQuote = q.asOf; paintQuote(q); }
   if (r && (r.generatedAt || r.date) !== lastResearch) {
     lastResearch = r.generatedAt || r.date;
