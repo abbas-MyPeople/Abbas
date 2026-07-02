@@ -6,6 +6,13 @@ name: Stocks · market snapshot (SPY)
 
 on:
   workflow_dispatch:
+  # Push trigger doubles as a manual refresh lever (and fires on merge),
+  # since GitHub's cron scheduler can lag new workflows by an hour or more.
+  push:
+    branches: [main]
+    paths:
+      - 'stocks/scripts/**'
+      - '.github/workflows/stocks-market-snapshot.yml'
   schedule:
     # Every 5 min, 13:30–20:00 UTC (≈ 9:30–16:00 ET), weekdays. GitHub cron
     # has jitter, so effective cadence is ~5–10 min; the pages poll the

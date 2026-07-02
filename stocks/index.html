@@ -97,7 +97,7 @@ async function paintFeatured() {
         </div>
         <div>
           <span class="chip ${c.cls}">${fmt.arrow(c.pct)} ${q ? fmt.signed(q.change) : ''} (${c.txt})</span>
-          <div class="note" style="margin-top:6px">${q ? 'as of ' + fmt.ago(q.asOf) : 'quote loads after first snapshot'}</div>
+          <div class="note" style="margin-top:6px">${q ? 'as of ' + fmt.ago(q.asOf) + ' · ' + (q.source === 'live' ? 'live feed' : 'snapshot') : 'quote loads after first snapshot'}</div>
         </div>
         <div style="flex:1;min-width:180px">${q?.spark ? sparkline(q.spark) : ''}</div>
       </div>
