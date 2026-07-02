@@ -64,7 +64,7 @@
 import { loadJSON, fmt, mountNav, mountFooter, initTheme, gauge, autoRefresh, setText, setHTML } from '../assets/js/app.js';
 import { mountTimeframeChart, mountTechnicals } from '../assets/js/charts.js';
 import { renderBrief } from '../assets/js/research.js';
-import { fetchLiveQuote, fetchLiveVIX } from '../assets/js/cboe.js';
+import { fetchLiveQuote, fetchLiveVIX, sourceLabel } from '../assets/js/cboe.js';
 
 initTheme();
 mountNav('spy');
@@ -83,7 +83,7 @@ function paintQuote(q) {
   const c = q.changePct ?? 0;
   setHTML(document.getElementById('heroChg'),
     `<span class="chip ${fmt.cls(c)}">${fmt.arrow(c)} ${fmt.signed(q.change)} (${fmt.pct(c)})</span>
-     <div class="note" style="margin-top:6px">as of <span id="qAgo">${fmt.ago(q.asOf)}</span> · ${q.source === 'live' ? 'live feed' : 'snapshot'} · auto-updates</div>`);
+     <div class="note" style="margin-top:6px">as of <span id="qAgo">${fmt.ago(q.asOf)}</span> · ${sourceLabel(q.source)} · auto-updates</div>`);
   const stats = [
     ['Open', fmt.money(q.open)], ['Prev close', fmt.money(q.prevClose)],
     ['Day range', `${fmt.usd(q.dayLow)}–${fmt.usd(q.dayHigh)}`], ['Volume', fmt.compact(q.volume)],
@@ -112,21 +112,37 @@ function paintVol(r, q) {
   <p class="note" style="margin-top:12px">Higher regime = bigger, faster swings — options gain value but decay and whipsaw risk rise. Size accordingly.</p>`);
 }
 
+let lastQuoteTs = 0;
+function paintIfNewer(q) {
+  const ts = Date.parse(q?.asOf || 0) || 0;
+  if (!q || ts < lastQuoteTs) return;   // never downgrade to older data
+  lastQuoteTs = ts;
+  if (q.asOf !== lastQuote) { lastQuote = q.asOf; paintQuote(q); }
+}
+
+let snapQCache = null;
 async function tick() {
-  const [snapQ, r, liveQ, liveVix] = await Promise.all([
+  // Phase 1 — instant: committed snapshot paints immediately.
+  const [snapQ, r] = await Promise.all([
     loadJSON('data/spy/quote/latest.json'),
-    loadJSON('data/spy/research/latest.json'),
+    loadJSON('data/spy/research/latest.json')
+  ]);
+  snapQCache = snapQ || snapQCache;
+  paintIfNewer(snapQ);
+  if (r && (r.generatedAt || r.date) !== lastResearch) {
+    lastResearch = r.generatedAt || r.date;
+    paintVol(r, curQ || snapQ);
+    renderBrief(document.getElementById('research'), r);
+  }
+
+  // Phase 2 — live upgrade: real-time price (falls to ~15m-delayed Cboe
+  // internally), merged over the snapshot for fields the feeds lack.
+  const [liveQ, liveVix] = await Promise.all([
     fetchLiveQuote('SPY').catch(() => null),
     fetchLiveVIX().catch(() => null)
   ]);
-  // Live price wins; committed snapshot fills what the live feed lacks
-  // (ATR, 52w range, sparkline). VIX live if reachable.
-  const q = liveQ ? { ...(snapQ || {}), ...liveQ, vix: liveVix?.vix ?? snapQ?.vix } : snapQ;
-  if (q && q.asOf !== lastQuote) { lastQuote = q.asOf; paintQuote(q); }
-  if (r && (r.generatedAt || r.date) !== lastResearch) {
-    lastResearch = r.generatedAt || r.date;
-    paintVol(r, q || curQ);
-    renderBrief(document.getElementById('research'), r);
+  if (liveQ) {
+    paintIfNewer({ ...(snapQCache || {}), ...liveQ, vix: liveVix?.vix ?? snapQCache?.vix });
   }
 }
 

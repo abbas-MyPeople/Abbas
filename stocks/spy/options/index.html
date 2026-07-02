@@ -78,7 +78,7 @@
 <script type="module">
 import { loadJSON, fmt, mountNav, mountFooter, initTheme, autoRefresh, setText, setHTML } from '../../assets/js/app.js';
 import { derive, score, verdict } from '../../assets/js/options.js';
-import { fetchLiveMarket } from '../../assets/js/cboe.js';
+import { fetchLiveMarket, fetchRealtimeQuote } from '../../assets/js/cboe.js';
 
 initTheme();
 mountNav('spy-options');
@@ -236,13 +236,17 @@ function compare(c, peer) {
   return bits.join('');
 }
 
-/* Recompute everything from a fresh snapshot, preserving view state. */
-function hydrate(data) {
-  const spot = data.spot;
+/* Recompute everything from a fresh snapshot, preserving view state.
+   If a real-time spot is available it drives ALL spot-dependent math
+   (breakeven distance, % move needed, moneyness) — premiums remain the
+   delayed chain's and are labeled as such. */
+function hydrate(data, liveSpot) {
+  const spot = liveSpot ?? data.spot;
   const rf = data.riskFree ?? 0.043;
   curAsOf = data.asOf;
-  curSource = data.source === 'live' ? 'live feed' : 'committed snapshot';
-  setText(document.getElementById('spot'), fmt.money(spot));
+  curSource = (liveSpot ? 'spot real-time · ' : 'spot delayed · ')
+    + (data.source === 'delayed' || data.source === 'live' ? 'premiums ~15 min delayed' : 'committed snapshot');
+  setText(document.getElementById('spot'), fmt.money(spot) + (liveSpot ? '' : ' (delayed)'));
   setText(document.getElementById('asof'), fmt.when(data.asOf) + ' · ' + fmt.ago(data.asOf) + ' · ' + curSource);
 
   all = data.contracts
@@ -265,14 +269,27 @@ function hydrate(data) {
 }
 
 async function tick() {
-  // Live feed first (fresh every tick, independent of CI); committed
-  // snapshot only as fallback. Both share the same schema.
-  let data = null;
-  try { data = (await fetchLiveMarket('SPY', 7)).chain; } catch (e) { /* fall back */ }
+  // Phase 1 — instant: committed snapshot renders the page immediately on
+  // first load; live tiers upgrade it in place below.
+  if (!all.length) {
+    const snap = await loadJSON('data/spy/options/latest.json');
+    if (snap?.contracts?.length) { lastAsOf = snap.asOf + '|x'; hydrate(snap, null); }
+  }
+  // Phase 2 — chain (delayed; free real-time options data doesn't exist) +
+  // real-time spot in parallel; committed snapshot only as last resort.
+  const [chainRes, rtRes] = await Promise.allSettled([
+    fetchLiveMarket('SPY', 7),
+    fetchRealtimeQuote('SPY')
+  ]);
+  let data = chainRes.status === 'fulfilled' ? chainRes.value.chain : null;
+  const liveSpot = rtRes.status === 'fulfilled' ? rtRes.value.price : null;
   if (!data || !data.contracts?.length) data = await loadJSON('data/spy/options/latest.json');
-  if (!data || !data.contracts?.length || data.asOf === lastAsOf) return;
-  lastAsOf = data.asOf;
-  hydrate(data);
+  if (!data || !data.contracts?.length) return;
+  // Re-render when the chain advances OR the real-time spot moved.
+  const sig = data.asOf + '|' + (liveSpot != null ? liveSpot.toFixed(2) : 'x');
+  if (sig === lastAsOf) return;
+  lastAsOf = sig;
+  hydrate(data, liveSpot);
 }
 
 /* Interactions (bound once; delegation survives every re-render) */
