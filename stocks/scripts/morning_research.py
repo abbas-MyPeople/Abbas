@@ -43,9 +43,18 @@ SCHEMA_HINT = """Return ONLY a JSON object (no prose, no code fence) with EXACTL
  "summary": "2-3 sentence synthesis of what is driving SPY right now",
  "bias": {"direction":"bullish|bearish|neutral","confidence":"high|med|low","note":"one line why"},
  "keyLevels": {"support":[num,num],"resistance":[num,num],"pivot":num},
+ "watchWindows": [
+   {"start":"9:30 ET","end":"10:30 ET","what":"what happens in this window and why it matters",
+    "expectVol":"high|med|low","direction":"bullish|bearish|two-way","probabilityPct":60}
+ ],
  "drivers": [
    {"title":"short title","type":"bull|bear|macro","impact":"high|med|low",
     "confidence":"high|med|low","inferred":false,
+    "direction":"bullish|bearish|neutral",
+    "probabilityPct": 65,
+    "magnitude":"±0.4%",
+    "pricedIn":"yes|partial|no",
+    "window":"10:00-11:00 ET or null if all-day",
     "detail":"1-2 sentences, concrete and specific with numbers where possible",
     "tags":["Fed","rates"],"source":"https://..."}
  ],
@@ -53,8 +62,12 @@ SCHEMA_HINT = """Return ONLY a JSON object (no prose, no code fence) with EXACTL
  "watch": ["specific thing to watch today", "..."],
  "sources": [{"title":"outlet","url":"https://..."}]
 }
-Provide 4-7 drivers. Mark inferred=true for second-order effects you reason to (not
-directly reported). Rank by CONFIDENT price impact. Be concrete; cite real sources."""
+Provide 4-7 drivers and 2-5 watchWindows covering the session start to close.
+For EVERY driver answer the trader's four questions: which direction does it push,
+how big (magnitude as a % move), how likely (probabilityPct that it actually moves
+SPY), and is it already priced in (yes/partial/no)? Mark inferred=true for
+second-order effects you reason to (not directly reported). Rank by CONFIDENT
+price impact. Be concrete; cite real sources."""
 
 def build_prompt(quote):
     d = now_et().strftime("%A, %B %d, %Y")
@@ -67,6 +80,10 @@ def build_prompt(quote):
         f"mega-cap earnings & moves, geopolitics, bond yields, oil, USD, and cross-asset signals. "
         f"Go deep — surface the obvious AND infer second-order effects. Synthesize into concise, "
         f"high-signal drivers a busy trader can absorb in seconds.\n\n"
+        f"Write it as an ACTION SHEET, not a news recap. The reader wants: watch out from THIS "
+        f"time to THIS time; THIS is happening; expect THIS much volatility; it is (not) priced "
+        f"in; it leans bullish/bearish with roughly X% probability of actually moving the market. "
+        f"Every claim should answer: direction, size, likelihood, priced-in?\n\n"
         f"Current context (grounding): SPY ~{spot}, VIX ~{vix}. Use real, current figures from your search.\n\n"
         + SCHEMA_HINT
     )

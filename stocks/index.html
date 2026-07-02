@@ -52,7 +52,8 @@
 
 <script type="module">
 import { BASE, loadJSON, fmt, mountNav, mountFooter, initTheme, sparkline, autoRefresh, setHTML } from './assets/js/app.js';
-import { fetchLiveQuote, sourceLabel } from './assets/js/cboe.js';
+import { fetchLiveQuote, fetchRealtimeQuote, sourceLabel } from './assets/js/cboe.js';
+import { analyzeAll, structureStrip, TF_SETS } from './assets/js/levels.js';
 initTheme();
 mountNav('home');
 
@@ -77,9 +78,13 @@ function chg(q) {
 
 const featured = (reg?.symbols || []).find(s => s.featured);
 
-async function paintFeatured() {
+let featStrip = '';   // compact structure summary (1h + 1D), refreshed ~5 min
+let featQCache = null;
+
+async function paintFeatured(qOverride) {
   if (!featured) return;
-  const q = await quoteFor(featured);
+  const q = qOverride || await quoteFor(featured);
+  featQCache = q || featQCache;
   const c = chg(q);
   setHTML(document.getElementById('featured'), `
     <a class="card" href="${BASE}/${featured.id}/" style="display:block">
@@ -101,6 +106,7 @@ async function paintFeatured() {
         </div>
         <div style="flex:1;min-width:180px">${q?.spark ? sparkline(q.spark) : ''}</div>
       </div>
+      ${featStrip}
       <p class="muted" style="margin:14px 0 0">${featured.blurb}</p>
       <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
         <span class="btn ghost">📊 Charts</span>
@@ -142,8 +148,28 @@ async function paintCatalog() {
 }
 
 async function tick() { await Promise.all([paintFeatured(), paintCatalog()]); }
+
+// FAST tick — featured price only, every 5s while the market is open.
+async function fastTick() {
+  if (!featured) return;
+  const rt = await fetchRealtimeQuote(featured.symbol).catch(() => null);
+  if (rt) paintFeatured({ ...(featQCache || {}), ...rt });
+}
+
+// Structure strip (1h + 1D) — every ~5 min.
+async function stripTick() {
+  if (!featured) return;
+  const analyses = await analyzeAll(featured.symbol, featQCache?.price,
+    TF_SETS.filter(t => t.key === '1h' || t.key === '1d'));
+  const s = structureStrip(analyses);
+  if (s && s !== featStrip) { featStrip = s; paintFeatured(featQCache); }
+}
+
 await tick();
+stripTick();
 autoRefresh(tick);
+autoRefresh(fastTick, { openMs: 5_000, extMs: 15_000, closedMs: 120_000 });
+autoRefresh(stripTick, { openMs: 300_000, extMs: 600_000, closedMs: 1_800_000 });
 
 mountFooter();
 </script>
