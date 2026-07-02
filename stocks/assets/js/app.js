@@ -91,12 +91,17 @@ export async function loadJSON(relPath) {
    patching the DOM ONLY when data actually changed — no blinks, no reloads. */
 export function autoRefresh(tick, { openMs = 60_000, extMs = 120_000, closedMs = 600_000 } = {}) {
   let timer = null;
+  let inFlight = false;   // a slow tick must never pile up behind a fast cadence
   const delay = () => {
     const { state } = marketStatus();
     return state === 'open' ? openMs : (state === 'closed' ? closedMs : extMs);
   };
   const loop = async () => {
-    if (!document.hidden) { try { await tick(); } catch (e) { console.warn('refresh tick failed:', e); } }
+    if (!document.hidden && !inFlight) {
+      inFlight = true;
+      try { await tick(); } catch (e) { console.warn('refresh tick failed:', e); }
+      finally { inFlight = false; }
+    }
     timer = setTimeout(loop, delay());
   };
   document.addEventListener('visibilitychange', () => {

@@ -255,7 +255,8 @@ function hydrate(data, liveSpot) {
   curSource = (liveSpot ? 'spot real-time · ' : 'spot delayed · ')
     + (data.source === 'delayed' || data.source === 'live' ? 'premiums ~15 min delayed' : 'committed snapshot');
   setText(document.getElementById('spot'), fmt.money(spot) + (liveSpot ? '' : ' (delayed)'));
-  setText(document.getElementById('asof'), fmt.when(data.asOf) + ' · ' + fmt.ago(data.asOf) + ' · ' + curSource);
+  const stale = (Date.now() - Date.parse(data.asOf)) > 25 * 60_000 ? ' · ⚠ CHAIN STALE' : '';
+  setText(document.getElementById('asof'), fmt.when(data.asOf) + ' · ' + fmt.ago(data.asOf) + ' · ' + curSource + stale);
 
   all = data.contracts
     .filter(c => (c.dte ?? 99) <= (data.maxDTE ?? 7))
