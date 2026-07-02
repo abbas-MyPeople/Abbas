@@ -116,7 +116,8 @@ def main():
     r["symbol"] = "SPY"
     r["session"] = "pre-open"
     r["date"] = now_et().strftime("%Y-%m-%d")
-    r["generatedAt"] = now_et().isoformat(timespec="seconds") + "Z"
+    # True UTC — the frontend parses this as an instant for "ago" display.
+    r["generatedAt"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
     vp = vol_profile(vix)
     r["volatility"] = {"vix": vix, "vixChg": quote.get("vixChg"),
                        "ivRank": r.get("volatility", {}).get("ivRank"),

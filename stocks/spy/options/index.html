@@ -78,6 +78,7 @@
 <script type="module">
 import { loadJSON, fmt, mountNav, mountFooter, initTheme, autoRefresh, setText, setHTML } from '../../assets/js/app.js';
 import { derive, score, verdict } from '../../assets/js/options.js';
+import { fetchLiveMarket } from '../../assets/js/cboe.js';
 
 initTheme();
 mountNav('spy-options');
@@ -92,7 +93,7 @@ const recsEl = document.getElementById('recs');
    sort, and open contract stay put — only the numbers inside update. */
 let all = [], expiries = [], top = [];
 let side = 'call', exp = null, sortK = 'strike', sortDir = 1;
-let openId = null, lastAsOf = null, curAsOf = null;
+let openId = null, lastAsOf = null, curAsOf = null, curSource = '';
 
 const idOf = (c) => `${c.type}-${c.expiry}-${c.strike}`;
 
@@ -240,8 +241,9 @@ function hydrate(data) {
   const spot = data.spot;
   const rf = data.riskFree ?? 0.043;
   curAsOf = data.asOf;
+  curSource = data.source === 'live' ? 'live feed' : 'committed snapshot';
   setText(document.getElementById('spot'), fmt.money(spot));
-  setText(document.getElementById('asof'), fmt.when(data.asOf) + ' · ' + fmt.ago(data.asOf));
+  setText(document.getElementById('asof'), fmt.when(data.asOf) + ' · ' + fmt.ago(data.asOf) + ' · ' + curSource);
 
   all = data.contracts
     .filter(c => (c.dte ?? 99) <= (data.maxDTE ?? 7))
@@ -263,7 +265,11 @@ function hydrate(data) {
 }
 
 async function tick() {
-  const data = await loadJSON('data/spy/options/latest.json');
+  // Live feed first (fresh every tick, independent of CI); committed
+  // snapshot only as fallback. Both share the same schema.
+  let data = null;
+  try { data = (await fetchLiveMarket('SPY', 7)).chain; } catch (e) { /* fall back */ }
+  if (!data || !data.contracts?.length) data = await loadJSON('data/spy/options/latest.json');
   if (!data || !data.contracts?.length || data.asOf === lastAsOf) return;
   lastAsOf = data.asOf;
   hydrate(data);

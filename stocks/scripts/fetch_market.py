@@ -87,7 +87,8 @@ def main():
     spot = data.get("current_price") or data.get("close")
     prev = data.get("prev_day_close")
     ts = cboe.get("timestamp") or now_et().isoformat()
-    as_of = now_et().isoformat(timespec="seconds") + "Z"
+    # True UTC — the frontend's "as of / ago" math parses this as an instant.
+    as_of = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
     today = now_et().date()
     contracts = []
