@@ -1,0 +1,33 @@
+{
+  "symbol": "SPY",
+  "asOf": "2026-07-02T08:30:00Z",
+  "price": 746.2,
+  "prevClose": 748.9,
+  "change": -2.7,
+  "changePct": -0.361,
+  "open": 748.1,
+  "dayHigh": 748.6,
+  "dayLow": 745.3,
+  "volume": 41200000,
+  "vix": 15.1,
+  "vixChg": 0.6,
+  "dailyMovePct": 0.602,
+  "week52Low": 588.0,
+  "week52High": 761.6,
+  "atr": 6.4,
+  "spark": [
+    748.9,
+    748.1,
+    747.4,
+    746.2,
+    745.6,
+    746.8,
+    746.1,
+    745.9,
+    746.5,
+    746.0,
+    746.4,
+    746.2
+  ],
+  "source": "SAMPLE seed"
+}

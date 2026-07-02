@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stocks Dashboard · abbaszoeb.com</title>
+<meta name="description" content="Abbas's private markets dashboard — SPY options, live charts, and an automated morning research briefing.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+<main class="wrap">
+  <section class="section">
+    <div class="eyebrow">Personal markets desk</div>
+    <h1 style="font-size:34px;margin:6px 0 4px">Good morning, Abbas.</h1>
+    <p class="muted" style="max-width:640px">Your command center for the day. Start with the SPY morning brief, check the ≤7-day options chain,
+      then watch the tape across timeframes. Pick an asset below.</p>
+  </section>
+
+  <!-- SPY featured card -->
+  <section class="section" id="featured"></section>
+
+  <!-- Category groups -->
+  <section class="section">
+    <div class="card-head"><h2>All assets</h2><span class="hint">stocks &amp; crypto · add more anytime</span></div>
+    <div id="catalog"></div>
+  </section>
+
+  <section class="section">
+    <div class="grid cols-3">
+      <div class="card">
+        <div class="eyebrow">01 · Every morning</div>
+        <h3 style="margin:8px 0 6px">Deep research brief</h3>
+        <p class="note">An automated pre-open pass on what actually moved price — surfaced <em>and</em> inferred — synthesized into bite-sized, visual drivers with confidence and expected volatility.</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">02 · ≤ 7 days only</div>
+        <h3 style="margin:8px 0 6px">Options, decoded</h3>
+        <p class="note">The near-dated chain with computed Greeks, the exact move &amp; speed each contract needs to pay, leverage, comparisons, and the standout plays.</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">03 · Live tape</div>
+        <h3 style="margin:8px 0 6px">Multi-timeframe charts</h3>
+        <p class="note">1m · 5m · 15m · 1h · 1d · 1w · 1mo, near-real-time and colored, so you can read momentum, volatility, and structure at a glance.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script type="module">
+import { BASE, loadJSON, fmt, mountNav, mountFooter, initTheme, sparkline } from './assets/js/app.js';
+initTheme();
+mountNav('home');
+
+const reg = await loadJSON('data/registry.json');
+
+// Try to enrich each symbol with a quote snapshot (optional).
+async function quoteFor(sym) {
+  return await loadJSON(`data/${sym.id}/quote/latest.json`);
+}
+
+function chg(q) {
+  if (!q) return { txt: '—', cls: 'flat', pct: 0 };
+  const c = q.changePct ?? 0;
+  return { txt: fmt.pct(c), cls: fmt.cls(c), pct: c };
+}
+
+const featured = (reg?.symbols || []).find(s => s.featured);
+if (featured) {
+  const q = await quoteFor(featured);
+  const c = chg(q);
+  document.getElementById('featured').innerHTML = `
+    <a class="card" href="${BASE}/${featured.id}/" style="display:block">
+      <div class="card-head">
+        <span class="tag gold">Featured</span>
+        <span class="hint">Tap to open the ${featured.symbol} desk →</span>
+      </div>
+      <div class="quote-hero">
+        <div>
+          <div class="sym">${featured.symbol}</div>
+          <div class="muted" style="font-size:13px">${featured.name}</div>
+        </div>
+        <div>
+          <div class="price">${q ? fmt.money(q.price) : '—'}</div>
+        </div>
+        <div>
+          <span class="chip ${c.cls}">${fmt.arrow(c.pct)} ${q ? fmt.signed(q.change) : ''} (${c.txt})</span>
+          <div class="note" style="margin-top:6px">${q ? 'as of ' + fmt.ago(q.asOf) : 'quote loads after first snapshot'}</div>
+        </div>
+        <div style="flex:1;min-width:180px">${q?.spark ? sparkline(q.spark) : ''}</div>
+      </div>
+      <p class="muted" style="margin:14px 0 0">${featured.blurb}</p>
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+        <span class="btn ghost">📊 Charts</span>
+        <span class="btn ghost">⛓ Options ≤${featured.maxDTE}d</span>
+        <span class="btn ghost">📰 Morning brief</span>
+      </div>
+    </a>`;
+}
+
+// Catalog grouped by category
+const cats = reg?.categories || [];
+const out = [];
+for (const cat of cats) {
+  const syms = (reg.symbols || []).filter(s => s.category === cat.id);
+  if (!syms.length) continue;
+  const cards = [];
+  for (const s of syms) {
+    const q = s.status === 'live' ? await quoteFor(s) : null;
+    const c = chg(q);
+    const planned = s.status !== 'live';
+    cards.push(`
+      <a class="card sym-card ${planned ? '' : ''}" href="${planned ? '#' : BASE + '/' + s.id + '/'}" ${planned ? 'onclick="return false" style="opacity:.6;cursor:not-allowed"' : ''}>
+        <div class="row">
+          <div><div class="name">${s.symbol}</div><div class="cat">${cat.label}${planned ? ' · soon' : ''}</div></div>
+          ${planned ? '<span class="tag info">planned</span>' : `<span class="chip ${c.cls}">${fmt.arrow(c.pct)} ${c.txt}</span>`}
+        </div>
+        <div>${q?.spark ? sparkline(q.spark) : '<div class="sparkline"></div>'}</div>
+        <div class="row">
+          <span class="mono" style="font-size:18px">${q ? fmt.money(q.price) : '—'}</span>
+          ${s.options ? `<span class="tag gold">options ≤${s.maxDTE}d</span>` : '<span class="tag info">spot</span>'}
+        </div>
+      </a>`);
+  }
+  out.push(`<div style="margin:10px 0 6px" class="eyebrow">${cat.label}</div><div class="grid cols-3">${cards.join('')}</div>`);
+}
+document.getElementById('catalog').innerHTML = out.join('<div class="divider"></div>');
+
+mountFooter();
+</script>
+</body>
+</html>

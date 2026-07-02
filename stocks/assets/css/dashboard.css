@@ -1,0 +1,266 @@
+/* ==========================================================================
+   Stocks Dashboard — design system
+   A dense, elegant, dark trading aesthetic. Semantic up/down colors are
+   consistent everywhere; numbers use a tabular monospace so columns align.
+   Light mode is supported via [data-theme="light"] for daytime reading.
+   ========================================================================== */
+
+:root {
+  /* Core surfaces (dark, TradingView-adjacent) */
+  --bg:        #0a0e17;
+  --bg-2:      #0f1524;
+  --surface:   #131a2a;
+  --surface-2: #1a2336;
+  --surface-3: #222d44;
+  --border:    #26304a;
+  --border-2:  #313d5c;
+
+  /* Text */
+  --text:      #e6ebf5;
+  --text-2:    #9aa7c2;
+  --text-3:    #64708c;
+
+  /* Semantic market colors (color-blind-safe teal/red pairing) */
+  --up:        #26c281;
+  --up-dim:    rgba(38, 194, 129, 0.14);
+  --down:      #f2557a;
+  --down-dim:  rgba(242, 85, 122, 0.14);
+  --flat:      #8b96b0;
+
+  /* Brand accent (gold — ties to Abbas's brand) */
+  --accent:    #d9b24a;
+  --accent-2:  #f0cf76;
+  --accent-dim:rgba(217, 178, 74, 0.14);
+
+  /* Sequential accents for categorical viz (accessible, distinct in dark) */
+  --c1: #4aa3ff; /* blue   */
+  --c2: #d9b24a; /* gold   */
+  --c3: #26c281; /* teal   */
+  --c4: #b07cff; /* purple */
+  --c5: #ff9f43; /* orange */
+  --c6: #f2557a; /* rose   */
+
+  --radius:   14px;
+  --radius-sm: 9px;
+  --shadow:   0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --serif: "Playfair Display", Georgia, serif;
+
+  --maxw: 1320px;
+}
+
+[data-theme="light"] {
+  --bg:        #f4f6fb;
+  --bg-2:      #eef1f8;
+  --surface:   #ffffff;
+  --surface-2: #f6f8fc;
+  --surface-3: #eef1f8;
+  --border:    #dde3ee;
+  --border-2:  #cdd5e5;
+  --text:      #14192a;
+  --text-2:    #4a556e;
+  --text-3:    #7b869c;
+  --up:        #12996b;
+  --down:      #d33a5f;
+  --shadow:    0 10px 30px rgba(20, 25, 42, 0.10);
+  --shadow-sm: 0 2px 10px rgba(20, 25, 42, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(74, 163, 255, 0.06), transparent 60%),
+    radial-gradient(900px 500px at -5% 0%, rgba(217, 178, 74, 0.05), transparent 55%),
+    var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.up   { color: var(--up); }
+.down { color: var(--down); }
+.muted { color: var(--text-2); }
+.dim  { color: var(--text-3); }
+
+/* ---------- Layout ---------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+.section { padding: 26px 0; }
+.grid { display: grid; gap: 16px; }
+.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cols-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) { .cols-3, .cols-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr; } }
+
+/* ---------- Top navigation ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-inner {
+  max-width: var(--maxw); margin: 0 auto; padding: 12px 20px;
+  display: flex; align-items: center; gap: 18px;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.01em; }
+.brand .logo {
+  width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--accent), #a8842b); color: #1a1408; font-weight: 800;
+  font-family: var(--mono); box-shadow: var(--shadow-sm);
+}
+.brand small { color: var(--text-3); font-weight: 500; font-size: 12px; }
+.nav-links { display: flex; gap: 4px; margin-left: 8px; flex-wrap: wrap; }
+.nav-links a {
+  padding: 7px 12px; border-radius: 8px; color: var(--text-2); font-size: 14px; font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-links a:hover { background: var(--surface); color: var(--text); }
+.nav-links a.active { background: var(--accent-dim); color: var(--accent-2); }
+.spacer { flex: 1; }
+.pill {
+  display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px;
+  border: 1px solid var(--border); border-radius: 999px; font-size: 12.5px; color: var(--text-2);
+  background: var(--surface);
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--flat); }
+.dot.live { background: var(--up); box-shadow: 0 0 0 0 rgba(38,194,129,.6); animation: pulse 2s infinite; }
+.dot.closed { background: var(--text-3); }
+@keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(38,194,129,.5)} 70%{box-shadow:0 0 0 7px rgba(38,194,129,0)} 100%{box-shadow:0 0 0 0 rgba(38,194,129,0)} }
+
+.icon-btn {
+  width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-2); cursor: pointer; display: grid; place-items: center;
+  font-size: 15px;
+}
+.icon-btn:hover { color: var(--text); border-color: var(--border-2); }
+
+/* ---------- Cards ---------- */
+.card {
+  background: linear-gradient(180deg, var(--surface), var(--bg-2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.card.pad-sm { padding: 14px; }
+.card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.card-head h3 { margin: 0; font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
+.card-head .hint { font-size: 12px; color: var(--text-3); }
+.eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+
+/* ---------- Hero quote ---------- */
+.quote-hero { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 22px; }
+.quote-hero .sym { font-family: var(--serif); font-size: 40px; font-weight: 800; letter-spacing: -0.02em; }
+.quote-hero .price { font-family: var(--mono); font-size: 44px; font-weight: 700; line-height: 1; }
+.quote-hero .chg { font-family: var(--mono); font-size: 18px; font-weight: 600; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; font-family: var(--mono);
+}
+.chip.up { background: var(--up-dim); color: var(--up); }
+.chip.down { background: var(--down-dim); color: var(--down); }
+.chip.flat { background: var(--surface-3); color: var(--text-2); }
+
+/* ---------- Stat tiles ---------- */
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.stat .k { font-size: 11.5px; color: var(--text-3); letter-spacing: 0.03em; text-transform: uppercase; }
+.stat .v { font-family: var(--mono); font-size: 20px; font-weight: 600; }
+.stat .sub { font-size: 12px; color: var(--text-2); }
+
+/* ---------- Buttons / tabs ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600;
+  font-size: 14px; cursor: pointer; transition: all .15s;
+}
+.btn:hover { border-color: var(--border-2); background: var(--surface-2); }
+.btn.primary { background: linear-gradient(135deg, var(--accent), #b8912f); color: #1a1408; border: none; }
+.btn.primary:hover { filter: brightness(1.06); }
+.btn.ghost { background: transparent; }
+
+.tabs { display: inline-flex; gap: 2px; padding: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; flex-wrap: wrap; }
+.tabs button {
+  border: 0; background: transparent; color: var(--text-2); font-family: var(--mono); font-size: 13px;
+  font-weight: 600; padding: 7px 13px; border-radius: 8px; cursor: pointer; transition: all .12s;
+}
+.tabs button:hover { color: var(--text); }
+.tabs button.active { background: var(--accent-dim); color: var(--accent-2); }
+
+/* ---------- Tables ---------- */
+.table-wrap { overflow-x: auto; border-radius: var(--radius-sm); }
+table.chain { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 13px; }
+table.chain th, table.chain td { padding: 9px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--border); }
+table.chain th { position: sticky; top: 0; background: var(--surface-2); color: var(--text-3); font-weight: 600; font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; }
+table.chain th:first-child, table.chain td:first-child { text-align: left; }
+table.chain tbody tr:hover { background: var(--surface); }
+table.chain tr.itm td { background: color-mix(in srgb, var(--accent-dim) 55%, transparent); }
+table.chain tr.selected td { background: var(--accent-dim); }
+.tag {
+  display: inline-block; padding: 2px 7px; border-radius: 6px; font-size: 11px; font-weight: 700;
+  font-family: var(--sans); letter-spacing: 0.02em;
+}
+.tag.call { background: var(--up-dim); color: var(--up); }
+.tag.put  { background: var(--down-dim); color: var(--down); }
+.tag.gold { background: var(--accent-dim); color: var(--accent-2); }
+.tag.info { background: rgba(74,163,255,.14); color: var(--c1); }
+
+/* ---------- Badges / confidence ---------- */
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
+.badge.high { background: var(--up-dim); color: var(--up); }
+.badge.med  { background: var(--accent-dim); color: var(--accent-2); }
+.badge.low  { background: var(--surface-3); color: var(--text-2); }
+
+/* ---------- Gauges / meters ---------- */
+.meter { height: 8px; border-radius: 999px; background: var(--surface-3); overflow: hidden; }
+.meter > span { display: block; height: 100%; border-radius: 999px; }
+
+/* ---------- Research cards ---------- */
+.driver {
+  border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; background: var(--surface);
+  display: flex; flex-direction: column; gap: 8px; position: relative; overflow: hidden;
+}
+.driver::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--flat); }
+.driver.bull::before { background: var(--up); }
+.driver.bear::before { background: var(--down); }
+.driver.macro::before { background: var(--c1); }
+.driver h4 { margin: 0; font-size: 15px; font-weight: 650; letter-spacing: -0.01em; }
+.driver p { margin: 0; font-size: 13.5px; color: var(--text-2); }
+.driver .meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-3); }
+
+/* ---------- Symbol cards (home) ---------- */
+.sym-card { display: flex; flex-direction: column; gap: 10px; transition: transform .15s, border-color .15s; }
+.sym-card:hover { transform: translateY(-2px); border-color: var(--border-2); }
+.sym-card .row { display: flex; align-items: center; justify-content: space-between; }
+.sym-card .name { font-weight: 700; font-size: 17px; }
+.sym-card .cat { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); }
+.sparkline { height: 42px; width: 100%; }
+
+/* ---------- Footer / notes ---------- */
+.note { font-size: 12px; color: var(--text-3); line-height: 1.6; }
+.divider { height: 1px; background: var(--border); margin: 22px 0; border: 0; }
+footer.site { border-top: 1px solid var(--border); margin-top: 40px; padding: 26px 0; color: var(--text-3); font-size: 13px; }
+
+.disclaimer {
+  border: 1px dashed var(--border-2); border-radius: var(--radius-sm); padding: 12px 14px;
+  font-size: 12px; color: var(--text-3); background: var(--surface); line-height: 1.6;
+}
+
+/* skeleton */
+.skeleton { background: linear-gradient(90deg, var(--surface-2), var(--surface-3), var(--surface-2)); background-size: 200% 100%; animation: sk 1.3s infinite; border-radius: 6px; color: transparent; }
+@keyframes sk { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+h1 { font-family: var(--serif); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 4px; }
