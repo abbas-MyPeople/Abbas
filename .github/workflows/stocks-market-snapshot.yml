@@ -7,10 +7,12 @@ name: Stocks · market snapshot (SPY)
 on:
   workflow_dispatch:
   schedule:
-    # Every 15 min, 13:30–20:00 UTC (≈ 9:30–16:00 ET), weekdays.
-    - cron: '30,45 13 * * 1-5'
-    - cron: '*/15 14-19 * * 1-5'
-    - cron: '0 20 * * 1-5'
+    # Every 5 min, 13:30–20:00 UTC (≈ 9:30–16:00 ET), weekdays. GitHub cron
+    # has jitter, so effective cadence is ~5–10 min; the pages poll the
+    # committed JSON every 60s and patch in place, so updates land silently.
+    - cron: '30-55/5 13 * * 1-5'
+    - cron: '*/5 14-19 * * 1-5'
+    - cron: '0,5 20 * * 1-5'
 
 permissions:
   contents: write

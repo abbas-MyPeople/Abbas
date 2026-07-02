@@ -84,6 +84,37 @@ export async function loadJSON(relPath) {
   }
 }
 
+/* ---------- Silent auto-refresh ----------
+   Re-runs `tick` on a cadence that adapts to the market session (fast while
+   open, relaxed off-hours), pauses while the tab is hidden, and fires
+   immediately when the tab becomes visible again. `tick` is responsible for
+   patching the DOM ONLY when data actually changed — no blinks, no reloads. */
+export function autoRefresh(tick, { openMs = 60_000, extMs = 120_000, closedMs = 600_000 } = {}) {
+  let timer = null;
+  const delay = () => {
+    const { state } = marketStatus();
+    return state === 'open' ? openMs : (state === 'closed' ? closedMs : extMs);
+  };
+  const loop = async () => {
+    if (!document.hidden) { try { await tick(); } catch (e) { console.warn('refresh tick failed:', e); } }
+    timer = setTimeout(loop, delay());
+  };
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) { clearTimeout(timer); loop(); }
+  });
+  timer = setTimeout(loop, delay());
+  return () => clearTimeout(timer);
+}
+
+/* Patch helpers: touch the DOM only when content actually differs, so
+   repaints never happen on unchanged data. */
+export function setText(el, txt) {
+  if (el && el.textContent !== txt) el.textContent = txt;
+}
+export function setHTML(el, html) {
+  if (el && el.innerHTML !== html) el.innerHTML = html;
+}
+
 /* ---------- Theme ---------- */
 export function initTheme() {
   const saved = localStorage.getItem('stx-theme');
