@@ -9,7 +9,7 @@
 **Legend — Flagship status:** 🟢 live · 🟡 built/deployed (non-public app) · 🔵 spec'd, build pending · ⚪ advisory only (not a flagship build).
 **Legend — AZ status:** ✅ marketed as a named play + priced · 🟠 marketed but thin (no proof/case) · 🔴 proven at flagship but NOT yet a marketed AZ offering (**opportunity**) · ⚪ marketed with no flagship proof (**flag**).
 
-Last reconciled: 2026-07-01 (from full audits of both repos).
+Last reconciled: 2026-07-05 (full audits of both repos + owner input; see [`CHANGELOG.md`](CHANGELOG.md)).
 
 ---
 
