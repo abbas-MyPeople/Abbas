@@ -302,7 +302,7 @@
       "az_offering": "Unified customer identity (CDP) + receipt-scan 3P→direct (Ledger #17 — 🔵 in active build)",
       "git": {
         "ahead": 6,
-        "behind": 9,
+        "behind": 11,
         "last_commit": "2026-07-05",
         "open_prs": 0
       }
@@ -439,7 +439,7 @@
       "az_offering": "n/a — but validates that AZ (the product) is the asset that outlives one location",
       "git": {
         "ahead": 36,
-        "behind": 9,
+        "behind": 11,
         "last_commit": "2026-07-03",
         "open_prs": 0
       }
@@ -496,7 +496,7 @@
       "az_offering": "Content system (advisory / future SKU)",
       "git": {
         "ahead": 14,
-        "behind": 83,
+        "behind": 85,
         "last_commit": "2026-07-03",
         "open_prs": 0
       }
@@ -505,7 +505,7 @@
       "id": "staffing",
       "name": "Staffing & Hiring Plan",
       "repo": "wok",
-      "location": "docs/16-staffing-and-hiring-engine.md",
+      "location": "docs/staffing-and-hiring.md (main) + branch",
       "branch": "claude/menu-item-pricing-6ir5eg",
       "status": "reference",
       "health": "green",
@@ -528,12 +528,12 @@
       ],
       "overlaps": [],
       "next": [
-        "Cherry-pick the doc onto main"
+        "Done — on main as docs/staffing-and-hiring.md"
       ],
       "az_offering": "Labor optimization (advisory)",
       "git": {
         "ahead": 1,
-        "behind": 9,
+        "behind": 11,
         "last_commit": "2026-07-05",
         "open_prs": 0
       }
@@ -601,7 +601,7 @@
       "branch": "main",
       "status": "live",
       "health": "amber",
-      "percent": 80,
+      "percent": 84,
       "role": "THE PRODUCT — packages every flagship capability as named, priced offerings. This is the replicable, sellable asset. Site live at azrestaurantpartners.com.",
       "stage": "Site + published pricing + 101-tool toolbox + 12 guides live. Capability ledger + onboarding playbook mature. Pre-first-external-client.",
       "components": [
@@ -617,7 +617,7 @@
         },
         {
           "name": "flagship/CAPABILITY-LEDGER (source of truth)",
-          "pct": 85,
+          "pct": 90,
           "status": "built"
         },
         {
@@ -627,15 +627,14 @@
         },
         {
           "name": "Live case study page",
-          "pct": 10,
-          "status": "planning"
+          "pct": 85,
+          "status": "live"
         }
       ],
       "blockers": [
-        "No live case study (raw numbers exist, need owner fill-ins)",
-        "No voice demo linked",
-        "AEO engine (#9) + MCP (#8) proven but unmarketed",
-        "Ledger LAGS what's actually built"
+        "Case study live but 3 hard-outcome numbers pending (owner)",
+        "No voice demo linked yet",
+        "Ledger now reconciled to reality"
       ],
       "manual_steps": [
         "Fill case-study numbers (direct-vs-3P shift, $ commission recovered, calls captured)",
@@ -652,9 +651,9 @@
         }
       ],
       "next": [
-        "Update the ledger to reality",
-        "Publish the W&K case study",
-        "Package the AEO engine as the flagship offer"
+        "Fill the 3 [OWNER] case-study numbers",
+        "Link a voice demo",
+        "Roll AEO engine offer into outreach"
       ],
       "az_offering": "This IS the product surface",
       "git": {
@@ -717,6 +716,7 @@
       "Ship the two near-done faucets (deploy guest platform + voice agent)",
       "Cheap cleanups (merge staffing doc; harvest Instagram; archive stale branches)",
       "Productize (update AZ ledger to reality; publish W&K case study; package the AEO engine as the flagship offer)"
-    ]
+    ],
+    "runbook": "Execution runbooks now on Wok main: docs/CONVERGENCE-PLAN.md (the 3 refactors, file-level) + docs/BRANCH-DISPOSITIONS.md."
   }
 }
