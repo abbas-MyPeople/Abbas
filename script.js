@@ -55,7 +55,7 @@
      section view, and conversion so we see what people see and click — no hand-tagging.
      TODO(owner): create a GA4 property for azrestaurantpartners.com and paste its
      Measurement ID below. Until then this no-ops safely (nothing is sent). */
-  const GA4_ID = ''; // e.g. 'G-XXXXXXXXXX'
+  const GA4_ID = 'G-3GEL1D477G'; // azrestaurantpartners.com GA4 property
   (() => {
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
