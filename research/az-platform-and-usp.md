@@ -62,8 +62,7 @@ the thing the site most under-sells (currently one small card). Three points to 
    craft of a great operator (objection handling, upsell logic, catering sizing, complaint triage) — **not
    a generic chatbot.**
 2. **Identity is a choosable asset.** The owner dictates the voice — language, accent, warmth, cultural
-   fit. At Wok & Karahi, the agent "Haania" (on the "Naina" Vapi voice engine) speaks English *and*
-   Urdu/Hindi and says the dishes right, so a desi
+   fit. At Wok & Karahi, the agent speaks English *and* Urdu/Hindi and says the dishes right, so a desi
    customer feels *at home and recognized* the moment they call. For a demographic-specific restaurant
    that **changes the customer dynamic** and becomes a brand identity the owner owns and controls.
 3. **You dictate public perception at every touchpoint.** Humans err — a rushed server, a missed call, a
