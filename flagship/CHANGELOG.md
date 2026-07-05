@@ -4,6 +4,21 @@ Dated log of what shipped, so any future session can pick up without re-deriving
 Newest first. Capability status lives in [`CAPABILITY-LEDGER.md`](CAPABILITY-LEDGER.md); positioning
 rationale in [`../research/az-platform-and-usp.md`](../research/az-platform-and-usp.md).
 
+## 2026-07-05 — productization: growth engine goes live + case study page (this work block)
+
+**Ledger reconciled to current flagship reality**
+- **#9 Closed-loop AEO/SEO "living-website" growth engine → 🟢 BUILT & running on cron** at the flagship; **first real weekly approval email delivered**. Flipped AZ status to ✅ (now a named, priced offering). Marked as the strongest recurring-retainer product in the portfolio.
+- **#17 Unified customer identity (CDP) + receipt-scan spin-wheel → 🟡 built, not deployed** (was 🔵 in-build). Guest platform + spin-wheel capture flow are built and demoable; not live yet.
+- **#1 AI voice agent** updated to **28 Vapi tools, real-write capable** (gated Clover order writes proven end-to-end), **built & pending go-live** on the production line.
+- **#3 Analytics** confirmed 🟢 live. Section-C growth guidance updated (#9 removed from the 🔴 opportunity list).
+
+**Published a live case study page**
+- New `case-study.html` (styled to `styles.css`, Article + FAQPage schema), linked from the homepage nav + the proof section, and from `details.html`/footers. Grounded in verifiable facts: 4.6★ / 872 reviews (~400 a year ago), 403-to-bots → AI-readable, the two-identity (CDP entity) consolidation, +63% higher ticket ordering both cuisines, direct ~8.8% vs 3P apps 20%+. Hard-outcome numbers left as `[OWNER: …]` placeholders (commission recovered $, direct-vs-3P shift, calls captured).
+
+**Marketed the growth engine as a named offering**
+- Added the closed-loop AEO growth engine to `details.html` as the flagship recurring product ("we watch your data + the world, propose site changes weekly, you approve by email, we ship them"), consistent with existing tiers.
+- `sitemap.xml`: added the case study; `/flagship/ /research/ /command/` stay out.
+
 ## 2026-07-01 → 07-05 — bridge + repositioning + analytics (this work block)
 
 **The bridge (Wok → AZ productization flow)**
