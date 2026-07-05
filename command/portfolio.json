@@ -1,0 +1,722 @@
+{
+  "meta": {
+    "generated": "2026-07-05",
+    "last_git_sync": "2026-07-05",
+    "note": "Portfolio + product command center across both repos. Curated fields = the AI audit; git fields = auto-refreshed by scripts/portfolio-sync.py.",
+    "repos": [
+      {
+        "id": "wok",
+        "name": "WokAndKarahiTexas.com",
+        "slug": "abbas-MyPeople/WokAndKarahiTexas.com",
+        "role": "The flagship / lab where capabilities are proven"
+      },
+      {
+        "id": "az",
+        "name": "AZ Restaurant Partners",
+        "slug": "abbas-MyPeople/Abbas",
+        "role": "The product / consulting business where capabilities are packaged and sold"
+      }
+    ]
+  },
+  "summary": {
+    "thesis": "Not 8 projects — ONE system: a shared restaurant spine (Clover data + guest identity + a sense→approve→act loop) with faucets on top (website, phone, spin-wheel, campaigns). The replicable product = AZ Restaurant Partners. Wok & Karahi itself is being prepared for sale, which makes the replicable platform the durable asset.",
+    "spine": [
+      "rewards/ = guest graph",
+      "engine_v2 = the one Clover reader",
+      "seo_engine = the approve→act loop",
+      "fct_signal = the metrics spine"
+    ],
+    "faucets": [
+      "website-v2",
+      "voice-agent",
+      "/game spin-wheel",
+      "analytics dashboard"
+    ]
+  },
+  "projects": [
+    {
+      "id": "website",
+      "name": "Website (public site)",
+      "repo": "wok",
+      "location": "website-v2/",
+      "branch": "main",
+      "status": "live",
+      "health": "green",
+      "percent": 90,
+      "role": "The storefront the whole system optimizes — discovery → direct orders + catering. AZ offering: 'AEO-ready site' (#2).",
+      "stage": "Live at wokandkarahitexas.com; SEO/AEO build, entity schema, static menu, occasion pages shipped.",
+      "components": [
+        {
+          "name": "Static site + SEO/AEO",
+          "pct": 95,
+          "status": "live"
+        },
+        {
+          "name": "Local/dish/occasion pages + 12 blog articles",
+          "pct": 90,
+          "status": "live"
+        },
+        {
+          "name": "Entity schema (alternateName/sameAs consolidation)",
+          "pct": 100,
+          "status": "live"
+        }
+      ],
+      "blockers": [
+        "Real Clover item photos (gated on Clover dev-app verification)",
+        "3P (~30%) markup prices (same gate)"
+      ],
+      "manual_steps": [
+        "GA4 key events",
+        "Google Search Console + Bing/IndexNow",
+        "GBP cleanup + reviews",
+        "halal-cert PDF + About copy"
+      ],
+      "overlaps": [],
+      "next": [
+        "Add real photos + 3P prices once Clover dev-app verified",
+        "Owner AEO checklist (docs/aeo-owner-checklist.md)"
+      ],
+      "az_offering": "AEO-ready website (Ledger #2 — 🟢 live, but thin proof on AZ site)",
+      "git": {
+        "ahead": 0,
+        "behind": 0,
+        "last_commit": "2026-07-05",
+        "open_prs": 0
+      }
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics Dashboard (Control Plane)",
+      "repo": "wok",
+      "location": "analytics/",
+      "branch": "main",
+      "status": "live",
+      "health": "amber",
+      "percent": 75,
+      "role": "The owner's decision cockpit — Clover sales/channels/menu/margins + AI chat. Also the SPINE's single Clover READ layer everything should converge onto.",
+      "stage": "v2 is the flagship (app_v2/engine_v2 + JS sections); v1 still shipped in the image. Deployed to a private HF Space.",
+      "components": [
+        {
+          "name": "engine_v2 (Clover parse: channel/cuisine/margin)",
+          "pct": 85,
+          "status": "live"
+        },
+        {
+          "name": "JS dashboard sections (pulse/sales/money/menu/ops/…)",
+          "pct": 80,
+          "status": "live"
+        },
+        {
+          "name": "Books/cash fusion (money.py, gated)",
+          "pct": 50,
+          "status": "in-build"
+        },
+        {
+          "name": "v1 (legacy app.py/engine.py)",
+          "pct": 100,
+          "status": "retire"
+        }
+      ],
+      "blockers": [
+        "v1→v2 cutover not finalized",
+        "Books/cash side must stay gated (never in the public Space)"
+      ],
+      "manual_steps": [
+        "HF Space secrets: CLOVER_API_KEY/TOKEN, MERCHANT_ID, GROQ_API_KEY, AUTH_USER/PASS",
+        "GitHub HF_TOKEN for sync"
+      ],
+      "overlaps": [
+        {
+          "with": "guest-platform",
+          "what": "clover_sync duplicates engine_v2's tender map + channel classification",
+          "severity": "severe"
+        },
+        {
+          "with": "voice-agent",
+          "what": "voice-agent has its own Clover client",
+          "severity": "moderate"
+        }
+      ],
+      "next": [
+        "Make engine_v2 the ONE Clover reader; others import it",
+        "Finish v1→v2 cutover, retire v1"
+      ],
+      "az_offering": "Cross-location analytics + true-net P&L (Ledger #3 — 🟢 live)",
+      "git": {
+        "ahead": 0,
+        "behind": 0,
+        "last_commit": "2026-07-05",
+        "open_prs": 0
+      }
+    },
+    {
+      "id": "seo-engine",
+      "name": "Living-Website Engine",
+      "repo": "wok",
+      "location": "seo_engine/",
+      "branch": "main",
+      "status": "live-partial",
+      "health": "green",
+      "percent": 60,
+      "role": "The SPINE's approve→act loop: sense (sales+weather+events+SEO) → weekly email → owner approves by reply → auto-ships site changes. AZ's strongest recurring-retainer product (#9).",
+      "stage": "Phases 0–3b built + running (WATCH guard, sensors, weekly email, reply-parse, PR executor with AUTO_MERGE). First real email delivered; WK_ENGINE_* secrets set.",
+      "components": [
+        {
+          "name": "Sensors (weather/NWS, events/Aladhan, Clover momentum)",
+          "pct": 90,
+          "status": "live"
+        },
+        {
+          "name": "Weekly email compose + send",
+          "pct": 100,
+          "status": "live"
+        },
+        {
+          "name": "Reply read + parse (fail-closed sender)",
+          "pct": 100,
+          "status": "live"
+        },
+        {
+          "name": "Execute approved → auto-merge PR",
+          "pct": 80,
+          "status": "live"
+        },
+        {
+          "name": "Phase 4: AI-answer + rank tracking",
+          "pct": 0,
+          "status": "planning"
+        }
+      ],
+      "blockers": [
+        "Freeform-instruction (model) executor not built",
+        "Phase 4 needs ~$10–35/mo paid tier",
+        "VERIFY (72h/30d) loop unbuilt"
+      ],
+      "manual_steps": [
+        "(done) WK_ENGINE_EMAIL + WK_ENGINE_APP_PASSWORD",
+        "Approve paid tier for Phase 4",
+        "GBP API access (owner-gated)"
+      ],
+      "overlaps": [
+        {
+          "with": "guest-platform",
+          "what": "guest platform's 'campaign brain + owner-approval layer' is ~80% a re-plan of THIS loop",
+          "severity": "severe"
+        }
+      ],
+      "next": [
+        "Make this the ONE approval kernel — route the guest platform's campaigns + the email senders through it",
+        "Featured-dish executor",
+        "Phase 4"
+      ],
+      "az_offering": "Closed-loop AEO/SEO growth engine (Ledger #9 — 🔵/🔴 'strongest recurring-retainer product', NOT yet marketed)",
+      "git": {
+        "ahead": 0,
+        "behind": 0,
+        "last_commit": "2026-07-05",
+        "open_prs": 0
+      }
+    },
+    {
+      "id": "guest-platform",
+      "name": "Guest & Loyalty Platform",
+      "repo": "wok",
+      "location": "rewards/ + website-v2/game/",
+      "branch": "claude/delivery-game-wheel-fpphu5",
+      "status": "built-not-deployed",
+      "health": "red",
+      "percent": 62,
+      "role": "The SPINE's guest system-of-record: phone-keyed profiles, spin-wheel acquisition faucet, Clover order graph + identity resolution, admin/floor portals. Converts 3P customers to direct (~$29K/yr commission drag).",
+      "stage": "Game + profiles + portals + agent API + Clover graph code-complete & offline-tested (27+11 tests). Campaign brain is spec-only. 0% deployed.",
+      "components": [
+        {
+          "name": "/game spin-wheel + receipt OCR verification",
+          "pct": 90,
+          "status": "built"
+        },
+        {
+          "name": "Phone-keyed guest profiles (OTP-ready)",
+          "pct": 85,
+          "status": "built"
+        },
+        {
+          "name": "Clover order graph + identity resolution",
+          "pct": 70,
+          "status": "built"
+        },
+        {
+          "name": "Admin portal (guest-360 / segments / grants)",
+          "pct": 75,
+          "status": "built"
+        },
+        {
+          "name": "Floor dashboard",
+          "pct": 90,
+          "status": "built"
+        },
+        {
+          "name": "AI-phone-agent connection (/api/agent/*)",
+          "pct": 85,
+          "status": "built"
+        },
+        {
+          "name": "Campaign brain + owner-approval (Phase 3)",
+          "pct": 0,
+          "status": "planning"
+        }
+      ],
+      "blockers": [
+        "Nothing deployed — merge branch triggers Render+Pages",
+        "Needs a persistent disk or the member DB wipes on deploy",
+        "Live Clover + OCR never exercised"
+      ],
+      "manual_steps": [
+        "Rotate + set Clover token",
+        "GROQ_API_KEY, ADMIN/AUTH/AGENT keys",
+        "Attach Render 1GB disk + DATA_DIR",
+        "Merge branch, run first sync, print spin-card QR"
+      ],
+      "overlaps": [
+        {
+          "with": "seo-engine",
+          "what": "DON'T build a 2nd approval/campaign loop — emit findings into seo_engine",
+          "severity": "severe"
+        },
+        {
+          "with": "analytics",
+          "what": "clover_sync copy-pastes engine_v2's tender map — converge",
+          "severity": "severe"
+        },
+        {
+          "with": "voice-agent",
+          "what": "voice-agent's loyalty.json/caller_history duplicate this member store (consent hazard)",
+          "severity": "severe"
+        }
+      ],
+      "next": [
+        "Route campaign brain through seo_engine",
+        "clover_sync → import engine_v2",
+        "Then deploy with the disk"
+      ],
+      "az_offering": "Unified customer identity (CDP) + receipt-scan 3P→direct (Ledger #17 — 🔵 in active build)",
+      "git": {
+        "ahead": 6,
+        "behind": 9,
+        "last_commit": "2026-07-05",
+        "open_prs": 0
+      }
+    },
+    {
+      "id": "voice-agent",
+      "name": "AI Voice Agent (phone)",
+      "repo": "wok",
+      "location": "voice-agent/",
+      "branch": "main",
+      "status": "built-not-deployed",
+      "health": "amber",
+      "percent": 88,
+      "role": "The phone faucet — answers every call (EN + Urdu/Hindi), takes orders straight into Clover, catering, upsell, warm-transfer, reads the guest graph. AZ offering: AI phone answering (#1).",
+      "stage": "Real-write-capable, 28 Vapi tools, tested offline. 0% live (no phone number, not deployed). README stale ('build not started' is wrong).",
+      "components": [
+        {
+          "name": "Vapi assistant + prompts + tools",
+          "pct": 90,
+          "status": "built"
+        },
+        {
+          "name": "Tool server (Flask webhook, 28 tools)",
+          "pct": 95,
+          "status": "built"
+        },
+        {
+          "name": "Clover order write + print_event (gated)",
+          "pct": 90,
+          "status": "built"
+        },
+        {
+          "name": "Availability/86 + ready-time + SMS",
+          "pct": 90,
+          "status": "built"
+        },
+        {
+          "name": "rewards_client bridge (correct converged path)",
+          "pct": 85,
+          "status": "built"
+        },
+        {
+          "name": "Local loyalty.json / caller_history (should fold in)",
+          "pct": 100,
+          "status": "retire"
+        }
+      ],
+      "blockers": [
+        "No phone number",
+        "Not deployed to Fly",
+        "Live Clover cutover test owed",
+        "2 pre-existing test failures"
+      ],
+      "manual_steps": [
+        "Provision Vapi phone number + overflow forwarding",
+        "Deploy to Fly, run create_assistant.py",
+        "Secrets: CLOVER_API_TOKEN, MERCHANT_ID, REWARDS_API_*, Twilio",
+        "One live /test_order",
+        "Update stale README"
+      ],
+      "overlaps": [
+        {
+          "with": "guest-platform",
+          "what": "loyalty.json + caller_history duplicate the member/consent store — TCPA hazard",
+          "severity": "severe"
+        },
+        {
+          "with": "analytics",
+          "what": "own Clover client duplicates engine_v2 (write side is legit; read/constants aren't)",
+          "severity": "moderate"
+        }
+      ],
+      "next": [
+        "Fold loyalty/caller_history into rewards/",
+        "Deploy + phone number + live cutover test"
+      ],
+      "az_offering": "AI phone agent (Ledger #1 — 🟢 live at flagship per AZ; needs a public demo link)",
+      "git": {
+        "ahead": 0,
+        "behind": 0,
+        "last_commit": "2026-07-05",
+        "open_prs": 0
+      }
+    },
+    {
+      "id": "sale-kit",
+      "name": "Business Exit Prep (private)",
+      "repo": "wok",
+      "location": "selling-restaurant/",
+      "branch": "claude/restaurant-sale-research-uphkxd",
+      "status": "in-build",
+      "health": "amber",
+      "percent": 88,
+      "role": "CONFIDENTIAL — toolkit to sell Wok & Karahi (target close Aug 31), asset-led. Reframes the mission: the replicable platform is the durable asset. (Financials/PII kept OUT of this dashboard.)",
+      "stage": "Research corpus + buyer data-room + outreach CRM ~90% done; owner-side assembly + landlord/attorney steps remain. Stranded on branch (never publish).",
+      "components": [
+        {
+          "name": "Valuation research + market comps",
+          "pct": 95,
+          "status": "built"
+        },
+        {
+          "name": "Buyer data room + listing kit",
+          "pct": 90,
+          "status": "built"
+        },
+        {
+          "name": "Outreach CRM + landing + cadence",
+          "pct": 75,
+          "status": "built"
+        }
+      ],
+      "blockers": [
+        "Owner-side: assemble data room (tax/P&L/lease)",
+        "Landlord lease-assignment talk (#1 close risk)",
+        "Attorney review"
+      ],
+      "manual_steps": [
+        "Fill outreach config",
+        "Landlord conversation",
+        "Attorney flat-fee NDA/term-sheet review"
+      ],
+      "overlaps": [
+        {
+          "with": "analytics",
+          "what": "shares Clover/books data as an INPUT only — no duplicated tooling",
+          "severity": "none"
+        }
+      ],
+      "next": [
+        "Owner runbook (OWNER-ACTION-PLAN.md)",
+        "Keep private — never a public deploy path"
+      ],
+      "az_offering": "n/a — but validates that AZ (the product) is the asset that outlives one location",
+      "git": {
+        "ahead": 36,
+        "behind": 9,
+        "last_commit": "2026-07-03",
+        "open_prs": 0
+      }
+    },
+    {
+      "id": "instagram",
+      "name": "Instagram Content System",
+      "repo": "wok",
+      "location": "Instagram/ + content-engine/",
+      "branch": "claude/instagram-food-dilemma-carousel-dd17wq",
+      "status": "stale",
+      "health": "amber",
+      "percent": 40,
+      "role": "Organic brand engine — the 'Duality' mirror-format art system + a generalized content-robot. Adjacent to seo_engine's content executor.",
+      "stage": "Strategy + art system ~90%; execution ~5% (nothing rendered/posted). 80 commits behind main — stale.",
+      "components": [
+        {
+          "name": "Brand/strategy + 10-mirror season",
+          "pct": 90,
+          "status": "built"
+        },
+        {
+          "name": "Image + free video pipeline (scripts)",
+          "pct": 60,
+          "status": "built"
+        },
+        {
+          "name": "content-engine (n8n/WhatsApp) — design only",
+          "pct": 20,
+          "status": "planning"
+        }
+      ],
+      "blockers": [
+        "Owner decisions (tagline, font, cadence, Palmier $29/mo)",
+        "No episodes produced/posted",
+        "80 behind main"
+      ],
+      "manual_steps": [
+        "Pick tagline + lettering + cadence",
+        "Decide AI-video subscription",
+        "Stand up n8n/WhatsApp/IG API for automation"
+      ],
+      "overlaps": [
+        {
+          "with": "seo-engine",
+          "what": "could feed the same brand/GBP content pipeline eventually",
+          "severity": "low"
+        }
+      ],
+      "next": [
+        "Harvest strategy + free-stack scripts, rebase onto main",
+        "Treat production + automation as follow-on"
+      ],
+      "az_offering": "Content system (advisory / future SKU)",
+      "git": {
+        "ahead": 14,
+        "behind": 83,
+        "last_commit": "2026-07-03",
+        "open_prs": 0
+      }
+    },
+    {
+      "id": "staffing",
+      "name": "Staffing & Hiring Plan",
+      "repo": "wok",
+      "location": "docs/16-staffing-and-hiring-engine.md",
+      "branch": "claude/menu-item-pricing-6ir5eg",
+      "status": "reference",
+      "health": "green",
+      "percent": 100,
+      "role": "Ops playbook — steady-state staffing table + hiring sourcing + outreach templates. (Branch is misnamed; the pricing work already shipped to main.)",
+      "stage": "Finished document. No code. Trivial additive merge.",
+      "components": [
+        {
+          "name": "Staffing plan doc",
+          "pct": 100,
+          "status": "built"
+        }
+      ],
+      "blockers": [],
+      "manual_steps": [
+        "Post Indeed porter role",
+        "Email LSC + Interfaith contacts",
+        "Announce $300 referral bonus",
+        "Working-trial shifts"
+      ],
+      "overlaps": [],
+      "next": [
+        "Cherry-pick the doc onto main"
+      ],
+      "az_offering": "Labor optimization (advisory)",
+      "git": {
+        "ahead": 1,
+        "behind": 9,
+        "last_commit": "2026-07-05",
+        "open_prs": 0
+      }
+    },
+    {
+      "id": "ops-microapps",
+      "name": "Ops Micro-apps",
+      "repo": "wok",
+      "location": "reports/, email-campaign/, chat/, employees/, recipes/",
+      "branch": "main",
+      "status": "live",
+      "health": "green",
+      "percent": 85,
+      "role": "Standing utilities — daily sales-report email, weekly promo email, guest chat, employee portal, recipe/catering tool. Some duplicate the spine's Clover client + email senders.",
+      "stage": "Live via Render + GitHub Actions crons.",
+      "components": [
+        {
+          "name": "Daily report emailer (cron)",
+          "pct": 100,
+          "status": "live"
+        },
+        {
+          "name": "Email campaign (weekly)",
+          "pct": 100,
+          "status": "live"
+        },
+        {
+          "name": "chat / employees / recipes (Render)",
+          "pct": 90,
+          "status": "live"
+        }
+      ],
+      "blockers": [],
+      "manual_steps": [
+        "Gmail app password + Clover secrets (set)"
+      ],
+      "overlaps": [
+        {
+          "with": "seo-engine",
+          "what": "email senders should route through the one approval kernel",
+          "severity": "moderate"
+        },
+        {
+          "with": "analytics",
+          "what": "own Clover fetch duplicates engine_v2",
+          "severity": "moderate"
+        }
+      ],
+      "next": [
+        "Fold email senders under the one approval kernel over time"
+      ],
+      "az_offering": "Chat POS assistant (#10), staff handbook (#11) — proven, unmarketed",
+      "git": {
+        "ahead": 0,
+        "behind": 0,
+        "last_commit": "2026-07-05",
+        "open_prs": 0
+      }
+    },
+    {
+      "id": "az-site",
+      "name": "AZ Product & Website",
+      "repo": "az",
+      "location": "/ (root) + flagship/ + research/",
+      "branch": "main",
+      "status": "live",
+      "health": "amber",
+      "percent": 80,
+      "role": "THE PRODUCT — packages every flagship capability as named, priced offerings. This is the replicable, sellable asset. Site live at azrestaurantpartners.com.",
+      "stage": "Site + published pricing + 101-tool toolbox + 12 guides live. Capability ledger + onboarding playbook mature. Pre-first-external-client.",
+      "components": [
+        {
+          "name": "Marketing site + pricing tiers",
+          "pct": 90,
+          "status": "live"
+        },
+        {
+          "name": "Toolbox lead-magnet (101 tool pages)",
+          "pct": 100,
+          "status": "live"
+        },
+        {
+          "name": "flagship/CAPABILITY-LEDGER (source of truth)",
+          "pct": 85,
+          "status": "built"
+        },
+        {
+          "name": "Onboarding + replication playbook",
+          "pct": 80,
+          "status": "built"
+        },
+        {
+          "name": "Live case study page",
+          "pct": 10,
+          "status": "planning"
+        }
+      ],
+      "blockers": [
+        "No live case study (raw numbers exist, need owner fill-ins)",
+        "No voice demo linked",
+        "AEO engine (#9) + MCP (#8) proven but unmarketed",
+        "Ledger LAGS what's actually built"
+      ],
+      "manual_steps": [
+        "Fill case-study numbers (direct-vs-3P shift, $ commission recovered, calls captured)",
+        "Publish case study",
+        "Houston phone (drop the 408)",
+        "abbas@azrestaurantpartners.com",
+        "Native Hindi/Urdu review"
+      ],
+      "overlaps": [
+        {
+          "with": "seo-engine",
+          "what": "AZ should market this as its flagship recurring offer (#9)",
+          "severity": "opportunity"
+        }
+      ],
+      "next": [
+        "Update the ledger to reality",
+        "Publish the W&K case study",
+        "Package the AEO engine as the flagship offer"
+      ],
+      "az_offering": "This IS the product surface",
+      "git": {
+        "ahead": 0,
+        "behind": 0,
+        "last_commit": "2026-07-05",
+        "open_prs": 0
+      }
+    }
+  ],
+  "convergence": {
+    "duplications": [
+      {
+        "what": "Clover API clients",
+        "copies": "7+",
+        "converge_to": "analytics/engine_v2 (one reader) + one small write module",
+        "severity": "severe",
+        "why": "price/channel drift; 7 auth paths"
+      },
+      {
+        "what": "Owner-approval / campaign brain",
+        "copies": "3",
+        "converge_to": "seo_engine email-approve→PR→revert kernel",
+        "severity": "severe",
+        "why": "3 inboxes asking approval for one restaurant"
+      },
+      {
+        "what": "Guest identity / loyalty / consent",
+        "copies": "2–3",
+        "converge_to": "rewards/ as system of record; voice-agent reads via rewards_client",
+        "severity": "severe",
+        "why": "TCPA/consent hazard — opted-in one store, out the other"
+      },
+      {
+        "what": "Dashboards",
+        "copies": "v1 + v2 + guest admin",
+        "converge_to": "analytics v2 (+ guest-360 as a section)",
+        "severity": "moderate",
+        "why": "retire v1"
+      },
+      {
+        "what": "Clover tender→channel map",
+        "copies": "3 (identical IDs)",
+        "converge_to": "one shared constant",
+        "severity": "moderate",
+        "why": "hand-synced maps drift"
+      },
+      {
+        "what": "Menu source-of-truth",
+        "copies": "several JSONs",
+        "converge_to": "one canonical menu.json",
+        "severity": "low",
+        "why": "price/86 drift"
+      }
+    ],
+    "sequence": [
+      "Unify the Clover layer (engine_v2 = the one reader; kill duplicate tender maps)",
+      "One approval kernel (route guest-platform campaigns + email senders through seo_engine)",
+      "One guest graph (fold voice-agent loyalty/caller_history into rewards/)",
+      "Ship the two near-done faucets (deploy guest platform + voice agent)",
+      "Cheap cleanups (merge staffing doc; harvest Instagram; archive stale branches)",
+      "Productize (update AZ ledger to reality; publish W&K case study; package the AEO engine as the flagship offer)"
+    ]
+  }
+}
