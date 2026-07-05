@@ -121,8 +121,7 @@
     </div>
     <div>
       <div class="sync">
-        <button class="btn" id="syncBtn">↻ Sync latest</button>
-        <a class="btn ghost" id="fullSync" target="_blank" rel="noopener">Run full sync ↗</a>
+        <button class="btn" id="syncBtn">↻ Sync latest from main</button>
       </div>
       <div class="synced" id="syncedAt"></div>
     </div>
@@ -156,7 +155,6 @@
 const STATUS_LABEL={ "live":"Live","live-partial":"Live (partial)","built-not-deployed":"Built · not deployed","in-build":"In build","stale":"Stale","reference":"Reference","planning":"Planned" };
 const BOARD_ORDER=[["live","Live"],["live-partial","Live (partial)"],["built-not-deployed","Built · not deployed"],["in-build","In build"],["stale","Stale / reference"]];
 const HEALTH_COLOR={green:"var(--green)",amber:"var(--amber)",red:"var(--red)"};
-const AZ_ACTIONS="https://github.com/abbas-MyPeople/Abbas/actions/workflows/portfolio-sync.yml";
 let DATA=null, VIEW="cards", REPO="all", Q="";
 
 function pctColor(p){ return p>=85?"var(--green)":p>=55?"var(--amber)":"var(--sev)"; }
@@ -166,9 +164,8 @@ async function load(bust){
   const r = await fetch("portfolio.json"+(bust?("?t="+Date.now()):""));
   DATA = await r.json();
   document.getElementById("thesis").textContent = DATA.summary.thesis;
-  document.getElementById("fullSync").href = AZ_ACTIONS;
   document.getElementById("syncedAt").innerHTML =
-    "data synced "+esc(DATA.meta.last_git_sync)+" · viewed "+new Date().toLocaleString();
+    "portfolio.json updated "+esc(DATA.meta.last_git_sync)+" · read from main "+new Date().toLocaleTimeString();
   renderKpis(); render();
 }
 function projects(){

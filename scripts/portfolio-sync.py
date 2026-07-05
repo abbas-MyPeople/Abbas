@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 """
-portfolio-sync — refresh the live GIT facts in command/portfolio.json for BOTH repos.
+portfolio-sync — an AUDIT-TIME helper that refreshes the git facts in command/portfolio.json.
 
-Pulls ahead/behind vs main, last-commit date, and open-PR count for each project's branch via `gh api`,
-and stamps meta.last_git_sync. The CURATED fields (role, stage, %, components, blockers, overlaps,
-manual_steps, next) are the AI audit and are left untouched here — re-run the AI portfolio audit to refresh
-those. Resilient: any lookup that fails keeps the existing value.
-
-Run in the AZ repo's Action. Needs a token with READ access to BOTH repos (set GH_TOKEN to a fine-grained
-PAT `PORTFOLIO_PAT`); with only the default GITHUB_TOKEN, the Wok repo's facts won't refresh.
+The dashboard's "Sync latest from main" button just re-reads the committed portfolio.json — no token, no
+cron, no cross-repo API. This script is run manually as part of a re-audit (when someone with `gh` access
+to both repos regenerates the portfolio), to refresh ahead/behind, last-commit date, and open-PR count per
+project's branch, then the result is committed to main. The curated narrative fields are the AI audit.
+Resilient: any lookup that fails keeps the existing value.
 """
 import json, subprocess, datetime, os
 from pathlib import Path
