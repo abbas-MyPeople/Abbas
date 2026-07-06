@@ -50,21 +50,35 @@
     return parts.length ? parts.join(' · ') : 'direct / none';
   };
 
-  /* ============ ANALYTICS: GA4 + granular auto-tracking ============ */
-  /* Mirrors the restaurant site's GA4 pattern, extended to auto-capture every click,
-     section view, and conversion so we see what people see and click — no hand-tagging.
-     TODO(owner): create a GA4 property for azrestaurantpartners.com and paste its
-     Measurement ID below. Until then this no-ops safely (nothing is sent). */
-  const GA4_ID = 'G-3GEL1D477G'; // azrestaurantpartners.com GA4 property
+  /* ============ ANALYTICS: GTM + GA4 + granular auto-tracking ============ */
+  /* Loaded once here (script.js is on every funnel page) so it covers index/details/
+     toolbox/guides/tools/case-study without touching 120+ files — and correctly skips the
+     unrelated stocks/ and command/ dashboards. Both tags load ASYNC (no render-blocking).
+     - GA4 (below) runs DIRECTLY so data flows with zero setup.
+     - GTM is the tag container for FUTURE pixels (Meta/Google Ads/etc.) added in the GTM UI —
+       no code change needed later. Our custom events (gtag('event')) also land in the shared
+       dataLayer, so GTM can use them.
+     ⚠️ Do NOT add a GA4 Configuration tag inside GTM while GA4 also runs directly here, or GA4
+       double-counts. To consolidate later: remove the direct GA4 block below AND add GA4 in GTM. */
+  const GTM_ID = 'GTM-K6GTGXP9'; // azrestaurantpartners.com GTM container
+  const GA4_ID = 'G-3GEL1D477G'; // azrestaurantpartners.com GA4 property (runs directly)
   (() => {
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    // GA4 — direct, so analytics works immediately
     if (GA4_ID && GA4_ID.indexOf('G-') === 0) {
       const s = document.createElement('script');
       s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
       document.head.appendChild(s);
       gtag('js', new Date());
       gtag('config', GA4_ID, { transport_type: 'beacon' });
+    }
+    // GTM — container for future tags/pixels, managed in the GTM UI
+    if (GTM_ID && GTM_ID.indexOf('GTM-') === 0) {
+      window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      const g = document.createElement('script');
+      g.async = true; g.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+      document.head.appendChild(g);
     }
   })();
   const attrParams = () => {
