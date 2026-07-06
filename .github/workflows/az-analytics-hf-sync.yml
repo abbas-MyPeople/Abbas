@@ -1,0 +1,94 @@
+name: Sync AZ analytics/ to Hugging Face Space
+
+# Mirrors the CONTENTS of analytics/ to the Hugging Face Space
+# abbaszoeb7/AZRestaurantPartners-Analytics (Docker SDK, gunicorn app:app on port 7860).
+# The HF Space expects the dashboard files at its repo ROOT, so analytics/app.py
+# becomes /app.py in the Space. GitHub is the source of truth.
+#
+# ONE-TIME OWNER SETUP:
+#   1. huggingface.co/settings/tokens -> New token -> type "Write"
+#      (or fine-grained with write access to spaces/abbaszoeb7/AZRestaurantPartners-Analytics).
+#   2. GitHub repo -> Settings -> Secrets and variables -> Actions ->
+#      New repository secret -> name: HF_TOKEN, value: <the write token>.
+#
+# The token is only ever interpolated into the remote URL; it is never echoed.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "analytics/**"
+      - ".github/workflows/az-analytics-hf-sync.yml"
+  workflow_dispatch:
+
+# Don't run two syncs at once; let an in-progress push finish.
+concurrency:
+  group: az-hf-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  HF_USERNAME: abbaszoeb7
+  HF_SPACE: AZRestaurantPartners-Analytics
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub repo (source of truth)
+        uses: actions/checkout@v4
+
+      - name: Clone the Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${HF_TOKEN:-}" ]; then
+            echo "::error::HF_TOKEN secret is not set. Add it under Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          # Token lives only in the remote URL. Disable git tracing so it can't leak.
+          export GIT_TRACE=0 GIT_CURL_VERBOSE=0
+          git clone --depth 1 \
+            "https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/${HF_SPACE}.git" \
+            hf-space
+
+      - name: Copy analytics/ contents into the Space working tree
+        run: |
+          set -euo pipefail
+          # rsync the CONTENTS of analytics/ (trailing slash) to the Space root.
+          # --delete keeps the Space in sync with GitHub, but we PRESERVE the
+          # Space's own .git and skip build/venv/secret artifacts.
+          rsync -av --delete \
+            --exclude='.git/' \
+            --exclude='__pycache__/' \
+            --exclude='*.pyc' \
+            --exclude='.env' \
+            --exclude='.env.*' \
+            analytics/ hf-space/
+
+      - name: Commit and push to the Space
+        working-directory: hf-space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -euo pipefail
+          export GIT_TRACE=0 GIT_CURL_VERBOSE=0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          # Skip the commit/push if nothing actually changed, so the job stays green.
+          if git diff --cached --quiet; then
+            echo "No changes to sync; Space is already up to date."
+            exit 0
+          fi
+          SHORT_SHA="$(echo "${GITHUB_SHA}" | cut -c1-7)"
+          git commit -m "Sync from GitHub ${SHORT_SHA}"
+          # Re-set the remote with credentials in case the cloned URL was sanitized.
+          git remote set-url origin \
+            "https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/${HF_SPACE}.git"
+          git push origin HEAD:main
+          echo "Pushed ${SHORT_SHA} to the Hugging Face Space."

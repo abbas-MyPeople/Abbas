@@ -1,0 +1,7 @@
+flask==3.1.0
+gunicorn==23.0.0
+# GA4 Data API auth: google-auth signs the service-account JWT; requests handles token refresh.
+# ga4.py also carries a pure-stdlib RS256 fallback (needs `cryptography`, a google-auth
+# transitive dep) if google-auth is ever absent.
+google-auth==2.*
+requests==2.*
