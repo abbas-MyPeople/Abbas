@@ -65,7 +65,7 @@ jobs:
         run: python -m growth_engine.run --mode read
 
       - name: EXECUTE — apply the approved moves (site edits + actions)
-        run: python -m growth_engine.run --mode execute
+        run: python -m growth_engine.run --mode execute --apply
 
       - name: Commit accumulated state + site edits
         if: always()             # record decisions even if execute partially failed
