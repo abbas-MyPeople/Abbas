@@ -1,0 +1,5 @@
+# growth_engine deps. WATCH/PROPOSE/SEND/READ + the LLM actioner run on the Python standard library only
+# (urllib/smtplib/imaplib/json/subprocess). These are optional accelerators:
+requests>=2.31        # convenience HTTP (the modules themselves use urllib; requests kept for parity/CI)
+google-auth>=2.23     # faster GA4 SA-token path in ../analytics/ga4.py (stdlib JWT fallback exists)
+# node (for `node --check` JS validation) and git must be on PATH at execute time.

@@ -1,0 +1,83 @@
+name: AZ Growth Engine — daily reply reader + execute
+
+# The AZ Restaurant Partners growth engine (growth_engine/ python package).
+# Later in the morning it READs the owner's reply to the daily proposal, parses
+# the decisions, then EXECUTEs the approved moves (site edits + actions). Any
+# updated engine state AND site edits are committed back to main.
+#
+# NOTE: scheduled + manual only. It must NOT trigger on push (it writes to
+# growth_engine/state/** and the site, which would self-trigger a loop).
+
+on:
+  schedule:
+    - cron: "31 13 * * *"    # 13:31 UTC (~8:31 AM US Central)
+  workflow_dispatch:
+
+concurrency:
+  group: az-growth
+  cancel-in-progress: false
+
+permissions:
+  contents: write            # to commit engine state + site edits back to the repo
+
+env:
+  GA4_PROPERTY_ID:        ${{ secrets.GA4_PROPERTY_ID }}
+  GA4_SA_JSON:            ${{ secrets.GA4_SA_JSON }}
+  GROQ_API_KEY:           ${{ secrets.GROQ_API_KEY }}
+  ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
+  WK_ENGINE_EMAIL:        ${{ secrets.WK_ENGINE_EMAIL }}
+  WK_ENGINE_APP_PASSWORD: ${{ secrets.WK_ENGINE_APP_PASSWORD }}
+  WK_ENGINE_TO:           ${{ secrets.WK_ENGINE_TO }}
+
+jobs:
+  read-and-execute:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r growth_engine/requirements.txt
+
+      - name: Guard — required secrets must be present
+        run: |
+          set -euo pipefail
+          missing=""
+          for name in GA4_PROPERTY_ID GA4_SA_JSON GROQ_API_KEY ANTHROPIC_API_KEY \
+                      WK_ENGINE_EMAIL WK_ENGINE_APP_PASSWORD WK_ENGINE_TO; do
+            if [ -z "${!name:-}" ]; then
+              missing="${missing} ${name}"
+            fi
+          done
+          if [ -n "${missing}" ]; then
+            echo "::error::Missing required secret(s):${missing}. Set them under Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          echo "All required secrets present."
+
+      - name: READ — parse the owner's reply
+        run: python -m growth_engine.run --mode read
+
+      - name: EXECUTE — apply the approved moves (site edits + actions)
+        run: python -m growth_engine.run --mode execute
+
+      - name: Commit accumulated state + site edits
+        if: always()             # record decisions even if execute partially failed
+        run: |
+          git config user.name  "growth-engine[bot]"
+          git config user.email "growth-engine@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "growth-engine: daily read+execute snapshot [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push origin main || echo "push skipped"
+          fi
