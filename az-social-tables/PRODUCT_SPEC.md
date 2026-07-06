@@ -38,6 +38,37 @@ Night). Halal-friendly formats are a genuine differentiator in this trade area.
 
 ---
 
+## Competitive landscape (researched 2026-07; don't skip this)
+
+The *consumer experience* is validated and crowded; the *restaurant-side business*
+is not. Position accordingly.
+
+- **Timeleft** (timeleft.com) — the category giant: ~6,500 dinners/week, ~150k
+  monthly participants, €18M ARR, 200+ cities **including Houston**. Consumer pays
+  a ticket fee; restaurants pay nothing and are treated as free inventory (their
+  stated scaling strategy: no hosts, no restaurant ops). One SKU: 6 strangers,
+  algorithm-matched, weeknight dinner.
+- **222** (222.place) — $10.1M Series A; LA/NYC-centric. Consumer curation fee /
+  subscription, plus a restaurant partner program (~$3/person sent). Closest to
+  monetizing the venue side, but still a consumer-app company; no slow-night
+  program, no ROI accounting, no hosting.
+- **OpenToBites** — local Houston app for dinner meetups; early, consumer-side.
+
+**What this means:**
+1. Demand is proven — people demonstrably pay $16–20 just to be seated with
+   strangers. Our deposit-that-becomes-food is an easier ask, not a harder one.
+2. The undefended ground is **venue-side**: selling restaurants a measured
+   slow-night revenue program (hosted formats, POS baseline comparison,
+   pay-per-seated-guest) in **suburban trade areas** (Spring/Klein/Woodlands)
+   below the density these machines need — plus formats only a venue operator can
+   run (Food Discovery as menu marketing, halal-friendly tables, community nights).
+3. The risk is drifting into their lane: a generic "dinner with strangers" brand
+   competing for Inner-Loop consumers loses to Timeleft's polish. If a consumer in
+   our funnel could have used Timeleft instead, we're off-position.
+4. Cheap intelligence play: attend a Houston Timeleft dinner before pilot week 1;
+   consider listing W&K as a venue for such platforms — free covers + a view of
+   the machine from inside.
+
 ## Why this is not a dating app
 
 - **The customer is the restaurant.** Revenue comes from venues paying for seated
