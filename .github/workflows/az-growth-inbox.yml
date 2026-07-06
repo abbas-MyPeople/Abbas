@@ -23,7 +23,6 @@ permissions:
 env:
   GA4_PROPERTY_ID:        ${{ secrets.GA4_PROPERTY_ID }}
   GA4_SA_JSON:            ${{ secrets.GA4_SA_JSON }}
-  GROQ_API_KEY:           ${{ secrets.GROQ_API_KEY }}
   ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
   WK_ENGINE_EMAIL:        ${{ secrets.WK_ENGINE_EMAIL }}
   WK_ENGINE_APP_PASSWORD: ${{ secrets.WK_ENGINE_APP_PASSWORD }}
@@ -50,7 +49,7 @@ jobs:
         run: |
           set -euo pipefail
           missing=""
-          for name in GA4_PROPERTY_ID GA4_SA_JSON GROQ_API_KEY ANTHROPIC_API_KEY \
+          for name in GA4_PROPERTY_ID GA4_SA_JSON ANTHROPIC_API_KEY \
                       WK_ENGINE_EMAIL WK_ENGINE_APP_PASSWORD WK_ENGINE_TO; do
             if [ -z "${!name:-}" ]; then
               missing="${missing} ${name}"
