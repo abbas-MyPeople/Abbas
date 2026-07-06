@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Spring · The Woodlands · North Houston</div>
+    <h1>Meet real people<br>over real food.</h1>
+    <p class="lede">
+      We host curated dinners at great local restaurants — singles tables, new-friends
+      tables, chef's tastings, community nights. You apply for a seat, we balance the
+      table, a host gets the conversation going, and then it's just a good dinner.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn" href="{{ url_for('events_list') }}">Find a Dinner</a>
+      <a class="btn btn-ghost" href="{{ url_for('restaurants') }}">Fill Empty Tables (restaurants)</a>
+    </div>
+    <p class="hero-note">
+      <strong>This is real-world dining, not a dating app.</strong> No profiles, no swiping,
+      no chat rooms — one table, one evening, real conversation.
+    </p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Four kinds of tables</h2>
+      <p>Every dinner is small (12–20 seats), hosted, and held at a restaurant we'd send our own family to.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><span class="pill pill-singles">Singles Dinner Night</span>
+        <h3>Dinner, not a swipe session</h3>
+        <p>A balanced table of local singles in a similar age range. Two light icebreakers, then real conversation over shared plates.</p></div>
+      <div class="card"><span class="pill pill-friends">New Friends Dinner</span>
+        <h3>For making actual friends</h3>
+        <p>New in town, or your circle shrank after college? Platonic on purpose — small groups that rotate between courses.</p></div>
+      <div class="card"><span class="pill pill-discovery">Food Discovery Table</span>
+        <h3>Eat something new, together</h3>
+        <p>Guided family-style tastings — the dishes a menu can't explain, told by the people who cook them.</p></div>
+      <div class="card"><span class="pill pill-community">Community Dinner Night</span>
+        <h3>Your neighborhood, one table</h3>
+        <p>Open tables that bring a neighborhood together — families, newcomers, regulars. Everyone eats.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How it works</h2>
+    </div>
+    <div class="grid grid-2">
+      <div class="steps">
+        <div class="step"><div><h4>Apply for a seat</h4><p>Two minutes: who you are, what you're looking for, what you eat. No account, no profile.</p></div></div>
+        <div class="step"><div><h4>We curate the table</h4><p>We balance every dinner by hand — age range, intent, group mix — so it actually works. You'll hear back within 48 hours.</p></div></div>
+        <div class="step"><div><h4>Reserve with a small deposit</h4><p>Deposits (usually $10) hold your seat and come <em>off your food bill</em>. It keeps the table full of people who show up.</p></div></div>
+        <div class="step"><div><h4>Come to dinner</h4><p>A host greets you, seats you, breaks the ice, and steps back. Order what you like. Stay as long as you want.</p></div></div>
+      </div>
+      <div class="trust">
+        <h4>Trust &amp; safety, plainly</h4>
+        <ul>
+          <li>Every dinner is in a public restaurant with our host present the whole time.</li>
+          <li>We collect names and phone numbers — everyone at the table is accountable.</li>
+          <li>House rules: be kind, show up, no hard selling, no photographing other guests without asking.</li>
+          <li>Anyone who makes the table feel unsafe is removed and not invited back.</li>
+          <li>Your info is used to run the dinner you applied for — never sold.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if events %}
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head"><h2>Next tables</h2></div>
+    <div class="grid grid-3">
+      {% for e in events %}
+      <div class="card event-card">
+        <span class="pill pill-{{ e.type }}">{{ EVENT_TYPES[e.type] }}</span>
+        <h3>{{ e.title }}</h3>
+        <div class="meta">
+          <span>📍 {{ e.venue }} · {{ e.venue_area }}</span>
+          <span>🗓 {{ e.date }} · {{ e.time }}</span>
+        </div>
+        <p class="vibe">“{{ e.vibe }}”</p>
+        <div class="cta-row">
+          <a class="btn btn-small" href="{{ url_for('event_detail', event_id=e.id) }}">View &amp; apply</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <p style="margin-top:22px"><a href="{{ url_for('events_list') }}">See all upcoming dinners →</a></p>
+  </div>
+</section>
+{% endif %}
+
+<section class="section">
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div>
+        <div class="kicker">For restaurant owners</div>
+        <h2>We turn empty tables into curated social dining experiences.</h2>
+        <p>Slow Tuesday? We bring 12–20 pre-booked, deposit-committed local guests to your
+        dining room, host the whole evening, and hand you a plain-numbers recap the next
+        morning. You pay only for guests who are actually seated.</p>
+        <a class="btn" href="{{ url_for('restaurants') }}">Fill Empty Tables</a>
+      </div>
+      <div class="card">
+        <h3>Why restaurants like this</h3>
+        <p>Delivery apps take ~30% and keep the customer. We do the opposite: full-price
+        dine-in covers on your slowest night, guests who meet <em>in your dining room</em>
+        and come back with the people they met. First pilot event is on us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

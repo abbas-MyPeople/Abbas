@@ -1,0 +1,61 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}{{ 'New event' if is_new else 'Edit event' }} — AZ Social Tables{% endblock %}
+{% block admin %}
+<h1>{{ 'Create event' if is_new else 'Edit event' }}</h1>
+<div class="card" style="max-width:760px">
+  <form class="stack" method="post">
+    <div class="field"><label for="title">Title *</label>
+      <input type="text" id="title" name="title" required maxlength="140" value="{{ event.title if event else '' }}"></div>
+    <div class="field-row">
+      <div class="field"><label for="type">Event type *</label>
+        <select id="type" name="type" required>
+          {% for key, label in EVENT_TYPES.items() %}
+          <option value="{{ key }}" {{ 'selected' if event and event.type == key }}>{{ label }}</option>
+          {% endfor %}
+        </select></div>
+      <div class="field"><label for="status">Status *</label>
+        <select id="status" name="status">
+          {% for st in ['draft','open','full','completed','cancelled'] %}
+          <option value="{{ st }}" {{ 'selected' if event and event.status == st }}>{{ st }}</option>
+          {% endfor %}
+        </select></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label for="venue">Venue *</label>
+        <input type="text" id="venue" name="venue" required maxlength="120" value="{{ event.venue if event else 'Wok & Karahi' }}"></div>
+      <div class="field"><label for="venue_area">Venue area</label>
+        <input type="text" id="venue_area" name="venue_area" maxlength="120" value="{{ event.venue_area if event else 'Spring, TX (FM 2920)' }}"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label for="date">Date *</label>
+        <input type="date" id="date" name="date" required value="{{ event.date if event else '' }}"></div>
+      <div class="field"><label for="time">Start time *</label>
+        <input type="time" id="time" name="time" required value="{{ event.time if event else '18:30' }}"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label for="age_range">Age range <span class="hint">— if relevant</span></label>
+        <input type="text" id="age_range" name="age_range" maxlength="20" value="{{ event.age_range if event else '21+' }}"></div>
+      <div class="field"><label for="capacity">Capacity *</label>
+        <input type="number" id="capacity" name="capacity" required min="1" max="200" value="{{ event.capacity if event else 16 }}"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label for="deposit">Deposit ($, toward meal)</label>
+        <input type="number" id="deposit" name="deposit" min="0" max="500" value="{{ event.deposit if event else 10 }}"></div>
+      <div class="field"><label for="per_guest_fee">Fee per seated guest ($)</label>
+        <input type="number" id="per_guest_fee" name="per_guest_fee" min="0" max="100" value="{{ event.per_guest_fee if event else 6 }}"></div>
+    </div>
+    <div class="field"><label for="offer">Offer / on the house</label>
+      <input type="text" id="offer" name="offer" maxlength="200" value="{{ event.offer if event else '' }}"></div>
+    <div class="field"><label for="dietary_notes">Dietary notes</label>
+      <input type="text" id="dietary_notes" name="dietary_notes" maxlength="200" value="{{ event.dietary_notes if event else '' }}"></div>
+    <div class="field"><label for="vibe">Vibe line <span class="hint">— one sentence shown on cards</span></label>
+      <input type="text" id="vibe" name="vibe" maxlength="200" value="{{ event.vibe if event else '' }}"></div>
+    <div class="field"><label for="description">Description</label>
+      <textarea id="description" name="description" maxlength="2000">{{ event.description if event else '' }}</textarea></div>
+    <div>
+      <button class="btn" type="submit">{{ 'Create event' if is_new else 'Save changes' }}</button>
+      <a class="btn btn-quiet" href="{{ url_for('admin_dashboard') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Social Tables — Meet real people over real food{% endblock %}</title>
+  <meta name="description" content="Curated dinners at local restaurants. Real people, real food, one table — a pilot by AZ Restaurant Partners.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="{{ url_for('landing') }}">Social<span>Tables</span></a>
+      <nav>
+        <a href="{{ url_for('events_list') }}">Upcoming dinners</a>
+        <a href="{{ url_for('restaurants') }}">For restaurants</a>
+        <a class="btn btn-small" href="{{ url_for('events_list') }}">Find a Dinner</a>
+      </nav>
+    </div>
+  </header>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="wrap">
+        {% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <div class="brand brand-footer">Social<span>Tables</span></div>
+        <p>Curated dinners at local restaurants — real-world dining, not a dating app.
+        A pilot by <strong>AZ Restaurant Partners</strong>, Spring&nbsp;TX.</p>
+      </div>
+      <div>
+        <h4>How it works</h4>
+        <p>Apply for a seat → we curate a balanced table → dinner at a great local
+        restaurant. Deposits go toward your meal. A host is present at every table.</p>
+      </div>
+      <div>
+        <h4>House rules</h4>
+        <p>Be kind, show up, no hard selling, no recording other guests. Public venues
+        only. We remove anyone who makes the table feel unsafe — no refund needed on our end,
+        no debate.</p>
+      </div>
+    </div>
+    <div class="wrap footnote">© 2026 AZ Restaurant Partners · Pilot program · Spring / North Houston, TX</div>
+  </footer>
+</body>
+</html>

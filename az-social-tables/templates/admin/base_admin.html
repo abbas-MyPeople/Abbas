@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-bar">
+  <div class="wrap">
+    <strong>Operator console</strong>
+    <span>
+      <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('admin_event_new') }}">+ New event</a>
+      <a href="{{ url_for('landing') }}">View public site</a>
+    </span>
+  </div>
+</div>
+<section class="section" style="padding-top:34px">
+  <div class="wrap">
+    {% block admin %}{% endblock %}
+  </div>
+</section>
+{% endblock %}

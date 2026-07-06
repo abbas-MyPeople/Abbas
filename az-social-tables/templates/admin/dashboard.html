@@ -1,0 +1,69 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Operator dashboard — AZ Social Tables{% endblock %}
+{% block admin %}
+<h1>Dashboard</h1>
+
+<div class="stat-row">
+  <div class="stat"><div class="num">{{ totals.applications }}</div><div class="lbl">Applications</div></div>
+  <div class="stat"><div class="num">{{ totals.pending }}</div><div class="lbl">Awaiting review</div></div>
+  <div class="stat"><div class="num">{{ totals.confirmed }}</div><div class="lbl">Confirmed seats</div></div>
+  <div class="stat"><div class="num">{{ totals.seated }}</div><div class="lbl">Guests seated</div></div>
+</div>
+
+<h2 style="margin-top:26px">Events</h2>
+<div class="table-scroll">
+<table class="admin">
+  <tr><th>Event</th><th>Type</th><th>Date</th><th>Status</th><th>Apps</th><th>Pending</th>
+      <th>Approved</th><th>Confirmed</th><th>Seated</th><th>Seats left</th><th></th></tr>
+  {% for e in events %}
+  {% set s = stats[e.id] %}
+  <tr>
+    <td><a href="{{ url_for('admin_event', event_id=e.id) }}"><strong>{{ e.title }}</strong></a><br>
+        <span style="color:var(--muted)">{{ e.venue }}</span></td>
+    <td>{{ EVENT_TYPES[e.type] }}</td>
+    <td>{{ e.date }}<br>{{ e.time }}</td>
+    <td class="status-{{ e.status }}">{{ e.status }}</td>
+    <td>{{ s.applications }}</td>
+    <td>{% if s.pending %}<strong>{{ s.pending }}</strong>{% else %}0{% endif %}</td>
+    <td>{{ s.approved }}/{{ e.capacity }}</td>
+    <td>{{ s.confirmed }}</td>
+    <td>{{ s.seated }}{% if s.no_show %} <span class="att-no_show">({{ s.no_show }} NS)</span>{% endif %}</td>
+    <td>{{ s.seats_left }}</td>
+    <td><a class="btn btn-tiny btn-quiet" href="{{ url_for('admin_event_edit', event_id=e.id) }}">Edit</a></td>
+  </tr>
+  {% else %}
+  <tr><td colspan="11">No events yet. <a href="{{ url_for('admin_event_new') }}">Create the first one.</a></td></tr>
+  {% endfor %}
+</table>
+</div>
+
+<h2 style="margin-top:40px" id="inquiries">Restaurant inquiries</h2>
+{% if inquiries %}
+<div class="table-scroll">
+<table class="admin">
+  <tr><th>Received</th><th>Restaurant</th><th>Contact</th><th>Area</th><th>Slow nights</th><th>Notes</th><th>Status</th></tr>
+  {% for i in inquiries %}
+  <tr>
+    <td>{{ i.created_at[:10] }}</td>
+    <td><strong>{{ i.restaurant }}</strong></td>
+    <td>{{ i.name }}<br>{{ i.contact }}</td>
+    <td>{{ i.area }}</td>
+    <td>{{ i.slow_nights }}</td>
+    <td style="max-width:260px">{{ i.notes }}</td>
+    <td>
+      <form class="inline-form" method="post" action="{{ url_for('admin_inquiry_status', inq_id=i.id) }}">
+        <select name="status" onchange="this.form.submit()">
+          {% for st in ['new','contacted','closed'] %}
+          <option value="{{ st }}" {{ 'selected' if i.status == st }}>{{ st }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% else %}
+<p>No restaurant inquiries yet.</p>
+{% endif %}
+{% endblock %}

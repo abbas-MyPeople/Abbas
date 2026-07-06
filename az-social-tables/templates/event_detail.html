@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}{{ event.title }} — Social Tables{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap">
+    <p><a href="{{ url_for('events_list') }}">← All dinners</a></p>
+    <div class="detail-grid">
+      <div>
+        <span class="pill pill-{{ event.type }}">{{ EVENT_TYPES[event.type] }}</span>
+        {% if event.status == 'full' %}<span class="pill pill-full">Waitlist only</span>{% endif %}
+        <h1 style="margin-top:12px">{{ event.title }}</h1>
+        <p class="vibe" style="font-style:italic">“{{ event.vibe }}”</p>
+        <p>{{ event.description }}</p>
+
+        <ul class="fact-list">
+          <li><span>Where</span><span>{{ event.venue }} — {{ event.venue_area }}</span></li>
+          <li><span>When</span><span>{{ event.date }} at {{ event.time }}</span></li>
+          <li><span>Ages</span><span>{{ event.age_range }}</span></li>
+          <li><span>Table size</span><span>{{ event.capacity }} seats
+            {% if event.status != 'full' %}· {{ stats.seats_left }} left{% endif %}</span></li>
+          <li><span>Deposit</span><span>${{ event.deposit }} — credited to your food bill</span></li>
+          {% if event.offer %}<li><span>On the house</span><span>{{ event.offer }}</span></li>{% endif %}
+          {% if event.dietary_notes %}<li><span>Dietary</span><span>{{ event.dietary_notes }}</span></li>{% endif %}
+        </ul>
+
+        <div class="trust">
+          <h4>Trust &amp; safety</h4>
+          <ul>
+            <li>Held in a public restaurant; our host is present the entire evening.</li>
+            <li>Every guest is name-and-phone verified and personally approved.</li>
+            <li>House rules: be kind, show up, no hard selling, ask before photos.</li>
+            <li>Anyone who makes the table feel unsafe is removed and not invited back.</li>
+            <li>Your answers are used only to curate this dinner — never sold or posted.</li>
+          </ul>
+        </div>
+        <p style="margin-top:14px; font-size:0.88rem; color:var(--muted)">
+          <strong>About the deposit:</strong> after you're approved, we'll text you simple
+          payment instructions. During this pilot, deposits are collected directly (not
+          through this site) and applied to your bill at dinner.</p>
+      </div>
+
+      <div class="card" id="apply">
+        {% if event.status == 'open' %}
+        <h3>Apply for a seat</h3>
+        <p style="font-size:0.9rem">Takes two minutes. We reply within 48 hours.</p>
+        {% else %}
+        <h3>Join the waitlist</h3>
+        <p style="font-size:0.9rem">This table is full — apply below and you're first in line if a seat opens.</p>
+        {% endif %}
+
+        {% if event.status in ('open', 'full') %}
+        <form class="stack" method="post" action="{{ url_for('event_apply', event_id=event.id) }}">
+          <div class="field"><label for="name">Full name *</label>
+            <input type="text" id="name" name="name" required maxlength="120"></div>
+          <div class="field"><label for="contact">Phone or email *
+              <span class="hint">— used only to confirm your seat</span></label>
+            <input type="text" id="contact" name="contact" required maxlength="120"></div>
+          <div class="field-row">
+            <div class="field"><label for="age_range">Age range *</label>
+              <select id="age_range" name="age_range" required>
+                <option value="" disabled selected>Select…</option>
+                {% for r in age_ranges %}<option>{{ r }}</option>{% endfor %}
+              </select></div>
+            <div class="field"><label for="gender">Gender
+                <span class="hint">— asked only to balance singles tables</span></label>
+              <select id="gender" name="gender">
+                <option value="">Prefer not to say</option>
+                <option value="woman">Woman</option>
+                <option value="man">Man</option>
+                <option value="nonbinary">Non-binary</option>
+              </select></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="intent">What are you here for? *</label>
+              <select id="intent" name="intent" required>
+                <option value="" disabled selected>Select…</option>
+                {% for key, label in INTENTS.items() %}<option value="{{ key }}">{{ label }}</option>{% endfor %}
+              </select></div>
+            <div class="field"><label for="area">Where are you based? *</label>
+              <select id="area" name="area" required>
+                <option value="" disabled selected>Select…</option>
+                {% for a in areas %}<option>{{ a }}</option>{% endfor %}
+              </select></div>
+          </div>
+          <div class="field"><label for="dietary">Dietary preferences
+              <span class="hint">— vegetarian, allergies, spice level…</span></label>
+            <input type="text" id="dietary" name="dietary" maxlength="200"></div>
+          <div class="field"><label for="vibe">Tell us a little about you *
+              <span class="hint">— one or two sentences: what you do, what you're into, your table energy</span></label>
+            <textarea id="vibe" name="vibe" required maxlength="500"></textarea></div>
+          <label class="consent">
+            <input type="checkbox" name="consent" value="1" required>
+            <span>I agree to the house rules (be kind, show up, no hard selling, ask before
+            photos) and understand the deposit holds my seat and is credited to my meal. *</span>
+          </label>
+          <button class="btn" type="submit">Request my seat</button>
+        </form>
+        {% else %}
+        <p>Applications for this table are closed. <a href="{{ url_for('events_list') }}">See other upcoming dinners →</a></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

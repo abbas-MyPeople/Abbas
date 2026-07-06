@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Upcoming dinners — Social Tables{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap">
+    <div class="kicker">Upcoming dinners</div>
+    <h1>Pull up a chair.</h1>
+    <p class="lede">Small, hosted, curated tables at local restaurants. Apply for the one that sounds like you.</p>
+
+    <div class="filter-bar">
+      <a href="{{ url_for('events_list') }}" class="{{ 'active' if not active_type }}">All tables</a>
+      {% for key, label in EVENT_TYPES.items() %}
+      <a href="{{ url_for('events_list', type=key) }}" class="{{ 'active' if active_type == key }}">{{ label }}</a>
+      {% endfor %}
+    </div>
+
+    {% if events %}
+    <div class="grid grid-3">
+      {% for e in events %}
+      {% set s = stats[e.id] %}
+      <div class="card event-card">
+        <div><span class="pill pill-{{ e.type }}">{{ EVENT_TYPES[e.type] }}</span>
+        {% if e.status == 'full' %} <span class="pill pill-full">Waitlist only</span>{% endif %}</div>
+        <h3>{{ e.title }}</h3>
+        <div class="meta">
+          <span>📍 {{ e.venue }} · {{ e.venue_area }}</span>
+          <span>🗓 {{ e.date }} at {{ e.time }}</span>
+          <span>👤 Ages {{ e.age_range }}</span>
+          <span>💵 ${{ e.deposit }} deposit — comes off your bill</span>
+        </div>
+        <p class="vibe">“{{ e.vibe }}”</p>
+        <div class="cta-row">
+          <a class="btn btn-small" href="{{ url_for('event_detail', event_id=e.id) }}">
+            {{ 'Join waitlist' if e.status == 'full' else 'View & apply' }}</a>
+          {% if e.status != 'full' %}
+          <span class="seats-left {{ 'low' if s.seats_left <= 4 }}">{{ s.seats_left }} seats left</span>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card">
+      <h3>No tables in this category right now</h3>
+      <p>New dinners are added weekly. <a href="{{ url_for('events_list') }}">See all upcoming tables</a>.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

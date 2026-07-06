@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Application received — Social Tables{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap" style="max-width:680px">
+    <div class="kicker">Application received</div>
+    <h1>You're in the queue. 🍽</h1>
+    <p class="lede">Thanks for applying to <strong>{{ event.title }}</strong> on
+    {{ event.date }} at {{ event.time }}.</p>
+    <div class="card">
+      <h3>What happens next</h3>
+      <div class="steps">
+        <div class="step"><div><p style="margin:4px 0 0"><strong>Within 48 hours</strong> we review applications and curate a balanced table.{% if event.status == 'full' %} This table is currently full, so you're first in line if a seat opens.{% endif %}</p></div></div>
+        <div class="step"><div><p style="margin:4px 0 0"><strong>If you're approved,</strong> you'll get a text/email with your seat confirmation and simple deposit instructions (${{ event.deposit }}, credited to your food bill).</p></div></div>
+        <div class="step"><div><p style="margin:4px 0 0"><strong>Day of the dinner,</strong> we send a reminder with parking and arrival details. Then — dinner.</p></div></div>
+      </div>
+    </div>
+    <p style="margin-top:22px"><a class="btn btn-ghost" href="{{ url_for('events_list') }}">Browse other dinners</a></p>
+  </div>
+</section>
+{% endblock %}

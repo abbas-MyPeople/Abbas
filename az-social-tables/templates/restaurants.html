@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Fill slow nights with pre-booked customers — AZ Social Tables{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">AZ Social Tables · for restaurant owners</div>
+    <h1>Fill slow restaurant nights<br>with pre-booked local customers.</h1>
+    <p class="lede">
+      We turn empty tables into curated social dining experiences — singles dinners,
+      new-friends tables, chef's tastings, community nights. We recruit and vet the
+      guests, collect deposits so they show up, host the evening, and hand you the
+      numbers the next morning. <strong>You pay only for guests who are actually seated.</strong>
+    </p>
+    <div class="hero-ctas">
+      <a class="btn" href="#inquiry">Book a 15-minute call</a>
+      <a class="btn btn-ghost" href="#roi">See the math</a>
+    </div>
+    <p class="hero-note">Built by AZ Restaurant Partners — run by an owner-operator, proven first in our own restaurant.</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The model, plainly</h2>
+      <p>No subscription. No hardware. No staff training. No discounting your menu to strangers on an app.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3>1 · We fill the table</h3>
+        <p>We recruit locals through community channels, take applications, vet and balance
+        the table, and collect a deposit that commits each guest to showing up on your
+        slowest night.</p></div>
+      <div class="card"><h3>2 · We host the night</h3>
+        <p>Our host greets guests, seats them, runs two light icebreakers, and stays through
+        the evening. Your team just does what it already does: serve great food.</p></div>
+      <div class="card"><h3>3 · You pay per seated guest</h3>
+        <p>A flat fee (typically <strong>$6 per seated guest</strong>) — counted at the door,
+        invoiced the next morning with a one-page recap: covers, spend, and revenue vs. your
+        normal night. No-shows cost you nothing. <strong>Your first event is free.</strong></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="roi">
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div>
+        <div class="kicker">Worked example</div>
+        <h2>What a slow Tuesday looks like with 18 booked guests</h2>
+        <p>Numbers below are a realistic mid-week scenario for an independent restaurant at
+        ~$25 a head — we'll model yours on the call using your own POS numbers.</p>
+        <p>Deposits (paid by guests, credited to their bills) mean the people who book
+        actually arrive — that's the difference between this and a free meetup that
+        half-shows. And unlike a delivery order, these guests see your dining room, meet
+        your staff, and tie a <em>memory</em> to your restaurant. The couple that met at
+        your table books their next three dates at it.</p>
+      </div>
+      <div class="card">
+        <h3>Event-night math</h3>
+        <table class="roi">
+          <tr><td>Seated guests (of 20 booked)</td><td>18</td></tr>
+          <tr><td>Average spend per guest</td><td>$25</td></tr>
+          <tr><td>Event revenue in the window</td><td>$450</td></tr>
+          <tr><td>Your normal slow-night window</td><td>~$150</td></tr>
+          <tr><td>Incremental revenue</td><td>+$300</td></tr>
+          <tr><td>Our fee (18 seated × $6)</td><td>−$108</td></tr>
+          <tr class="total"><td>Net new revenue, one night</td><td>+$192</td></tr>
+        </table>
+        <p style="margin-top:12px; font-size:0.85rem; color:var(--muted)">
+        Plus what doesn't fit in a table: reviews, photos, return visits, and catering
+        leads from guests who now know your food. Weekly event ≈ $800+/month net.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head"><h2>Good questions owners ask</h2></div>
+    <div class="grid grid-2">
+      <div class="card"><h3>"Is this a dating thing in my dining room?"</h3>
+        <p>No. It's a hosted dinner party. Singles night is one format of four — and even
+        that one looks like a normal long-table reservation: quiet, adult, well-run. No
+        gimmicks, no name tags, nothing your regulars would blink at.</p></div>
+      <div class="card"><h3>"What does my staff have to do?"</h3>
+        <p>Nothing new. It's one big reservation with a pre-set table plan. Our host handles
+        everything social. Most kitchens actually prefer it — orders arrive in a predictable
+        wave on an otherwise dead night.</p></div>
+      <div class="card"><h3>"What if guests don't show?"</h3>
+        <p>Deposits cut no-shows hard, and we overbook against a waitlist. Either way, you
+        pay per <em>seated</em> guest — an empty chair never costs you a dollar.</p></div>
+      <div class="card"><h3>"How do I know it worked?"</h3>
+        <p>Next-morning recap: guests seated, average spend, event-window revenue vs. your
+        same-weekday baseline. If the math doesn't clearly work, stop — no contract, no
+        minimums.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="inquiry">
+  <div class="wrap" style="max-width:720px">
+    <div class="kicker">Get started</div>
+    <h2>Tell us about your slow nights</h2>
+    <p>15-minute call, your numbers, no pitch deck. First event free, then pay-per-seated-guest.</p>
+    <div class="card">
+      <form class="stack" method="post" action="{{ url_for('restaurant_inquiry') }}">
+        <div class="field-row">
+          <div class="field"><label for="restaurant">Restaurant name *</label>
+            <input type="text" id="restaurant" name="restaurant" required maxlength="120"></div>
+          <div class="field"><label for="name">Your name</label>
+            <input type="text" id="name" name="name" maxlength="120"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="contact">Phone or email *</label>
+            <input type="text" id="contact" name="contact" required maxlength="120"></div>
+          <div class="field"><label for="area">Neighborhood / area</label>
+            <input type="text" id="area" name="area" maxlength="120" placeholder="e.g. Spring, Katy, Heights"></div>
+        </div>
+        <div class="field"><label for="slow_nights">Which nights are slow?</label>
+          <input type="text" id="slow_nights" name="slow_nights" maxlength="120" placeholder="e.g. Tue & Wed after 6"></div>
+        <div class="field"><label for="notes">Anything else?</label>
+          <textarea id="notes" name="notes" maxlength="1000" placeholder="Seats, cuisine, private room, what you've tried…"></textarea></div>
+        <button class="btn" type="submit">Request a call</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

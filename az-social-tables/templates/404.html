@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Not found — Social Tables{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap" style="max-width:620px; text-align:center">
+    <h1>That table isn't set.</h1>
+    <p class="lede">The page you're looking for doesn't exist — or the event is no longer taking applications.</p>
+    <a class="btn" href="{{ url_for('events_list') }}">See upcoming dinners</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}{{ event.title }} — operator — AZ Social Tables{% endblock %}
+{% block admin %}
+<p><a href="{{ url_for('admin_dashboard') }}">← Dashboard</a></p>
+<h1>{{ event.title }}</h1>
+<p>
+  <span class="pill pill-{{ event.type }}">{{ EVENT_TYPES[event.type] }}</span>
+  &nbsp;<span class="status-{{ event.status }}">{{ event.status }}</span>
+  &nbsp;· {{ event.venue }} · {{ event.date }} at {{ event.time }} · capacity {{ event.capacity }}
+  &nbsp;· <a class="btn btn-tiny btn-quiet" href="{{ url_for('admin_event_edit', event_id=event.id) }}">Edit event</a>
+  &nbsp;<a class="btn btn-tiny btn-quiet" href="{{ url_for('event_detail', event_id=event.id) }}">Public page</a>
+</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="num">{{ stats.applications }}</div><div class="lbl">Applications</div></div>
+  <div class="stat"><div class="num">{{ stats.pending }}</div><div class="lbl">Pending</div></div>
+  <div class="stat"><div class="num">{{ stats.approved }}/{{ event.capacity }}</div><div class="lbl">Approved</div></div>
+  <div class="stat"><div class="num">{{ stats.waitlist }}</div><div class="lbl">Waitlist</div></div>
+  <div class="stat"><div class="num">{{ stats.confirmed }}</div><div class="lbl">Confirmed (deposit)</div></div>
+  <div class="stat"><div class="num">{{ stats.seated }}</div><div class="lbl">Seated</div></div>
+  <div class="stat"><div class="num">{{ stats.no_show }}</div><div class="lbl">No-shows</div></div>
+  <div class="stat"><div class="num">{{ stats.show_rate ~ '%' if stats.show_rate is not none else '—' }}</div><div class="lbl">Show rate</div></div>
+</div>
+
+{% if stats.gender or stats.intent %}
+<div class="balance-chips">
+  {% for g, n in stats.gender.items() %}<span class="pill">approved · {{ g }}: {{ n }}</span>{% endfor %}
+  {% for i, n in stats.intent.items() %}<span class="pill">intent · {{ INTENTS.get(i, i) }}: {{ n }}</span>{% endfor %}
+</div>
+{% endif %}
+
+<h2 style="margin-top:30px">Applicants</h2>
+{% if apps %}
+<div class="table-scroll">
+<table class="admin">
+  <tr><th>Applicant</th><th>Details</th><th>Vibe</th><th>Status</th><th>Decision</th>
+      <th>Deposit</th><th>Night of</th></tr>
+  {% for a in apps %}
+  <tr>
+    <td><strong>{{ a.name }}</strong><br><span style="color:var(--muted)">{{ a.contact }}</span></td>
+    <td>{{ a.age_range }}{% if a.gender %} · {{ a.gender }}{% endif %}<br>
+        {{ INTENTS.get(a.intent, a.intent) }} · {{ a.area }}
+        {% if a.dietary %}<br>🍽 {{ a.dietary }}{% endif %}</td>
+    <td style="max-width:240px; font-style:italic">“{{ a.vibe }}”</td>
+    <td class="status-{{ a.status }}">{{ a.status }}
+        {% if a.confirmed %}<br><span class="att-seated">✓ deposit</span>{% endif %}
+        {% if a.attendance %}<br><span class="att-{{ a.attendance }}">{{ 'seated' if a.attendance == 'seated' else 'no-show' }}</span>{% endif %}</td>
+    <td>
+      {% for d, label in [('approved','Approve'), ('waitlist','Waitlist'), ('rejected','Reject')] %}
+      {% if a.status != d %}
+      <form class="inline-form" method="post" action="{{ url_for('admin_app_decision', app_id=a.id) }}">
+        <input type="hidden" name="decision" value="{{ d }}">
+        <button class="btn btn-tiny {{ 'btn-quiet' if d != 'approved' }}" type="submit">{{ label }}</button>
+      </form>
+      {% endif %}
+      {% endfor %}
+    </td>
+    <td>
+      {% if a.status == 'approved' %}
+      <form class="inline-form" method="post" action="{{ url_for('admin_app_confirm', app_id=a.id) }}">
+        <input type="hidden" name="confirmed" value="{{ '0' if a.confirmed else '1' }}">
+        <button class="btn btn-tiny btn-quiet" type="submit">{{ 'Undo deposit' if a.confirmed else 'Deposit ✓' }}</button>
+      </form>
+      {% endif %}
+    </td>
+    <td>
+      {% if a.status == 'approved' %}
+        {% for m, label in [('seated','Seated'), ('no_show','No-show'), ('','Clear')] %}
+        {% if a.attendance != m and not (m == '' and not a.attendance) %}
+        <form class="inline-form" method="post" action="{{ url_for('admin_app_attendance', app_id=a.id) }}">
+          <input type="hidden" name="attendance" value="{{ m }}">
+          <button class="btn btn-tiny btn-quiet" type="submit">{{ label }}</button>
+        </form>
+        {% endif %}
+        {% endfor %}
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% else %}
+<p>No applications yet. Share the public link: <code>{{ url_for('event_detail', event_id=event.id, _external=True) }}</code></p>
+{% endif %}
+
+<div class="grid grid-2" style="margin-top:40px">
+  <div class="card">
+    <h3>Close-out: event ROI</h3>
+    <form class="stack" method="post" action="{{ url_for('admin_event_roi', event_id=event.id) }}">
+      <div class="field-row">
+        <div class="field"><label for="sales_estimate">Event-window sales ($)
+            <span class="hint">— from the restaurant / Clover</span></label>
+          <input type="number" step="0.01" id="sales_estimate" name="sales_estimate"
+                 value="{{ roi.sales_estimate if roi.sales_estimate is not none else '' }}"></div>
+        <div class="field"><label for="baseline_estimate">Normal-night baseline ($)
+            <span class="hint">— same weekday avg, last 4 weeks</span></label>
+          <input type="number" step="0.01" id="baseline_estimate" name="baseline_estimate"
+                 value="{{ roi.baseline_estimate if roi.baseline_estimate is not none else '' }}"></div>
+      </div>
+      <div class="field"><label for="notes">Notes</label>
+        <textarea id="notes" name="notes" maxlength="1000">{{ roi.notes or '' }}</textarea></div>
+      <button class="btn btn-small" type="submit">Save ROI numbers</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>ROI summary</h3>
+    {% if roi_summary %}
+    {% if roi_summary.estimated %}
+    <p style="font-size:0.85rem; color:var(--muted)">Using <strong>mock Clover numbers</strong> where
+    manual figures are missing — enter real numbers on the left to replace them.</p>
+    {% endif %}
+    <table class="roi">
+      <tr><td>Event-window revenue</td><td>${{ '%.2f' % roi_summary.revenue }}</td></tr>
+      <tr><td>Normal-night baseline</td><td>${{ '%.2f' % roi_summary.baseline }}</td></tr>
+      <tr><td>Incremental revenue</td><td>${{ '%.2f' % roi_summary.incremental }}</td></tr>
+      <tr><td>Fee ({{ stats.seated }} seated × ${{ event.per_guest_fee }})</td><td>−${{ '%.2f' % roi_summary.fee }}</td></tr>
+      <tr class="total"><td>Restaurant net</td><td>${{ '%.2f' % roi_summary.restaurant_net }}</td></tr>
+      {% if roi_summary.multiple is not none %}
+      <tr><td>Incremental ÷ fee</td><td>{{ roi_summary.multiple }}×</td></tr>
+      {% endif %}
+      {% if roi_summary.spend_per_seated is not none %}
+      <tr><td>Avg spend / seated guest</td><td>${{ '%.2f' % roi_summary.spend_per_seated }}</td></tr>
+      {% endif %}
+    </table>
+    {% else %}
+    <p>Enter event-window sales and baseline to see the summary.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
