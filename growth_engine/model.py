@@ -69,6 +69,22 @@ def load(path: Path) -> list[dict]:
     return out
 
 
+ACTIONS = STATE / "actions.jsonl"
+
+
+def log_action(kind: str, summary: str, batch_id: str | None = None, status: str = "done",
+               target: dict | None = None, result: str | None = None) -> dict:
+    """Record a material action taken on the owner's behalf — feeds the 'Since last time' brief section."""
+    rec = {"ts": now(), "kind": kind, "summary": summary, "batch_id": batch_id,
+           "status": status, "target": target or {}, "result": result}
+    _append(ACTIONS, rec)
+    return rec
+
+
+def load_actions() -> list[dict]:
+    return load(ACTIONS)
+
+
 def load_signals() -> list[dict]:
     return load(SIGNALS)
 

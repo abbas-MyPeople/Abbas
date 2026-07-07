@@ -126,5 +126,55 @@ def queue_clarification(batch_id: str, question: str, verbose: bool = True) -> d
         return {"error": type(ex).__name__}
 
 
+def send_ack(batch_id, understood, next_steps, verbose: bool = True) -> dict:
+    """Reply to the owner right after their reply: what we understood + what we'll do. Dry-runs w/o creds."""
+    if _disabled():
+        return {"disabled": True}
+    email_addr, app_pw = _creds()
+    C = compose
+    subject = f"AZ site engine — got your reply, here's the plan [{batch_id}]"
+    u = "\n".join(f"  • {x}" for x in understood) or "  • (no clear items)"
+    n = "\n".join(f"  • {x}" for x in next_steps) or "  • Nothing to ship."
+    body = (f"Got your reply — here's what I understood, and what I'll do next.\n\n"
+            f"WHAT I UNDERSTOOD\n{u}\n\nWHAT I'LL DO\n{n}\n\n"
+            f"Nothing goes live until it passes validation. You'll see how it turned out in tomorrow's brief.\n"
+            f"— {C.FROM_NAME}")
+
+    def _li(items, dot):
+        return "".join(f'<div style="color:{C._BODY};font-size:14px;padding:3px 0 3px 16px;position:relative;">'
+                       f'<span style="position:absolute;left:0;color:{dot};">•</span>{C._esc(x)}</div>' for x in items)
+    html = (f'<!doctype html><html><body style="margin:0;background:{C._PAPER};">'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{C._PAPER};padding:20px 0;"><tr><td align="center">'
+            f'<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:{C._CARD};border:1px solid {C._LINE};border-radius:14px;overflow:hidden;">'
+            f'<tr><td style="height:4px;background:{C._EMBER};"></td></tr>'
+            f'<tr><td style="padding:18px 24px 6px;"><div style="font-family:{C._SERIF};color:{C._INK};font-size:18px;font-weight:700;">Got it — here\'s the plan</div>'
+            f'<div style="color:{C._MUTED};font-size:13px;margin-top:2px;">Reply received · batch {C._esc(batch_id or "")}</div></td></tr>'
+            f'<tr><td style="padding:10px 24px 2px;"><div style="font-family:{C._SERIF};color:{C._INK};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">What I understood</div>{_li(understood, C._MUTED)}</td></tr>'
+            f'<tr><td style="padding:12px 24px 2px;"><div style="font-family:{C._SERIF};color:{C._INK};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">What I\'ll do next</div>{_li(next_steps, C._EMBER)}</td></tr>'
+            f'<tr><td style="padding:14px 24px 20px;color:{C._MUTED};font-size:12px;">Nothing goes live until it passes validation. You\'ll see how it turned out in tomorrow\'s brief.<br>— {C.FROM_NAME}</td></tr>'
+            f'</table></td></tr></table></body></html>')
+
+    if not (email_addr and app_pw):
+        if verbose:
+            print(f"notify: DRY-RUN ack — {len(understood)} understood, {len(next_steps)} next step(s).")
+        return {"dry_run": True}
+    recipient = os.environ.get("WK_ENGINE_TO") or email_addr
+    m = EmailMessage()
+    m["From"] = email_addr; m["To"] = recipient; m["Reply-To"] = email_addr
+    m["Subject"] = subject; m["Message-ID"] = make_msgid(domain="azrestaurantpartners.com")
+    m["Date"] = formatdate(localtime=True); m["X-AZ-Batch"] = batch_id or ""
+    m.set_content(body); m.add_alternative(html, subtype="html")
+    try:
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=30) as s:
+            s.starttls(); s.login(email_addr, app_pw); s.send_message(m)
+        if verbose:
+            print("notify: ack sent.")
+        return {"sent": True}
+    except Exception as ex:
+        if verbose:
+            print(f"notify: ack SEND FAILED ({type(ex).__name__}).")
+        return {"error": type(ex).__name__}
+
+
 if __name__ == "__main__":
     send_daily()

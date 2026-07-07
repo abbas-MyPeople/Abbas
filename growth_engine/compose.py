@@ -248,6 +248,34 @@ def _proposal_card_html(i, p) -> str:
     )
 
 
+def _continuity(html=False):
+    """Recap of what the owner recently asked for + how it turned out (from actions.jsonl)."""
+    acts = model.load_actions()[-4:][::-1]
+    if not acts:
+        return "" if html else []
+    labels = {"shipped": "shipped", "running": "running", "done": "done", "reverted": "reverted"}
+    if not html:
+        out = ["═══ SINCE YOUR LAST REPLY ═══"]
+        for a in acts:
+            tgt = (a.get("target") or {}).get("page_file") or ""
+            st = labels.get(a.get("status"), a.get("status", ""))
+            r = f" — {a['result']}" if a.get("result") else ""
+            out.append(f"• {a.get('summary','(action)')}" + (f" · {tgt}" if tgt else "") + f"  [{st}]{r}")
+        return out
+    rows = ""
+    for a in acts:
+        tgt = (a.get("target") or {}).get("page_file") or ""
+        st = labels.get(a.get("status"), a.get("status", ""))
+        r = f' — {_esc(a["result"])}' if a.get("result") else ""
+        rows += (f'<div style="color:{_BODY};font-size:13px;padding:3px 0;">'
+                 f'<b style="color:{_INK};">{_esc(a.get("summary","action"))}</b>'
+                 + (f' <span style="color:{_MUTED};">· {_esc(tgt)}</span>' if tgt else "")
+                 + f' <span style="color:{_MUTED};">[{_esc(st)}]{r}</span></div>')
+    return (f'<tr><td style="padding:14px 24px 4px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
+            f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Since your last reply</div>'
+            f'<div style="margin-top:6px;">{rows}</div></td></tr>')
+
+
 def _build_html(subject, kind, perf, alerts, surface, watching, overflow, exp_data=None) -> str:
     date_str = datetime.date.today().strftime("%A, %B %-d")
     band = {"alert": _RED, "propose": _EMBER, "holding": _GREEN}.get(kind, _EMBER)
@@ -266,6 +294,7 @@ def _build_html(subject, kind, perf, alerts, surface, watching, overflow, exp_da
     parts.append(f'<tr><td style="padding:20px 24px 6px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
                  f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">How the site performed</div></td></tr>')
     parts.append(_scorecard_html(perf))
+    parts.append(_continuity(True))   # "Since your last reply" recap
     # alerts
     if alerts:
         parts.append(f'<tr><td style="padding:14px 24px 4px;"><div style="font-family:{_SERIF};color:{_RED};font-size:13px;'
@@ -344,6 +373,10 @@ def render_email(findings, signals=None) -> dict:
     if perf:
         lines.append("═══ HOW THE SITE PERFORMED ═══")
         lines.extend(perf)
+        lines.append("")
+    _cont = _continuity(False)
+    if _cont:
+        lines.extend(_cont)
         lines.append("")
     if alerts:
         lines.append("═══ NEEDS ATTENTION ═══")

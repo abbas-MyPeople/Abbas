@@ -151,10 +151,10 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
         if verbose:
             print("execute: no owner decision yet — nothing to do.")
         return {"batch_id": None, "plans": [], "committed": []}
-    fp = _decision_fp(dec)
-    if not dry and _already_executed(fp):
+    dfp = _decision_fp(dec)   # decision fingerprint (NOT the drafts-loop `fp` below — keep distinct)
+    if not dry and _already_executed(dfp):
         if verbose:
-            print(f"execute: decision {fp[:8]} already actioned — no-op (idempotent; safe to run often).")
+            print(f"execute: decision {dfp[:8]} already actioned — no-op (idempotent; safe to run often).")
         return {"batch_id": dec.get("batch_id"), "plans": [], "committed": [], "idempotent_skip": True}
 
     res = plan_from_decisions(verbose=verbose)
@@ -166,6 +166,32 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
               f"{len(res['clarifications'])} clarification(s)")
         for s in res["skipped"]:
             print(f"  (skip) {s}")
+
+    # ── read-receipt: reply to the owner with what we understood + what we'll do (once per decision) ──
+    if not dry:
+        batch = _latest(model.STATE / "batches.jsonl") or {}
+        surf = {s["n"]: s for s in batch.get("surfaced", [])}
+        understood, next_steps = [], []
+        if dec.get("global"):
+            understood.append(f"Overall: {dec['global']}.")
+        for n_str, d in (dec.get("items") or {}).items():
+            n = int(n_str); h = (surf.get(n) or {}).get("headline", f"item {n}"); deci = d.get("decision")
+            if deci == "approve":
+                understood.append(f"#{n} “{h}” — approved.")
+            elif deci == "reject":
+                understood.append(f"#{n} “{h}” — rejected (leaving as-is).")
+            elif deci == "instruct":
+                understood.append(f"#{n} “{h}” — your change: “{(d.get('instruction') or '').strip()[:140]}”.")
+            else:
+                understood.append(f"#{n} “{h}” — unclear, rolling over.")
+        for p in plans:
+            next_steps.append((f"Launch an A/B test: {p['summary']}" if p.get("kind") == "experiment_start"
+                               else f"Apply: {p.get('summary','a change')}") + ".")
+        for q in res["clarifications"]:
+            next_steps.append(f"Ask you to clarify: {q[:140]}")
+        if not plans and not res["clarifications"]:
+            next_steps.append("Nothing to ship from this reply — recorded your decisions.")
+        notify.send_ack(res["batch_id"], understood, next_steps, verbose=verbose)
 
     # ── render/apply each plan ──
     for p in plans:
@@ -192,6 +218,8 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
             c = _sh("git", "commit", "-m", msg)
             if c.returncode == 0:
                 committed.append("experiments.json")
+                model.log_action("experiment_start", f"Started A/B test {exp['id']}", batch_id=res["batch_id"],
+                                 target={"page_file": draft.get("page"), "section": draft.get("anchor")}, status="running")
                 if verbose:
                     print(f"      ✓ committed: {msg}")
             else:
@@ -236,6 +264,8 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
             c = _sh("git", "commit", "-m", msg)
             if c.returncode == 0:
                 committed.append(path)
+                model.log_action("edit", p["summary"], batch_id=res["batch_id"],
+                                 target={"page_file": path}, status="shipped")
                 if verbose:
                     print(f"      ✓ committed: {msg}")
             else:
@@ -259,7 +289,7 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
     if dry and verbose:
         print("  [dry-run] nothing written, nothing committed.")
     else:
-        _record_executed(fp, res.get("batch_id"))   # mark done → frequent re-runs are safe no-ops
+        _record_executed(dfp, res.get("batch_id"))   # mark done → frequent re-runs are safe no-ops
     res["committed"] = committed
     return res
 
