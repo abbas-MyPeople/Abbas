@@ -21,11 +21,12 @@ def _disabled() -> bool:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="AZ Restaurant Partners growth engine")
-    ap.add_argument("--mode", choices=["sense", "watch", "propose", "send", "read", "execute", "experiments"],
+    ap.add_argument("--mode", choices=["sense", "watch", "propose", "send", "read", "execute", "experiments", "aivis"],
                     default="watch")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--dry", action="store_true", default=True, help="execute: plan/diff only (default)")
     ap.add_argument("--apply", dest="dry", action="store_false", help="execute: really write + commit")
+    ap.add_argument("--force", action="store_true", help="aivis: ignore the weekly cadence gate")
     args = ap.parse_args(argv)
     v = not args.quiet
 
@@ -47,6 +48,12 @@ def main(argv=None) -> int:
         except Exception as e:
             if v:
                 print(f"demand: skipped ({type(e).__name__})")
+        try:
+            from .sensors import ai_visibility   # opt-in + weekly + cost-capped; self-no-ops otherwise
+            ai_visibility.run(verbose=v)
+        except Exception as e:
+            if v:
+                print(f"ai_visibility: skipped ({type(e).__name__})")
         return 0
 
     if args.mode == "propose":
@@ -105,6 +112,11 @@ def main(argv=None) -> int:
                 print(f"experiments: commit failed: {(c.stderr or c.stdout).strip()[:160]}")
         elif args.dry and changed and v:
             print(f"experiments: [dry-run] would commit {changed}")
+        return 0
+
+    if args.mode == "aivis":
+        from .sensors import ai_visibility   # opt-in AI-recommendation rank tracker (AI_VISIBILITY_ENABLED=1)
+        ai_visibility.run(verbose=v, force=args.force)
         return 0
 
     return 0
