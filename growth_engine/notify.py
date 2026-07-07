@@ -73,6 +73,8 @@ def send_daily(verbose: bool = True) -> dict:
     m["Date"] = formatdate(localtime=True)
     m["X-AZ-Batch"] = batch_id
     m.set_content(e["body"] + f"\n\n[batch {batch_id} — reply to this email to approve/reject]")
+    if e.get("html"):                       # branded HTML is the primary view; plain text is the fallback
+        m.add_alternative(e["html"], subtype="html")
 
     try:
         with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=30) as s:

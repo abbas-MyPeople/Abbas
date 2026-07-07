@@ -5,11 +5,14 @@ Two parts:
   1. "HOW THE SITE PERFORMED" — a short, honest read from the latest GA4 signals (traffic + conversion).
   2. up to 3 concrete PROPOSALS — each with WHY, the exact PAGE/SECTION it touches, and a reply handle.
 
-Verdict-first, phone-skimmable, plain reply protocol. COMPOSE only — sending is notify.py. A quiet day
-produces an honest short "nothing to change, here's what I'm watching" note. Even with GA4 empty (brand-new
-property, no rows) it renders a valid brief.
+Renders BOTH a branded HTML email (the primary, visual presentation) and a plain-text fallback with the
+same content + the exact reply protocol. COMPOSE only — sending is notify.py. A quiet day produces an
+honest short "nothing to change, here's what I'm watching" note. Even with GA4 empty (brand-new property,
+no rows) it renders a valid brief.
 """
 from __future__ import annotations
+import datetime
+from html import escape as _esc
 from . import model
 
 FROM_NAME = "AZ site growth engine"
@@ -22,6 +25,12 @@ _IMPACT = {
     "G0_site_guard": "site integrity → AI/organic discovery",
 }
 _DEFAULT_IMPACT = "leads + discovery"
+
+# ── brand palette (mirrors the site: cream / ink / ember) ─────────────────────────────────────
+_PAPER, _CARD, _INK, _BODY, _MUTED = "#f4eee2", "#fbf7ee", "#1b1a17", "#4f4a40", "#8a8275"
+_EMBER, _LINE, _GREEN, _RED = "#c0492b", "#e5dcc9", "#2f7a3f", "#b23b2e"
+_SERIF = "Georgia, 'Times New Roman', serif"
+_SANS = "-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
 
 
 def _dedupe(findings):
@@ -44,30 +53,186 @@ def _fmt_pct(v):
     return "n/a" if v is None else f"{v:+.0f}%"
 
 
-def _performance(signals) -> list[str]:
-    """The 'how the site performed' summary, read straight from the newest GA4 signals."""
-    if not model.latest(signals, "traffic_available", "site"):
-        return []
+def _performance_data(signals) -> dict:
+    """Structured performance read used by BOTH the HTML scorecard and the text summary."""
     avail = model.latest(signals, "traffic_available", "site")
-    if not avail or not avail.get("value"):
-        return ["• GA4 is connected but has no rows yet — the property is still gathering data."]
-    lines = []
+    if not avail:
+        return {"available": False}
+    if not avail.get("value"):
+        return {"available": True, "has_rows": False}
+    d = {"available": True, "has_rows": True}
     sd = model.latest(signals, "sessions_delta_pct", "site")
     if sd:
         m = sd.get("meta", {})
-        lines.append(f"• Traffic: {m.get('prev','?')} → {m.get('cur','?')} sessions "
-                     f"({_fmt_pct(sd.get('value'))} vs the prior week).")
+        d["sessions"] = {"prev": m.get("prev"), "cur": m.get("cur"), "delta": sd.get("value")}
     ct = model.latest(signals, "conv_total_delta_pct", "site")
     if ct:
         m = ct.get("meta", {})
-        parts = []
+        bd = {}
         for e in ("finder_capture", "call_click", "lead_submit"):
             s = model.latest(signals, f"conv_{e}", "site")
             if s:
-                parts.append(f"{e}={s.get('value')}")
-        lines.append(f"• Conversions: {m.get('prev','?')} → {m.get('cur','?')} "
-                     f"({_fmt_pct(ct.get('value'))} WoW)" + (" — " + ", ".join(parts) if parts else "") + ".")
+                bd[e] = s.get("value")
+        d["conversions"] = {"prev": m.get("prev"), "cur": m.get("cur"), "delta": ct.get("value"), "breakdown": bd}
+    return d
+
+
+def _performance(signals) -> list[str]:
+    """The 'how the site performed' summary as plain-text lines (fallback)."""
+    d = _performance_data(signals)
+    if not d.get("available"):
+        return []
+    if not d.get("has_rows"):
+        return ["• GA4 is connected but has no rows yet — the property is still gathering data."]
+    lines = []
+    s = d.get("sessions")
+    if s:
+        lines.append(f"• Traffic: {s.get('prev','?')} → {s.get('cur','?')} sessions "
+                     f"({_fmt_pct(s.get('delta'))} vs the prior week).")
+    c = d.get("conversions")
+    if c:
+        parts = [f"{k}={v}" for k, v in (c.get("breakdown") or {}).items()]
+        lines.append(f"• Conversions: {c.get('prev','?')} → {c.get('cur','?')} "
+                     f"({_fmt_pct(c.get('delta'))} WoW)" + (" — " + ", ".join(parts) if parts else "") + ".")
     return lines
+
+
+# ══════════════════════════════════════ HTML EMAIL ══════════════════════════════════════════════
+def _delta_html(v):
+    if v is None:
+        return f'<span style="color:{_MUTED};font-size:13px;">— no prior week</span>'
+    color = _GREEN if v >= 0 else _RED
+    arrow = "▲" if v >= 0 else "▼"
+    return f'<span style="color:{color};font-weight:700;font-size:14px;">{arrow} {abs(v):.0f}%</span>'
+
+
+def _metric_cell(label, cur, delta, sub=""):
+    cur = "—" if cur in (None, "?") else cur
+    subline = f'<div style="color:{_MUTED};font-size:12px;margin-top:4px;">{_esc(sub)}</div>' if sub else ""
+    return (
+        f'<td width="50%" style="padding:6px;" valign="top">'
+        f'<div style="background:{_PAPER};border:1px solid {_LINE};border-radius:12px;padding:16px 18px;">'
+        f'<div style="color:{_MUTED};font-size:11px;letter-spacing:.12em;text-transform:uppercase;">{_esc(label)}</div>'
+        f'<div style="font-family:{_SERIF};color:{_INK};font-size:30px;font-weight:700;line-height:1.1;margin:6px 0 4px;">{_esc(str(cur))}</div>'
+        f'{_delta_html(delta)}{subline}</div></td>'
+    )
+
+
+def _scorecard_html(perf) -> str:
+    if not perf.get("available"):
+        return (f'<tr><td style="padding:4px 24px 8px;"><div style="background:{_PAPER};border:1px dashed {_LINE};'
+                f'border-radius:12px;padding:16px 18px;color:{_MUTED};font-size:14px;">GA4 will populate here once '
+                f'the property is granted read access.</div></td></tr>')
+    if not perf.get("has_rows"):
+        return (f'<tr><td style="padding:4px 24px 8px;"><div style="background:{_PAPER};border:1px dashed {_LINE};'
+                f'border-radius:12px;padding:16px 18px;color:{_MUTED};font-size:14px;">📊 GA4 is connected — the '
+                f'property is new and still gathering its first data. Metrics appear here as traffic builds.</div></td></tr>')
+    s = perf.get("sessions") or {}
+    c = perf.get("conversions") or {}
+    conv_sub = " · ".join(f"{k.replace('_',' ')} {v}" for k, v in (c.get("breakdown") or {}).items())
+    cells = _metric_cell("Sessions (7d)", s.get("cur"), s.get("delta"),
+                         f"was {s.get('prev','—')} prior week" if s else "")
+    cells += _metric_cell("Conversions (7d)", c.get("cur"), c.get("delta"), conv_sub)
+    return f'<tr><td style="padding:0 18px 8px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>{cells}</tr></table></td></tr>'
+
+
+def _proposal_card_html(i, p) -> str:
+    impact = _IMPACT.get(p.get("rule_id"), _DEFAULT_IMPACT)
+    tgt = p.get("target") or {}
+    where = ""
+    if tgt.get("page_file"):
+        where = tgt["page_file"] + (f" · {tgt['section']}" if tgt.get("section") else "")
+    rows = ""
+    if p.get("detail"):
+        rows += f'<tr><td style="color:{_MUTED};font-size:12px;width:64px;padding:3px 0;" valign="top">Why</td><td style="color:{_BODY};font-size:14px;padding:3px 0;">{_esc(p["detail"])}</td></tr>'
+    if where:
+        rows += f'<tr><td style="color:{_MUTED};font-size:12px;padding:3px 0;" valign="top">Where</td><td style="color:{_BODY};font-size:14px;padding:3px 0;"><code style="background:{_PAPER};padding:1px 5px;border-radius:4px;">{_esc(where)}</code></td></tr>'
+    rows += f'<tr><td style="color:{_MUTED};font-size:12px;padding:3px 0;" valign="top">Impact</td><td style="color:{_BODY};font-size:14px;padding:3px 0;">{_esc(impact)}</td></tr>'
+    reply = (f'<div style="background:{_PAPER};border-radius:8px;padding:10px 12px;margin-top:12px;font-family:{_SANS};font-size:13px;color:{_INK};">'
+             f'Reply&nbsp; <b style="color:{_GREEN};">"{i} approve"</b> &nbsp;·&nbsp; <b style="color:{_RED};">"{i} reject"</b> '
+             f'&nbsp;·&nbsp; <b>"{i} &lt;your tweak&gt;"</b></div>')
+    badge = (f'<table role="presentation" cellpadding="0" cellspacing="0"><tr>'
+             f'<td style="background:{_EMBER};color:#fff;font-family:{_SERIF};font-weight:700;font-size:15px;'
+             f'width:28px;height:28px;text-align:center;border-radius:50%;">{i}</td></tr></table>')
+    return (
+        f'<tr><td style="padding:8px 24px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+        f'style="background:{_CARD};border:1px solid {_LINE};border-radius:12px;"><tr><td style="padding:16px 18px;">'
+        f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
+        f'<td width="34" valign="top">{badge}</td>'
+        f'<td valign="top" style="padding-left:8px;"><div style="font-family:{_SERIF};color:{_INK};font-size:17px;'
+        f'font-weight:700;line-height:1.25;">{_esc(p["headline"])}</div>'
+        f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:8px;">{rows}</table>'
+        f'{reply}</td></tr></table></td></tr></table></td></tr>'
+    )
+
+
+def _build_html(subject, kind, perf, alerts, surface, watching, overflow) -> str:
+    date_str = datetime.date.today().strftime("%A, %B %-d")
+    band = {"alert": _RED, "propose": _EMBER, "holding": _GREEN}.get(kind, _EMBER)
+    if kind == "alert":
+        verdict = f"{len(alerts)} thing(s) need a look" + (f" · {len(surface)} proposed change(s)" if surface else "")
+    elif kind == "propose":
+        verdict = f"{len(surface)} proposed change{'s' if len(surface)!=1 else ''} — reply to approve"
+    else:
+        verdict = "All holding — nothing needs changing today"
+
+    parts = []
+    parts.append(f'<div style="background:{band};color:#fff;font-family:{_SANS};font-size:15px;font-weight:600;'
+                 f'padding:14px 24px;">{_esc(verdict)}</div>')
+    parts.append('<table role="presentation" width="100%" cellpadding="0" cellspacing="0">')
+    # performance
+    parts.append(f'<tr><td style="padding:20px 24px 6px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
+                 f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">How the site performed</div></td></tr>')
+    parts.append(_scorecard_html(perf))
+    # alerts
+    if alerts:
+        parts.append(f'<tr><td style="padding:14px 24px 4px;"><div style="font-family:{_SERIF};color:{_RED};font-size:13px;'
+                     f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Needs attention</div></td></tr>')
+        for a in alerts:
+            d = f'<div style="color:{_BODY};font-size:13px;margin-top:3px;">{_esc(a["detail"])}</div>' if a.get("detail") else ""
+            parts.append(f'<tr><td style="padding:2px 24px 8px;"><div style="border-left:3px solid {_RED};padding:6px 12px;'
+                         f'background:{_CARD};border-radius:0 8px 8px 0;"><b style="color:{_INK};font-size:14px;">{_esc(a["headline"])}</b>{d}</div></td></tr>')
+    # proposals
+    if surface:
+        parts.append(f'<tr><td style="padding:16px 24px 2px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
+                     f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Proposed changes</div>'
+                     f'<div style="color:{_MUTED};font-size:12px;margin-top:2px;">Nothing ships until you reply.</div></td></tr>')
+        for i, p in enumerate(surface, 1):
+            parts.append(_proposal_card_html(i, p))
+    # also today
+    also = [f"• {w['headline']}" for w in watching] + [f"• (queued) {o['headline']}" for o in overflow]
+    if not surface and not alerts:
+        also.append("• Live-site guard (proof bar, platform section, canonical, JSON-LD): all holding.")
+    if also:
+        items = "".join(f'<div style="color:{_BODY};font-size:13px;padding:2px 0;">{_esc(x)}</div>' for x in also)
+        parts.append(f'<tr><td style="padding:14px 24px 6px;"><div style="font-family:{_SERIF};color:{_MUTED};font-size:12px;'
+                     f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Also today — no action needed</div>'
+                     f'<div style="margin-top:6px;">{items}</div></td></tr>')
+    parts.append('</table>')
+
+    # reply protocol footer
+    proto = ('Reply <b>"approve all"</b> to ship everything, or per-item as shown. Free-form tweaks are fine '
+             '(<b>"1 make the hero say …"</b>) — I\'ll interpret it and confirm before anything ships.') if surface else \
+            'Just reply <b>"looks good"</b> (or with any change you want) — I read every reply.'
+    footer = (f'<div style="border-top:1px solid {_LINE};margin:8px 24px 0;"></div>'
+              f'<div style="padding:14px 24px 22px;color:{_BODY};font-size:13px;line-height:1.5;">{proto}'
+              f'<div style="color:{_MUTED};font-size:12px;margin-top:10px;">Nothing changes on the site until you reply.<br>'
+              f'— {FROM_NAME}</div></div>')
+
+    return (
+        f'<!doctype html><html><body style="margin:0;padding:0;background:{_PAPER};">'
+        f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{_PAPER};padding:20px 0;"><tr><td align="center">'
+        f'<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;'
+        f'background:{_CARD};border:1px solid {_LINE};border-radius:14px;overflow:hidden;">'
+        f'<tr><td style="height:4px;background:{_EMBER};"></td></tr>'
+        f'<tr><td style="padding:20px 24px 4px;"><div style="font-family:{_SERIF};color:{_INK};font-size:20px;font-weight:700;">'
+        f'AZ&nbsp;Restaurant&nbsp;Partners</div><div style="color:{_MUTED};font-size:13px;margin-top:2px;">Daily site check · {date_str}</div></td></tr>'
+        f'<tr><td style="padding:12px 0 0;">{"".join(parts)}</td></tr>'
+        f'<tr><td>{footer}</td></tr>'
+        f'</table>'
+        f'<div style="color:{_MUTED};font-size:11px;font-family:{_SANS};padding:14px 0;">Private brief · azrestaurantpartners.com</div>'
+        f'</td></tr></table></body></html>'
+    )
 
 
 def render_email(findings, signals=None) -> dict:
@@ -76,9 +241,10 @@ def render_email(findings, signals=None) -> dict:
     surface = proposals[:3]
     overflow = proposals[3:]
     perf = _performance(signals)
+    perf_data = _performance_data(signals)
+    kind = "alert" if alerts else ("propose" if surface else "holding")
 
     lines = []
-    # ── verdict line ──
     if alerts:
         verdict = f"⚠ {len(alerts)} thing(s) need a look, plus {len(surface)} proposed change(s)."
     elif surface:
@@ -88,13 +254,10 @@ def render_email(findings, signals=None) -> dict:
     lines.append(verdict)
     lines.append("")
 
-    # ── how the site performed ──
     if perf:
         lines.append("═══ HOW THE SITE PERFORMED ═══")
         lines.extend(perf)
         lines.append("")
-
-    # ── alerts first ──
     if alerts:
         lines.append("═══ NEEDS ATTENTION ═══")
         for a in alerts:
@@ -102,8 +265,6 @@ def render_email(findings, signals=None) -> dict:
             if a.get("detail"):
                 lines.append(f"  {a['detail']}")
         lines.append("")
-
-    # ── the numbered proposals ──
     if surface:
         lines.append("═══ PROPOSED CHANGES (reply to approve) ═══")
         lines.append("")
@@ -122,12 +283,7 @@ def render_email(findings, signals=None) -> dict:
             lines.append(f'   Reply:  "{i} approve"  ·  "{i} reject"  ·  "{i} <your exact instruction>"')
             lines.append("")
 
-    # ── status rollup ──
-    also = []
-    for w in watching:
-        also.append(f"• {w['headline']}")
-    for o in overflow:
-        also.append(f"• (queued) {o['headline']}")
+    also = [f"• {w['headline']}" for w in watching] + [f"• (queued) {o['headline']}" for o in overflow]
     if not surface and not alerts:
         also.append("• Live-site guard (proof bar, platform section, canonical, JSON-LD): all holding.")
     if also:
@@ -135,7 +291,6 @@ def render_email(findings, signals=None) -> dict:
         lines.extend(also)
         lines.append("")
 
-    # ── protocol footer ──
     lines.append("──")
     if surface:
         lines.append('Reply "approve all" to ship everything, or per-item as shown. Freeform tweaks OK '
@@ -151,7 +306,8 @@ def render_email(findings, signals=None) -> dict:
     surfaced = [{"n": i + 1, "rule_id": p.get("rule_id"), "subject": p.get("subject"),
                  "headline": p.get("headline"), "target": p.get("target") or {}}
                 for i, p in enumerate(surface)]
-    return {"subject": subject, "body": "\n".join(lines), "surfaced": surfaced,
+    html = _build_html(subject, kind, perf_data, alerts, surface, watching, overflow)
+    return {"subject": subject, "body": "\n".join(lines), "html": html, "surfaced": surfaced,
             "counts": {"alerts": len(alerts), "proposals": len(proposals), "watching": len(watching)}}
 
 
@@ -164,3 +320,7 @@ if __name__ == "__main__":
     print("SUBJECT:", e["subject"])
     print("=" * 64)
     print(e["body"])
+    import pathlib
+    pathlib.Path("growth_engine/state/_preview.html").parent.mkdir(parents=True, exist_ok=True)
+    pathlib.Path("growth_engine/state/_preview.html").write_text(e["html"], encoding="utf-8")
+    print("\n[HTML preview written to growth_engine/state/_preview.html]")
