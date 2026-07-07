@@ -13,14 +13,32 @@ GUARDRAILS enforced here (defense in depth):
   • One commit per change (revert = git revert that commit).
 """
 from __future__ import annotations
-import os, subprocess, difflib
+import os, subprocess, difflib, hashlib, json
 from . import model, notify, actioner_llm
 from .executors import EXECUTORS, apply_llm_plan, is_allowed_path, validate_edit, read_page, REPO, ScopeError, ValidationError
+
+EXECUTED = model.STATE / "executed.jsonl"    # fingerprints of decisions already actioned (idempotency)
 
 
 def _latest(path):
     rows = model.load(path)
     return rows[-1] if rows else None
+
+
+def _decision_fp(dec) -> str:
+    """Stable fingerprint of an owner decision — so a frequent schedule never re-applies or re-emails it."""
+    payload = json.dumps({"b": dec.get("batch_id"), "g": dec.get("global"), "i": dec.get("items")}, sort_keys=True)
+    return hashlib.sha256(payload.encode()).hexdigest()
+
+
+def _already_executed(fp) -> bool:
+    return any(r.get("fp") == fp for r in model.load(EXECUTED))
+
+
+def _record_executed(fp, batch_id):
+    EXECUTED.parent.mkdir(parents=True, exist_ok=True)
+    with EXECUTED.open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"ts": model.now(), "fp": fp, "batch_id": batch_id}, sort_keys=True) + "\n")
 
 
 def _findings_by_key():
@@ -105,6 +123,17 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
             print("execute: ENGINE_DISABLED=1 — no-op.")
         return {"disabled": True}
 
+    dec = _latest(model.STATE / "decisions.jsonl")
+    if not dec:
+        if verbose:
+            print("execute: no owner decision yet — nothing to do.")
+        return {"batch_id": None, "plans": [], "committed": []}
+    fp = _decision_fp(dec)
+    if not dry and _already_executed(fp):
+        if verbose:
+            print(f"execute: decision {fp[:8]} already actioned — no-op (idempotent; safe to run often).")
+        return {"batch_id": dec.get("batch_id"), "plans": [], "committed": [], "idempotent_skip": True}
+
     res = plan_from_decisions(verbose=verbose)
     plans = res["plans"]
     committed = []
@@ -177,6 +206,8 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
 
     if dry and verbose:
         print("  [dry-run] nothing written, nothing committed.")
+    else:
+        _record_executed(fp, res.get("batch_id"))   # mark done → frequent re-runs are safe no-ops
     res["committed"] = committed
     return res
 

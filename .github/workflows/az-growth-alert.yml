@@ -1,0 +1,56 @@
+name: AZ Growth Engine — failure alert
+
+# Emails the owner whenever an engine workflow finishes with FAILURE — so silence
+# always means "it's working", never "it broke quietly". Runs on GitHub's servers
+# (cloud), reusing the engine's Gmail app password. Sends nothing on success.
+
+on:
+  workflow_run:
+    workflows:
+      - "AZ Growth Engine — daily sense + propose + send"
+      - "AZ Growth Engine — reply reader + execute (every 15m)"
+      - "Sync AZ analytics/ to Hugging Face Space"
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  alert:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Email the owner about the failed run
+        env:
+          WK_ENGINE_EMAIL: ${{ secrets.WK_ENGINE_EMAIL }}
+          WK_ENGINE_APP_PASSWORD: ${{ secrets.WK_ENGINE_APP_PASSWORD }}
+          WK_ENGINE_TO: ${{ secrets.WK_ENGINE_TO }}
+          WF_NAME: ${{ github.event.workflow_run.name }}
+          WF_URL: ${{ github.event.workflow_run.html_url }}
+          WF_TIME: ${{ github.event.workflow_run.updated_at }}
+        run: |
+          python3 - <<'PY'
+          import os, smtplib
+          from email.message import EmailMessage
+          e = os.environ.get("WK_ENGINE_EMAIL"); pw = os.environ.get("WK_ENGINE_APP_PASSWORD")
+          to = os.environ.get("WK_ENGINE_TO") or e
+          if not (e and pw):
+              print("no email creds — cannot alert"); raise SystemExit(0)
+          name = os.environ.get("WF_NAME", "an engine workflow")
+          url = os.environ.get("WF_URL", ""); when = os.environ.get("WF_TIME", "")
+          m = EmailMessage()
+          m["From"] = e; m["To"] = to
+          m["Subject"] = f"⚠ AZ growth engine — a run FAILED: {name}"
+          m.set_content(
+              f"Heads up — the workflow '{name}' just FAILED ({when}).\n\n"
+              f"Your site was NOT changed (the engine only ships on your approval, and this run errored "
+              f"before/while doing its job).\n\n"
+              f"See the logs and re-run it here:\n{url}\n\n"
+              f"— AZ site growth engine (automatic failure alert)")
+          try:
+              with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as s:
+                  s.starttls(); s.login(e, pw); s.send_message(m)
+              print("failure alert sent.")
+          except Exception as ex:
+              print(f"alert send failed ({type(ex).__name__})")
+          PY

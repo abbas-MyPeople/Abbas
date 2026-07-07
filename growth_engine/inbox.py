@@ -109,6 +109,13 @@ def record_decisions(batch_id, parsed):
     DECISIONS.parent.mkdir(parents=True, exist_ok=True)
     rec = {"ts": model.now(), "batch_id": batch_id, "global": parsed.get("global_"),
            "items": parsed.get("items"), "ambiguous": parsed.get("ambiguous")}
+    # Frequent reads see the same reply repeatedly — don't append a duplicate decision.
+    existing = model.load(DECISIONS)
+    if existing:
+        last = existing[-1]
+        if (last.get("batch_id") == rec["batch_id"] and last.get("items") == rec["items"]
+                and last.get("global") == rec["global"]):
+            return last
     with DECISIONS.open("a", encoding="utf-8") as f:
         f.write(json.dumps(rec, sort_keys=True) + "\n")
     return rec

@@ -269,6 +269,27 @@ def sense(verbose: bool = True) -> dict:
                       + (f" ({c_delta:+.0f}% WoW)" if c_delta is not None else ""),
                       detail="; ".join(f"{e}={cur_e[e]}" for e in KEY_EVENTS))
 
+    # ── 3b. LEAD RATE (leads per 100 visits) — THE objective: grow leads faster than traffic ─────
+    # We don't just want more visits; we want a higher share of the RIGHT visitors converting.
+    cur_rate = (cur_total / cur_t["sessions"] * 100) if cur_t["sessions"] else None
+    prev_rate = (prev_total / prev_t["sessions"] * 100) if prev_t["sessions"] else None
+    rate_delta = _delta_pct(cur_rate, prev_rate) if (cur_rate is not None and prev_rate is not None) else None
+    if cur_rate is not None:
+        model.signal("ga4", "lead_rate_per_100", "site", round(cur_rate, 2), unit="rate", period=f"{WINDOW_DAYS}d",
+                     meta={"cur": round(cur_rate, 2), "prev": None if prev_rate is None else round(prev_rate, 2),
+                           "delta_pct": rate_delta, "leads": cur_total, "sessions": cur_t["sessions"]})
+    # Traffic climbing but the RATIO flat/down = more visits, not more of the right ones → fix targeting/clarity.
+    if (s_delta is not None and s_delta >= 10 and cur_t["sessions"] >= 50
+            and (rate_delta is None or rate_delta <= 0)):
+        model.finding("G7_lead_rate", "site", "opportunity", "good",
+                      f"Traffic up {s_delta:+.0f}% but the lead rate isn't"
+                      + (f" ({cur_rate:.1f} leads/100 visits)" if cur_rate is not None else ""),
+                      detail=("More visits aren't turning into more of the RIGHT visitors. Sharpen who the homepage "
+                              "speaks to (an audience-fit headline + subhead), make the value obvious in the first "
+                              "screen, and lead with one clear primary CTA — so a higher SHARE of traffic converts, "
+                              "not just more traffic. Reply with the audience/angle to target and I'll draft it."),
+                      target={"page_file": "index.html", "section": "hero"})
+
     # ── 4. funnel drop-off + 5. dead CTA (only if the site emits labelled sections) ──
     if len(sections) >= 2:
         top_views = max(s["views"] for s in sections)

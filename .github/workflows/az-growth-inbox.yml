@@ -1,21 +1,22 @@
-name: AZ Growth Engine — daily reply reader + execute
+name: AZ Growth Engine — reply reader + execute (every 15m)
 
 # The AZ Restaurant Partners growth engine (growth_engine/ python package).
-# Later in the morning it READs the owner's reply to the daily proposal, parses
-# the decisions, then EXECUTEs the approved moves (site edits + actions). Any
-# updated engine state AND site edits are committed back to main.
+# Runs every 15 minutes so the owner's reply is READ and EXECUTEd within minutes
+# of sending — not once a day. The engine is idempotent (execute.py fingerprints
+# each decision), so re-runs when there's no new reply are safe no-ops (nothing
+# re-applied, no duplicate emails). Any state/site changes are committed to main.
 #
 # NOTE: scheduled + manual only. It must NOT trigger on push (it writes to
 # growth_engine/state/** and the site, which would self-trigger a loop).
 
 on:
   schedule:
-    - cron: "31 13 * * *"    # 13:31 UTC (~8:31 AM US Central)
+    - cron: "*/15 * * * *"   # every 15 min — near-real-time reply handling (cloud, not the owner's PC)
   workflow_dispatch:
 
 concurrency:
-  group: az-growth
-  cancel-in-progress: false
+  group: az-growth-inbox      # own group so frequent reads never block the daily propose
+  cancel-in-progress: false   # let an in-flight read+execute finish (don't interrupt a commit)
 
 permissions:
   contents: write            # to commit engine state + site edits back to the repo

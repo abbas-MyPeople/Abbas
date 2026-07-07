@@ -23,6 +23,7 @@ _IMPACT = {
     "G5_funnel_dropoff": "keep visitors reaching the offer",
     "G6_dead_cta": "CTA click-through",
     "G0_site_guard": "site integrity → AI/organic discovery",
+    "G7_lead_rate": "lead RATE — a higher share of visits converting (right audience)",
 }
 _DEFAULT_IMPACT = "leads + discovery"
 
@@ -74,6 +75,10 @@ def _performance_data(signals) -> dict:
             if s:
                 bd[e] = s.get("value")
         d["conversions"] = {"prev": m.get("prev"), "cur": m.get("cur"), "delta": ct.get("value"), "breakdown": bd}
+    lr = model.latest(signals, "lead_rate_per_100", "site")
+    if lr:
+        m = lr.get("meta", {})
+        d["lead_rate"] = {"cur": m.get("cur"), "prev": m.get("prev"), "delta": m.get("delta_pct")}
     return d
 
 
@@ -133,7 +138,19 @@ def _scorecard_html(perf) -> str:
     cells = _metric_cell("Sessions (7d)", s.get("cur"), s.get("delta"),
                          f"was {s.get('prev','—')} prior week" if s else "")
     cells += _metric_cell("Conversions (7d)", c.get("cur"), c.get("delta"), conv_sub)
-    return f'<tr><td style="padding:0 18px 8px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>{cells}</tr></table></td></tr>'
+    row1 = f'<tr><td style="padding:0 18px 6px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>{cells}</tr></table></td></tr>'
+    # Lead rate = THE objective (leads per 100 visits). Emphasized on the ink card.
+    lr = perf.get("lead_rate") or {}
+    lr_row = ""
+    if lr.get("cur") is not None:
+        lr_row = (
+            f'<tr><td style="padding:0 24px 8px;"><div style="background:{_INK};border-radius:12px;padding:14px 18px;">'
+            f'<span style="color:#a89f90;font-size:11px;letter-spacing:.12em;text-transform:uppercase;">Lead rate · the number we\'re growing</span>'
+            f'<div style="margin-top:5px;"><span style="font-family:{_SERIF};color:#fff;font-size:26px;font-weight:700;">{lr["cur"]:.1f}</span>'
+            f'<span style="color:#cfc8ba;font-size:13px;"> leads per 100 visits</span>&nbsp;&nbsp;{_delta_html(lr.get("delta"))}</div>'
+            f'<div style="color:#8a8275;font-size:12px;margin-top:5px;">Goal: grow this — more of the right visitors converting, not just more traffic.</div>'
+            f'</div></td></tr>')
+    return row1 + lr_row
 
 
 def _proposal_card_html(i, p) -> str:
