@@ -42,3 +42,11 @@
 {"meta": {"delta_pct": null, "prev": 0}, "metric": "conv_lead_submit", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:23:21Z", "unit": "count", "value": 0}
 {"meta": {"cur": 0, "prev": 0}, "metric": "conv_total_delta_pct", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:23:21Z", "unit": "pct", "value": null}
 {"meta": {"cur": 0.0, "delta_pct": null, "leads": 0, "prev": null, "sessions": 9}, "metric": "lead_rate_per_100", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:23:21Z", "unit": "rate", "value": 0.0}
+{"meta": {"window_days": 7}, "metric": "traffic_available", "period": "point", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:27:50Z", "unit": "bool", "value": 1}
+{"meta": {"cur": 9, "prev": 0}, "metric": "sessions_delta_pct", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:27:50Z", "unit": "pct", "value": null}
+{"meta": {"cur": 9, "prev": 0}, "metric": "users_delta_pct", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:27:50Z", "unit": "pct", "value": null}
+{"meta": {"delta_pct": null, "prev": 0}, "metric": "conv_finder_capture", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:27:50Z", "unit": "count", "value": 0}
+{"meta": {"delta_pct": null, "prev": 0}, "metric": "conv_call_click", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:27:50Z", "unit": "count", "value": 0}
+{"meta": {"delta_pct": null, "prev": 0}, "metric": "conv_lead_submit", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:27:50Z", "unit": "count", "value": 0}
+{"meta": {"cur": 0, "prev": 0}, "metric": "conv_total_delta_pct", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:27:50Z", "unit": "pct", "value": null}
+{"meta": {"cur": 0.0, "delta_pct": null, "leads": 0, "prev": null, "sessions": 9}, "metric": "lead_rate_per_100", "period": "7d", "source": "ga4", "subject": "site", "ts": "2026-07-07T17:27:50Z", "unit": "rate", "value": 0.0}
