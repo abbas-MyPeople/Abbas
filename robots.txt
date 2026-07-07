@@ -4,5 +4,6 @@ Disallow: /flagship/
 Disallow: /research/
 Disallow: /growth_engine/
 Disallow: /command/
+Disallow: /stocks/
 
 Sitemap: https://azrestaurantpartners.com/sitemap.xml
