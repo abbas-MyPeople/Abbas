@@ -40,8 +40,13 @@ def main(argv=None) -> int:
         return 1 if s["critical_fails"] else 0
 
     if args.mode == "sense":
-        from .sensors import ga4_traffic
+        from .sensors import ga4_traffic, demand
         ga4_traffic.sense(verbose=v)
+        try:
+            demand.sense(verbose=v)          # free Google-Autocomplete demand signals (best-effort)
+        except Exception as e:
+            if v:
+                print(f"demand: skipped ({type(e).__name__})")
         return 0
 
     if args.mode == "propose":
