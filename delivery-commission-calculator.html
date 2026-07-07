@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Delivery Commission Calculator (Free, 2026)</title>
+  <meta name="description" content="Free calculator: see exactly how much DoorDash, Uber Eats and Grubhub commissions cost your restaurant per month and per year — and how much you'd keep going direct." />
+  <meta name="theme-color" content="#f4eee2" />
+  <link rel="canonical" href="https://azrestaurantpartners.com/delivery-commission-calculator.html" />
+  <meta property="og:title" content="Restaurant Delivery Commission Calculator (Free)" />
+  <meta property="og:description" content="See how much the delivery apps' 15–30% commissions really cost you per year — and how much you'd keep by moving orders to first-party ordering." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://azrestaurantpartners.com/delivery-commission-calculator.html" />
+  <meta property="og:image" content="https://azrestaurantpartners.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b1a17'/%3E%3Ctext x='50%25' y='55%25' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23c0492b' text-anchor='middle' dominant-baseline='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebApplication", "name": "Restaurant Delivery Commission Calculator", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "url": "https://azrestaurantpartners.com/delivery-commission-calculator.html", "description": "Free calculator estimating how much a restaurant loses to third-party delivery commissions per month and year, and potential savings from first-party ordering.", "publisher": { "@type": "Organization", "name": "AZ Restaurant Partners" } },
+    { "@type": "FAQPage", "mainEntity": [
+      { "@type": "Question", "name": "How much commission do delivery apps take?", "acceptedAnswer": { "@type": "Answer", "text": "DoorDash, Uber Eats and Grubhub typically charge restaurants 15–30% of each order for their standard marketplace/delivery plans, plus additional fees for marketing/ads. Lower-commission 'pickup' or 'basic' tiers exist but come with far less visibility. Use the calculator above with your real numbers to see the annual cost." } },
+      { "@type": "Question", "name": "How much cheaper is first-party (direct) online ordering?", "acceptedAnswer": { "@type": "Answer", "text": "Direct ordering has no 15–30% per-order commission — you pay roughly 2.6–3% in card processing plus a flat monthly platform fee (often $0–$500/mo). On steady volume that's dramatically cheaper than the apps; the calculator shows the difference on your numbers." } },
+      { "@type": "Question", "name": "Should I quit the delivery apps entirely?", "acceptedAnswer": { "@type": "Answer", "text": "Usually no. The apps are a discovery channel that brings new customers. The goal is to stop paying 15–30% on the orders you could own directly, and to convert app customers into repeat first-party regulars — not to go dark." } }
+    ]},
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://azrestaurantpartners.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Toolbox", "item": "https://azrestaurantpartners.com/toolbox.html" },
+      { "@type": "ListItem", "position": 3, "name": "Delivery Commission Calculator", "item": "https://azrestaurantpartners.com/delivery-commission-calculator.html" }
+    ]}
+  ]
+}
+  </script>
+  <style>
+    .calc{ background:var(--card,#fbf7ee); border:1px solid var(--line,#e5dcc9); border-radius:16px; padding:24px; margin:8px 0 28px; }
+    .calc__row{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid var(--line,#e5dcc9); }
+    .calc__row:last-of-type{ border-bottom:0; }
+    .calc__label{ font-weight:600; color:var(--ink,#1b1a17); }
+    .calc__label small{ display:block; color:var(--muted,#8a8275); font-weight:400; font-size:0.85rem; }
+    .calc__input{ display:flex; align-items:center; gap:10px; }
+    .calc__input input[type=number]{ width:120px; padding:9px 11px; border:1px solid var(--line,#e5dcc9); border-radius:9px; font:inherit; font-size:16px; text-align:right; background:#fff; color:var(--ink,#1b1a17); }
+    .calc__input input[type=range]{ width:150px; accent-color:var(--accent,#c0492b); }
+    .calc__unit{ color:var(--muted,#8a8275); font-size:0.9rem; min-width:34px; }
+    .calc__out{ display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:22px; background:var(--line,#e5dcc9); border:1px solid var(--line,#e5dcc9); border-radius:14px; overflow:hidden; }
+    .calc__card{ background:var(--paper,#f4eee2); padding:18px 20px; }
+    .calc__card--dark{ background:var(--ink,#1b1a17); }
+    .calc__cap{ font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted,#8a8275); }
+    .calc__card--dark .calc__cap{ color:#a89f90; }
+    .calc__big{ font-family:"Fraunces",Georgia,serif; font-weight:700; font-size:2rem; line-height:1.1; color:var(--accent,#c0492b); margin-top:6px; }
+    .calc__card--dark .calc__big{ color:#fff; }
+    .calc__sub{ font-size:0.86rem; color:var(--muted,#8a8275); margin-top:4px; }
+    .calc__note{ font-size:0.82rem; color:var(--muted,#8a8275); margin-top:14px; }
+    @media(max-width:520px){ .calc__out{ grid-template-columns:1fr; } .calc__row{ flex-direction:column; align-items:flex-start; } }
+  </style>
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="wrap nav__inner">
+      <a href="index.html" class="brand" aria-label="AZ Restaurant Partners">AZ&nbsp;Restaurant&nbsp;Partners</a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="toolbox.html">Toolbox</a>
+        <a href="guides.html">Guides</a>
+        <a href="details.html">Full details</a>
+        <a href="index.html#contact" class="nav__cta">Book a free call</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <article class="section guide">
+      <div class="wrap">
+        <div class="guide__head">
+          <p class="guide__crumb"><a href="toolbox.html">Toolbox</a> · Free calculator</p>
+          <h1>Restaurant delivery commission calculator</h1>
+          <p class="guide__lead">DoorDash, Uber Eats and Grubhub take <strong>15–30% of every order</strong>, plus fees. Put in your real numbers and see exactly what that costs you a year — and how much you'd keep by moving orders to your own first-party ordering.</p>
+          <p class="guide__meta">Free · no sign-up · your numbers stay in your browser</p>
+        </div>
+
+        <div class="calc" id="calc">
+          <div class="calc__row">
+            <span class="calc__label">Delivery orders per month<small>Across all the apps combined</small></span>
+            <span class="calc__input"><input type="range" id="orders" min="20" max="2000" step="10" value="400" /><input type="number" id="ordersN" min="0" value="400" /></span>
+          </div>
+          <div class="calc__row">
+            <span class="calc__label">Average order value<small>Typical delivery ticket</small></span>
+            <span class="calc__input"><span class="calc__unit">$</span><input type="number" id="aov" min="1" value="35" /></span>
+          </div>
+          <div class="calc__row">
+            <span class="calc__label">Current commission rate<small>Delivery apps usually 15–30%</small></span>
+            <span class="calc__input"><input type="range" id="rate" min="10" max="35" step="1" value="25" /><input type="number" id="rateN" min="0" max="100" value="25" /><span class="calc__unit">%</span></span>
+          </div>
+
+          <div class="calc__out">
+            <div class="calc__card"><div class="calc__cap">Lost to the apps — per month</div><div class="calc__big" id="perMonth">$0</div><div class="calc__sub" id="revLine">on $0 of delivery revenue</div></div>
+            <div class="calc__card calc__card--dark"><div class="calc__cap">Lost to the apps — per year</div><div class="calc__big" id="perYear">$0</div><div class="calc__sub" id="ordersYear">— orders/yr</div></div>
+            <div class="calc__card"><div class="calc__cap">Cost of the same orders, direct*</div><div class="calc__big" id="directYear" style="color:var(--ink,#1b1a17)">$0</div><div class="calc__sub">~3% card processing + a flat platform fee</div></div>
+            <div class="calc__card calc__card--dark"><div class="calc__cap">You'd keep — per year</div><div class="calc__big" id="savings" style="color:#7fd18f">$0</div><div class="calc__sub">by owning the orders you can</div></div>
+          </div>
+          <p class="calc__note">* Estimate. Direct ordering replaces the 15–30% commission with card processing (~2.6–3%) plus a flat monthly platform fee (often $0–$500). It assumes you move a meaningful share of orders to direct — the apps stay useful for discovery. Not financial advice; confirm rates on live quotes.</p>
+        </div>
+
+        <div class="guide__body">
+          <h2>What the number means</h2>
+          <p>For most independents, delivery <em>looks</em> busy and earns almost nothing — because 15–30% off the top, plus fees, is often larger than the whole margin on the dish. The figure above is the slice of your own revenue the apps keep every year. You don't beat it by quitting the apps (they bring new customers) — you beat it by <strong>owning the orders you can</strong> and converting app customers into direct regulars over time.</p>
+          <h2>How to keep more of it</h2>
+          <p>The playbook is simple: open your own commission-free ordering, price delivery to cover the commission, recover the money the apps wrongly deduct, pipe every app into one POS screen, and turn app customers into your regulars. We break each step down here:</p>
+          <ul>
+            <li><a href="cut-delivery-commissions.html">How to cut DoorDash &amp; delivery commissions</a> — the full playbook</li>
+            <li><a href="online-ordering-without-doordash.html">How to accept online orders without DoorDash</a> — step by step</li>
+            <li><a href="doordash-vs-ubereats-vs-grubhub.html">DoorDash vs Uber Eats vs Grubhub</a> — how the fees compare</li>
+            <li><a href="toolbox.html#cat-online-ordering">Commission-free ordering tools</a> in the toolbox</li>
+          </ul>
+          <div class="guide__callout">
+            <p><strong>Want this done for you?</strong> We set up first-party ordering, price it right, and recover wrongful app charges — and we take <strong>no commission from any vendor</strong>. You only pay once you're saving. <a href="index.html#contact">Book a free call</a> and we'll run your real numbers together.</p>
+          </div>
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div class="guide__body guide__faq">
+          <details><summary>How much commission do delivery apps take?</summary><p>DoorDash, Uber Eats and Grubhub typically charge 15–30% per order on their standard plans, plus marketing/ad fees. Lower "pickup"/"basic" tiers exist but with far less visibility. Use your real numbers above to see the annual cost.</p></details>
+          <details><summary>How much cheaper is direct ordering?</summary><p>Direct ordering has no 15–30% commission — you pay roughly 2.6–3% card processing plus a flat monthly platform fee (often $0–$500). On steady volume that's dramatically cheaper; the calculator shows the difference on your numbers.</p></details>
+          <details><summary>Should I quit the delivery apps entirely?</summary><p>Usually no. The apps are a discovery channel. The goal is to stop paying 15–30% on the orders you could own directly, and to convert app customers into repeat first-party regulars — not to go dark.</p></details>
+        </div>
+        <div class="guide__next">
+          <p class="guide__next-label">Read next</p>
+          <a href="cut-delivery-commissions.html">The full delivery-commission playbook →</a>
+          <a href="toolbox.html">Browse the full toolbox — 100+ tools by category →</a>
+        </div>
+      </div>
+    </article>
+
+    <section class="ctaband">
+      <div class="wrap ctaband__inner">
+        <p>See a number that stings? Let's fix it — you only pay once you're saving.</p>
+        <a href="index.html#contact" class="btn btn--primary">Book your free call</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="brand">AZ&nbsp;Restaurant&nbsp;Partners</span>
+      <p><strong>Keep more of what you earn.</strong> For independent, family-run restaurants · Spring &amp; Greater Houston, TX.</p>
+      <p class="footer__copy">© <span id="year"></span> AZ Restaurant Partners · <a href="index.html">Home</a> · <a href="toolbox.html">Toolbox</a> · <a href="details.html">Full details</a></p>
+    </div>
+  </footer>
+
+  <div class="mobilecta" id="mobilecta">
+    <a href="index.html#contact" class="btn btn--primary btn--full">Book your free call</a>
+  </div>
+
+  <script>
+    (function(){
+      var fmt = function(n){ return "$" + Math.round(n).toLocaleString("en-US"); };
+      var el = function(id){ return document.getElementById(id); };
+      var orders = el("orders"), ordersN = el("ordersN"), aov = el("aov"),
+          rate = el("rate"), rateN = el("rateN");
+      function sync(a,b){ b.value = a.value; }
+      function calc(){
+        var o = Math.max(0, +orders.value || 0), a = Math.max(0, +aov.value || 0), r = Math.max(0, +rate.value || 0);
+        var revM = o * a;
+        var lostM = revM * r/100;
+        var lostY = lostM * 12;
+        var directY = revM * 12 * 0.03;          // ~3% card processing on the same volume
+        var keepY = Math.max(0, lostY - directY);
+        el("perMonth").textContent = fmt(lostM);
+        el("perYear").textContent = fmt(lostY);
+        el("revLine").textContent = "on " + fmt(revM) + " of delivery revenue";
+        el("ordersYear").textContent = (o*12).toLocaleString("en-US") + " orders/yr";
+        el("directYear").textContent = fmt(directY);
+        el("savings").textContent = fmt(keepY);
+      }
+      orders.addEventListener("input", function(){ sync(orders, ordersN); calc(); });
+      ordersN.addEventListener("input", function(){ orders.value = ordersN.value; calc(); });
+      rate.addEventListener("input", function(){ sync(rate, rateN); calc(); });
+      rateN.addEventListener("input", function(){ rate.value = rateN.value; calc(); });
+      aov.addEventListener("input", calc);
+      calc();
+    })();
+  </script>
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -2,6 +2,8 @@
   "updated": "2026-07-07",
   "note": "Claude's rolling work-log for the AZ product + growth loop. Updated every session as things ship / start / pause. 'shipped' = live on main; the growth engine's own actions are in your daily email brief.",
   "items": [
+    { "status": "building", "area": "research", "date": "2026-07-07", "title": "Full-context growth research + proactive plan", "detail": "Researching AZ's growth opportunities — keywords, content gaps, link/AEO magnets, conversion levers, competitors — to proactively build what moves the needle, then executing it automatically." },
+    { "status": "shipped", "area": "content", "date": "2026-07-07", "title": "Delivery commission calculator (free)", "detail": "Interactive link + lead + AEO magnet: shows what DoorDash/Uber/Grubhub cost per year vs going direct. Featured on the guides hub, linked from the delivery guide, added to the sitemap." },
     { "status": "building", "area": "content", "date": "2026-07-07", "title": "SEO/AEO content velocity", "detail": "Writing high-intent comparison + how-to pages in batches (agents write → I verify → ship). This is the main traffic lever now." },
     { "status": "building", "area": "engine", "date": "2026-07-07", "title": "A/B experiment running", "detail": "Hero-headline test live (control vs value-forward). Engine measures daily; auto-decides once ~200 sessions/variant. Currently gathering data (traffic-limited)." },
 
