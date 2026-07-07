@@ -1,0 +1,1 @@
+{"batch_id": null, "kind": "experiment_start", "result": null, "status": "running", "summary": "Started A/B test: hero headline (control vs value-forward)", "target": {"page_file": "index.html", "section": "hero"}, "ts": "2026-07-07T17:26:41Z"}

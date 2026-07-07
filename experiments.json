@@ -1,3 +1,27 @@
 {
-  "experiments": []
+  "experiments": [
+    {
+      "id": "hero-headline-2026-07",
+      "page": "index.html",
+      "anchor": "hero",
+      "hypothesis": "A clear value / audience-fit hero converts a higher SHARE of visitors than the pain-question hero",
+      "metric": "conversion",
+      "split": 0.5,
+      "variants": {
+        "A": {
+          "label": "control"
+        },
+        "B": {
+          "selector": ".hero__title",
+          "attr": "innerHTML",
+          "value": "You run the restaurant. <em>We run the tech that grows it.</em>"
+        }
+      },
+      "min_sessions_per_variant": 200,
+      "max_days": 21,
+      "status": "running",
+      "started": "2026-07-07",
+      "result": null
+    }
+  ]
 }
