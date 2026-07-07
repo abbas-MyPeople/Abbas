@@ -64,11 +64,15 @@ em { font-style: italic; color: var(--accent); }
 .nav__toggle span { width: 26px; height: 2px; background: var(--ink); transition: .3s var(--ease); }
 
 /* ===================== HERO ===================== */
-.hero { padding: 132px 0 76px; }
-.hero__grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
-.hero__title { font-size: clamp(2.5rem, 5.4vw, 4rem); font-weight: 600; }
-.hero__lead { font-size: 1.18rem; margin-top: 26px; max-width: 38ch; }
-.hero__cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+.hero { padding: 118px 0 72px; }
+.hero__grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 56px; align-items: center; }
+.hero__title { font-size: clamp(2.4rem, 5vw, 3.7rem); font-weight: 600; }
+.hero__lead { font-size: 1.15rem; margin-top: 22px; max-width: 46ch; }
+.hero__cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+.hero__cost { margin-top: 18px; font-size: 0.98rem; color: var(--muted); max-width: 46ch; }
+.hero__cost strong { color: var(--ink); font-weight: 600; }
+.hero__cost a { color: var(--accent); border-bottom: 1px solid rgba(192,73,43,0.35); font-weight: 500; white-space: nowrap; }
+.hero__cost a:hover { border-bottom-color: var(--accent); }
 
 /* ===================== CREDIBILITY BAR ===================== */
 .creds { background: var(--ink); color: var(--paper); padding: 30px 0; }
