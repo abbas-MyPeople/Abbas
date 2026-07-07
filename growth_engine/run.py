@@ -7,6 +7,7 @@ growth_engine.run — the entry point the GitHub Actions cron calls (ported from
   python -m growth_engine.run --mode send        # send the brief (dry-runs without the WK_ENGINE_* secret)
   python -m growth_engine.run --mode read        # read owner reply → parse approve/reject/instructions
   python -m growth_engine.run --mode execute      # apply approved/interpreted edits + commit to main (--dry default)
+  python -m growth_engine.run --mode experiments  # A/B lifecycle: measure running experiments → decide → promote/revert (--dry default)
 
 Kill switch: ENGINE_DISABLED=1 → every mode no-ops. Orchestration stays tiny; logic lives in the modules.
 """
@@ -20,7 +21,7 @@ def _disabled() -> bool:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="AZ Restaurant Partners growth engine")
-    ap.add_argument("--mode", choices=["sense", "watch", "propose", "send", "read", "execute"],
+    ap.add_argument("--mode", choices=["sense", "watch", "propose", "send", "read", "execute", "experiments"],
                     default="watch")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--dry", action="store_true", default=True, help="execute: plan/diff only (default)")
@@ -75,6 +76,30 @@ def main(argv=None) -> int:
     if args.mode == "execute":
         from . import execute
         execute.run(dry=args.dry, verbose=v)
+        return 0
+
+    if args.mode == "experiments":
+        # A/B lifecycle: measure every running experiment, decide (deterministic z-test), and — on --apply —
+        # promote (bake the winner into the page) / revert. run_cycle writes the page + experiments.json;
+        # here we make the ONE revertible commit for the changed files (deploys via GitHub Pages).
+        from . import experiments, execute
+        s = experiments.run_cycle(verbose=v, apply=not args.dry)
+        changed = s.get("changed_files") or []
+        if not args.dry and changed:
+            execute._sh("git", "config", "user.name", "growth-engine[bot]")
+            execute._sh("git", "config", "user.email", "growth-engine@users.noreply.github.com")
+            for path in changed:
+                execute._sh("git", "add", "--", path)
+            msg = "growth-engine: experiment " + ", ".join(s.get("commit_tags") or ["update"])
+            c = execute._sh("git", "commit", "-m", msg)
+            if c.returncode == 0:
+                pu = execute._sh("git", "push", "origin", "HEAD:main")
+                if v:
+                    print(f"experiments: committed + {'pushed' if pu.returncode == 0 else 'push FAILED'} — {msg}")
+            elif v:
+                print(f"experiments: commit failed: {(c.stderr or c.stdout).strip()[:160]}")
+        elif args.dry and changed and v:
+            print(f"experiments: [dry-run] would commit {changed}")
         return 0
 
     return 0

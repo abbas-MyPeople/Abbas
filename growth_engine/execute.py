@@ -14,7 +14,7 @@ GUARDRAILS enforced here (defense in depth):
 """
 from __future__ import annotations
 import os, subprocess, difflib, hashlib, json
-from . import model, notify, actioner_llm
+from . import model, notify, actioner_llm, experiments
 from .executors import EXECUTORS, apply_llm_plan, is_allowed_path, validate_edit, read_page, REPO, ScopeError, ValidationError
 
 EXECUTED = model.STATE / "executed.jsonl"    # fingerprints of decisions already actioned (idempotency)
@@ -69,6 +69,29 @@ def plan_from_decisions(verbose: bool = True) -> dict:
         decision = d.get("decision")
         finding = fbk.get(f"{s['rule_id']}:{s['subject']}", s)
         finding = {**finding, "target": finding.get("target") or s.get("target") or {}, "_n": n}
+
+        # ── A/B EXPERIMENTS: an experiment-type finding LAUNCHES an A/B test, not a hard edit (spec §4).
+        # Approve/instruct route here first. An "instruct" carries the owner's angle → variant B is concrete,
+        # so we queue an experiment_start plan (run() calls experiments.start on --apply). A bare "approve"
+        # has no angle yet, so we DON'T launch a placeholder variant onto the live site — we ask for the copy.
+        # TODO(integration): to auto-draft B from a freeform angle, run it through actioner_llm first; today
+        # the instruction text is used verbatim as B's value (owner supplies exact copy).
+        if s["rule_id"] in experiments.EXPERIMENT_RULES and decision in ("approve", "instruct"):
+            angle = (d.get("instruction") or "").strip() if decision == "instruct" else ""
+            draft = experiments.propose_from_finding(finding)
+            if not draft:
+                skipped.append(f"item {n} ({s['rule_id']}): not testable (selector missing / element overlap) — no experiment")
+                continue
+            if angle:
+                draft["variants"]["B"]["value"] = angle
+                plans.append({"kind": "experiment_start", "draft": draft,
+                              "summary": f"start A/B experiment {draft['id']} on {draft['page']} · {draft['anchor']}",
+                              "files": {}, "local_drafts": {}})
+            else:
+                sect = (finding.get("target") or {}).get("section", "hero")
+                clarifications.append(f"Experiment {draft['id']} ({draft['anchor']}) is approved and ready. "
+                                      f"Reply with the exact new {sect} copy (the audience/angle) and I'll launch the A/B test.")
+            continue
 
         if decision == "approve":
             ex = EXECUTORS.get(s["rule_id"])
@@ -146,6 +169,35 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
 
     # ── render/apply each plan ──
     for p in plans:
+        # A/B experiment start: owner-gated launch. run_cycle later measures/decides. ONE commit of
+        # experiments.json (repo root) deploys the live split via GitHub Pages.
+        if p.get("kind") == "experiment_start":
+            draft = p["draft"]
+            if verbose:
+                print(f"  • {p['summary']}")
+            if dry:
+                if verbose:
+                    print(f"      ↳ (dry-run) would launch experiment {draft['id']} — "
+                          f"B[{draft['variants']['B'].get('selector')}] = {str(draft['variants']['B'].get('value',''))[:60]!r}")
+                continue
+            try:
+                exp = experiments.start(draft)
+            except (ScopeError, ValidationError) as e:
+                print(f"      ✗ experiment start REJECTED: {e}")
+                continue
+            _sh("git", "config", "user.name", "growth-engine[bot]")
+            _sh("git", "config", "user.email", "growth-engine@users.noreply.github.com")
+            _sh("git", "add", "--", "experiments.json")
+            msg = f"growth-engine: start A/B {exp['id']} (batch {res['batch_id']})"
+            c = _sh("git", "commit", "-m", msg)
+            if c.returncode == 0:
+                committed.append("experiments.json")
+                if verbose:
+                    print(f"      ✓ committed: {msg}")
+            else:
+                print(f"      ✗ commit failed: {(c.stderr or c.stdout).strip()[:160]}")
+            continue
+
         files = p.get("files", {})
         drafts = p.get("local_drafts", {})
         if verbose:

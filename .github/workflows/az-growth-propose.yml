@@ -64,6 +64,9 @@ jobs:
       - name: SENSE — gather context
         run: python -m growth_engine.run --mode sense
 
+      - name: EXPERIMENTS — measure running A/B tests, promote winners / revert losers
+        run: python -m growth_engine.run --mode experiments --apply
+
       - name: PROPOSE — draft the day's growth moves
         run: python -m growth_engine.run --mode propose
 

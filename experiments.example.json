@@ -1,0 +1,30 @@
+// experiments.example.json — REFERENCE ONLY (not fetched by the site; JSONC with comments).
+// The live file is experiments.json at the repo root; it must be strict JSON: {"experiments": []}.
+// Full schema per research/ab-testing-engine-spec.md §2. Copy one object into experiments.json
+// (strip these comments) and set status to "running" to go live. The client runner reads only
+// running experiments whose `page` matches the current page.
+{
+  "experiments": [
+    {
+      "id": "hero-headline-2026-07",          // unique, stable id; also the localStorage/GA4 key
+      "status": "running",                      // draft | running | decided | shipped | reverted
+      "page": "index.html",                     // matched against location.pathname's filename ("/" ⇒ index.html)
+      "anchor": "hero",                         // logical section the runner targets (documentation)
+      "hypothesis": "An audience-fit hero lifts lead-rate for corporate caterers",
+      "metric": "conversion",                   // lead_submit + call_click + finder_capture
+      "split": 0.5,                             // share of visitors bucketed to B (0..1)
+      "variants": {
+        "A": { "label": "control" },           // A = page left untouched
+        "B": {                                   // B = apply this DOM change
+          "selector": "#hero-title",            // querySelector target; if not found ⇒ fail safe to control
+          "attr": "innerHTML",                  // innerHTML | textContent | href | src | value | any attribute name
+          "value": "Halal catering Houston trusts — book your tasting"
+        }
+      },
+      "started": "2026-07-08",                  // ISO date the experiment started
+      "min_sessions_per_variant": 200,          // no decision before this many sessions per arm
+      "max_days": 21,                           // hard stop → decide or revert
+      "result": null                            // filled on decide: {winner, lift_pct, p, n_a, n_b}
+    }
+  ]
+}

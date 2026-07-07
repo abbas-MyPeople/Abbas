@@ -102,6 +102,71 @@ def _performance(signals) -> list[str]:
     return lines
 
 
+# ══════════════════════════════════════ EXPERIMENTS (A/B) ═══════════════════════════════════════
+def _experiments_data() -> dict:
+    """Deterministic read of the A/B lifecycle for the brief (running tests + today's decisions).
+    Never raises — a missing module / empty experiments.json just yields empty lists."""
+    try:
+        from . import experiments
+        return experiments.brief_data()
+    except Exception:
+        return {"running": [], "decisions_today": []}
+
+
+def _rate_str(v):
+    return "—" if v is None else f"{v:.1f}"
+
+
+def _experiments_text(exp) -> list[str]:
+    running, decided = exp.get("running") or [], exp.get("decisions_today") or []
+    if not running and not decided:
+        return []
+    out = ["═══ EXPERIMENTS (A/B) ═══"]
+    for r in running:
+        out.append(f"• {r['id']} on {r.get('page','?')} · day {r.get('days',0)}/{r.get('max_days','?')} — "
+                   f"A {_rate_str(r.get('a_rate'))} vs B {_rate_str(r.get('b_rate'))} leads/100 "
+                   f"(A {r.get('a_sessions') or 0} / B {r.get('b_sessions') or 0} sessions)")
+    for d in decided:
+        verb = "PROMOTED B" if d.get("action") == "promote" else "REVERTED to control"
+        lift = f", +{d['lift_pct']:.0f}%" if d.get("lift_pct") is not None else ""
+        pv = f", p={d['p']}" if d.get("p") is not None else ""
+        out.append(f"• DECIDED {d.get('id')}: {verb}{lift}{pv} — {d.get('reason','')}")
+    out.append("")
+    return out
+
+
+def _experiments_html(exp) -> str:
+    running, decided = exp.get("running") or [], exp.get("decisions_today") or []
+    if not running and not decided:
+        return ""
+    rows = []
+    for r in running:
+        rows.append(
+            f'<div style="background:{_PAPER};border:1px solid {_LINE};border-radius:10px;padding:12px 14px;margin-top:8px;">'
+            f'<div style="font-family:{_SANS};color:{_INK};font-size:14px;font-weight:600;">{_esc(r["id"])}'
+            f'<span style="color:{_MUTED};font-weight:400;font-size:12px;"> · {_esc(str(r.get("page","")))} · '
+            f'day {r.get("days",0)}/{r.get("max_days","?")}</span></div>'
+            f'<div style="margin-top:6px;font-size:13px;color:{_BODY};">'
+            f'<b>A</b> {_rate_str(r.get("a_rate"))} &nbsp;vs&nbsp; <b>B</b> {_rate_str(r.get("b_rate"))} '
+            f'<span style="color:{_MUTED};">leads / 100 visits</span>'
+            f'<span style="color:{_MUTED};font-size:12px;"> &nbsp;(A {r.get("a_sessions") or 0} / B {r.get("b_sessions") or 0} sessions)</span></div></div>')
+    for d in decided:
+        promoted = d.get("action") == "promote"
+        color = _GREEN if promoted else _RED
+        verb = "Promoted B — winner baked in" if promoted else "Reverted to control"
+        lift = f' &nbsp;+{d["lift_pct"]:.0f}%' if d.get("lift_pct") is not None else ""
+        pv = f' &nbsp;p={d["p"]}' if d.get("p") is not None else ""
+        rows.append(
+            f'<div style="border-left:3px solid {color};background:{_CARD};border-radius:0 8px 8px 0;'
+            f'padding:8px 12px;margin-top:8px;"><b style="color:{color};font-size:13px;">{_esc(str(d.get("id")))} — {verb}</b>'
+            f'<span style="color:{_INK};font-size:13px;font-weight:700;">{lift}{pv}</span>'
+            f'<div style="color:{_BODY};font-size:12px;margin-top:2px;">{_esc(str(d.get("reason","")))}</div></div>')
+    return (f'<tr><td style="padding:16px 24px 2px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
+            f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Experiments (A/B)</div>'
+            f'<div style="color:{_MUTED};font-size:12px;margin-top:2px;">Every change proven on real traffic — '
+            f'auto-promote winners, auto-revert losers.</div><div>{"".join(rows)}</div></td></tr>')
+
+
 # ══════════════════════════════════════ HTML EMAIL ══════════════════════════════════════════════
 def _delta_html(v):
     if v is None:
@@ -183,7 +248,7 @@ def _proposal_card_html(i, p) -> str:
     )
 
 
-def _build_html(subject, kind, perf, alerts, surface, watching, overflow) -> str:
+def _build_html(subject, kind, perf, alerts, surface, watching, overflow, exp_data=None) -> str:
     date_str = datetime.date.today().strftime("%A, %B %-d")
     band = {"alert": _RED, "propose": _EMBER, "holding": _GREEN}.get(kind, _EMBER)
     if kind == "alert":
@@ -216,6 +281,10 @@ def _build_html(subject, kind, perf, alerts, surface, watching, overflow) -> str
                      f'<div style="color:{_MUTED};font-size:12px;margin-top:2px;">Nothing ships until you reply.</div></td></tr>')
         for i, p in enumerate(surface, 1):
             parts.append(_proposal_card_html(i, p))
+    # experiments (A/B) — running tests + today's decisions
+    exp_html = _experiments_html(exp_data or {})
+    if exp_html:
+        parts.append(exp_html)
     # also today
     also = [f"• {w['headline']}" for w in watching] + [f"• (queued) {o['headline']}" for o in overflow]
     if not surface and not alerts:
@@ -259,6 +328,7 @@ def render_email(findings, signals=None) -> dict:
     overflow = proposals[3:]
     perf = _performance(signals)
     perf_data = _performance_data(signals)
+    exp_data = _experiments_data()
     kind = "alert" if alerts else ("propose" if surface else "holding")
 
     lines = []
@@ -300,6 +370,8 @@ def render_email(findings, signals=None) -> dict:
             lines.append(f'   Reply:  "{i} approve"  ·  "{i} reject"  ·  "{i} <your exact instruction>"')
             lines.append("")
 
+    lines.extend(_experiments_text(exp_data))
+
     also = [f"• {w['headline']}" for w in watching] + [f"• (queued) {o['headline']}" for o in overflow]
     if not surface and not alerts:
         also.append("• Live-site guard (proof bar, platform section, canonical, JSON-LD): all holding.")
@@ -323,7 +395,7 @@ def render_email(findings, signals=None) -> dict:
     surfaced = [{"n": i + 1, "rule_id": p.get("rule_id"), "subject": p.get("subject"),
                  "headline": p.get("headline"), "target": p.get("target") or {}}
                 for i, p in enumerate(surface)]
-    html = _build_html(subject, kind, perf_data, alerts, surface, watching, overflow)
+    html = _build_html(subject, kind, perf_data, alerts, surface, watching, overflow, exp_data)
     return {"subject": subject, "body": "\n".join(lines), "html": html, "surfaced": surfaced,
             "counts": {"alerts": len(alerts), "proposals": len(proposals), "watching": len(watching)}}
 

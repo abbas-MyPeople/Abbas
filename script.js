@@ -86,8 +86,11 @@
     ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','referrer','landing'].forEach((k) => { if (ATTR[k]) p[k] = ATTR[k]; });
     return p;
   };
+  // Active A/B assignment for THIS page (set by the experiment runner below). These two params
+  // ride on EVERY subsequent event so GA4 can split any conversion by variant with no per-test setup.
+  const EXP = { params: {} }; // { experiment_id, variant } — empty until/unless a running experiment matches
   const track = (name, params) => {
-    try { if (typeof gtag === 'function') gtag('event', name, Object.assign({ page: location.pathname }, attrParams(), params || {})); } catch (e) {}
+    try { if (typeof gtag === 'function') gtag('event', name, Object.assign({ page: location.pathname }, attrParams(), EXP.params, params || {})); } catch (e) {}
   };
   window.azTrack = track;
   const sectionOf = (el) => { const s = el.closest && el.closest('section[id]'); return (s && s.id) || (el.closest('[id]') && el.closest('[id]').id) || ''; };
@@ -169,6 +172,101 @@
       }
     });
   }
+
+  /* ============ A/B EXPERIMENT RUNNER (client-side; static-site safe) ============ */
+  /* Reads /experiments.json (owner-gated, served at the site root), and for each `running`
+     experiment whose `page` matches THIS page: assigns the visitor a STABLE A/B variant, applies
+     variant B's DOM change (A = control, untouched), and tags GA4 — the experiment_id + variant
+     ride on every event (merged in track() above) plus one `experiment_exposure` event per assign.
+     Fail-safe by construction: a missing/empty/broken experiments.json, a missing selector, or any
+     thrown error all leave the control page exactly as-is. Dependency-free.
+     Self-test (stability) — the assignment is a pure function of (vid, id), so it's reproducible:
+       $ node -e 'const h=s=>{let x=2166136261>>>0;for(const c of s){x^=c.charCodeAt(0);x=Math.imul(x,16777619)>>>0;}return (x>>>0)/4294967296;};
+                  const b=(v,id,split)=>h(v+":"+id)<split?"B":"A";
+                  console.log(b("v42","hero-headline-2026-07",0.5), b("v42","hero-headline-2026-07",0.5));'
+       → prints the SAME letter twice; same (vid,id) always buckets identically (no flicker). */
+  (() => {
+    const VID_KEY = 'az_vid';
+    const pageOf = (p) => { const f = (p || '').split('/').pop(); return f || 'index.html'; }; // "/" ⇒ index.html
+    const currentPage = pageOf(location.pathname);
+
+    // Persistent visitor id — created once on first visit, reused forever. Basis for stable buckets.
+    const visitorId = (() => {
+      let v = null;
+      try { v = localStorage.getItem(VID_KEY); } catch (e) {}
+      if (!v) {
+        v = 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+        try { localStorage.setItem(VID_KEY, v); } catch (e) {}
+      }
+      return v;
+    })();
+
+    // Deterministic string → float in [0,1) (FNV-1a). Same input always yields the same output.
+    const hash01 = (str) => {
+      let h = 2166136261 >>> 0;
+      for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+      return (h >>> 0) / 4294967296;
+    };
+
+    // Stable per-(visitor, experiment) assignment; persisted so the variant never flips ⇒ no flicker.
+    const assign = (exp) => {
+      const key = 'az_exp_' + exp.id;
+      let variant = null;
+      try { variant = localStorage.getItem(key); } catch (e) {}
+      if (variant !== 'A' && variant !== 'B') {
+        variant = hash01(visitorId + ':' + exp.id) < Number(exp.split) ? 'B' : 'A';
+        try { localStorage.setItem(key, variant); } catch (e) {}
+      }
+      return variant;
+    };
+
+    // Apply variant B's DOM change. Missing selector / bad attr ⇒ fail safe (return false, control stays).
+    const applyB = (exp) => {
+      const b = exp.variants && exp.variants.B;
+      if (!b || !b.selector) return false;
+      let el = null;
+      try { el = document.querySelector(b.selector); } catch (e) { return false; }
+      if (!el) return false;
+      const attr = b.attr || 'innerHTML';
+      try {
+        if (attr === 'innerHTML') el.innerHTML = b.value;
+        else if (attr === 'textContent' || attr === 'text') el.textContent = b.value;
+        else if (attr === 'href' || attr === 'src' || attr === 'value') el[attr] = b.value;
+        else el.setAttribute(attr, b.value);
+      } catch (e) { return false; }
+      return true;
+    };
+
+    const run = (config) => {
+      const list = (config && Array.isArray(config.experiments)) ? config.experiments : [];
+      let firstTagged = false;
+      list.forEach((exp) => {
+        try {
+          if (!exp || exp.status !== 'running' || !exp.id) return;
+          if (pageOf(exp.page) !== currentPage) return;
+          const variant = assign(exp);
+          if (variant === 'B') applyB(exp); // A = leave control untouched
+          // A visitor is usually in ≤1 experiment per page → the first match sets the reusable pair.
+          if (!firstTagged) { EXP.params.experiment_id = exp.id; EXP.params.variant = variant; firstTagged = true; }
+          track('experiment_exposure', { experiment_id: exp.id, variant: variant });
+        } catch (e) { /* one bad experiment can never break the page or the others */ }
+      });
+    };
+
+    // Fetch the config; ANY failure (network, 404, bad JSON) ⇒ no experiments (page = control).
+    // Kick the fetch off immediately (parallel with parsing); apply once BOTH fetch + DOM are ready
+    // to keep the target present and minimise flash-of-control.
+    try {
+      fetch('/experiments.json', { cache: 'no-cache' })
+        .then((r) => (r && r.ok) ? r.json() : null)
+        .then((cfg) => {
+          if (!cfg) return;
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => run(cfg));
+          else run(cfg);
+        })
+        .catch(() => {});
+    } catch (e) {}
+  })();
 
   /* ============ SELF-SERVICE TOOL FINDER ============ */
   // c = category · t = restaurant types · pr = problems · g = goals · s = sizes · b = budget tiers
