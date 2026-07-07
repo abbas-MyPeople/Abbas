@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>AZ · Work log</title>
+  <style>
+    :root{ --paper:#f4eee2; --card:#fbf7ee; --ink:#1b1a17; --body:#4f4a40; --muted:#8a8275;
+           --ember:#c0492b; --line:#e5dcc9; --green:#2f7a3f; --amber:#b8862f; --gray:#8a8275; }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; background:var(--paper);
+          color:var(--body); line-height:1.5; -webkit-font-smoothing:antialiased; }
+    .wrap{ max-width:820px; margin:0 auto; padding:28px 20px 60px; }
+    h1{ font-family:Georgia,serif; color:var(--ink); font-size:26px; font-weight:700; }
+    .sub{ color:var(--muted); font-size:13px; margin-top:4px; }
+    .top{ border-bottom:2px solid var(--ink); padding-bottom:12px; margin-bottom:8px; display:flex;
+          justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; }
+    .top a{ color:var(--ember); font-size:13px; text-decoration:none; font-weight:600; }
+    .group{ margin-top:26px; }
+    .group__h{ font-family:Georgia,serif; font-size:13px; font-weight:700; letter-spacing:.1em;
+               text-transform:uppercase; display:flex; align-items:center; gap:9px; }
+    .dot{ width:10px; height:10px; border-radius:50%; flex:none; }
+    .count{ color:var(--muted); font-size:12px; font-weight:600; }
+    .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px;
+           margin-top:10px; }
+    .card__t{ font-family:Georgia,serif; color:var(--ink); font-size:16px; font-weight:700; }
+    .card__meta{ display:flex; gap:8px; align-items:center; margin:3px 0 6px; flex-wrap:wrap; }
+    .chip{ font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+           border:1px solid var(--line); border-radius:999px; padding:1px 8px; }
+    .date{ color:var(--muted); font-size:12px; }
+    .card__d{ color:var(--body); font-size:14px; }
+    .empty{ color:var(--muted); font-size:13px; padding:6px 0; }
+    .err{ color:var(--ember); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div><h1>AZ · Work log</h1><div class="sub" id="sub">Loading…</div></div>
+      <a href="../index.html">← azrestaurantpartners.com</a>
+    </div>
+    <div id="board"></div>
+  </div>
+  <script>
+    var ORDER = [
+      { key:"building", label:"Building now",   color:"var(--ember)" },
+      { key:"shipped",  label:"Recently shipped", color:"var(--green)" },
+      { key:"queued",   label:"Queued next",    color:"var(--gray)" },
+      { key:"paused",   label:"Paused / needs you", color:"var(--amber)" },
+      { key:"closed",   label:"Closed",         color:"var(--muted)" }
+    ];
+    function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+    fetch("worklog.json?t=" + Date.now()).then(function(r){ return r.json(); }).then(function(d){
+      document.getElementById("sub").textContent =
+        "What Claude is shipping, building, and paused · updated " + esc(d.updated);
+      var items = d.items || [];
+      var board = document.getElementById("board");
+      ORDER.forEach(function(g){
+        var mine = items.filter(function(it){ return it.status === g.key; });
+        var html = '<div class="group"><div class="group__h"><span class="dot" style="background:'+g.color+'"></span>'
+                 + g.label + ' <span class="count">'+ mine.length +'</span></div>';
+        if(!mine.length){ html += '<div class="empty">— nothing here right now</div>'; }
+        mine.forEach(function(it){
+          html += '<div class="card"><div class="card__t">'+esc(it.title)+'</div>'
+               +  '<div class="card__meta"><span class="chip">'+esc(it.area||"")+'</span>'
+               +  '<span class="date">'+esc(it.date||"")+'</span></div>'
+               +  '<div class="card__d">'+esc(it.detail||"")+'</div></div>';
+        });
+        board.innerHTML += html + '</div>';
+      });
+    }).catch(function(e){
+      document.getElementById("board").innerHTML = '<p class="err">Could not load the work log.</p>';
+    });
+  </script>
+</body>
+</html>

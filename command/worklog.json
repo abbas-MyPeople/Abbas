@@ -1,0 +1,26 @@
+{
+  "updated": "2026-07-07",
+  "note": "Claude's rolling work-log for the AZ product + growth loop. Updated every session as things ship / start / pause. 'shipped' = live on main; the growth engine's own actions are in your daily email brief.",
+  "items": [
+    { "status": "building", "area": "content", "date": "2026-07-07", "title": "SEO/AEO content velocity", "detail": "Writing high-intent comparison + how-to pages in batches (agents write → I verify → ship). This is the main traffic lever now." },
+    { "status": "building", "area": "engine", "date": "2026-07-07", "title": "A/B experiment running", "detail": "Hero-headline test live (control vs value-forward). Engine measures daily; auto-decides once ~200 sessions/variant. Currently gathering data (traffic-limited)." },
+
+    { "status": "shipped", "area": "content", "date": "2026-07-07", "title": "6 comparison + how-to pages", "detail": "Toast vs Clover, Square vs Toast, DoorDash vs Uber Eats vs Grubhub, Otter vs Deliverect vs ItsaCheckmate, AI-phone cost, online ordering without DoorDash. Wired into guides hub + sitemap (124 URLs)." },
+    { "status": "shipped", "area": "seo", "date": "2026-07-07", "title": "SEO/AEO foundation + GSC", "detail": "llms.txt, strengthened entity schema (LinkedIn sameAs, serviceType, knowsAbout), guides CollectionPage schema, robots hygiene, Google Search Console verified + sitemap submitted." },
+    { "status": "shipped", "area": "engine", "date": "2026-07-07", "title": "Read-receipt + 'since last reply' recap", "detail": "When you reply, the engine emails back what it understood + what it'll do; the next brief recaps prior requests + outcomes." },
+    { "status": "shipped", "area": "engine", "date": "2026-07-06", "title": "A/B testing engine", "detail": "Client-side experiment runner + engine lifecycle: propose → owner-approved start → measure per variant → z-test auto-promote winners / revert losers. Owner approves the start; data decides." },
+    { "status": "shipped", "area": "engine", "date": "2026-07-06", "title": "Autonomous growth loop", "detail": "Daily GA4 sense → visual HTML brief email → reply-to-approve/instruct (Claude actioner) → validated, revertible, scope-fenced edits → deploy. Runs on GitHub Actions cron; failure alerts; lead-rate objective; idempotent; reply-reads every 15 min." },
+    { "status": "shipped", "area": "site", "date": "2026-07-06", "title": "Guarded analytics dashboard (Hugging Face)", "detail": "Private GA4 dashboard: traffic, top pages, section funnel, conversions, sources. Auto-deploys from analytics/." },
+    { "status": "shipped", "area": "infra", "date": "2026-07-06", "title": "GA4 + GTM analytics", "detail": "Granular auto-tracking (every click, section view, conversion) + Google Tag Manager container for future pixels." },
+    { "status": "shipped", "area": "site", "date": "2026-07-01", "title": "Positioning reframe + proof", "detail": "USP = you (engineer + operator) as one platform; platform section, elevated voice-AI showcase, proof bar (4.6★/872 reviews), case study, onepager refresh." },
+    { "status": "shipped", "area": "infra", "date": "2026-07-01", "title": "Wok → AZ bridge", "detail": "flagship/ capability ledger + sync protocol + case study: proven-at-restaurant flows into the AZ product automatically." },
+
+    { "status": "queued", "area": "content", "date": "2026-07-07", "title": "More content batches", "detail": "Square vs Clover, OpenTable vs Resy vs Tock, top AI-phone tools head-to-head, more 'how much does X cost' pages, Houston/halal niche pages." },
+    { "status": "queued", "area": "site", "date": "2026-07-07", "title": "Onepager PDF + translations + finder-to-layers", "detail": "Regenerate the leave-behind PDF, translate new copy (Hindi/Urdu), tie the tool-finder to the 5 platform layers." },
+
+    { "status": "paused", "area": "engine", "date": "2026-07-07", "title": "Voice line go-live check", "detail": "The 'call & test it' CTA uses (281) 362-5354 — waiting on that AI line being live; will verify and adjust the CTA if not." },
+    { "status": "paused", "area": "site", "date": "2026-07-07", "title": "Case-study hard numbers", "detail": "3 outcome numbers (commission recovered $, direct-vs-3P shift, calls captured) need you before they go on the live case study." },
+
+    { "status": "closed", "area": "seo", "date": "2026-07-07", "title": "Indexation setup", "detail": "GSC verified, sitemap fetched (124 URLs), Bing import available. Google is now crawling — done." }
+  ]
+}
