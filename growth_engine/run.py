@@ -21,7 +21,8 @@ def _disabled() -> bool:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="AZ Restaurant Partners growth engine")
-    ap.add_argument("--mode", choices=["sense", "watch", "propose", "send", "read", "execute", "experiments", "aivis"],
+    ap.add_argument("--mode", choices=["sense", "watch", "propose", "send", "read", "execute", "experiments",
+                                       "aivis", "agent", "merge"],
                     default="watch")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--dry", action="store_true", default=True, help="execute: plan/diff only (default)")
@@ -128,6 +129,109 @@ def main(argv=None) -> int:
     if args.mode == "aivis":
         from .sensors import ai_visibility   # opt-in AI-recommendation rank tracker (AI_VISIBILITY_ENABLED=1)
         ai_visibility.run(verbose=v, force=args.force)
+        return 0
+
+    if args.mode == "agent":
+        # Build the next QUEUED reply-task on a throwaway branch, open a PR, email the owner the link.
+        # Nothing reaches the live site until the owner replies "merge" (--mode merge). One task per run.
+        from . import tasks, reply_agent, execute, notify
+
+        def _git(*a):
+            return execute._sh("git", *a)
+
+        def _commit_queue(msg):
+            _git("add", "--", "command/reply-tasks.json")
+            c = _git("commit", "-m", msg)
+            if c.returncode == 0:
+                _git("push", "origin", "HEAD:main")
+
+        t = tasks.next_queued()
+        if not t:
+            if v:
+                print("agent: no queued reply-tasks.")
+            return 0
+        tid, branch = t["id"], f"reply/{t['id']}"
+        if args.dry:      # true no-op preview — mutate/commit nothing
+            if v:
+                print(f"agent: [dry-run] would build task {tid}: {t['directive'][:80]}")
+            return 0
+        _git("config", "user.name", "growth-engine[bot]")
+        _git("config", "user.email", "growth-engine@users.noreply.github.com")
+        _git("fetch", "origin", "main")
+        # 1) mark building on main + push (durable; prevents double-processing)
+        tasks.update(tid, status="building", branch=branch)
+        _commit_queue(f"reply-agent: start {tid}")
+        # 2) build on a fresh branch off latest main
+        _git("checkout", "-B", branch, "origin/main")
+        res = reply_agent.build(t["directive"], verbose=v)
+        changed = res.get("changed_files") or []
+        if not changed:
+            _git("checkout", "main"); _git("reset", "--hard", "origin/main")
+            tasks.update(tid, status="failed", summary=res.get("summary", "no changes produced"))
+            _commit_queue(f"reply-agent: {tid} produced no changes")
+            if v:
+                print(f"agent: {tid} produced no changes — marked failed.")
+            return 0
+        for f in changed:
+            _git("add", "--", f)
+        _git("commit", "-m", f"reply-agent: {t['directive'][:60]} ({tid})")
+        _git("push", "-u", "origin", branch)
+        # 3) open the PR (gh CLI; GH_TOKEN provided by the workflow)
+        pr = execute._sh("gh", "pr", "create", "--base", "main", "--head", branch,
+                         "--title", f"[reply-agent] {t['directive'][:60]}",
+                         "--body", (f"Auto-built from your email reply — review before it ships.\n\n"
+                                    f"**You asked:** {t['directive']}\n\n**What I did:** {res.get('summary','')}\n\n"
+                                    f"Reply **\"merge\"** to the engine email to ship this to the live site."))
+        pr_url = ""
+        if pr.returncode == 0 and pr.stdout:
+            pr_url = pr.stdout.strip().splitlines()[-1]
+        elif v:
+            print(f"agent: gh pr create failed: {(pr.stderr or pr.stdout).strip()[:160]}")
+        num = pr_url.rstrip("/").split("/")[-1] if pr_url else ""
+        # 4) record pr_open on main + notify the owner
+        _git("checkout", "main"); _git("reset", "--hard", "origin/main")
+        tasks.update(tid, status="pr_open", pr_url=(pr_url or None),
+                     pr_number=(int(num) if num.isdigit() else None), summary=res.get("summary"))
+        _commit_queue(f"reply-agent: opened PR for {tid}")
+        notify.send_task_done(t, pr_url, res.get("summary", ""), verbose=v)
+        if v:
+            print(f"agent: built {tid} → {pr_url or '(PR create failed)'}")
+        return 0
+
+    if args.mode == "merge":
+        # Owner replied "merge" → merge the newest open reply-agent PR (fail-closed on sender via inbox).
+        from . import inbox, tasks, execute, notify
+        execute._sh("git", "config", "user.name", "growth-engine[bot]")
+        execute._sh("git", "config", "user.email", "growth-engine@users.noreply.github.com")
+        reply = inbox.fetch_reply(verbose=v)
+        if not reply:
+            return 0
+        low = (reply["text"] or "").lower()
+        if not any(w in low for w in ("merge", "ship it", "go live", "publish it", "ship this")):
+            if v:
+                print("merge: no merge intent in the latest reply.")
+            return 0
+        prs = tasks.open_prs()
+        if not prs:
+            if v:
+                print("merge: no open reply-agent PRs to merge.")
+            return 0
+        t = prs[-1]     # newest open PR
+        r = execute._sh("gh", "pr", "merge", str(t["pr_number"]), "--squash", "--delete-branch")
+        if r.returncode == 0:
+            execute._sh("git", "fetch", "origin", "main")
+            execute._sh("git", "checkout", "main")
+            execute._sh("git", "reset", "--hard", "origin/main")
+            tasks.update(t["id"], status="merged")
+            execute._sh("git", "add", "--", "command/reply-tasks.json")
+            c = execute._sh("git", "commit", "-m", f"reply-agent: merged {t['id']}")
+            if c.returncode == 0:
+                execute._sh("git", "push", "origin", "HEAD:main")
+            notify.send_merged(t, verbose=v)
+            if v:
+                print(f"merge: merged PR #{t['pr_number']} ({t['id']}).")
+        elif v:
+            print(f"merge: gh merge failed: {(r.stderr or r.stdout).strip()[:160]}")
         return 0
 
     return 0

@@ -176,5 +176,88 @@ def send_ack(batch_id, understood, next_steps, verbose: bool = True) -> dict:
         return {"error": type(ex).__name__}
 
 
+def _send_simple(subject, body, html, batch_id, verbose=True) -> dict:
+    """Shared SMTP send for the reply-agent notifications. Dry-runs without creds; never raises out."""
+    if _disabled():
+        return {"disabled": True}
+    email_addr, app_pw = _creds()
+    if not (email_addr and app_pw):
+        if verbose:
+            print(f"notify: DRY-RUN — would send «{subject}».")
+        return {"dry_run": True}
+    recipient = os.environ.get("WK_ENGINE_TO") or email_addr
+    m = EmailMessage()
+    m["From"] = email_addr; m["To"] = recipient; m["Reply-To"] = email_addr
+    m["Subject"] = subject; m["Message-ID"] = make_msgid(domain="azrestaurantpartners.com")
+    m["Date"] = formatdate(localtime=True); m["X-AZ-Batch"] = batch_id or ""
+    m.set_content(body)
+    if html:
+        m.add_alternative(html, subtype="html")
+    try:
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=30) as s:
+            s.starttls(); s.login(email_addr, app_pw); s.send_message(m)
+        if verbose:
+            print(f"notify: sent «{subject}».")
+        return {"sent": True}
+    except Exception as ex:
+        if verbose:
+            print(f"notify: SEND FAILED ({type(ex).__name__}).")
+        return {"error": type(ex).__name__}
+
+
+def send_task_done(task, pr_url, summary, verbose: bool = True) -> dict:
+    """Email the owner that a reply-task is built and open as a PR to review, with the link.
+    Tags the subject with the task's batch id so a 'merge' reply threads back to the loop."""
+    C = compose
+    bid = (task or {}).get("batch_id", "")
+    directive = (task or {}).get("directive", "")
+    subject = f"AZ site engine — built what you asked, ready to review [{bid}]"
+    link = pr_url or "(PR link unavailable — check the repo's Pull Requests)"
+    body = (f"You asked:\n  “{directive}”\n\n"
+            f"I built it and opened a pull request so you can review it before anything goes live:\n"
+            f"  {link}\n\n"
+            f"What I did: {summary}\n\n"
+            f"On that page you can see the full diff and a preview of the change. If it looks good, just "
+            f"reply “merge” and I'll ship it to the live site. If not, tell me what to change.\n"
+            f"— {C.FROM_NAME}")
+    btn = (f'<a href="{C._esc(pr_url)}" style="display:inline-block;background:{C._EMBER};color:#fff;'
+           f'text-decoration:none;font-family:{C._SANS};font-weight:600;font-size:14px;padding:11px 20px;'
+           f'border-radius:999px;">Review the change &rarr;</a>') if pr_url else ""
+    html = (f'<!doctype html><html><body style="margin:0;background:{C._PAPER};">'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{C._PAPER};padding:20px 0;"><tr><td align="center">'
+            f'<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:{C._CARD};border:1px solid {C._LINE};border-radius:14px;overflow:hidden;">'
+            f'<tr><td style="height:4px;background:{C._EMBER};"></td></tr>'
+            f'<tr><td style="padding:18px 24px 4px;"><div style="font-family:{C._SERIF};color:{C._INK};font-size:19px;font-weight:700;">Built what you asked — ready to review</div></td></tr>'
+            f'<tr><td style="padding:6px 24px 2px;"><div style="color:{C._MUTED};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">You asked</div>'
+            f'<div style="color:{C._INK};font-size:15px;font-style:italic;padding:4px 0 10px;">&ldquo;{C._esc(directive)}&rdquo;</div></td></tr>'
+            f'<tr><td style="padding:2px 24px 6px;"><div style="color:{C._MUTED};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">What I did</div>'
+            f'<div style="color:{C._BODY};font-size:14px;padding:4px 0 12px;line-height:1.5;">{C._esc(summary)}</div>{btn}</td></tr>'
+            f'<tr><td style="padding:16px 24px 20px;color:{C._BODY};font-size:13px;line-height:1.55;">'
+            f'Open the link to see the full diff + preview. If it&rsquo;s good, reply <b style="color:{C._EMBER};">&ldquo;merge&rdquo;</b> and I&rsquo;ll ship it live. '
+            f'If not, tell me what to change.<div style="color:{C._MUTED};font-size:12px;margin-top:10px;">Nothing is live yet — it&rsquo;s waiting on your say-so.<br>&mdash; {C.FROM_NAME}</div></td></tr>'
+            f'</table></td></tr></table></body></html>')
+    return _send_simple(subject, body, html, bid, verbose=verbose)
+
+
+def send_merged(task, verbose: bool = True) -> dict:
+    """Confirm to the owner that their approved reply-task PR was merged + is deploying."""
+    C = compose
+    bid = (task or {}).get("batch_id", "")
+    directive = (task or {}).get("directive", "")
+    subject = f"AZ site engine — merged + shipping [{bid}]"
+    body = (f"Done — I merged it and it's deploying to the live site now (usually live within a minute or two).\n\n"
+            f"  “{directive}”\n\n"
+            f"You'll see it in the next growth update too.\n— {C.FROM_NAME}")
+    html = (f'<!doctype html><html><body style="margin:0;background:{C._PAPER};">'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{C._PAPER};padding:20px 0;"><tr><td align="center">'
+            f'<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:{C._CARD};border:1px solid {C._LINE};border-radius:14px;overflow:hidden;">'
+            f'<tr><td style="height:4px;background:{C._GREEN};"></td></tr>'
+            f'<tr><td style="padding:18px 24px 6px;"><div style="font-family:{C._SERIF};color:{C._INK};font-size:19px;font-weight:700;">Merged &mdash; it\'s shipping</div>'
+            f'<div style="color:{C._INK};font-size:15px;font-style:italic;padding:8px 0 2px;">&ldquo;{C._esc(directive)}&rdquo;</div>'
+            f'<div style="color:{C._MUTED};font-size:13px;padding:8px 0 4px;">Deploying to the live site now &mdash; usually live within a minute or two.<br>&mdash; {C.FROM_NAME}</div></td></tr>'
+            f'</table></td></tr></table></body></html>')
+    return _send_simple(subject, body, html, bid, verbose=verbose)
+
+
 if __name__ == "__main__":
     send_daily()

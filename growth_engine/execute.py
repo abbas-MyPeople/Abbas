@@ -14,7 +14,7 @@ GUARDRAILS enforced here (defense in depth):
 """
 from __future__ import annotations
 import os, subprocess, difflib, hashlib, json
-from . import model, notify, actioner_llm, experiments
+from . import model, notify, actioner_llm, experiments, tasks
 from .executors import EXECUTORS, apply_llm_plan, is_allowed_path, validate_edit, read_page, REPO, ScopeError, ValidationError
 
 EXECUTED = model.STATE / "executed.jsonl"    # fingerprints of decisions already actioned (idempotency)
@@ -189,12 +189,16 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
                 understood.append(f"#{n} “{h}” — your change: “{(d.get('instruction') or '').strip()[:140]}”.")
             else:
                 understood.append(f"#{n} “{h}” — unclear, rolling over.")
-        # General directives (not tied to a proposal): capture + log so they surface to the team,
-        # since the automated engine can't safely apply broad instructions itself.
+        # General directives (not tied to a proposal): the fenced auto-executor can't safely build these
+        # itself, so QUEUE each as a reply-task. The scheduled reply-agent then builds it on a branch and
+        # opens a PR for the owner to review + "merge". (execute commits the queue file below.)
+        _queued_new = False
         for direc in (dec.get("directives") or []):
+            _t, _created = tasks.enqueue(direc, res["batch_id"])
+            _queued_new = _queued_new or _created
             understood.append(f"Noted: {direc[:180]}")
             model.log_action("directive", direc[:200], batch_id=res["batch_id"], status="captured")
-            next_steps.append(f"Logged for the team to action: {direc[:140]}")
+            next_steps.append(f"Building it → I'll email you a PR to review before it ships: {direc[:120]}")
         for p in plans:
             next_steps.append((f"Launch an A/B test: {p['summary']}" if p.get("kind") == "experiment_start"
                                else f"Apply: {p.get('summary','a change')}") + ".")
@@ -205,6 +209,14 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
         if not plans and not res["clarifications"] and not (dec.get("directives")):
             next_steps.append("Nothing to ship from this reply — recorded your decisions.")
         notify.send_ack(res["batch_id"], understood, next_steps, verbose=verbose)
+        # persist newly-queued reply-tasks so the scheduled reply-agent can pick them up
+        if _queued_new:
+            _sh("git", "config", "user.name", "growth-engine[bot]")
+            _sh("git", "config", "user.email", "growth-engine@users.noreply.github.com")
+            _sh("git", "add", "--", "command/reply-tasks.json")
+            c = _sh("git", "commit", "-m", f"reply-agent: queued task(s) from batch {res['batch_id']}")
+            if c.returncode == 0:
+                committed.append("command/reply-tasks.json")
 
     # ── render/apply each plan ──
     for p in plans:

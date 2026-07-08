@@ -1,0 +1,62 @@
+name: AZ Growth Engine — reply build-agent (PR-gated)
+
+# When the owner replies to the daily brief with a real task ("write a page on halal catering",
+# "add a Square-vs-Clover FAQ"), execute.py queues it in command/reply-tasks.json. This workflow
+# picks up the next QUEUED task, runs the agentic build worker (growth_engine/reply_agent.py) to
+# implement it on a throwaway branch, opens a PULL REQUEST, and emails the owner the link.
+# Nothing reaches the live site until the owner replies "merge" (handled by the inbox workflow).
+#
+# Scheduled + manual only (must not trigger on push). One task per run.
+
+on:
+  schedule:
+    - cron: "7,27,47 * * * *"   # ~every 20 min, offset from the :00/:15/:30/:45 inbox reads
+  workflow_dispatch:
+
+concurrency:
+  group: az-reply-agent          # never run two builds at once
+  cancel-in-progress: false      # let an in-flight build + PR finish
+
+permissions:
+  contents: write                # commit the branch + task-queue state
+  pull-requests: write           # open the review PR
+
+env:
+  ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
+  WK_ENGINE_EMAIL:        ${{ secrets.WK_ENGINE_EMAIL }}
+  WK_ENGINE_APP_PASSWORD: ${{ secrets.WK_ENGINE_APP_PASSWORD }}
+  WK_ENGINE_TO:           ${{ secrets.WK_ENGINE_TO }}
+  GH_TOKEN:               ${{ github.token }}
+
+jobs:
+  build-next-task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r growth_engine/requirements.txt
+
+      - name: Guard — required secrets must be present
+        run: |
+          set -euo pipefail
+          missing=""
+          for name in ANTHROPIC_API_KEY WK_ENGINE_EMAIL WK_ENGINE_APP_PASSWORD WK_ENGINE_TO; do
+            if [ -z "${!name:-}" ]; then missing="${missing} ${name}"; fi
+          done
+          if [ -n "${missing}" ]; then
+            echo "::error::Missing required secret(s):${missing}."
+            exit 1
+          fi
+          echo "All required secrets present."
+
+      - name: AGENT — build the next queued reply-task on a branch + open a PR
+        run: python -m growth_engine.run --mode agent --apply

@@ -20,6 +20,7 @@ concurrency:
 
 permissions:
   contents: write            # to commit engine state + site edits back to the repo
+  pull-requests: write       # to merge an approved reply-agent PR when the owner replies "merge"
 
 env:
   GA4_PROPERTY_ID:        ${{ secrets.GA4_PROPERTY_ID }}
@@ -67,6 +68,11 @@ jobs:
 
       - name: EXECUTE — apply the approved moves (site edits + actions)
         run: python -m growth_engine.run --mode execute --apply
+
+      - name: MERGE — if the owner replied "merge", merge the newest reply-agent PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m growth_engine.run --mode merge
 
       - name: Commit accumulated state + site edits
         if: always()             # record decisions even if execute partially failed
