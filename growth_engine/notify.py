@@ -259,5 +259,58 @@ def send_merged(task, verbose: bool = True) -> dict:
     return _send_simple(subject, body, html, bid, verbose=verbose)
 
 
+def send_task_shipped(task, url, summary, verbose: bool = True) -> dict:
+    """Email the owner that a LOW-RISK reply-task (a new content page) was built + auto-shipped live —
+    with the link + a one-word revert. Auto-merge only ever ships isolated new content."""
+    C = compose
+    bid = (task or {}).get("batch_id", "")
+    directive = (task or {}).get("directive", "")
+    subject = f"AZ site engine — built + shipped what you asked [{bid}]"
+    link = url or "(live shortly)"
+    body = (f"You asked:\n  “{directive}”\n\n"
+            f"I built it and — because it's a low-risk new page (it can't break anything already on the "
+            f"site) and passed validation — I shipped it live:\n  {link}\n\n"
+            f"What I did: {summary}\n\n"
+            f"If you don't want it, just reply “revert” and I'll pull it right back off. Anything that "
+            f"touches an existing page still waits for your “merge” first.\n— {C.FROM_NAME}")
+    btn = (f'<a href="{C._esc(url)}" style="display:inline-block;background:{C._GREEN};color:#fff;'
+           f'text-decoration:none;font-family:{C._SANS};font-weight:600;font-size:14px;padding:11px 20px;'
+           f'border-radius:999px;">View it live &rarr;</a>') if url else ""
+    html = (f'<!doctype html><html><body style="margin:0;background:{C._PAPER};">'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{C._PAPER};padding:20px 0;"><tr><td align="center">'
+            f'<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:{C._CARD};border:1px solid {C._LINE};border-radius:14px;overflow:hidden;">'
+            f'<tr><td style="height:4px;background:{C._GREEN};"></td></tr>'
+            f'<tr><td style="padding:18px 24px 4px;"><div style="font-family:{C._SERIF};color:{C._INK};font-size:19px;font-weight:700;">Built &amp; shipped &mdash; it\'s live</div></td></tr>'
+            f'<tr><td style="padding:6px 24px 2px;"><div style="color:{C._MUTED};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">You asked</div>'
+            f'<div style="color:{C._INK};font-size:15px;font-style:italic;padding:4px 0 10px;">&ldquo;{C._esc(directive)}&rdquo;</div></td></tr>'
+            f'<tr><td style="padding:2px 24px 6px;"><div style="color:{C._MUTED};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">What I did</div>'
+            f'<div style="color:{C._BODY};font-size:14px;padding:4px 0 12px;line-height:1.5;">{C._esc(summary)}</div>{btn}</td></tr>'
+            f'<tr><td style="padding:16px 24px 20px;color:{C._BODY};font-size:13px;line-height:1.55;">'
+            f'This was a low-risk new page, so it went straight live (validated first). Don&rsquo;t want it? '
+            f'Reply <b style="color:{C._EMBER};">&ldquo;revert&rdquo;</b> and it&rsquo;s gone. Edits to existing pages still wait for your &ldquo;merge&rdquo;.'
+            f'<div style="color:{C._MUTED};font-size:12px;margin-top:10px;">&mdash; {C.FROM_NAME}</div></td></tr>'
+            f'</table></td></tr></table></body></html>')
+    return _send_simple(subject, body, html, bid, verbose=verbose)
+
+
+def send_reverted(task, verbose: bool = True) -> dict:
+    """Confirm an auto-shipped reply-task was reverted off the live site."""
+    C = compose
+    bid = (task or {}).get("batch_id", "")
+    directive = (task or {}).get("directive", "")
+    subject = f"AZ site engine — reverted [{bid}]"
+    body = (f"Done — I reverted it. It's off the live site now (deploying the removal, usually within a "
+            f"minute or two).\n\n  “{directive}”\n\n— {C.FROM_NAME}")
+    html = (f'<!doctype html><html><body style="margin:0;background:{C._PAPER};">'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{C._PAPER};padding:20px 0;"><tr><td align="center">'
+            f'<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:{C._CARD};border:1px solid {C._LINE};border-radius:14px;overflow:hidden;">'
+            f'<tr><td style="height:4px;background:{C._EMBER};"></td></tr>'
+            f'<tr><td style="padding:18px 24px 8px;"><div style="font-family:{C._SERIF};color:{C._INK};font-size:19px;font-weight:700;">Reverted</div>'
+            f'<div style="color:{C._INK};font-size:15px;font-style:italic;padding:8px 0 2px;">&ldquo;{C._esc(directive)}&rdquo;</div>'
+            f'<div style="color:{C._MUTED};font-size:13px;padding:8px 0 4px;">It&rsquo;s off the live site &mdash; the removal is deploying now.<br>&mdash; {C.FROM_NAME}</div></td></tr>'
+            f'</table></td></tr></table></body></html>')
+    return _send_simple(subject, body, html, bid, verbose=verbose)
+
+
 if __name__ == "__main__":
     send_daily()

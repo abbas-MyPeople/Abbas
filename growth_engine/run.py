@@ -172,30 +172,70 @@ def main(argv=None) -> int:
             if v:
                 print(f"agent: {tid} produced no changes — marked failed.")
             return 0
+        # classify blast radius + validate → decide auto-merge eligibility.
+        # AUTO-MERGE only brand-new content pages (isolated — can't break a page that already works),
+        # plus additive sitemap/guides wiring, AND only if validation passes. ANY edit to a pre-existing
+        # file (index.html, styles.css, an existing page) stays PR-gated for the owner's "merge".
+        def _low_risk(files):
+            for f in files:
+                if f in ("sitemap.xml", "guides.html"):
+                    continue
+                if execute._sh("git", "cat-file", "-e", f"origin/main:{f}").returncode == 0:
+                    return False, f"edits the existing file {f}"
+            return True, "new content only"
+
+        def _live_url(files):
+            for f in files:
+                if f.endswith(".html") and f not in ("guides.html",):
+                    if execute._sh("git", "cat-file", "-e", f"origin/main:{f}").returncode != 0:
+                        return f"https://azrestaurantpartners.com/{f}"
+            return ""
+
+        low_risk, lr_reason = _low_risk(changed)
+        ok_valid, v_reason = reply_agent.validate(changed)
+        do_auto = (os.environ.get("AUTO_MERGE_TASKS", "1") != "0") and low_risk and ok_valid
+        live_url = _live_url(changed)
+
         for f in changed:
             _git("add", "--", f)
         _git("commit", "-m", f"reply-agent: {t['directive'][:60]} ({tid})")
         _git("push", "-u", "origin", branch)
-        # 3) open the PR (gh CLI; GH_TOKEN provided by the workflow)
+        # 3) open the PR (revert unit + audit trail even when auto-merged)
+        note = ("Low-risk (new content) + validated → auto-merged live." if do_auto
+                else f"Held for your review — {lr_reason if not low_risk else v_reason}. Reply \"merge\" to ship.")
         pr = execute._sh("gh", "pr", "create", "--base", "main", "--head", branch,
                          "--title", f"[reply-agent] {t['directive'][:60]}",
-                         "--body", (f"Auto-built from your email reply — review before it ships.\n\n"
-                                    f"**You asked:** {t['directive']}\n\n**What I did:** {res.get('summary','')}\n\n"
-                                    f"Reply **\"merge\"** to the engine email to ship this to the live site."))
-        pr_url = ""
-        if pr.returncode == 0 and pr.stdout:
-            pr_url = pr.stdout.strip().splitlines()[-1]
-        elif v:
-            print(f"agent: gh pr create failed: {(pr.stderr or pr.stdout).strip()[:160]}")
+                         "--body", (f"Auto-built from your email reply.\n\n**You asked:** {t['directive']}\n\n"
+                                    f"**What I did:** {res.get('summary','')}\n\n{note}"))
+        pr_url = pr.stdout.strip().splitlines()[-1] if (pr.returncode == 0 and pr.stdout) else ""
         num = pr_url.rstrip("/").split("/")[-1] if pr_url else ""
-        # 4) record pr_open on main + notify the owner
-        _git("checkout", "main"); _git("reset", "--hard", "origin/main")
-        tasks.update(tid, status="pr_open", pr_url=(pr_url or None),
-                     pr_number=(int(num) if num.isdigit() else None), summary=res.get("summary"))
+        pr_number = int(num) if num.isdigit() else None
+        _git("checkout", "main")
+
+        # 4a) AUTO-MERGE path — low-risk new content ships immediately (revertible)
+        if do_auto and pr_number:
+            mg = execute._sh("gh", "pr", "merge", str(pr_number), "--squash", "--delete-branch")
+            if mg.returncode == 0:
+                _git("fetch", "origin", "main"); _git("reset", "--hard", "origin/main")
+                sha = (execute._sh("git", "rev-parse", "origin/main").stdout or "").strip()
+                tasks.update(tid, status="merged", pr_url=(pr_url or None), pr_number=pr_number,
+                             summary=res.get("summary"), merge_sha=sha, auto=True, live_url=live_url)
+                _commit_queue(f"reply-agent: auto-shipped {tid}")
+                notify.send_task_shipped(t, live_url or pr_url, res.get("summary", ""), verbose=v)
+                if v:
+                    print(f"agent: auto-shipped {tid} → {live_url or pr_url}")
+                return 0
+            elif v:
+                print(f"agent: auto-merge failed ({(mg.stderr or mg.stdout).strip()[:120]}) — leaving PR for review.")
+        # 4b) GATED path — needs the owner's "merge"
+        _git("reset", "--hard", "origin/main")
+        tasks.update(tid, status="pr_open", pr_url=(pr_url or None), pr_number=pr_number,
+                     summary=res.get("summary"),
+                     review_reason=(lr_reason if not low_risk else (v_reason if not ok_valid else "auto-merge off")))
         _commit_queue(f"reply-agent: opened PR for {tid}")
         notify.send_task_done(t, pr_url, res.get("summary", ""), verbose=v)
         if v:
-            print(f"agent: built {tid} → {pr_url or '(PR create failed)'}")
+            print(f"agent: built {tid} → PR {pr_url or '(create failed)'} (review)")
         return 0
 
     if args.mode == "merge":
@@ -207,9 +247,34 @@ def main(argv=None) -> int:
         if not reply:
             return 0
         low = (reply["text"] or "").lower()
+
+        # REVERT takes priority — pull a change the owner didn't want (incl. an auto-shipped one).
+        if any(w in low for w in ("revert", "undo", "take it down", "roll back", "rollback", "pull it")):
+            merged = [x for x in tasks.load() if x.get("status") == "merged" and x.get("merge_sha")]
+            if not merged:
+                if v:
+                    print("merge: revert requested but no merged task with a revert point.")
+                return 0
+            t = merged[-1]
+            execute._sh("git", "fetch", "origin", "main")
+            execute._sh("git", "checkout", "main")
+            execute._sh("git", "reset", "--hard", "origin/main")
+            rv = execute._sh("git", "revert", "--no-edit", t["merge_sha"])
+            if rv.returncode == 0:
+                tasks.update(t["id"], status="reverted")
+                execute._sh("git", "add", "--", "command/reply-tasks.json")
+                execute._sh("git", "commit", "-m", f"reply-agent: revert {t['id']} (owner request)")
+                pu = execute._sh("git", "push", "origin", "HEAD:main")
+                notify.send_reverted(t, verbose=v)
+                if v:
+                    print(f"merge: reverted {t['id']} ({'pushed' if pu.returncode == 0 else 'push FAILED'}).")
+            elif v:
+                print(f"merge: revert failed: {(rv.stderr or rv.stdout).strip()[:140]}")
+            return 0
+
         if not any(w in low for w in ("merge", "ship it", "go live", "publish it", "ship this")):
             if v:
-                print("merge: no merge intent in the latest reply.")
+                print("merge: no merge/revert intent in the latest reply.")
             return 0
         prs = tasks.open_prs()
         if not prs:
@@ -222,7 +287,8 @@ def main(argv=None) -> int:
             execute._sh("git", "fetch", "origin", "main")
             execute._sh("git", "checkout", "main")
             execute._sh("git", "reset", "--hard", "origin/main")
-            tasks.update(t["id"], status="merged")
+            sha = (execute._sh("git", "rev-parse", "origin/main").stdout or "").strip()
+            tasks.update(t["id"], status="merged", merge_sha=sha)
             execute._sh("git", "add", "--", "command/reply-tasks.json")
             c = execute._sh("git", "commit", "-m", f"reply-agent: merged {t['id']}")
             if c.returncode == 0:

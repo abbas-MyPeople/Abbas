@@ -15,8 +15,34 @@ SAFETY (defense in depth):
   • No API key / ENGINE_DISABLED=1 → clean no-op.
 """
 from __future__ import annotations
-import os, json, urllib.request
+import os, json, re, urllib.request
 from .executors import REPO
+
+
+def validate(changed) -> tuple:
+    """Automated safety gate for auto-merge: every changed .html has valid JSON-LD + basic structure,
+    and sitemap.xml stays well-formed XML. Returns (ok, reason). A failure keeps the task PR-gated."""
+    for f in changed:
+        p = REPO / f
+        if not p.is_file():
+            return False, f"{f}: missing after build"
+        if f.endswith(".html"):
+            html = p.read_text(encoding="utf-8", errors="replace")
+            for b in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S):
+                try:
+                    json.loads(b)
+                except Exception:
+                    return False, f"{f}: invalid JSON-LD"
+            low = html.lower()
+            if "<head" not in low or "</html>" not in low or "</body>" not in low:
+                return False, f"{f}: incomplete HTML document"
+        if f == "sitemap.xml":
+            import xml.dom.minidom as _m
+            try:
+                _m.parse(str(p))
+            except Exception:
+                return False, "sitemap.xml not well-formed"
+    return True, "ok"
 
 API_URL = "https://api.anthropic.com/v1/messages"
 MODEL = os.environ.get("REPLY_AGENT_MODEL", "claude-opus-4-8")
