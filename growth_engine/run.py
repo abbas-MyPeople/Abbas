@@ -70,19 +70,30 @@ def main(argv=None) -> int:
         return 0
 
     if args.mode == "read":
-        from . import inbox, reply_parse
+        from . import inbox, reply_parse, actioner_llm
         reply = inbox.fetch_reply(verbose=v)
         if not reply:
             return 0
         batch = inbox._latest_batch() or {}
+        surfaced = batch.get("surfaced", [])
         num = min(3, int((batch.get("counts") or {}).get("proposals", 0)))
         parsed = reply_parse.parse(reply["text"], num)
-        inbox.record_decisions(reply["batch_id"], parsed)
+        # The deterministic parser only handles replies phrased against the numbered proposals.
+        # If the reply is freeform/ambiguous (or matched nothing), read the WHOLE reply with the LLM
+        # so we always understand it, capture general directives, and can send a non-empty ack.
+        understanding = None
+        if parsed.get("ambiguous") or not parsed.get("items"):
+            understanding = actioner_llm.understand_reply(reply["text"], surfaced, verbose=v)
+            for n, d in (understanding.get("items") or {}).items():
+                parsed.setdefault("items", {}).setdefault(n, d)   # don't override an explicit parse
+        inbox.record_decisions(reply["batch_id"], parsed, understanding)
         if v:
             decisions = {k: x["decision"] for k, x in parsed["items"].items()}
             print(f"read: decisions = {decisions or 'none clear'}")
-            if parsed["ambiguous"]:
-                print(f"  ambiguous (→ LLM actioner / re-ask at execute): {parsed['ambiguous']}")
+            if understanding:
+                print(f"  understood: {understanding.get('summary','')}")
+                if understanding.get("directives"):
+                    print(f"  directives: {understanding['directives']}")
         return 0
 
     if args.mode == "execute":

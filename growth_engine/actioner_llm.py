@@ -182,3 +182,83 @@ def interpret(instruction: str, item: dict, budget: Budget, verbose: bool = True
     return {"kind": "clarify",
             "question": f'I couldn\'t interpret "{instruction}" into a safe edit. '
                         f"Please name the page, the exact current text, and the new text."}
+
+
+# ══════════════════════════════════════ WHOLE-REPLY UNDERSTANDING ════════════════════════════════
+# The deterministic parser only handles replies phrased against the numbered proposals. Real owners
+# reply in plain language ("the report sucks, redesign it", "focus more on catering", "yes to the
+# glossary but skip the vs pages"). This reads the ENTIRE reply against the brief and returns a
+# structured understanding so the loop always (a) knows what the owner meant and (b) can send a
+# non-empty acknowledgement. It NEVER raises and degrades to a plain echo without an LLM key.
+_UNDERSTAND_SYSTEM = (
+    "You are the assistant behind a restaurant-tech consultancy's daily growth brief. The owner just "
+    "replied to that brief by email. Read their reply and extract intent. Output STRICT JSON only.\n"
+    "Return: {\n"
+    '  "summary": "one plain-English sentence: what the owner wants / is telling you",\n'
+    '  "reply_to_owner": "a warm, specific 1-2 sentence acknowledgement written TO the owner, '
+    'confirming you understood and what you\'ll do next",\n'
+    '  "items": {"1": {"decision": "approve|reject|instruct", "instruction": "<verbatim tweak if instruct, else empty>"}},\n'
+    '  "directives": ["general instruction or feedback NOT tied to a numbered proposal — e.g. redesign the report, '
+    'focus more on X, stop doing Y"]\n'
+    "}\n"
+    "Rules: only include an item number the owner actually referenced. If the reply is general feedback or a "
+    "new direction (not about a specific proposal), put it in directives and leave items empty. Never invent "
+    "approvals. Keep reply_to_owner honest — if the ask is something the automated engine can't do itself "
+    "(like changing how the brief works), say you've logged it for the team."
+)
+
+
+def understand_reply(reply_text: str, surfaced: list, budget: "Budget|None" = None, verbose: bool = True) -> dict:
+    """Return {available, summary, reply_to_owner, items:{n:{decision,instruction}}, directives:[...]}.
+    Degrades safely: without an LLM it still returns a usable echo so the ack is never empty."""
+    reply_text = (reply_text or "").strip()
+    echo = (reply_text.splitlines()[0][:200] if reply_text else "").strip()
+    fallback = {
+        "available": False,
+        "summary": echo or "(empty reply)",
+        "reply_to_owner": ("Got your note — I've logged it and will factor it into what I build next."
+                           if reply_text else "Got an empty reply — nothing to action."),
+        "items": {},
+        "directives": [reply_text] if reply_text else [],
+    }
+    if os.environ.get("ENGINE_DISABLED") == "1" or not reply_text:
+        return fallback
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return fallback
+    if budget is not None and not budget.take():
+        return fallback
+
+    items_ctx = "\n".join(f'  #{s.get("n")}: {s.get("headline","")}' for s in (surfaced or [])) or "  (none)"
+    user = (f"THE BRIEF'S NUMBERED PROPOSALS (may be empty):\n{items_ctx}\n\n"
+            f"OWNER'S REPLY (verbatim):\n{reply_text[:4000]}")
+    raw = ""
+    for m in (MODEL, FALLBACK_MODEL):
+        try:
+            raw = _call(api_key, m, _UNDERSTAND_SYSTEM, user)
+            if raw:
+                break
+        except Exception as e:
+            if verbose:
+                print(f"understand_reply: {m} failed ({type(e).__name__}); trying fallback.")
+            continue
+    obj = _extract_json(raw) if raw else None
+    if not obj or not isinstance(obj, dict):
+        return fallback
+
+    items = {}
+    for k, v in (obj.get("items") or {}).items():
+        try:
+            n = int(str(k).lstrip("#"))
+        except Exception:
+            continue
+        if isinstance(v, dict) and v.get("decision") in ("approve", "reject", "instruct"):
+            items[n] = {"decision": v["decision"], "instruction": (v.get("instruction") or None)}
+    directives = [d.strip() for d in (obj.get("directives") or []) if isinstance(d, str) and d.strip()]
+    return {
+        "available": True,
+        "summary": (obj.get("summary") or echo or "").strip() or fallback["summary"],
+        "reply_to_owner": (obj.get("reply_to_owner") or fallback["reply_to_owner"]).strip(),
+        "items": items,
+        "directives": directives,
+    }

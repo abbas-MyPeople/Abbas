@@ -105,16 +105,21 @@ def fetch_reply(verbose: bool = True) -> dict | None:
     return None
 
 
-def record_decisions(batch_id, parsed):
+def record_decisions(batch_id, parsed, understanding=None):
     DECISIONS.parent.mkdir(parents=True, exist_ok=True)
+    u = understanding or {}
     rec = {"ts": model.now(), "batch_id": batch_id, "global": parsed.get("global_"),
-           "items": parsed.get("items"), "ambiguous": parsed.get("ambiguous")}
+           "items": parsed.get("items"), "ambiguous": parsed.get("ambiguous"),
+           # whole-reply understanding (populated when the reply was freeform) — drives a non-empty ack
+           "summary": u.get("summary"), "reply_to_owner": u.get("reply_to_owner"),
+           "directives": u.get("directives") or []}
     # Frequent reads see the same reply repeatedly — don't append a duplicate decision.
     existing = model.load(DECISIONS)
     if existing:
         last = existing[-1]
         if (last.get("batch_id") == rec["batch_id"] and last.get("items") == rec["items"]
-                and last.get("global") == rec["global"]):
+                and last.get("global") == rec["global"]
+                and (last.get("directives") or []) == rec["directives"]):
             return last
     with DECISIONS.open("a", encoding="utf-8") as f:
         f.write(json.dumps(rec, sort_keys=True) + "\n")

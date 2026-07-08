@@ -11,9 +11,59 @@ honest short "nothing to change, here's what I'm watching" note. Even with GA4 e
 no rows) it renders a valid brief.
 """
 from __future__ import annotations
-import datetime
+import datetime, json, pathlib
 from html import escape as _esc
 from . import model
+
+_REPO = pathlib.Path(__file__).resolve().parent.parent   # AZ repo root (holds command/worklog.json)
+
+
+def _worklog(limit_shipped: int = 5, limit_next: int = 3) -> dict:
+    """Read command/worklog.json → the REAL work (recently shipped + what's building/queued).
+    This is what makes the brief a growth update instead of a maintenance log. Never raises."""
+    try:
+        items = json.loads((_REPO / "command" / "worklog.json").read_text(encoding="utf-8")).get("items", [])
+    except Exception:
+        return {"shipped": [], "next": []}
+    def _clip(s, n=118):
+        s = (s or "").strip()
+        return s if len(s) <= n else s[: n - 1].rstrip() + "…"
+    shipped = [{"title": i.get("title", ""), "detail": _clip(i.get("detail", "")), "area": i.get("area", "")}
+               for i in items if i.get("status") == "shipped"][:limit_shipped]
+    nxt = [{"title": i.get("title", ""), "detail": _clip(i.get("detail", "")), "status": i.get("status", "")}
+           for i in items if i.get("status") in ("building", "queued")][:limit_next]
+    return {"shipped": shipped, "next": nxt}
+
+
+def _worklog_html(wl) -> str:
+    shipped = wl.get("shipped") or []
+    if not shipped:
+        return ""
+    rows = "".join(
+        f'<div style="padding:8px 0;border-bottom:1px solid {_LINE};">'
+        f'<div><span style="color:{_GREEN};font-size:11px;font-weight:700;letter-spacing:.04em;">● LIVE</span>'
+        f'&nbsp; <b style="color:{_INK};font-size:14px;">{_esc(i["title"])}</b></div>'
+        f'<div style="color:{_BODY};font-size:12px;margin-top:3px;line-height:1.45;">{_esc(i["detail"])}</div></div>'
+        for i in shipped)
+    return (f'<tr><td style="padding:18px 24px 2px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
+            f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">What went live</div>'
+            f'<div style="color:{_MUTED};font-size:12px;margin-top:2px;">Real work shipped to the site — the growth engine + build team.</div>'
+            f'<div style="margin-top:6px;">{rows}</div></td></tr>')
+
+
+def _next_html(wl) -> str:
+    nxt = wl.get("next") or []
+    if not nxt:
+        return ""
+    rows = "".join(
+        f'<div style="padding:5px 0;"><span style="color:{_EMBER};font-size:11px;font-weight:700;">'
+        f'{_esc((i.get("status") or "next").upper())}</span>&nbsp; '
+        f'<b style="color:{_INK};font-size:13px;">{_esc(i["title"])}</b>'
+        f'<div style="color:{_MUTED};font-size:12px;margin-top:1px;">{_esc(i["detail"])}</div></div>'
+        for i in nxt)
+    return (f'<tr><td style="padding:14px 24px 4px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
+            f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">What I\'m building next</div>'
+            f'<div style="margin-top:6px;">{rows}</div></td></tr>')
 
 FROM_NAME = "AZ site growth engine"
 # rule_id → the single KPI each proposal is trying to move (keeps IMPACT honest + specific).
@@ -276,25 +326,29 @@ def _continuity(html=False):
             f'<div style="margin-top:6px;">{rows}</div></td></tr>')
 
 
-def _build_html(subject, kind, perf, alerts, surface, watching, overflow, exp_data=None) -> str:
+def _build_html(subject, kind, perf, alerts, surface, watching, overflow, exp_data=None, wl=None) -> str:
     date_str = datetime.date.today().strftime("%A, %B %-d")
+    wl = wl or {"shipped": [], "next": []}
     band = {"alert": _RED, "propose": _EMBER, "holding": _GREEN}.get(kind, _EMBER)
     if kind == "alert":
-        verdict = f"{len(alerts)} thing(s) need a look" + (f" · {len(surface)} proposed change(s)" if surface else "")
+        verdict = f"{len(alerts)} thing(s) need a look" + (f" · {len(surface)} for your call" if surface else "")
     elif kind == "propose":
-        verdict = f"{len(surface)} proposed change{'s' if len(surface)!=1 else ''} — reply to approve"
+        verdict = f"Growth update · {len(surface)} quick call{'s' if len(surface)!=1 else ''} for you"
     else:
-        verdict = "All holding — nothing needs changing today"
+        verdict = "Growth update · nothing needs your input today"
 
     parts = []
     parts.append(f'<div style="background:{band};color:#fff;font-family:{_SANS};font-size:15px;font-weight:600;'
                  f'padding:14px 24px;">{_esc(verdict)}</div>')
     parts.append('<table role="presentation" width="100%" cellpadding="0" cellspacing="0">')
-    # performance
-    parts.append(f'<tr><td style="padding:20px 24px 6px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
-                 f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">How the site performed</div></td></tr>')
+    # LEAD with the real work shipped (the brief's connection to reality)
+    parts.append(_worklog_html(wl))
+    # performance — honest read of the trajectory
+    parts.append(f'<tr><td style="padding:18px 24px 6px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
+                 f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">How we\'re doing</div></td></tr>')
     parts.append(_scorecard_html(perf))
-    parts.append(_continuity(True))   # "Since your last reply" recap
+    parts.append(_next_html(wl))       # what's building next
+    parts.append(_continuity(True))    # "Since your last reply" recap
     # alerts
     if alerts:
         parts.append(f'<tr><td style="padding:14px 24px 4px;"><div style="font-family:{_SERIF};color:{_RED};font-size:13px;'
@@ -306,8 +360,8 @@ def _build_html(subject, kind, perf, alerts, surface, watching, overflow, exp_da
     # proposals
     if surface:
         parts.append(f'<tr><td style="padding:16px 24px 2px;"><div style="font-family:{_SERIF};color:{_INK};font-size:13px;'
-                     f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Proposed changes</div>'
-                     f'<div style="color:{_MUTED};font-size:12px;margin-top:2px;">Nothing ships until you reply.</div></td></tr>')
+                     f'font-weight:700;letter-spacing:.08em;text-transform:uppercase;">For your call</div>'
+                     f'<div style="color:{_MUTED};font-size:12px;margin-top:2px;">Optional — nothing ships until you reply. Reply in plain words; I\'ll understand it.</div></td></tr>')
         for i, p in enumerate(surface, 1):
             parts.append(_proposal_card_html(i, p))
     # experiments (A/B) — running tests + today's decisions
@@ -325,14 +379,13 @@ def _build_html(subject, kind, perf, alerts, surface, watching, overflow, exp_da
                      f'<div style="margin-top:6px;">{items}</div></td></tr>')
     parts.append('</table>')
 
-    # reply protocol footer
-    proto = ('Reply <b>"approve all"</b> to ship everything, or per-item as shown. Free-form tweaks are fine '
-             '(<b>"1 make the hero say …"</b>) — I\'ll interpret it and confirm before anything ships.') if surface else \
-            'Just reply <b>"looks good"</b> (or with any change you want) — I read every reply.'
+    # reply footer — plain-English, conversational (the loop now understands freeform replies)
+    proto = ('<b>Just reply in plain English</b> — a question, a new direction ("focus more on catering"), '
+             'an approval, or a tweak. I read every word, reply back with exactly what I understood and what '
+             'I\'ll do, and log anything for the team. Nothing changes on the site without your say-so.')
     footer = (f'<div style="border-top:1px solid {_LINE};margin:8px 24px 0;"></div>'
-              f'<div style="padding:14px 24px 22px;color:{_BODY};font-size:13px;line-height:1.5;">{proto}'
-              f'<div style="color:{_MUTED};font-size:12px;margin-top:10px;">Nothing changes on the site until you reply.<br>'
-              f'— {FROM_NAME}</div></div>')
+              f'<div style="padding:14px 24px 22px;color:{_BODY};font-size:13px;line-height:1.55;">{proto}'
+              f'<div style="color:{_MUTED};font-size:12px;margin-top:10px;">— {FROM_NAME}</div></div>')
 
     return (
         f'<!doctype html><html><body style="margin:0;padding:0;background:{_PAPER};">'
@@ -341,7 +394,7 @@ def _build_html(subject, kind, perf, alerts, surface, watching, overflow, exp_da
         f'background:{_CARD};border:1px solid {_LINE};border-radius:14px;overflow:hidden;">'
         f'<tr><td style="height:4px;background:{_EMBER};"></td></tr>'
         f'<tr><td style="padding:20px 24px 4px;"><div style="font-family:{_SERIF};color:{_INK};font-size:20px;font-weight:700;">'
-        f'AZ&nbsp;Restaurant&nbsp;Partners</div><div style="color:{_MUTED};font-size:13px;margin-top:2px;">Daily site check · {date_str}</div></td></tr>'
+        f'AZ&nbsp;Restaurant&nbsp;Partners</div><div style="color:{_MUTED};font-size:13px;margin-top:2px;">Growth update · {date_str}</div></td></tr>'
         f'<tr><td style="padding:12px 0 0;">{"".join(parts)}</td></tr>'
         f'<tr><td>{footer}</td></tr>'
         f'</table>'
@@ -358,21 +411,34 @@ def render_email(findings, signals=None) -> dict:
     perf = _performance(signals)
     perf_data = _performance_data(signals)
     exp_data = _experiments_data()
+    wl = _worklog()
     kind = "alert" if alerts else ("propose" if surface else "holding")
 
     lines = []
     if alerts:
-        verdict = f"⚠ {len(alerts)} thing(s) need a look, plus {len(surface)} proposed change(s)."
+        verdict = f"⚠ {len(alerts)} thing(s) need a look" + (f", plus {len(surface)} for your call." if surface else ".")
     elif surface:
-        verdict = f"{len(surface)} proposed change(s) for the site today — reply to approve."
+        verdict = f"Growth update — {len(surface)} quick call(s) for you, reply in plain words."
     else:
-        verdict = "Nothing needs changing today. Here's how the site did + what I'm watching."
+        verdict = "Growth update — here's what shipped, how we're doing, and what's next. Nothing needs your input today."
     lines.append(verdict)
     lines.append("")
 
+    if wl.get("shipped"):
+        lines.append("═══ RECENTLY SHIPPED ═══")
+        for i in wl["shipped"]:
+            lines.append(f"• {i['title']}")
+            if i.get("detail"):
+                lines.append(f"  {i['detail']}")
+        lines.append("")
     if perf:
-        lines.append("═══ HOW THE SITE PERFORMED ═══")
+        lines.append("═══ HOW WE'RE DOING ═══")
         lines.extend(perf)
+        lines.append("")
+    if wl.get("next"):
+        lines.append("═══ BUILDING NEXT ═══")
+        for i in wl["next"]:
+            lines.append(f"• [{(i.get('status') or 'next').upper()}] {i['title']}")
         lines.append("")
     _cont = _continuity(False)
     if _cont:
@@ -414,21 +480,22 @@ def render_email(findings, signals=None) -> dict:
         lines.append("")
 
     lines.append("──")
-    if surface:
-        lines.append('Reply "approve all" to ship everything, or per-item as shown. Freeform tweaks OK '
-                     '("1 make the hero say …") — I\'ll interpret and confirm before anything ships.')
-    lines.append("Nothing changes on the site until you reply.")
+    lines.append('Just reply in plain English — a question, a new direction ("focus more on catering"), an '
+                 'approval, or a tweak. I read every word, reply back with what I understood + what I\'ll do, '
+                 'and log anything for the team. Nothing changes on the site without your say-so.')
     lines.append(f"— {FROM_NAME}")
 
-    subj_tag = f"{len(surface)} proposed change(s)" if surface else "all holding"
+    n_ship = len(wl.get("shipped") or [])
+    subj_tag = (f"{len(surface)} for your call" if surface else
+                (f"{n_ship} shipped recently" if n_ship else "all holding"))
     if alerts:
         subj_tag = f"{len(alerts)} to review · " + subj_tag
-    subject = f"AZ Restaurant Partners — daily site check: {subj_tag}"
+    subject = f"AZ Restaurant Partners — growth update: {subj_tag}"
 
     surfaced = [{"n": i + 1, "rule_id": p.get("rule_id"), "subject": p.get("subject"),
                  "headline": p.get("headline"), "target": p.get("target") or {}}
                 for i, p in enumerate(surface)]
-    html = _build_html(subject, kind, perf_data, alerts, surface, watching, overflow, exp_data)
+    html = _build_html(subject, kind, perf_data, alerts, surface, watching, overflow, exp_data, wl)
     return {"subject": subject, "body": "\n".join(lines), "html": html, "surfaced": surfaced,
             "counts": {"alerts": len(alerts), "proposals": len(proposals), "watching": len(watching)}}
 

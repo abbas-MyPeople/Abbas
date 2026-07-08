@@ -27,7 +27,8 @@ def _latest(path):
 
 def _decision_fp(dec) -> str:
     """Stable fingerprint of an owner decision — so a frequent schedule never re-applies or re-emails it."""
-    payload = json.dumps({"b": dec.get("batch_id"), "g": dec.get("global"), "i": dec.get("items")}, sort_keys=True)
+    payload = json.dumps({"b": dec.get("batch_id"), "g": dec.get("global"), "i": dec.get("items"),
+                          "d": dec.get("directives")}, sort_keys=True)
     return hashlib.sha256(payload.encode()).hexdigest()
 
 
@@ -172,6 +173,10 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
         batch = _latest(model.STATE / "batches.jsonl") or {}
         surf = {s["n"]: s for s in batch.get("surfaced", [])}
         understood, next_steps = [], []
+        # Lead with the plain-English understanding of the whole reply (freeform replies) so the ack is
+        # never empty — this is what was silently missing before.
+        if dec.get("summary"):
+            understood.append(dec["summary"])
         if dec.get("global"):
             understood.append(f"Overall: {dec['global']}.")
         for n_str, d in (dec.get("items") or {}).items():
@@ -184,12 +189,20 @@ def run(dry: bool = True, verbose: bool = True) -> dict:
                 understood.append(f"#{n} “{h}” — your change: “{(d.get('instruction') or '').strip()[:140]}”.")
             else:
                 understood.append(f"#{n} “{h}” — unclear, rolling over.")
+        # General directives (not tied to a proposal): capture + log so they surface to the team,
+        # since the automated engine can't safely apply broad instructions itself.
+        for direc in (dec.get("directives") or []):
+            understood.append(f"Noted: {direc[:180]}")
+            model.log_action("directive", direc[:200], batch_id=res["batch_id"], status="captured")
+            next_steps.append(f"Logged for the team to action: {direc[:140]}")
         for p in plans:
             next_steps.append((f"Launch an A/B test: {p['summary']}" if p.get("kind") == "experiment_start"
                                else f"Apply: {p.get('summary','a change')}") + ".")
         for q in res["clarifications"]:
             next_steps.append(f"Ask you to clarify: {q[:140]}")
-        if not plans and not res["clarifications"]:
+        if not understood:
+            understood.append(dec.get("reply_to_owner") or "Read your reply and recorded it.")
+        if not plans and not res["clarifications"] and not (dec.get("directives")):
             next_steps.append("Nothing to ship from this reply — recorded your decisions.")
         notify.send_ack(res["batch_id"], understood, next_steps, verbose=verbose)
 
