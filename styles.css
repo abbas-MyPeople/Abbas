@@ -443,6 +443,16 @@ html[dir="rtl"] .tooldir__tag { margin-right: 0; margin-left: 5px; }
 .tooldir__guides a { display: inline-block; margin: 0 16px 9px 0; color: var(--accent); border-bottom: 1px solid rgba(192,73,43,0.35); font-size: 0.98rem; }
 @media (max-width: 600px) { .guide { padding-top: 100px; } }
 
+/* Comparison tables (.cmp) — ported from the toast-vs-clover head-to-head */
+.cmp { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; background: #f4eee2; color: #1b1a17; margin: 0; }
+.cmp th { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 2px solid #c0492b; font-weight: 700; }
+.cmp thead th:first-child { width: 20%; }
+.cmp td { padding: 0.7rem 0.9rem; border-bottom: 1px solid #e5dcc9; vertical-align: top; }
+.cmp tbody tr:last-child td { border-bottom: 0; }
+.cmp td:first-child, .cmp .cmp__row-label { font-weight: 600; }
+.cmp__wrap { overflow-x: auto; margin: 1.25rem 0; }
+.cmp__note { font-size: 0.85rem; color: #6b6456; margin-top: 0.4rem; }
+
 /* Tool directory "more" link + per-tool detail pages */
 .tooldir__more { display: inline-block; margin-top: 4px; font-size: 0.86rem; font-weight: 600; color: var(--accent); border-bottom: 1px solid transparent; }
 .tooldir__more:hover { border-bottom-color: var(--accent); }
