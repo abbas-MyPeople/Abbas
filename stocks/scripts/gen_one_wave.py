@@ -1,191 +1,10 @@
 #!/usr/bin/env python3
-"""One Wave v2 — document based on the candle technique itself.
-Every classification computed by candle_engine; no eyeballed calls."""
-import pandas as pd
-from candle_engine import classify, anatomy, trend_before, multi_patterns, line_value
+"""One Wave — final version: the candle reading, written for a reader with zero context."""
+from gen_one_wave_data import (rows_m, rows_w, rows_d, rows_h, rows_15, svg_m, svg_w, svg_d,
+                      svg_h, svg_15, ledger, up_now, up_jul8, dn_now, lo_now,
+                      CLOSE_TODAY, SCRATCH, L_ITEMS)
 
-SCRATCH = "/tmp/claude-0/-home-user-Abbas/0bcb134e-841b-522b-b661-36eb435683b7/scratchpad"
-CLOSE_TODAY = 7543.64
-SCALE = 10.039  # SPX/SPY ratio at Jul 8 close
-
-d = pd.read_csv("/home/user/Abbas/stocks/data/candles/gspc_daily_close_fred.csv")
-d.columns = ["Date", "Close"]
-d = d[d.Close != "."].copy()
-d["Close"] = d.Close.astype(float)
-d["Date"] = pd.to_datetime(d.Date)
-d = d.dropna().reset_index(drop=True)
-
-# ---------------- build candle series ----------------
-dm = d.set_index("Date").Close
-rows_m = []
-for (yy, mm), s in dm.groupby([dm.index.year, dm.index.month]):
-    if (yy, mm) < (2025, 7):
-        continue
-    rows_m.append(dict(label=f"{pd.Timestamp(yy,mm,1):%b %y}", o=s.iloc[0], h=s.max(), l=s.min(), c=s.iloc[-1]))
-rows_m[-1].update(c=CLOSE_TODAY, h=max(rows_m[-1]["h"], CLOSE_TODAY), label=rows_m[-1]["label"] + " ‡")
-
-rows_w = []
-for ts, s in d.set_index("Date").Close.resample("W-FRI"):
-    if len(s) == 0 or ts < pd.Timestamp("2026-04-20"):
-        continue
-    rows_w.append(dict(label=f"w/e {ts:%b %d}", o=s.iloc[0], h=s.max(), l=s.min(), c=s.iloc[-1]))
-rows_w[-1].update(c=CLOSE_TODAY, h=max(rows_w[-1]["h"], CLOSE_TODAY), label=rows_w[-1]["label"] + " ‡")
-
-t = d.tail(16).reset_index(drop=True)
-true_hl = {"2026-07-07": (750.96 * SCALE, 745.21 * SCALE), "2026-07-08": (746.15 * SCALE, 739.51 * SCALE)}
-rows_d = []
-for i in range(1, len(t)):
-    o, c = t.Close[i - 1], t.Close[i]
-    h, l = true_hl.get(str(t.Date[i].date()), (max(o, c), min(o, c)))
-    rows_d.append(dict(label=f"{t.Date[i]:%a %b %d}", o=o, h=max(h, o, c), l=min(l, o, c), c=c, wick=str(t.Date[i].date()) in true_hl))
-rows_d.append(dict(label="Thu Jul 09 †", o=747.26 * SCALE, h=max(751.83 * SCALE, CLOSE_TODAY), l=745.59 * SCALE, c=CLOSE_TODAY, wick=True))
-
-J8 = [(741.51,741.51,741.12,741.32),(740.15,740.74,739.94,740.74),(740.59,740.74,740.50,740.50),(740.48,741.25,740.48,741.25),(741.66,742.58,741.66,742.58),(742.73,743.10,742.73,743.03),(743.22,744.27,743.22,744.27),(744.40,744.68,744.29,744.29),(744.28,744.94,744.28,744.94),(745.44,745.72,745.44,745.55),(745.26,745.26,744.36,744.36),(744.43,745.29,744.39,745.29),(745.27,745.28,745.18,745.18),(744.91,744.91,744.44,744.44),(745.18,745.27,745.04,745.27),(745.14,745.33,745.14,745.26),(745.30,745.30,744.83,744.83),(745.03,745.19,744.92,744.92),(745.24,745.33,744.80,744.80),(745.66,745.66,745.29,745.40)]
-J9 = [(747.35,748.40,747.35,748.40),(748.11,748.95,748.11,748.67),(748.69,748.69,747.55,747.55),(746.26,747.88,746.26,747.88),(747.65,748.40,747.65,747.88),(748.05,748.73,747.97,748.73),(748.86,749.49,748.86,749.20),(749.22,749.90,749.22,749.80),(749.58,750.11,749.58,750.11),(750.16,750.16,749.87,749.87),(750.33,750.53,750.33,750.53),(750.56,750.80,750.56,750.64),(750.48,750.69,750.48,750.69),(750.48,750.48,750.42,750.44),(750.72,751.23,750.72,751.23),(751.54,751.76,751.45,751.76),(751.62,751.73,751.62,751.70),(751.74,751.74,751.73,751.73)]
-rows_15 = [dict(label=f"Jul 8 · {i+1}", o=a, h=b, l=c, c=e) for i, (a, b, c, e) in enumerate(J8)] + \
-          [dict(label=f"Jul 9 · {i+1}", o=a, h=b, l=c, c=e) for i, (a, b, c, e) in enumerate(J9)]
-
-def agg(bins, label, per=4):
-    out = []
-    for i in range(0, len(bins), per):
-        ch = bins[i:i + per]
-        out.append(dict(label=f"{label} · hr {i//per+1}", o=ch[0][0], h=max(x[1] for x in ch), l=min(x[2] for x in ch), c=ch[-1][3]))
-    return out
-rows_h = agg(J8, "Jul 8") + agg(J9, "Jul 9")
-
-# ---------------- classification & patterns ----------------
-KEEP = ("engulfing", "harami", "morning star", "evening star", "soldiers", "crows", "outside", "tweezer")
-
-def enrich(rows, keep=KEEP, tweezer_min_tf=False):
-    closes = [r["c"] for r in rows]
-    for i, r in enumerate(rows):
-        r["cls"] = classify(r["o"], r["h"], r["l"], r["c"], trend_before(closes, i))
-    pats = {}
-    for i, nm in multi_patterns(rows):
-        if not any(k in nm for k in keep):
-            continue
-        if "tweezer" in nm and not tweezer_min_tf:
-            continue
-        pats.setdefault(i, []).append(nm)
-    for i, r in enumerate(rows):
-        r["pats"] = ", ".join(dict.fromkeys(pats.get(i, [])))
-    return rows
-
-rows_m = enrich(rows_m)
-rows_w = enrich(rows_w)
-rows_d = enrich(rows_d, tweezer_min_tf=True)
-rows_h = enrich(rows_h)
-rows_15 = enrich(rows_15)
-
-# manual dedup of noisy daily tweezers: keep only Jun 26 & Jul 2 (flat closes at level)
-for r in rows_d:
-    if "tweezer" in r["pats"] and r["label"] not in ("Fri Jun 26", "Thu Jul 02"):
-        r["pats"] = ", ".join(p for p in r["pats"].split(", ") if "tweezer" not in p)
-
-# ---------------- diagonals & levels ----------------
-dd = d.reset_index(drop=True)
-def sidx(ds):
-    return int((dd.Date <= pd.Timestamp(ds)).sum()) - 1
-NOW = len(dd)  # today
-i_mar, v_mar = sidx("2026-03-30"), 6343.72
-i_j26, v_j26 = sidx("2026-06-26"), 7354.02
-i_top, v_top = sidx("2026-06-02"), 7609.78
-i_j06, v_j06 = sidx("2026-07-06"), 7537.43
-i_j12, v_j12 = sidx("2026-06-12"), 7266.99
-up_now = line_value(i_mar, v_mar, i_j26, v_j26, NOW)
-up_jul8 = line_value(i_mar, v_mar, i_j26, v_j26, NOW - 1)
-dn_now = line_value(i_top, v_top, i_j06, v_j06, NOW)
-lo_now = line_value(i_j12, v_j12, i_j26, v_j26, NOW)
-
-LEVELS = [
-    ("7,609.78", "r", "the all-time high close (Jun 2) — June's hanging-man head; negation line for every bear pattern below"),
-    ("7,580.06", "r", "May 29 record close — last shelf before the high"),
-    ("7,537–7,554", "r", "the weekly lower-high (w/e Jun 19: 7,554.29) + Jul 6 close — the triangle's trigger zone, price closed INSIDE it today"),
-    (f"≈{dn_now:,.0f}", "r", "falling diagonal from the Jun 2 high through the Jul 6 high — today's close 7,543.64 finished ABOVE it (first close above since the top)"),
-    ("7,499–7,501", "s", "Jun 30 / Jun 18 closes — pivot cluster, two touches, now support"),
-    (f"≈{up_now:,.0f}", "s", f"rising primary diagonal from the Mar 30 low through the Jun 26 low (+16.6 pts/session). On Jul 8 it sat at ≈{up_jul8:,.0f}: that day's candle speared to 7,423 and closed at 7,482.71 — pierced it, reclaimed it"),
-    ("7,483.2x", "s", "the triple-close shelf — Jul 1, Jul 2, Jul 8 all closed here, and it now coincides with the rising diagonal: horizontal memory and diagonal trend at the same price"),
-    ("7,354.02", "s", "the weekly higher-low (w/e Jun 26) — lower triangle boundary; floor of the coil"),
-    ("7,266.99", "s", "the June swing low (w/e Jun 12 hammer wick) — June's hanging-man wick tip; the pattern's confirmation line"),
-    ("6,343.72", "s", "the March 30 low — anchor of the primary diagonal"),
-]
-
-# ---------------- svg builders ----------------
-def candles_svg(rows, w, h, hlines=(), dlines=(), label_every=None, pad=8, forming_last=True):
-    los = [r["l"] for r in rows] + [v for v, *_ in hlines]
-    his = [r["h"] for r in rows] + [v for v, *_ in hlines]
-    lo, hi = min(los), max(his)
-    span = (hi - lo) or 1
-    lo -= span * 0.04; hi += span * 0.04
-    n = len(rows)
-    slot = (w - 2 * pad) / n
-    bw = min(16, slot * 0.55)
-    def Y(v):
-        return 6 + (1 - (v - lo) / (hi - lo)) * (h - 28)
-    def X(i):
-        return pad + slot * (i + 0.5)
-    out = []
-    for v, cls, lab in hlines:
-        out.append(f'<line class="lvl {cls}" x1="{pad}" y1="{Y(v):.1f}" x2="{w-pad}" y2="{Y(v):.1f}"/>'
-                   f'<text class="lvlt {cls}" x="{w-pad}" y="{Y(v)-3:.1f}" text-anchor="end">{lab}</text>')
-    for (i1, v1, i2, v2, cls, lab) in dlines:
-        x1, y1 = X(i1), Y(v1)
-        x2, y2 = X(i2), Y(v2)
-        xe = w - pad
-        ye = y1 + (y2 - y1) * (xe - x1) / (x2 - x1)
-        out.append(f'<line class="diag {cls}" x1="{x1:.1f}" y1="{y1:.1f}" x2="{xe:.1f}" y2="{ye:.1f}"/>'
-                   f'<text class="lvlt {cls}" x="{xe}" y="{ye-4:.1f}" text-anchor="end">{lab}</text>')
-    for i, r in enumerate(rows):
-        cx = X(i)
-        up = r["c"] >= r["o"]
-        cls = "cu" if up else "cd"
-        if forming_last and i == n - 1 and r["label"].endswith(("‡", "†")):
-            cls += " live"
-        top, bot = max(r["o"], r["c"]), min(r["o"], r["c"])
-        tip = f"{r['label']}: O {r['o']:,.2f} · H {r['h']:,.2f} · L {r['l']:,.2f} · C {r['c']:,.2f} — {r['cls']}" + (f" | {r['pats']}" if r["pats"] else "")
-        out.append(f'<g class="{cls}"><title>{tip}</title>'
-                   f'<line x1="{cx:.1f}" y1="{Y(r["h"]):.1f}" x2="{cx:.1f}" y2="{Y(r["l"]):.1f}"/>'
-                   f'<rect x="{cx-bw/2:.1f}" y="{Y(top):.1f}" width="{bw:.1f}" height="{max(1.5, Y(bot)-Y(top)):.1f}" rx="1.5"/></g>')
-        if r["pats"]:
-            out.append(f'<circle class="pat" cx="{cx:.1f}" cy="{Y(r["h"])-6:.1f}" r="2.6"><title>{r["pats"]}</title></circle>')
-        if label_every and i % label_every == 0:
-            out.append(f'<text class="ax" x="{cx:.1f}" y="{h-4}" text-anchor="middle">{r["label"].replace(" ‡","").replace(" †","")}</text>')
-    return "".join(out)
-
-
-def ledger(rows, unit=""):
-    tr = ""
-    for r in rows:
-        rng, body, uw, lw = anatomy(r["o"], r["h"], r["l"], r["c"])
-        cls_c = "up" if r["c"] >= r["o"] else "dn"
-        pat = f'<div class="patline">{r["pats"]}</div>' if r["pats"] else ""
-        tr += (f"<tr><td>{r['label']}</td><td>{r['o']:,.2f}</td><td>{r['h']:,.2f}</td><td>{r['l']:,.2f}</td>"
-               f"<td>{r['c']:,.2f}</td><td>{uw:,.2f}</td><td>{lw:,.2f}</td>"
-               f"<td class='{cls_c}'>{r['cls']}{pat}</td></tr>")
-    return (f'<div class="tbl"><table><thead><tr><th>Candle{unit}</th><th>Open</th><th>High</th><th>Low</th>'
-            f'<th>Close</th><th>Wick ↑</th><th>Wick ↓</th><th>Read (computed)</th></tr></thead><tbody>{tr}</tbody></table></div>')
-
-
-# chart-local index positions for weekly diagonals
-wi = {r["label"].replace(" ‡", ""): i for i, r in enumerate(rows_w)}
-w_dlines = [
-    (wi["w/e Jun 05"], 7609.78, wi["w/e Jun 19"], 7554.29, "r", "falling boundary"),
-    (wi["w/e Jun 12"], 7266.99, wi["w/e Jun 26"], 7354.02, "s", "rising boundary"),
-]
-di = {r["label"].replace(" †", ""): i for i, r in enumerate(rows_d)}
-d_dlines = [
-    (di["Mon Jun 29"], line_value(i_mar, v_mar, i_j26, v_j26, sidx("2026-06-29")), di["Wed Jul 08"], up_jul8, "s", "primary diagonal (from Mar 30 low)"),
-]
-
-svg_m = candles_svg(rows_m, 720, 250, hlines=[(7609.78, "r", "ATH 7,609.78"), (7266.99, "s", "June wick tip 7,266.99")], label_every=2)
-svg_w = candles_svg(rows_w, 720, 250, hlines=[(7354.02, "s", "7,354 floor")], dlines=w_dlines, label_every=2)
-svg_d = candles_svg(rows_d, 720, 250, hlines=[(7483.23, "s", "7,483 shelf"), (7580.06, "r", "7,580"), (7609.78, "r", "ATH")], dlines=d_dlines, label_every=3)
-svg_h = candles_svg(rows_h, 720, 210, hlines=[(745.5, "s", "745.4–745.7 (SPY)"), (751.76, "r", "day high")], label_every=1)
-svg_15 = candles_svg(rows_15, 720, 210, hlines=[(745.5, "s", "745.5"), (750.45, "s", "750.4 last HL")], label_every=6)
-
-L_ITEMS = "".join(f'<li><span class="px {c}">{v}</span> {t}</li>' for v, c, t in LEVELS)
-
-html = f"""<title>One Wave — a candle-by-candle reading of the S&P 500</title>
+html = f"""<title>One Wave — the S&P 500 at every zoom level</title>
 <style>
 :root {{
   --ground:#f7f6f2; --surface:#fffdf9; --ink:#191714; --ink2:#524e46; --mut:#8b867c;
@@ -211,13 +30,15 @@ html = f"""<title>One Wave — a candle-by-candle reading of the S&P 500</title>
 body {{ background:var(--ground); color:var(--ink); margin:0; font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif }}
 .wrap {{ max-width:47rem; margin:0 auto; padding:0 1.25rem 6rem }}
 h1,h2 {{ font-family:"Iowan Old Style",Georgia,serif; font-weight:600; text-wrap:balance }}
-h1 {{ font-size:clamp(2rem,5.5vw,3.2rem); line-height:1.12; margin:.6rem 0 1rem }}
-h2 {{ font-size:1.6rem; line-height:1.25; margin:0 0 .7rem }}
-h1 em,h2 em {{ font-style:italic; color:var(--gold) }}
+h1 {{ font-size:clamp(2rem,5.5vw,3.1rem); line-height:1.12; margin:.6rem 0 1rem }}
+h2 {{ font-size:1.55rem; line-height:1.25; margin:0 0 .7rem }}
 p {{ max-width:64ch; color:var(--ink2); margin:0 0 1.05rem }}
 p strong,li strong {{ color:var(--ink) }}
 .eyebrow {{ font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); margin:4rem 0 .4rem }}
 .lede {{ font-size:1.12rem }}
+.takeaway {{ background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--gold-mark);
+  border-radius:10px; padding:.85rem 1rem; margin:0 0 1.2rem; font-size:.98rem; color:var(--ink2) }}
+.takeaway b {{ color:var(--ink) }}
 .chip {{ display:inline-block; font:600 .68rem/1 system-ui; letter-spacing:.12em; color:var(--gold);
   border:1px solid color-mix(in oklab, var(--gold) 45%, transparent); border-radius:999px;
   padding:.45em .9em; margin-bottom:.7rem; text-transform:uppercase }}
@@ -260,165 +81,185 @@ hr {{ border:0; border-top:1px solid var(--line); margin:3rem 0 }}
 <div class="wrap">
 
 <header class="hero">
-<div class="eyebrow">A candle-by-candle field study · S&amp;P 500 · closed 7,543.64 · July 9, 2026</div>
-<h1>Five numbers, repeated at every scale, tell you everything the market is doing. <em>Here is today's reading.</em></h1>
-<p class="lede">A candle is where a price <strong>opened</strong>, the <strong>highest</strong> and <strong>lowest</strong>
-it reached, where it <strong>closed</strong> — and the shape those four numbers make: the <strong>body</strong>
-(open→close) and the <strong>wicks</strong> (the rejected extremes). That's the entire alphabet.
-Read it at the month, the week, the day, the hour, the quarter-hour — and the same sentences appear at
-every magnification, because each big candle is <em>literally built out of</em> the small ones.
-Every pattern named below was classified by measurement — body/range and wick/range ratios — not by opinion.</p>
+<div class="eyebrow">S&amp;P 500 · Thursday, July 9, 2026 · closed at 7,543.64</div>
+<h1>One market, five zoom levels, one story.</h1>
+<p class="lede">The S&amp;P 500 is the index that tracks America's 500 largest companies — for most
+people, it's what their retirement savings actually do all day. This page reads it the way you'd
+examine anything carefully: <strong>from far away, then closer, then closer still</strong> — by month,
+by week, by day, by hour, by quarter-hour — using only verified price data. You need no finance
+background. There is exactly one concept to learn, and it takes thirty seconds:</p>
+<p><strong>A candle.</strong> Take any stretch of time — a month, a day, fifteen minutes — and record four
+numbers: where the price <strong>started</strong>, the <strong>highest</strong> it got, the
+<strong>lowest</strong> it got, and where it <strong>ended</strong>. Drawn as a bar, the thick part (start→end)
+is the <em>body</em>; the thin lines above and below are the <em>wicks</em> — the extremes that didn't hold.
+Green: ended higher. Red: ended lower. That's the whole alphabet. The shapes have old names:</p>
 <div class="anatomy">
-<div class="anx"><b>Marubozu</b> body ≥85% of the range: one side in total control, no rejection.</div>
-<div class="anx"><b>Doji / spinning top</b> body ≤12% / ≤40%: a stalemate; whoever pushed got pushed back.</div>
-<div class="anx"><b>Hammer / hanging man</b> lower wick ≥2× body: a plunge that was bought back. At a low it's a floor forming; at a high, a warning.</div>
-<div class="anx"><b>Engulfing / star / soldiers</b> multi-candle sentences: a reversal swallowing the prior bar, a gap-pause-reverse, three drives in a row.</div>
+<div class="anx"><b>Solid bar, no wicks</b> one side won all period long, no pushback. (Named a <i>marubozu</i>.)</div>
+<div class="anx"><b>Tiny body, long wicks</b> a fight that ended where it started — a stalemate. (A <i>doji</i> or <i>spinning top</i>.)</div>
+<div class="anx"><b>Long tail below</b> price plunged and was bought back up. At a bottom, a floor forming (a <i>hammer</i>); at a record high, a warning (a <i>hanging man</i>).</div>
+<div class="anx"><b>Multi-bar shapes</b> one bar swallowing the previous one (<i>engulfing</i>), three drives in a row (<i>soldiers</i> / <i>crows</i>), a pause-then-reverse (<i>star</i>).</div>
 </div>
+<p>Every shape named on this page was assigned by <strong>measurement</strong> — the ratio of body to wicks —
+by a small program, not by anyone's opinion. Hover any candle to see its four numbers and its computed read.
+One honesty rule governs everything here, borrowed from a meditation discipline: <strong>report only what
+was actually observed; where data couldn't be obtained, say so — never fill a gap with imagination.</strong>
+Every gap on this page is labeled.</p>
 </header>
 
 <hr>
 
 <section>
-<div class="chip">Monthly · 13 candles</div>
-<h2>Two marubozus into a hanging man — and July is trading <em>inside</em> it.</h2>
+<div class="chip">Zoom 1 · By month — the last 13 months</div>
+<h2>A climb, a crash, a violent recovery — and now a warning being tested.</h2>
+<div class="takeaway"><b>Plain version:</b> the market climbed steadily through 2025, crashed 9% in March 2026
+(an inflation scare plus a new Middle-East war), then recovered so fast that April became its best month since
+2020 and June touched an all-time high of 7,609.78. But June itself is the warning: mid-month the market fell
+hard — almost 350 points — and had to be pulled back up. July so far is trading entirely <em>inside</em> June's
+range. The biggest picture is genuinely undecided.</div>
 <figure class="card"><svg viewBox="0 0 720 254">{svg_m}</svg>
-<figcaption>Monthly candles, Jul 2025 → Jul 2026. Wicks are highest/lowest <i>daily close</i> in the month (measured; intraday extremes not available). ‡ = still forming. Gold dot = multi-candle pattern; hover any candle for its numbers and read.</figcaption></figure>
+<figcaption>Each candle = one month. Wicks show the highest and lowest <i>daily close</i> in that month (measured
+from the Federal Reserve's official series). ‡ = July, still in progress. Gold dots mark computed multi-candle patterns.</figcaption></figure>
 {ledger(rows_m)}
-<p><strong>The sentence this ledger spells:</strong> a rising staircase (Jul–Oct 25, closing with
-<em>three white soldiers</em>) → a 310-point lower wick in November — a <em>dragonfly doji</em>, the first
-"plunge bought back" → two more balance candles → March's 353-point bear body with a deep tail →
-<strong>April: a 634-point bull marubozu with zero wick on either end</strong> — the single most one-sided
-monthly candle in the series → May, a second marubozu → and then <strong>June: a hanging man exactly at the
-all-time high.</strong> Small body (101), lower wick more than twice the body (232 points to 7,266.99). After
-two months of total buyer control, June is the first month where price fell hard and had to be rescued.
-That candle is the monthly chart's entire message: <em>the rescue worked, but a rescue was needed.</em></p>
-<p><strong>And July so far is an inside bar</strong> — its whole range (7,483–7,544) sits within June's
-body. The biggest timeframe is coiled: no resolution above 7,609.78 (negates the hanging man) or below
-7,266.99 (confirms it) has happened yet. Everything below this line on the page is the inside of that coil.</p>
+<p><strong>What to notice in the table:</strong> April has a 634-point body and <em>zero</em> wick on either
+end — a month where buyers never once gave ground, the most one-sided candle in the series. And June has a
+small body with a 232-point tail below it — the "hanging man": at a record high, price fell far and needed
+rescuing. The rescue worked, but a rescue was needed. That's the first crack after two months of total control.</p>
+<p><strong>The month-scale question is exactly two numbers.</strong> A close above <strong>7,609.78</strong>
+cancels June's warning. A fall below <strong>7,266.99</strong> (the tip of June's tail) confirms it. Everything
+in the rest of this page is the market deciding between those two numbers.</p>
 </section>
 
 <hr>
 
 <section>
-<div class="chip">Weekly · 12 candles</div>
-<h2>Gravestone, engulfing, hammer: the week-scale argument, drawn with rulers.</h2>
+<div class="chip">Zoom 2 · By week — the last 12 weeks</div>
+<h2>Nine straight winning weeks, one knockdown, then a five-week squeeze.</h2>
+<div class="takeaway"><b>Plain version:</b> through April and May the market rose nine weeks in a row — the
+longest streak in three years. In early June one bad day (a too-hot jobs report) erased an entire record week.
+Since then it's been a narrowing tug-of-war: each rally peaks a little lower than 7,609, each dip bottoms a
+little higher than 7,267. Squeezes like this usually end with a decisive move within a few weeks — and this
+week closed right at the squeeze's upper edge.</div>
 <figure class="card"><svg viewBox="0 0 720 254">{svg_w}</svg>
-<figcaption>Weekly candles with the two computed diagonals: falling boundary through the Jun 5 / Jun 19 highs (7,609.78 → 7,554.29), rising boundary through the Jun 12 / Jun 26 lows (7,266.99 → 7,354.02). ‡ = week in progress.</figcaption></figure>
+<figcaption>Each candle = one week. The two dashed lines are drawn through the actual highs (falling line) and
+actual lows (rising line) of the squeeze — not sketched, computed. ‡ = this week, in progress until Friday's close.</figcaption></figure>
 {ledger(rows_w)}
-<p><strong>Structure, computed from swing pivots:</strong> higher-high 7,609.78 → lower-low 7,266.99 →
-<strong>lower high 7,554.29</strong> → <strong>higher low 7,354.02</strong>. Lower highs <em>and</em> higher
-lows: a <strong>symmetrical triangle</strong>, contracting from both sides — not one-way pressure but a
-genuine standoff, tightening toward a decision. The candle sentences inside it: the <em>gravestone doji</em>
-of May 15 (an 88-point upper wick — the first rejection at 7,501); the <em>bearish engulfing outside bar</em>
-of June 5 that swallowed the record week entire; the <em>hammer</em> of June 12 (139-point tail to 7,267);
-and this week — currently a <strong>dragonfly doji sitting on the falling boundary</strong>: dipped 55 points,
-recovered all of it, and closed 7,543.64, <em>above the upper diagonal</em> (≈{dn_now:,.0f} today). A weekly close
-here tomorrow-equivalent (Friday) would be the triangle's first upside escape.</p>
+<p><strong>The week-scale story in three candles:</strong> mid-May printed the first rejection — price reached
+7,501, was pushed all the way back, and the week closed where it started (an 88-point wick above a 4-point
+body). Early June, the knockdown: one week's candle completely swallowed the record week before it. Mid-June,
+the floor: a plunge to 7,267 bought back by Friday — a 139-point tail. Rejection above, floor below: that's
+the squeeze. <strong>This week closed at 7,543.64 — slightly above the falling line (≈{dn_now:,.0f})</strong>.
+If Friday holds that, it's the first weekly escape from the squeeze, upward.</p>
 </section>
 
 <hr>
 
 <section>
-<div class="chip">Daily · 16 candles</div>
-<h2>Evening star, three black crows, morning star — a full reversal cycle in three weeks.</h2>
+<div class="chip">Zoom 3 · By day — the last 16 sessions</div>
+<h2>Sellers ran out of fuel, buyers took over, and one price kept catching the market.</h2>
+<div class="takeaway"><b>Plain version:</b> late June was five straight down days — but look at the size of
+each fall: 107 points, then 7, then 0.7, then 3.5. The selling literally decayed to nothing. Then five straight
+up days. Then this week's test: on July 8 the market dropped hard in the morning and recovered by the close —
+and it stopped falling at the same area where it had already found rest three times: <b>7,483.23 (Jul 1),
+7,483.24 (Jul 2), 7,482.71 (Jul 8)</b>. Three separate days, the same price to within half a point. Prices
+have memory, because millions of people remember them.</div>
 <figure class="card"><svg viewBox="0 0 720 254">{svg_d}</svg>
-<figcaption>Daily candles. Bodies are true (close-to-close); wicks are real only for Jul 7–9 (recorded by this project's pipeline, SPY-scaled ×10.04); † = today, final close real, intraday shape recorded through 1:46 PM. Rising dashed line = the primary diagonal from the March 30 low.</figcaption></figure>
+<figcaption>Each candle = one trading day. Bodies (start→end) are exact for all days; the thin wicks are real
+recorded extremes only for Jul 7–9, captured live by this project's own data pipeline. † = today. The rising
+dashed line connects the March 30 low to the June 26 low — the "walking line" of the whole recovery.</figcaption></figure>
 {ledger(rows_d)}
-<p><strong>The three-act sentence:</strong> Act one — <em>evening star</em> (Jun 23) then <em>three black
-crows</em> into June 26: a five-day bleed that dried up (final crows' bodies: 7.2, 0.7, 3.5 points —
-sellers running out of conviction, the bleed literally decaying to zero). Act two — <em>bullish engulfing
-outside bar</em> (Jun 29), four straight bull closes, a <em>morning star</em> completing on Jul 6.
-Act three — the test: Jul 8 opens down, spears to <strong>7,423</strong> — through the rising diagonal
-(≈7,467 that day) — and closes back above it at 7,482.71, landing on the <strong>7,483 shelf where
-July 1 and July 2 also closed</strong>. A 60-point lower wick, body of 21: hammer anatomy, at the exact
-crossing of horizontal memory and diagonal trend. Today confirmed it: opened higher, dipped only to
-7,484 (the shelf again, held to within a point), closed 7,543.64 — <strong>above the falling diagonal
-from the June top.</strong></p>
+<p><strong>One more thing about July 8:</strong> draw a straight line under the recovery — from the March 30
+bottom (6,343.72) through the June 26 dip (7,354.02). The market has been walking up that line for three months,
+about 17 points a day. On July 8, the morning panic dropped price <em>through</em> the line (down to 7,423) —
+and by the close it was back above it, resting on the 7,483 shelf. A break that fails to break is the strongest
+kind of test a line can pass. Today confirmed it: up 0.81% to 7,543.64.</p>
 </section>
 
 <hr>
 
 <section>
-<div class="chip">Hourly &amp; 15-minute · Jul 8–9</div>
-<h2>The same reversal, one more magnification down.</h2>
+<div class="chip">Zoom 4 · By hour and quarter-hour — July 8 and 9</div>
+<h2>Watch fear arrive, peak, and dissolve — in real time.</h2>
+<div class="takeaway"><b>Plain version:</b> on July 8, panic peaked at 12:15 PM — the market's "fear gauge"
+(the VIX) hit its high of 18.4 at the exact minute prices hit their low. Then four calm hours of recovery.
+Overnight, the U.S. actually struck Iran and the ceasefire was declared dead — and the next morning the market
+flinched for about fifteen minutes, then climbed all day. The same war caused a 9% crash in March and a 3%
+wobble in June. Now: a 45-minute dip. Repeated shocks lose their power — whether that's wisdom or complacency
+is the one question this page can't answer.</div>
 <figure class="card"><svg viewBox="0 0 720 214">{svg_h}</svg>
-<figcaption>Hourly candles (SPY units — multiply by ~10 for index points), built from the recorded 5-minute closes; intra-bar extremes slightly understated. Jul 8's first recorded hour is a hammer; Jul 9 hours 2–5 print three-white-soldiers then an inside-bar pause at the high.</figcaption></figure>
+<figcaption>Each candle = one hour (prices here are for SPY, the fund that tracks the index — multiply by ~10).
+Jul 8: a long-tailed first hour, then recovery. Jul 9: five green hours in a row, pausing only at the day's high.</figcaption></figure>
 {ledger(rows_h, " (SPY)")}
 <figure class="card"><svg viewBox="0 0 720 214">{svg_15}</svg>
-<figcaption>15-minute candles, both sessions. Jul 8: bullish engulfing at the low (bar 4), then a stair; Jul 9: the war-headline bear marubozu (bar 3) answered within 15 minutes by a bigger bull marubozu (bar 4) — computed swing sequence for the day: H → HH → HL → HH → HL → HH. No lower low after 10:20 AM.</figcaption></figure>
-<p><strong>Here is the technique's deepest point, visible in the numbers:</strong> June's monthly hanging-man
-<em>wick</em> — one line on the monthly chart — <em>is</em> the weekly hammer of June 12. That weekly hammer's
-wick <em>is</em> the daily crows-then-engulfing sequence. July 8's daily hammer wick <em>is</em> the hourly
-hammer plus engulfing you see above, which <em>is</em> the 15-minute bars 1–4. <strong>A wick at any scale
-decomposes into a full reversal pattern one scale below.</strong> The gross level doesn't summarize the subtle
-level — it <em>is</em> the subtle level, seen from further away. That's why the levels agree across scales:
-they're not four analyses. They're one event, at four magnifications.</p>
+<figcaption>Each candle = 15 minutes, both sessions. On Jul 9, bar 3 is the war-headline flinch — answered
+within fifteen minutes by a bigger green bar, and no new low for the rest of the day.</figcaption></figure>
+<p><strong>And here is the discovery that makes the whole zoom exercise worth it.</strong> Go back to June's
+monthly candle: its long lower tail is a single line. Zoom in, and that tail <em>is</em> the mid-June week with
+its 139-point plunge-and-rescue. Zoom into that week and it's the run of shrinking red days followed by the
+recovery. Zoom into July 8's daily tail and it's the hourly panic-and-recovery pictured above, which is itself
+the 15-minute bars. <strong>A "moment" at one zoom level is a complete drama at the next.</strong> Big candles
+aren't summaries of small ones — they <em>are</em> the small ones, seen from farther away. That's why the same
+few prices keep mattering at every level: the month, the week, the day and the hour are one event, at four
+magnifications.</p>
 </section>
 
 <hr>
 
 <section>
-<div class="chip">The map · horizontal &amp; diagonal</div>
-<h2>Every line that matters, and why it's there.</h2>
+<div class="chip">The map · every price that matters</div>
+<h2>Nine numbers, and why each one earned its place.</h2>
 <ul class="levels">{L_ITEMS}</ul>
-<p><strong>The confluence that defines this week:</strong> the rising diagonal from the March low
-(≈{up_now:,.0f} today, climbing ~17 points a session) has converged onto the 7,483 triple-close shelf.
-Trend and memory at the same price. Below it, nothing until 7,354. Above, the falling diagonal
-(≈{dn_now:,.0f}) — <em>closed above today</em> — then the 7,537–7,554 trigger zone (price is inside it now),
-then 7,580, then the 7,609.78 line that decides the monthly candle.</p>
+<p><strong>The single most loaded spot on the map:</strong> the rising line from the March low now passes
+through ≈{up_now:,.0f} — almost exactly the 7,483 shelf where three days closed. The market's trend and the
+market's memory currently point at the same price. Below it there's little until 7,354; above it, the falling
+line (crossed today), then 7,580, then the 7,609.78 record that decides the whole monthly picture.</p>
 </section>
 
 <hr>
 
 <section>
-<div class="chip">The forecast · pattern by pattern, level by level</div>
-<h2>What the candles say next — each call with the price that kills it.</h2>
-<div class="pred"><h3>15-minute / hourly</h3>
-<p>An unbroken higher-high/higher-low ladder into an inside-bar pause at the day high (751.7 SPY / ≈7,546).
-Inside bars at highs are continuation more often than reversal while the last higher-low holds.</p>
-<p class="inv">Ladder ends on a break of 750.42 SPY (≈7,533); reversal signal only below 745.6 (≈7,486).</p></div>
-<div class="pred"><h3>Daily</h3>
-<p>Morning star → diagonal-spear hammer → confirmation close above the falling diagonal. The pattern
-sequence targets the overhead supply in order: 7,580.06 first, then the 7,609.78 line. Two closes above
-7,554 would put the June top under direct test within days.</p>
-<p class="inv">Invalidated by a daily close below 7,483 — that breaks both the shelf and, within a session or two, the rising diagonal.</p></div>
-<div class="pred"><h3>Weekly</h3>
-<p>Symmetrical triangle 7,609.78 / 7,266.99, boundaries now ≈{dn_now:,.0f} and ≈{lo_now:,.0f} — about
-{dn_now - lo_now:,.0f} points apart and closing; the apex arrives within roughly three to four weeks, and
-this week's dragonfly is pressing the upper line. Triangle height ≈343 points: an upside escape that holds
-projects toward <strong>≈7,90x</strong>; a downside escape projects toward <strong>≈7,21x</strong>. The
-candles lean up (hammer at the lower boundary, dragonfly at the upper, engulfing already answered) — the
-triangle itself is neutral until a weekly close leaves it.</p>
-<p class="inv">Up-call dies on a weekly close under 7,354; the whole coil resolves bearish under 7,267.</p></div>
-<div class="pred"><h3>Monthly</h3>
-<p>June's hanging man remains the standing warning at the top, and July's inside bar is the market
-deciding whether to believe it. Above <strong>7,609.78</strong>, the warning is negated and the two-marubozu
-impulse resumes. Below <strong>7,266.99</strong> (the wick tip), the hanging man confirms — and by the wick-decomposition
-rule, expect that confirmation to arrive first as a weekly engulfing, which arrives first as a daily
-gap-and-crows, which arrives first as a 15-minute ladder of lower lows. The subtle level always moves first.</p>
-<p class="inv">No monthly signal exists between those two prices — anyone claiming one inside the range is narrating, not reading.</p></div>
+<div class="chip">What happens next · with the prices that would prove it wrong</div>
+<h2>Expectations, not prophecies. Each one carries its own "I was wrong" number.</h2>
+<p>Candle patterns are tendencies — they describe what usually followed this shape, not what must. The honest
+way to state them is with the exact price at which each read fails:</p>
+<div class="pred"><h3>Hours ahead</h3>
+<p>Today ended with an unbroken ladder of higher lows, pausing at the day's high. Ladders like that more often
+continue than reverse.</p>
+<p class="inv">Wrong if: price breaks below ≈7,533 (the last rung). Genuinely bearish only below ≈7,486.</p></div>
+<div class="pred"><h3>Days ahead</h3>
+<p>The sequence — sellers decaying to zero, five up days, a hard test that held, today's confirmation above the
+falling line — points to a run at 7,580 first, then the 7,609.78 record itself, likely within days.</p>
+<p class="inv">Wrong if: any daily close back below 7,483 — that breaks both the shelf and, within a day or two, the rising line.</p></div>
+<div class="pred"><h3>Weeks ahead</h3>
+<p>The squeeze is 343 points tall (7,609.78 top, 7,266.99 bottom). If the market escapes upward and holds, that
+height projects a move toward roughly <strong>7,900</strong>; a downward escape projects toward roughly
+<strong>7,210</strong>. The recent candles — floor held below, rejection weakening above, this week closing at
+the upper edge — lean upward. The squeeze itself is neutral until a Friday close leaves it.</p>
+<p class="inv">Up-case wrong if: a week closes below 7,354. Everything bearish confirms below 7,266.99.</p></div>
+<div class="pred"><h3>Months ahead</h3>
+<p>June's hanging man remains the standing warning at the top; July, so far trading inside June's range, is the
+market deciding whether to believe it. Above 7,609.78 the warning cancels and the spring trend resumes. Below
+7,266.99 it confirms — and because big moves are made of small ones, that confirmation would show up
+<em>first</em> as failures at the daily and hourly levels, at these same prices. The small scale always moves first.</p>
+<p class="inv">Between those two numbers there is no month-scale signal. Anyone claiming one is telling a story, not reading a chart.</p></div>
 </section>
 
 <hr>
 
 <section>
-<div class="chip">Method &amp; honesty</div>
-<h2>Every read above was computed, not felt.</h2>
-<p>Classification rules: marubozu = body ≥85% of range; doji ≤12%; spinning top &lt;40%; hammer/hanging man =
-lower wick ≥2× body with minimal upper wick; multi-candle patterns (engulfing, harami, stars, soldiers,
-crows, tweezers, inside/outside bars) by strict body/extreme comparisons; swing structure by fractal pivots;
-horizontal zones by pivot clustering; diagonals by two-pivot lines with values computed per session.
-The engine and this page's generator are committed alongside the data.</p>
-<p><strong>Data bases, stated plainly:</strong> monthly/weekly wicks = daily-close extremes (FRED official
-series; intraday extremes unavailable — so a monthly wick here understates the true wick). Daily bodies real
-for all 16; daily wicks real only Jul 7–9 (recorded live by this repo's snapshot pipeline, SPY×10.04).
-Hourly/15-minute candles built from recorded 5-minute closes — intra-bar extremes slightly understated;
-Jul 8's first ~65 minutes weren't captured. Today's close (7,543.64) is the official print; today's intraday
-shape is recorded through 1:46 PM. One-minute data: never obtained, therefore never shown. Where the
-instrument couldn't reach, the page says so instead of imagining — that rule is the technique.</p>
-<p class="foot">S&amp;P 500 · July 9, 2026 close 7,543.64 (+0.81%). A study of price structure, not investment
-advice. Patterns are tendencies with failure prices attached — that is why every forecast above carries its own
-invalidation line.</p>
+<div class="chip">Sources &amp; honesty</div>
+<h2>Where every number came from, and what's missing.</h2>
+<p><strong>Sources:</strong> daily closing prices from the Federal Reserve's public FRED database (2,608
+sessions, ten years); today's official close (7,543.64) cross-checked against financial press; the July 7–9
+intraday candles recorded live, before and during writing, by a small automated pipeline in this project that
+snapshots the market every few minutes. Pattern names were assigned by a program using fixed body/wick ratio
+rules; the program and the data are saved with this page so any read can be re-checked.</p>
+<p><strong>Known limits, stated plainly:</strong> monthly and weekly wicks are built from daily closes, so the
+true intraday extremes are slightly larger than drawn. Daily wicks are real only for July 7–9. The hourly and
+15-minute candles are built from 5-minute samples, so their extremes are slightly understated, and the first
+hour of July 8 wasn't captured. One-minute data could not be obtained at all and is therefore simply absent.
+Nothing missing was estimated or invented.</p>
+<p class="foot">S&amp;P 500, July 9, 2026: closed 7,543.64, up 0.81%. This is a reading of price structure, not
+investment advice — which is why every expectation above is published together with the price that kills it.</p>
 </section>
 
 </div>
