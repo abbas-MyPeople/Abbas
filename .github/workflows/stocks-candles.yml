@@ -1,0 +1,44 @@
+name: Stocks · candle history (multi-timeframe)
+
+# Fetches real OHLCV candles (1m → monthly) for SPX/SPY/VIX via Yahoo's chart API
+# and commits them under stocks/data/candles/. Runs from GitHub's network, which
+# has open egress — sandboxed analysis sessions then read the committed JSON.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - 'claude/**'
+    paths:
+      - 'stocks/scripts/fetch_candles.py'
+      - '.github/workflows/stocks-candles.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stocks-candles-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  candles:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch candle history
+        run: python stocks/scripts/fetch_candles.py
+      - name: Commit if changed
+        run: |
+          git config user.name  "stocks-bot"
+          git config user.email "stocks-bot@users.noreply.github.com"
+          git add stocks/data/candles
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore(stocks): multi-timeframe candle history [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
