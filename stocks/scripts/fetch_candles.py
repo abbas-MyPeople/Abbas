@@ -82,7 +82,7 @@ def yahoo(symbol, slug, interval, rng):
     def go():
         from urllib.parse import quote
         last = None
-        for i, host in enumerate(("query1", "query2", "query1", "query2")):
+        for i, host in enumerate(("query1", "query2")):
             try:
                 body = http_get(
                     f"https://{host}.finance.yahoo.com/v8/finance/chart/{quote(symbol)}"
@@ -104,9 +104,9 @@ def yahoo(symbol, slug, interval, rng):
                 save(f"{slug}_{interval}.json", json.dumps(out, separators=(",", ":")),
                      len(candles))
                 return
-            except Exception as e:  # noqa: BLE001 - retry with backoff (429s often clear)
+            except Exception as e:  # noqa: BLE001 - retry once with short backoff
                 last = e
-                time.sleep(20 * (i + 1))
+                time.sleep(15 * (i + 1))
         raise last
     attempt(f"{slug}_{interval}.json", go)
 
@@ -114,17 +114,21 @@ def yahoo(symbol, slug, interval, rng):
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    # Reliable sources first, so a Yahoo rate-limit can't block them.
-    stooq("%5Espx", "gspc", "d", "20240101")
-    stooq("%5Espx", "gspc", "w", "20200101")
-    stooq("%5Espx", "gspc", "m", "20100101")
+    # Reliable sources first, so a Yahoo rate-limit can't block them. Deep
+    # history on purpose: daily from 1995 covers dot-com, GFC, COVID regimes.
+    stooq("%5Espx", "gspc", "d", "19950101")
+    stooq("%5Espx", "gspc", "w", "19950101")
+    stooq("%5Espx", "gspc", "m", "19500101")
     stooq("spy.us", "spy", "d", "20240101")
-    stooq("%5Evix", "vix", "d", "20250101")
+    stooq("%5Evix", "vix", "d", "20150101")
     cboe("_SPX", "gspc")
     cboe("SPY", "spy")
 
-    for sym, slug in (("^GSPC", "gspc"), ("SPY", "spy")):
-        for interval, rng in (("1m", "5d"), ("5m", "30d"), ("15m", "60d"), ("60m", "180d")):
+    for sym, slug, specs in (
+        ("^GSPC", "gspc", (("1m", "5d"), ("5m", "30d"), ("15m", "60d"), ("60m", "730d"))),
+        ("SPY", "spy", (("1m", "5d"), ("15m", "60d"))),
+    ):
+        for interval, rng in specs:
             yahoo(sym, slug, interval, rng)
             time.sleep(5)
 

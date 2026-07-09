@@ -17,8 +17,10 @@ on:
 permissions:
   contents: write
 
+# Group is versioned so an updated fetcher doesn't queue behind a long-running
+# older one; rebase-before-push below handles the resulting commit races.
 concurrency:
-  group: stocks-candles-${{ github.ref }}
+  group: stocks-candles-v2-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -40,5 +42,6 @@ jobs:
             echo "No changes."
           else
             git commit -m "chore(stocks): multi-timeframe candle history [skip ci]"
+            git pull --rebase origin ${{ github.ref_name }}
             git push origin HEAD:${{ github.ref_name }}
           fi
