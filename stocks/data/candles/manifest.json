@@ -1,19 +1,19 @@
 {
- "generatedAt": "2026-07-09T19:46:09.407645+00:00",
- "files": {},
+ "generatedAt": "2026-07-09T19:54:17.222071+00:00",
+ "files": {
+  "gspc_daily_close_fred.csv": 2608
+ },
  "errors": {
-  "gspc_d_stooq.csv": "ValueError: unexpected response: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></head><body><noscript>T'",
-  "gspc_w_stooq.csv": "ValueError: unexpected response: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></head><body><noscript>T'",
-  "gspc_m_stooq.csv": "ValueError: unexpected response: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></head><body><noscript>T'",
-  "spy_d_stooq.csv": "ValueError: unexpected response: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></head><body><noscript>T'",
-  "vix_d_stooq.csv": "ValueError: unexpected response: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></head><body><noscript>T'",
-  "gspc_intraday_cboe.json": "HTTPError: HTTP Error 403: Forbidden",
-  "spy_intraday_cboe.json": "HTTPError: HTTP Error 403: Forbidden",
+  "gspc_d_stooq.csv": "ValueError: unexpected response: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></he'",
+  "gspc_w_stooq.csv": "ValueError: unexpected response: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></he'",
+  "gspc_m_stooq.csv": "ValueError: unexpected response: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></he'",
+  "vix_d_stooq.csv": "ValueError: unexpected response: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"></he'",
+  "gspc_daily_mw_1998_2003.csv": "HTTPError: HTTP Error 401: HTTP Forbidden",
+  "gspc_daily_mw_2025_2026.csv": "HTTPError: HTTP Error 401: HTTP Forbidden",
   "gspc_1m.json": "HTTPError: HTTP Error 429: Too Many Requests",
   "gspc_5m.json": "HTTPError: HTTP Error 429: Too Many Requests",
   "gspc_15m.json": "HTTPError: HTTP Error 429: Too Many Requests",
   "gspc_60m.json": "HTTPError: HTTP Error 429: Too Many Requests",
-  "spy_1m.json": "HTTPError: HTTP Error 429: Too Many Requests",
-  "spy_15m.json": "HTTPError: HTTP Error 429: Too Many Requests"
+  "spy_1m.json": "HTTPError: HTTP Error 429: Too Many Requests"
  }
 }
