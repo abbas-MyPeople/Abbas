@@ -1,0 +1,20 @@
+{
+ "generatedAt": "2026-07-09T19:29:39.293094+00:00",
+ "files": {},
+ "errors": {
+  "gspc_1m.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "gspc_5m.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "gspc_15m.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "gspc_60m.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "gspc_1d.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "gspc_1wk.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "gspc_1mo.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "spy_1m.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "spy_5m.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "spy_15m.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "spy_60m.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "spy_1d.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "vix_60m.json": "HTTPError: HTTP Error 429: Too Many Requests",
+  "vix_1d.json": "HTTPError: HTTP Error 429: Too Many Requests"
+ }
+}
