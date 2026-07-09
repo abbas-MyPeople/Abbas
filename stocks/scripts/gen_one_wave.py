@@ -66,6 +66,11 @@ td.up {{ color:var(--up) }} td.dn {{ color:var(--dn) }}
 .anatomy {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:.9rem; margin:1.3rem 0 }}
 .anx {{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:.9rem; font-size:.8rem; color:var(--mut); line-height:1.5 }}
 .anx b {{ color:var(--ink); display:block; font-size:.86rem; margin-bottom:.2rem }}
+.inside {{ font-family:"Iowan Old Style",Georgia,serif; font-style:italic; font-size:1.05rem;
+  line-height:1.7; color:var(--ink); max-width:60ch; margin:1.6rem 0 1.2rem; padding-left:1.1rem;
+  border-left:2px solid var(--gold-mark) }}
+.inside small {{ display:block; font:600 .64rem/1 system-ui; font-style:normal; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:.5rem }}
 .pred {{ border-left:3px solid var(--gold-mark); padding:.15rem 0 .15rem 1rem; margin:1.2rem 0 }}
 .pred h3 {{ margin:.2rem 0 .3rem; font-size:1.02rem }}
 .pred p {{ margin-bottom:.4rem; font-size:.95rem }}
@@ -124,6 +129,13 @@ from the Federal Reserve's official series). ‡ = July, still in progress. Gold
 end — a month where buyers never once gave ground, the most one-sided candle in the series. And June has a
 small body with a 232-point tail below it — the "hanging man": at a record high, price fell far and needed
 rescuing. The rescue worked, but a rescue was needed. That's the first crack after two months of total control.</p>
+<div class="inside"><small>The same thing, seen from inside</small>
+I climbed for five months without effort. In November I fell hard once, in the middle of the month,
+and was caught before anyone watching month-ends could notice. In January I touched 7,000 for one day
+and was pushed out. In March, four weeks took back everything the year had given. In April it all
+returned, and more — thirty days without a single push-back. In June I stood higher than I had ever
+stood, fell 343 points, and was caught again. I ended June looking calm. I was not calm.
+July: I have not yet left June's shadow.</div>
 <p><strong>The month-scale question is exactly two numbers.</strong> A close above <strong>7,609.78</strong>
 cancels June's warning. A fall below <strong>7,266.99</strong> (the tip of June's tail) confirms it. Everything
 in the rest of this page is the market deciding between those two numbers.</p>
@@ -143,6 +155,11 @@ week closed right at the squeeze's upper edge.</div>
 <figcaption>Each candle = one week. The two dashed lines are drawn through the actual highs (falling line) and
 actual lows (rising line) of the squeeze — not sketched, computed. ‡ = this week, in progress until Friday's close.</figcaption></figure>
 {ledger(rows_w)}
+<div class="inside"><small>The same thing, seen from inside</small>
+Nine weeks I only rose, and by the eighth the rising itself had become the point. The tenth week I
+gave back a record in one day. Since then, each time I reach up I stop a little lower; each time I
+fall I stop a little higher. The room I move in shrinks every week. This week I dipped, took all of
+it back, and ended at the top edge of what room remains.</div>
 <p><strong>The week-scale story in three candles:</strong> mid-May printed the first rejection — price reached
 7,501, was pushed all the way back, and the week closed where it started (an 88-point wick above a 4-point
 body). Early June, the knockdown: one week's candle completely swallowed the record week before it. Mid-June,
@@ -167,6 +184,12 @@ have memory, because millions of people remember them.</div>
 recorded extremes only for Jul 7–9, captured live by this project's own data pipeline. † = today. The rising
 dashed line connects the March 30 low to the June 26 low — the "walking line" of the whole recovery.</figcaption></figure>
 {ledger(rows_d)}
+<div class="inside"><small>The same thing, seen from inside</small>
+Five days I fell, each day with less force — 107 points, then 7, then less than one. The falling
+ended not because buying arrived but because the selling was finished. Then five days up. On July 8
+I was thrown down at the open and I stopped at 7,483 — not because a line exists there; nothing
+exists there. It is simply where, three times now, the wish to sell ran out. Today I opened above
+it, touched it once, and left.</div>
 <p><strong>One more thing about July 8:</strong> draw a straight line under the recovery — from the March 30
 bottom (6,343.72) through the June 26 dip (7,354.02). The market has been walking up that line for three months,
 about 17 points a day. On July 8, the morning panic dropped price <em>through</em> the line (down to 7,423) —
@@ -192,6 +215,12 @@ Jul 8: a long-tailed first hour, then recovery. Jul 9: five green hours in a row
 <figure class="card"><svg viewBox="0 0 720 214">{svg_15}</svg>
 <figcaption>Each candle = 15 minutes, both sessions. On Jul 9, bar 3 is the war-headline flinch — answered
 within fifteen minutes by a bigger green bar, and no new low for the rest of the day.</figcaption></figure>
+<div class="inside"><small>The same thing, seen from inside</small>
+At 12:15 on July 8 the fear was largest at the exact minute the price was lowest. That is not a
+coincidence — it is one event, measured twice. The next morning the war came back and I fell for
+fifteen minutes. In March the same news held me down for a month; in June, for a week. What repeats
+is felt less. Whether that is understanding or numbness cannot be seen from inside the moment,
+so I will not claim to know.</div>
 <p><strong>And here is the discovery that makes the whole zoom exercise worth it.</strong> Go back to June's
 monthly candle: its long lower tail is a single line. Zoom in, and that tail <em>is</em> the mid-June week with
 its 139-point plunge-and-rescue. Zoom into that week and it's the run of shrinking red days followed by the
@@ -219,6 +248,11 @@ line (crossed today), then 7,580, then the 7,609.78 record that decides the whol
 <section>
 <div class="chip">What happens next · with the prices that would prove it wrong</div>
 <h2>Expectations, not prophecies. Each one carries its own "I was wrong" number.</h2>
+<div class="inside"><small>Before the forecasts, the bare truth</small>
+A level is not a wall; it is a memory of where intentions ran out. A pattern is not a promise; it is
+the shape a crowd makes when it does what crowds have done before. What follows is not what I will
+do. It is what bodies like mine have usually done from here — stated with the price at which
+that stops being true.</div>
 <p>Candle patterns are tendencies — they describe what usually followed this shape, not what must. The honest
 way to state them is with the exact price at which each read fails:</p>
 <div class="pred"><h3>Hours ahead</h3>
