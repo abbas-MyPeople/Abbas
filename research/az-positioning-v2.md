@@ -23,18 +23,19 @@ rising, and restaurants are an open lane."
 
 ## 2. The proof stack — why AZ does NOT need an external client first
 
-Two proofs at opposite ends of the market, which together beat any single local logo:
-- **Enterprise:** Abbas deployed **Hard Rock Cafe's first production AI agents (3), plus the
-  observability stack, agent maintenance, and surrounding integration**, as a **Senior Solution
-  Architect & Sales Engineer (WSO2).** → *"I built and shipped this for a global hospitality brand."*
+Three proofs, at opposite ends of the market, which together beat any single local logo:
+- **Big-tech engineer:** **ex-Google software engineer** (confirmed — keep on the site).
+- **Enterprise AI, in hospitality:** deployed **Hard Rock Cafe's first AI agents — and the
+  agent-management ecosystem around them** (the observability + guardrails that keep the agents safe
+  and visible as they scale). → *"I built the AI systems a global restaurant brand runs on."* (Keep it
+  at this level — do not detail the WSO2-client relationship on the site.)
 - **Owner-operator:** he runs the same class of systems on **his own restaurant (Wok & Karahi)**. →
   *"And I run it on my own place — so I've made every mistake on mine, not yours."*
 
-The one-liner: **"I did it for a global chain. I do it on my own restaurant. Now I do it for yours."**
-> ⚠️ ACCURACY/BRANDING TO CONFIRM before public use: exact titles/dates/scope wording for Hard Rock &
-> WSO2; logo-usage rights (Hard Rock is a trademark — use "worked with"/case-study framing unless
-> permission exists); and reconcile the site's current "ex-Google engineer" claim with what is
-> verifiable. The brand is honesty — every credential on the site must be exactly true and defensible.
+The one-liner: **"I built the AI a global chain runs on. I run it on my own restaurant. Now I do it for yours."**
+> Branding note: using the *name* "Hard Rock Cafe" factually ("deployed their first AI agents") is fine;
+> be careful with the **logo** (trademark) unless permitted. Every credential stays exactly true — that
+> honesty is the brand.
 
 ## 3. The first-principles core — the one commonality under everything AZ does
 
@@ -97,10 +98,19 @@ The owner has never heard "FDE." Never say it to them. Translate everything into
 | CDP / guest identity | "Your own customer list — that you actually own, not the apps." |
 | Platform / moat / operating system | (never said to the owner) |
 
-**Entry wedge (recommended, still open):** lead with **#5 "see your true numbers"** (only an
-operator-engineer can show an owner their real per-item/channel/daypart net) or the **AI phone agent**
-(tangible, demoable). NOT delivery commissions (commodity, and — for Wok — intentional CAC). Decide the
-one wedge before the site copy is finalized.
+**Entry wedge — a two-step, not one (refined):**
+- **Cold opener = the AI phone agent.** It's *tangible and needs zero data or trust* — "call this
+  number and hear it take an order." Magic in 30 seconds; gets you in the door. (Honest caveat: it's
+  on a test line, not Wok's main line yet — demo in test mode; don't claim it answers Wok's real line
+  until the cutover.)
+- **The closer = the "money X-ray" (a.k.a. "see your true numbers").** Once there's a little trust,
+  offer a **free read-only look at their POS + app statements**, and hand back a plain-English picture
+  of what each item/channel/day *actually* makes them and where they're quietly bleeding — the thing
+  no competitor can do and most owners have never seen. It's differentiated, it shocks, and it sells
+  the engagement. It needs data access, so it's a closer, not a cold opener.
+- **NOT** delivery commissions as the lead (commodity; and for Wok it's intentional CAC).
+Owner-facing names: opener = **"Never miss another order"**; closer = **"See what your restaurant is
+really making"** (never say "true-net" or "P&L reconciliation").
 
 ## 7. Honest guardrails (protect the trust that IS the brand)
 Do not publish what the code can't back (the audit caught these): no "872 reviews" until verified; no
