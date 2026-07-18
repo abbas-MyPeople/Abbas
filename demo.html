@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AZ Restaurant Partners — 3-minute product tour</title>
-  <meta name="description" content="Try the product in three minutes: call the live AI phone agent, see the AI-readable restaurant site it built, and walk through the pilot restaurant's numbers." />
+  <title>AZ Restaurant Partners — the product, live</title>
+  <meta name="description" content="Use the product in three minutes: call the live AI phone agent, see the AI-readable restaurant site, real POS analytics, and every system we've built — voice, growth engine, rewards, deal-room infrastructure and more." />
   <meta name="robots" content="noindex,nofollow" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b1a17'/%3E%3Ctext x='50%25' y='55%25' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23c0492b' text-anchor='middle' dominant-baseline='middle'%3EA%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,13 +12,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .demo-wrap{ max-width:760px; margin:0 auto; padding:110px 22px 60px; }
+    .demo-wrap{ max-width:960px; margin:0 auto; padding:110px 22px 60px; }
     .demo-step{ border:1px solid rgba(27,26,23,.14); border-radius:16px; padding:26px 28px; margin-top:18px; background:#fbf7ee; }
     .demo-step h2{ font-family:"Fraunces",Georgia,serif; font-size:1.3rem; margin-bottom:10px; display:flex; align-items:center; gap:12px; }
     .demo-step h2 .n{ width:34px; height:34px; border-radius:50%; background:#c0492b; color:#fff; display:grid; place-items:center; font-size:1rem; flex:none; }
     .demo-step p{ line-height:1.6; color:#3d3a33; margin-bottom:10px; }
     .demo-step ul{ margin:0 0 12px 20px; line-height:1.6; color:#3d3a33; }
     .demo-note{ font-size:.9rem; color:#6f685c; margin-top:24px; line-height:1.55; }
+    /* charts */
+    .charts{ margin-top:40px; }
+    .chart-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:18px; }
+    @media (max-width:820px){ .chart-grid{ grid-template-columns:1fr; } }
+    .chart{ border:1px solid rgba(27,26,23,.14); border-radius:16px; padding:22px 24px; background:#fff; }
+    .chart h3{ font-family:"Fraunces",Georgia,serif; font-size:1.05rem; margin-bottom:2px; }
+    .chart .sub{ font-size:.8rem; color:#6f685c; margin-bottom:16px; }
+    .brow{ display:grid; grid-template-columns:110px 1fr 52px; align-items:center; gap:10px; margin-bottom:8px; }
+    .brow .lbl{ font-size:.82rem; color:#1b1a17; text-align:right; line-height:1.2; }
+    .brow .val{ font-size:.82rem; font-weight:600; color:#1b1a17; font-variant-numeric:tabular-nums; }
+    .bar{ height:18px; background:rgba(27,26,23,.06); border-radius:4px; overflow:hidden; }
+    .bar > span{ display:block; height:100%; background:#c0492b; border-radius:0 4px 4px 0; transition:filter .15s; }
+    .brow:hover .bar > span{ filter:brightness(.85); }
+    .tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:18px; }
+    @media (max-width:820px){ .tiles{ grid-template-columns:repeat(2,1fr); } }
+    .tile{ border:1px solid rgba(27,26,23,.14); border-radius:16px; padding:18px 16px; background:#fbf7ee; }
+    .tile strong{ display:block; font-family:"Fraunces",Georgia,serif; font-size:1.55rem; line-height:1.1; color:#97361e; }
+    .tile span{ font-size:.83rem; color:#6f685c; line-height:1.35; display:block; margin-top:6px; }
+    /* build cards */
+    .build{ margin-top:44px; }
+    .cards{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px; }
+    @media (max-width:820px){ .cards{ grid-template-columns:1fr; } }
+    .card{ border:1px solid rgba(27,26,23,.14); border-radius:16px; padding:22px 24px; background:#fff; }
+    .card h3{ font-family:"Fraunces",Georgia,serif; font-size:1.12rem; margin:8px 0 6px; }
+    .card p{ font-size:.92rem; line-height:1.55; color:#3d3a33; margin-bottom:8px; }
+    .card ul{ margin:0 0 0 18px; font-size:.88rem; line-height:1.55; color:#3d3a33; }
+    .chip{ display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:3px 10px; border-radius:999px; }
+    .chip--live{ background:#c0492b; color:#fff; }
+    .chip--run{ background:#1b1a17; color:#f1e9da; }
+    .chip--built{ background:transparent; color:#1b1a17; border:1px solid rgba(27,26,23,.35); }
   </style>
 </head>
 <body>
@@ -35,34 +65,178 @@
   </header>
 
   <main class="demo-wrap">
-    <p class="kicker">The product, in three minutes</p>
+    <p class="kicker">The product, live — nothing staged</p>
     <h1 class="h2" style="font-size:clamp(1.8rem,4vw,2.4rem)">Don't read about it. Use it.</h1>
-    <p class="lead" style="margin-top:12px">AZ is the AI tech team for independent restaurants, proven on our own restaurant first — <strong>Wok &amp; Karahi</strong> in Spring, TX (4.6★, 872 Google reviews). Everything below is live production, not a staged demo.</p>
+    <p class="lead" style="margin-top:12px">AZ is the AI tech team for independent restaurants, proven on our own restaurant first — <strong>Wok &amp; Karahi</strong> in Spring, TX (4.6★, 872 Google reviews; sales doubled in 18 months under our family). Everything on this page is production, and <strong>every number is real</strong>, straight from our POS — we've redacted absolute dollar totals, nothing else.</p>
 
     <div class="demo-step">
       <h2><span class="n">1</span> Call the product — it's answering right now</h2>
       <p><a href="tel:+19036024012" class="btn btn--primary">Call (903) 602-4012</a></p>
-      <p>You'll be talking to our AI phone agent on a real line, grounded in the restaurant's real 78-dish menu with live Clover POS item IDs. Things worth trying:</p>
+      <p>You'll be talking to our AI phone agent, grounded in the restaurant's real 78-dish menu with live Clover POS item IDs. Things worth trying:</p>
       <ul>
         <li>Order a Crispy Beef and a chicken chow mein — it resolves dishes, asks only the choices that matter, and reads the order back before anything is committed.</li>
         <li>Ask what's in the Dum Biryani, or what it recommends for someone who likes spicy.</li>
         <li>Ask about catering for 40 people — it sizes trays from a headcount.</li>
         <li>Try to make it invent a dish or a discount. It won't — everything is grounded in the POS.</li>
       </ul>
-      <p><em>Fair warning: confirmed orders write straight into our POS and the kitchen will actually make your food. Hang up before confirming, or come to Spring, TX and eat it.</em></p>
+      <p><em>This demo line runs with order-writing switched to safe mode — confirm away, the kitchen won't fire your ticket. In production the same confirmed order writes straight into Clover; that path went live only after real verified transactions, and it's one env flag away.</em></p>
     </div>
 
     <div class="demo-step">
       <h2><span class="n">2</span> See what it built for discovery</h2>
-      <p><a href="https://wokandkarahitexas.com" target="_blank" rel="noopener">wokandkarahitexas.com</a> — the restaurant's site, rebuilt in code so AI assistants can actually read it: full Restaurant/Menu/FAQ structured data, every dish statically rendered with its real POS ID, and <a href="https://wokandkarahitexas.com/llms.txt" target="_blank" rel="noopener">llms.txt</a>. The old site returned HTTP 403 to every AI crawler. A weekly engine now proposes site improvements from live data and ships whatever the owner approves by email.</p>
+      <p><a href="https://wokandkarahitexas.com" target="_blank" rel="noopener">wokandkarahitexas.com</a> — the restaurant's site, rebuilt in code so AI assistants can actually read it: full Restaurant/Menu/FAQ structured data, every dish statically rendered with its real POS ID, and <a href="https://wokandkarahitexas.com/llms.txt" target="_blank" rel="noopener">llms.txt</a>. The old site returned HTTP 403 to every AI crawler.</p>
     </div>
 
     <div class="demo-step">
       <h2><span class="n">3</span> Walk through the pilot restaurant</h2>
-      <p><a href="case-study.html">The full walkthrough</a> — the week the restaurant used to have, and what each fix was made of: an existing tool set up right, software we built, or a $2 card on a table that doubled our reviews (~400 → 872 at 4.6★ in a year). With the honest scoreboard of what's proven vs. still being measured.</p>
+      <p><a href="case-study.html">The full walkthrough</a> — the week the restaurant used to have, and what each fix was made of: an existing tool set up right, software we built, or a $2 card on a table that doubled our reviews (~400 → 872 at 4.6★ in a year).</p>
     </div>
 
-    <p class="demo-note"><strong>Also running in production</strong> (shown live on a screen-share, happily): POS analytics on ~1,500 orders — menu engineering, channel economics, the +63%-ticket dual-cuisine discovery — and the autonomous growth engine. Built and operated by one founder. First two pilot restaurants signed in Spring, TX.</p>
+    <!-- REAL ANALYTICS -->
+    <section class="charts">
+      <p class="kicker">The analytics brain — real output, from our own POS</p>
+      <h2 class="h2" style="font-size:1.6rem">90 days · 1,501 paid orders · $58.18 average ticket.</h2>
+      <p class="lead" style="margin-top:10px;font-size:1rem">This is the same analysis engine every client restaurant gets — menu engineering, channel economics, daypart profit. Below is our restaurant's actual data (relative scales shown; absolute $ redacted). These findings drove real decisions: the phone agent's upsells, the menu's steering, the direct-order push.</p>
+
+      <div class="chart-grid">
+        <div class="chart">
+          <h3>Where the revenue comes from</h3>
+          <p class="sub">Share of revenue by channel · 90 days</p>
+          <div class="brow"><span class="lbl">Dine-in</span><div class="bar"><span style="width:100%"></span></div><span class="val">44.9%</span></div>
+          <div class="brow"><span class="lbl">Takeout (direct)</span><div class="bar"><span style="width:60%"></span></div><span class="val">27.0%</span></div>
+          <div class="brow"><span class="lbl">DoorDash</span><div class="bar"><span style="width:31%"></span></div><span class="val">13.8%</span></div>
+          <div class="brow"><span class="lbl">Uber Eats</span><div class="bar"><span style="width:28%"></span></div><span class="val">12.5%</span></div>
+          <div class="brow"><span class="lbl">Grubhub</span><div class="bar"><span style="width:3%"></span></div><span class="val">1.3%</span></div>
+          <p class="sub" style="margin:12px 0 0"><strong style="color:#97361e">27.6% of revenue rides the ~30%-commission apps</strong> — that's the margin-recovery target the whole system works against.</p>
+        </div>
+        <div class="chart">
+          <h3>What actually sells</h3>
+          <p class="sub">Top dishes by revenue, relative to #1 · 90 days</p>
+          <div class="brow"><span class="lbl">Chow Mein</span><div class="bar"><span style="width:100%"></span></div><span class="val">100</span></div>
+          <div class="brow"><span class="lbl">Fried Rice</span><div class="bar"><span style="width:67%"></span></div><span class="val">67</span></div>
+          <div class="brow"><span class="lbl">Dum Biryani</span><div class="bar"><span style="width:44%"></span></div><span class="val">44</span></div>
+          <div class="brow"><span class="lbl">Mongolian</span><div class="bar"><span style="width:43%"></span></div><span class="val">43</span></div>
+          <div class="brow"><span class="lbl">Sesame</span><div class="bar"><span style="width:42%"></span></div><span class="val">42</span></div>
+          <div class="brow"><span class="lbl">Karahi</span><div class="bar"><span style="width:39%"></span></div><span class="val">39</span></div>
+          <p class="sub" style="margin:12px 0 0">Chow Mein rides on <strong>~38% of all orders</strong>; naan attaches to roughly half of tickets — which is why the agent's upsells are these, not guesses.</p>
+        </div>
+      </div>
+
+      <div class="tiles">
+        <div class="tile"><strong>+63%</strong><span>higher ticket when a guest orders from both cuisines — found in this data, now steered by the menu, site &amp; phone agent</span></div>
+        <div class="tile"><strong>66.7%</strong><span>of revenue lands in the dinner window — staffing, prep, and promo timing all follow it</span></div>
+        <div class="tile"><strong>$64.94 vs $54.67</strong><span>weekend vs weekday average ticket — pricing and bundles are tuned per day</span></div>
+        <div class="tile"><strong>43 orders ≥ $150</strong><span>untracked "feast demand" in 90 days — the catering channel the data said to build</span></div>
+      </div>
+    </section>
+
+    <!-- THE FULL BUILD -->
+    <section class="build">
+      <p class="kicker">The full build — one founder, AI-leveraged</p>
+      <h2 class="h2" style="font-size:1.6rem">Every system below is real, in this stack, today.</h2>
+      <p class="lead" style="margin-top:10px;font-size:1rem">Built and operated by one person using AI agents as the engineering team — across ~21,000 lines of production Python, 8 scheduled automation pipelines, and 7 deployed apps.</p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="chip chip--live">Live — call it</span>
+          <h3>AI phone agent → POS</h3>
+          <p>The restaurant's best front-of-house employee, captured as AI.</p>
+          <ul>
+            <li>28 integrated tools · English + Urdu/Hindi in one locked voice</li>
+            <li>Full-order flow with read-back; gated writes into Clover with real item &amp; modifier IDs</li>
+            <li>Remembers regulars ("the usual?"), reservations, catering sizing, honest ready-times</li>
+            <li>Complaint triage with real empathy + a structured feedback log for the owner</li>
+            <li>15-persona adversarial QA gate · 206 automated checks · never falsely confirms</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="chip chip--run">Running</span>
+          <h3>POS analytics brain</h3>
+          <p>The charts above are its real output.</p>
+          <ul>
+            <li>Menu engineering (Kasavana-Smith), channel P&amp;L, daypart economics, cross-sell matrix</li>
+            <li>Conversational: the owner asks questions in plain English, it answers from live Clover data</li>
+            <li>Its findings feed every other system — upsells, site content, promo timing</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="chip chip--live">Live · ships weekly</span>
+          <h3>AI-visible website + living growth engine</h3>
+          <p>A site AI assistants can read — that improves itself.</p>
+          <ul>
+            <li>Full entity/Menu/FAQ schema, statically-rendered 78-dish menu, llms.txt</li>
+            <li>Weekly engine: watches GA4 + search + AI-answer rankings → proposes changes by email → ships what the owner approves, automatically</li>
+            <li>Significance-tested A/B experiments (two-proportion z-tests) on live pages</li>
+            <li>Runs for ~$10–35/month, all-in</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="chip chip--run">Running 1+ year</span>
+          <h3>Direct-order margin engine</h3>
+          <p>Converting the 30%-commission apps' customers into ours.</p>
+          <ul>
+            <li>Order-type-targeted thank-you notes in every third-party bag ("paying up to 50% extra?")</li>
+            <li>The apps' own drivers deliver our acquisition channel, at zero marketing cost</li>
+            <li>Tablet chaos eliminated: 3 delivery tablets → straight into one POS, no re-typing</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="chip chip--run">Running 1+ year</span>
+          <h3>Review engine</h3>
+          <p>~400 → 872 Google reviews at 4.6★, in about a year.</p>
+          <ul>
+            <li>"Scan me" card brought only at the moment a guest is visibly happy</li>
+            <li>Unhappy guests get the owner's personal card — intercepted before Google</li>
+            <li>Behavioral design, $2 of cardstock — our highest-ROI play</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="chip chip--built">Built · demoable</span>
+          <h3>Guest platform: rewards, CDP, spin-the-wheel</h3>
+          <p>Turning anonymous app customers into known regulars.</p>
+          <ul>
+            <li>Receipt-scan "spin the wheel": a DoorDash customer becomes a known, direct one on the spot</li>
+            <li>Customer/staff/admin flows, SMS OTP identity, abuse prevention, phone-at-pickup redemption</li>
+            <li>Seed of the cross-channel guest profile the phone agent already keeps</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="chip chip--built">Deployed</span>
+          <h3>Ops micro-apps</h3>
+          <p>The small tools that make a kitchen run smoother.</p>
+          <ul>
+            <li>Catering portion calculator — headcount → exact trays &amp; ounces (grounds the phone agent too)</li>
+            <li>Employee handbook Q&amp;A assistant for staff</li>
+            <li>Conversational POS assistant + an MCP server exposing the menu to AI tools</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="chip chip--run">Running daily</span>
+          <h3>Automation fleet</h3>
+          <p>Eight scheduled pipelines, zero babysitting.</p>
+          <ul>
+            <li>Daily POS sales report to the owner's inbox</li>
+            <li>Weekly newsletter engine with failed-send retry</li>
+            <li>Weekly AEO guard + daily reply-reader: the owner approves changes by replying to email</li>
+            <li>Fail-closed guardrails everywhere: allowlisted senders, dry-run defaults, kill switches</li>
+          </ul>
+        </div>
+        <div class="card" style="grid-column:1 / -1">
+          <span class="chip chip--built">Built &amp; battle-used</span>
+          <h3>And when we needed M&amp;A-grade infrastructure, we built that too.</h3>
+          <p>For a confidential business transaction, we stood up a self-hosted deal room in days — the same buy-customize-build engineering we bring to restaurants, pointed at a harder problem:</p>
+          <ul>
+            <li>Blind NDA e-sign desk (self-hosted clickwrap, no third-party service) → lead capture</li>
+            <li>Two-tier gated data room: summary after NDA, full financials after proof-of-funds — fail-closed 403s</li>
+            <li>Per-recipient watermarked documents · IP/device view logging · multi-IP forwarding detection</li>
+            <li>Dynamic gated URLs, cross-device state sync, and an owner CRM dashboard</li>
+            <li>An autonomous daily optimizer running significance-tested A/B on the funnel with a hard-capped ad budget</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <p class="demo-note"><strong>Want the live tour?</strong> On a screen-share we'll open the analytics dashboard on real dollars, place a call to the agent, and watch the pieces talk to each other. First two pilot restaurants signed in Spring, TX.</p>
     <p class="demo-note">Abbas Zoeb · azoeb27@gmail.com · <a href="https://azrestaurantpartners.com">azrestaurantpartners.com</a></p>
   </main>
 
