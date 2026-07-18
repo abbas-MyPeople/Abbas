@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AZ Restaurant Partners — 3-minute product tour</title>
+  <meta name="description" content="Try the product in three minutes: call the live AI phone agent, see the AI-readable restaurant site it built, and walk through the pilot restaurant's numbers." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b1a17'/%3E%3Ctext x='50%25' y='55%25' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23c0492b' text-anchor='middle' dominant-baseline='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .demo-wrap{ max-width:760px; margin:0 auto; padding:110px 22px 60px; }
+    .demo-step{ border:1px solid rgba(27,26,23,.14); border-radius:16px; padding:26px 28px; margin-top:18px; background:#fbf7ee; }
+    .demo-step h2{ font-family:"Fraunces",Georgia,serif; font-size:1.3rem; margin-bottom:10px; display:flex; align-items:center; gap:12px; }
+    .demo-step h2 .n{ width:34px; height:34px; border-radius:50%; background:#c0492b; color:#fff; display:grid; place-items:center; font-size:1rem; flex:none; }
+    .demo-step p{ line-height:1.6; color:#3d3a33; margin-bottom:10px; }
+    .demo-step ul{ margin:0 0 12px 20px; line-height:1.6; color:#3d3a33; }
+    .demo-note{ font-size:.9rem; color:#6f685c; margin-top:24px; line-height:1.55; }
+  </style>
+</head>
+<body>
+  <header class="nav scrolled" id="nav">
+    <div class="wrap nav__inner">
+      <a href="index.html" class="brand" aria-label="AZ Restaurant Partners">AZ&nbsp;Restaurant&nbsp;Partners</a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="case-study.html">The pilot restaurant</a>
+        <a href="details.html">Full details</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="demo-wrap">
+    <p class="kicker">The product, in three minutes</p>
+    <h1 class="h2" style="font-size:clamp(1.8rem,4vw,2.4rem)">Don't read about it. Use it.</h1>
+    <p class="lead" style="margin-top:12px">AZ is the AI tech team for independent restaurants, proven on our own restaurant first — <strong>Wok &amp; Karahi</strong> in Spring, TX (4.6★, 872 Google reviews). Everything below is live production, not a staged demo.</p>
+
+    <div class="demo-step">
+      <h2><span class="n">1</span> Call the product — it's answering right now</h2>
+      <p><a href="tel:+19036024012" class="btn btn--primary">Call (903) 602-4012</a></p>
+      <p>You'll be talking to our AI phone agent on a real line, grounded in the restaurant's real 78-dish menu with live Clover POS item IDs. Things worth trying:</p>
+      <ul>
+        <li>Order a Crispy Beef and a chicken chow mein — it resolves dishes, asks only the choices that matter, and reads the order back before anything is committed.</li>
+        <li>Ask what's in the Dum Biryani, or what it recommends for someone who likes spicy.</li>
+        <li>Ask about catering for 40 people — it sizes trays from a headcount.</li>
+        <li>Try to make it invent a dish or a discount. It won't — everything is grounded in the POS.</li>
+      </ul>
+      <p><em>Fair warning: confirmed orders write straight into our POS and the kitchen will actually make your food. Hang up before confirming, or come to Spring, TX and eat it.</em></p>
+    </div>
+
+    <div class="demo-step">
+      <h2><span class="n">2</span> See what it built for discovery</h2>
+      <p><a href="https://wokandkarahitexas.com" target="_blank" rel="noopener">wokandkarahitexas.com</a> — the restaurant's site, rebuilt in code so AI assistants can actually read it: full Restaurant/Menu/FAQ structured data, every dish statically rendered with its real POS ID, and <a href="https://wokandkarahitexas.com/llms.txt" target="_blank" rel="noopener">llms.txt</a>. The old site returned HTTP 403 to every AI crawler. A weekly engine now proposes site improvements from live data and ships whatever the owner approves by email.</p>
+    </div>
+
+    <div class="demo-step">
+      <h2><span class="n">3</span> Walk through the pilot restaurant</h2>
+      <p><a href="case-study.html">The full walkthrough</a> — the week the restaurant used to have, and what each fix was made of: an existing tool set up right, software we built, or a $2 card on a table that doubled our reviews (~400 → 872 at 4.6★ in a year). With the honest scoreboard of what's proven vs. still being measured.</p>
+    </div>
+
+    <p class="demo-note"><strong>Also running in production</strong> (shown live on a screen-share, happily): POS analytics on ~1,500 orders — menu engineering, channel economics, the +63%-ticket dual-cuisine discovery — and the autonomous growth engine. Built and operated by one founder. First two pilot restaurants signed in Spring, TX.</p>
+    <p class="demo-note">Abbas Zoeb · azoeb27@gmail.com · <a href="https://azrestaurantpartners.com">azrestaurantpartners.com</a></p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
