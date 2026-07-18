@@ -1,11 +1,17 @@
 # AZ Restaurant Partners
 
-> Restaurant-technology consulting for independent, family-run restaurants in Greater Houston, TX.
-> One integrated platform across every layer — get found, win the order (including an AI phone agent),
-> keep the guest, and see your numbers — built and run by Abbas Zoeb, an ex-Google software engineer
-> who also owns an award-winning restaurant (Wok & Karahi, Spring, TX). The operator keeps their
+> The embedded technology-and-strategy team for independent, family-run restaurants in Greater
+> Houston, TX. AZ studies how each restaurant actually operates, then engineers one connected system
+> around it — the doctrine is "use what works, connect what you have, build what's missing": the best
+> existing tools deeply set up and customized where they fit, connected to what the restaurant already
+> has, and custom software built only where nothing off the shelf does the job (like the live AI phone
+> agent that writes orders straight into the POS). Sometimes the highest-ROI fix isn't software at
+> all — a review card on the table, a smarter offer at the right moment — and AZ engineers those too.
+> Every layer: get found (Google + AI answers), win the order, keep the guest, see your numbers.
+> Built and run by Abbas Zoeb, an ex-Google software engineer who also owns an award-winning
+> restaurant (Wok & Karahi, Spring, TX), where every play is proven first. The operator keeps their
 > customers and data, authorizes every change, pays no vendor commissions, and only pays once they're
-> saving. Plans from $99/mo.
+> saving. Foundation plans from $99/mo; custom work scoped separately.
 
 ## What AZ does (offerings)
 - Commission Rescue — move orders off the ~30% third-party delivery apps to first-party ordering.
@@ -16,6 +22,7 @@
 - Catering & corporate lunches — a real off-premise channel at higher margins.
 - End the tablet chaos — delivery apps consolidated into one POS/kitchen.
 - See your numbers — one clear dashboard of sales, labor, and food cost across locations.
+- Custom engineering — when no existing tool fits, AZ builds the software (or the non-software play) the restaurant uniquely needs.
 
 ## Key pages
 - [Home — the platform + proof](https://azrestaurantpartners.com/)
