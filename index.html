@@ -34,6 +34,10 @@
     .mode{ border:1px solid rgba(27,26,23,.14); border-radius:16px; background:#fff; padding:22px 24px; }
     .mode h3{ font-family:"Fraunces",Georgia,serif; font-size:1.08rem; margin:10px 0 8px; }
     .mode p{ font-size:.93rem; line-height:1.58; color:#3d3a33; }
+    .mode__list{ list-style:none; margin:0; padding:0; }
+    .mode__list li{ font-size:.92rem; line-height:1.5; color:#3d3a33; padding:6px 0 6px 18px; position:relative; border-top:1px solid rgba(27,26,23,.07); }
+    .mode__list li:first-child{ border-top:none; }
+    .mode__list li::before{ content:"›"; position:absolute; left:2px; color:#c0492b; font-weight:700; }
     .mode__tag{ display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 12px; border-radius:999px; }
     .mode__tag--wired{ background:rgba(27,26,23,.08); color:#1b1a17; }
     .mode__tag--built{ background:#1b1a17; color:#f1e9da; }
@@ -152,18 +156,30 @@
         <div class="modes reveal">
           <div class="mode">
             <span class="mode__tag mode__tag--wired">Set up right</span>
-            <h3>The right existing tool, wired in properly</h3>
-            <p>There are 100+ restaurant tools out there — we know them all, so you never pay us to rebuild what you can just buy. We pick the few that fit your place, set them up deeply, and connect them to your POS. <em>At our place: three delivery tablets became one POS — no more re-typing orders in the rush.</em></p>
+            <h3>The right existing tool, wired in</h3>
+            <ul class="mode__list">
+              <li>100+ tools out there — we know them all</li>
+              <li>We pick the few that fit, and wire them into your POS</li>
+              <li><em>Ours: 3 delivery tablets → 1 POS. No re-typing.</em></li>
+            </ul>
           </div>
           <div class="mode">
             <span class="mode__tag mode__tag--built">Built for you</span>
-            <h3>Custom software, when nothing out there fits</h3>
-            <p>When no tool does what your restaurant needs, our engineers build it — that's the part almost nobody else offers. <em>At our place: an AI phone agent that answers every call in our guests' languages and writes orders straight into the POS, because nothing we could buy did it right.</em></p>
+            <h3>Custom-built, when nothing fits</h3>
+            <ul class="mode__list">
+              <li>No tool does it? Our engineers build it</li>
+              <li>The part almost nobody else offers</li>
+              <li><em>Ours: an AI phone agent → orders straight into the POS</em></li>
+            </ul>
           </div>
           <div class="mode">
             <span class="mode__tag mode__tag--behavioral">No software at all</span>
-            <h3>Sometimes the smartest fix is a $2 card</h3>
-            <p>Some money isn't lost to technology — it's lost to timing and words. <em>At our place: a review card brought only to visibly happy guests doubled our Google reviews to 872 at 4.6★.</em> The best play wins, whatever it's made of.</p>
+            <h3>Sometimes the fix is a $2 card</h3>
+            <ul class="mode__list">
+              <li>Some money is lost to timing and words, not tech</li>
+              <li>The best play wins — whatever it's made of</li>
+              <li><em>Ours: one review card → 400 → 872 reviews at 4.6★</em></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -178,16 +194,13 @@
           <p class="lead" style="margin-top:14px">First <strong>we study how your place actually works</strong> — the floor, the numbers, the goals. Then your technology starts behaving like one system: five layers, each proven on our own restaurant first. Nothing runs without your say-so.</p>
         </div>
         <div class="stack reveal">
-          <div class="layer"><span class="layer__n">01</span><div class="layer__body"><h3>The spine — your data &amp; POS</h3><p>One source of truth. Your delivery apps flow straight into your POS and the kitchen — instead of three tablets beeping while orders get re-keyed by hand.</p></div></div>
-          <div class="layer"><span class="layer__n">02</span><div class="layer__body"><h3>Get found</h3><p>A website AI assistants can actually read, a strong Google &amp; Maps presence, and more 5-star reviews — so you're the place people get pointed to.</p></div></div>
-          <div class="layer"><span class="layer__n">03</span><div class="layer__body"><h3>Win the order</h3><p>An AI voice agent that answers every call, your own online ordering that keeps you off the 30% apps, and a real catering channel.</p></div></div>
-          <div class="layer"><span class="layer__n">04</span><div class="layer__body"><h3>Keep the guest</h3><p>Your own guest list, loyalty and win-back, and a system that remembers your regulars — so the customer is yours, not the app's.</p></div></div>
-          <div class="layer"><span class="layer__n">05</span><div class="layer__body"><h3>The brain</h3><p>See your real numbers in plain language, know exactly what sells and when — and a menu that optimizes its own pricing and deals, only with your approval.</p></div></div>
+          <div class="layer"><span class="layer__n">01</span><div class="layer__body"><h3>The spine — your POS &amp; data</h3><p>Everything flows into one POS — delivery apps, phone orders, all of it. One source of truth the whole system learns from.</p></div></div>
+          <div class="layer"><span class="layer__n">02</span><div class="layer__body"><h3>Get found</h3><p>A site ChatGPT and Google can actually read — you're in the answer when people ask where to eat.</p></div></div>
+          <div class="layer"><span class="layer__n">03</span><div class="layer__body"><h3>Win the order</h3><p>The AI agent takes every call into the POS · your own ordering off the 30% apps · a real catering channel.</p></div></div>
+          <div class="layer"><span class="layer__n">04</span><div class="layer__body"><h3>Keep the guest</h3><p>A guest memory <em>you</em> own — "the usual?", loyalty, win-back. The customer is yours, not the app's.</p></div></div>
+          <div class="layer"><span class="layer__n">05</span><div class="layer__body"><h3>The brain that keeps improving</h3><p>Your real numbers, in plain language — plus a growth loop that proposes improvements, you approve by email, and it ships them itself.</p></div></div>
         </div>
-        <div class="pillars reveal">
-          <div class="pillar"><h4>On your terms</h4><p>You own your customers and your data. Every change needs <strong>your</strong> authorization first. And we take <strong>no vendor commissions, ever</strong> — the only thing we recommend is what's right for you.</p></div>
-          <div class="pillar"><h4>One mind, every layer</h4><p>It holds together because <strong>one operator-engineer</strong> — who's worked the rush and shipped the software — sets the standard and leads every engagement, with a <strong>team behind him</strong> building and running it. Singular expertise <em>and</em> real horsepower.</p></div>
-        </div>
+        <p class="lead reveal" style="text-align:center;margin:24px auto 0;max-width:680px;font-size:.98rem"><strong>On your terms, always:</strong> you own your customers and your data · every change needs your yes · zero vendor commissions, ever.</p>
       </div>
     </section>
 

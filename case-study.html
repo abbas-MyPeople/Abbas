@@ -87,6 +87,25 @@
     @media (max-width:820px){ .depth{ grid-template-columns:1fr; } }
     .depth__item{ border:1px solid rgba(27,26,23,.14); border-radius:14px; padding:18px; background:#fbf7ee; font-size:.92rem; line-height:1.5; color:#3d3a33; }
     .depth__item strong{ display:block; color:#1b1a17; margin-bottom:6px; }
+    .cycle{ display:flex; flex-direction:column; gap:8px; }
+    .cyc{ border:1px solid rgba(27,26,23,.14); border-left:4px solid rgba(27,26,23,.14); border-radius:10px; background:#fff; padding:10px 14px; transition:all .35s; opacity:.55; }
+    .cyc.on{ opacity:1; border-left-color:#c0492b; background:#fbf7ee; transform:translateX(4px); }
+    .cyc strong{ font-size:.72rem; letter-spacing:.12em; }
+    .cyc span{ display:block; font-size:.82rem; color:#6f685c; line-height:1.4; margin-top:2px; }
+    .gcard,.catcalc{ background:#fff; border:1px solid rgba(27,26,23,.16); border-radius:16px; padding:18px; max-width:360px; margin:0 auto; }
+    .gcard__row,.catcalc__row{ display:flex; justify-content:space-between; gap:10px; padding:9px 4px; border-top:1px solid rgba(27,26,23,.08); font-size:.85rem; opacity:0; transform:translateY(6px); transition:opacity .4s, transform .4s; }
+    .gcard__row--head{ border-top:none; opacity:1; transform:none; font-size:.8rem; color:#6f685c; }
+    .gcard__row span,.catcalc__row span{ color:#6f685c; }
+    .gcard__row.show,.catcalc__row.show{ opacity:1; transform:none; }
+    .gcard__row--ok,.catcalc__row--ok{ background:#eaf5ee; border-radius:8px; border-top:none; color:#1e5c38; font-size:.8rem; }
+    .catcalc__q{ font-size:.9rem; padding-bottom:8px; }
+    .phone{ width:min(320px,88vw); margin:0 auto; border:2px solid #1b1a17; border-radius:26px; background:#f4eee2; padding:16px 12px; min-height:340px; }
+    .phone__top{ text-align:center; font-size:.7rem; color:#6f685c; margin-bottom:10px; }
+    .phone__feed{ display:flex; flex-direction:column; gap:10px; }
+    .notif{ background:#fff; border:1px solid rgba(27,26,23,.12); border-radius:12px; padding:10px 12px; font-size:.78rem; line-height:1.4; opacity:0; transform:translateY(8px); transition:opacity .4s, transform .4s; }
+    .notif.show{ opacity:1; transform:none; }
+    .notif .app{ font-size:.64rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#97361e; display:block; margin-bottom:3px; }
+    .notif .approve{ display:inline-block; margin-top:6px; background:#1b1a17; color:#f1e9da; border-radius:999px; padding:3px 12px; font-size:.7rem; font-weight:600; }
     .callout-live{ display:flex; gap:16px; align-items:center; flex-wrap:wrap; background:#1b1a17; color:#f1e9da; border-radius:16px; padding:22px 24px; margin-top:22px; }
     .callout-live p{ color:#d9d0c0; margin:0; font-size:.95rem; line-height:1.5; flex:1; min-width:240px; }
     .callout-live p strong{ color:#fff; }
@@ -289,6 +308,79 @@
             </div>
           </div>
         </div>
+
+        <div class="fix reveal">
+          <div class="fix__grid">
+            <div>
+              <span class="modepill modepill--built">Built · the site that improves itself</span>
+              <h3>8. A website that runs its own growth loop.</h3>
+              <p>Most restaurant sites are built once and rot. Ours watches its own data — what people search, what AI assistants rank us for, what the POS says actually sells — and proposes its own improvements: new local pages, article drafts, sharper calls-to-action aimed at the goals that matter (calls, catering forms, direct orders). We approve by replying to an email; it ships itself, revertible; live A/B tests decide what stays.</p>
+              <p><strong>Running on a schedule today, for ~$10–35/month all-in.</strong></p>
+            </div>
+            <div class="cycle" aria-hidden="true">
+              <div class="cyc on"><strong>MEASURE</strong><span>searches · AI rankings · POS sales</span></div>
+              <div class="cyc"><strong>DECIDE</strong><span>what would move calls, catering &amp; direct orders most</span></div>
+              <div class="cyc"><strong>PROPOSE</strong><span>new pages, articles, better CTAs — by email</span></div>
+              <div class="cyc"><strong>APPROVE</strong><span>we reply APPROVE — nothing ships without a yes</span></div>
+              <div class="cyc"><strong>SHIP</strong><span>deployed automatically, revertible</span></div>
+              <div class="cyc"><strong>VERIFY</strong><span>real A/B tests — winners stay, losers roll back</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fix reveal">
+          <div class="fix__grid fix__grid--flip">
+            <div>
+              <div class="gcard" id="gcard">
+                <div class="gcard__row gcard__row--head"><strong>Incoming call · (832) ···-··41</strong></div>
+                <div class="gcard__row" data-i="1"><span>Name</span><strong>Priya S. — returning caller</strong></div>
+                <div class="gcard__row" data-i="2"><span>The usual</span><strong>Butter chicken · extra naan</strong></div>
+                <div class="gcard__row" data-i="3"><span>Prefers</span><strong>Mild · pickup · last visit 12 days ago</strong></div>
+                <div class="gcard__row gcard__row--ok" data-i="4"><strong>“Good to hear from you again, Priya! The usual?” ✓</strong></div>
+              </div>
+            </div>
+            <div>
+              <span class="modepill modepill--built">Built · a guest memory we own</span>
+              <h3>9. The restaurant remembers its regulars now.</h3>
+              <p>The apps kept our customers' names and habits for themselves — only 32 identifiable repeat customers in 1,501 orders. Now the phone recognizes a returning caller and offers "the usual," and a receipt-scan spin-the-wheel turns an app customer into a known, direct one on the spot. Loyalty in the first ten seconds of the second call.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fix reveal">
+          <div class="fix__grid">
+            <div>
+              <span class="modepill modepill--built">Built · found by the data, not a hunch</span>
+              <h3>10. The data found a catering business hiding inside the restaurant.</h3>
+              <p>43 orders over $150 in 90 days — feast demand nothing was tracking, at margins far above dine-in. So we built it a door: the phone agent sizes catering from a headcount, a portion calculator turns people into exact trays, occasion pages catch the searches, and real inquiries route to a human.</p>
+            </div>
+            <div>
+              <div class="catcalc" id="catcalc">
+                <div class="catcalc__q">“We're feeding about <strong>40 people</strong> — what do we need?”</div>
+                <div class="catcalc__row" data-i="1"><span>Chicken Chow Mein</span><strong>2 full trays</strong></div>
+                <div class="catcalc__row" data-i="2"><span>Chicken Karahi</span><strong>1 full + 1 half tray</strong></div>
+                <div class="catcalc__row" data-i="3"><span>Naan</span><strong>50 pieces</strong></div>
+                <div class="catcalc__row catcalc__row--ok" data-i="4"><strong>Quote routed to a human ✓</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fix reveal">
+          <div class="fix__grid fix__grid--flip">
+            <div>
+              <div class="phone">
+                <div class="phone__top">the owner's morning — the real reports the system sends</div>
+                <div class="phone__feed" id="phoneFeed"></div>
+              </div>
+            </div>
+            <div>
+              <span class="modepill modepill--built">Built · command &amp; control from the inbox</span>
+              <h3>11. The whole system reports to the owner — and asks permission.</h3>
+              <p>A daily sales report before the kitchen opens. Website improvements proposed by email and shipped on an APPROVE reply. An alert the moment something fails — heard from the system, never from an angry customer. A weekly digest of everything the phone captured. <strong>Nothing that matters happens without a yes</strong> — which is why the restaurant runs mostly without us standing in it.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -382,5 +474,52 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+  (function(){
+    var CYC = document.querySelectorAll('.cyc');
+    if(CYC.length){
+      var ci = 0;
+      setInterval(function(){
+        CYC.forEach(function(c){ c.classList.remove('on'); });
+        CYC[ci].classList.add('on');
+        ci = (ci + 1) % CYC.length;
+      }, 1900);
+    }
+    function stagedReveal(rootId){
+      var root = document.getElementById(rootId);
+      if(!root) return;
+      var seen=false;
+      new IntersectionObserver(function(es){ es.forEach(function(e){
+        if(!e.isIntersecting || seen) return; seen=true;
+        root.querySelectorAll('[data-i]').forEach(function(r){
+          setTimeout(function(){ r.classList.add('show'); }, 400 + parseInt(r.dataset.i,10)*900);
+        });
+      }); }, {threshold:.4}).observe(root);
+    }
+    stagedReveal('gcard');
+    stagedReveal('catcalc');
+    var NOTIFS = [
+      ['email · 7:00 am', "<strong>Daily sales report — yesterday</strong><br/>Orders, revenue vs last week, top dishes, channel mix — straight from the POS."],
+      ['email · monday', "<strong>This week I propose:</strong><br/>1) new page: “halal catering near The Woodlands”<br/>2) sharper catering call-to-action<br/><span class='approve'>reply: APPROVE → it ships itself</span>"],
+      ['text message', "⚠ <strong>Heads up:</strong> an online order failed → auto-retried ✓."],
+      ['email · weekly', "<strong>What the phone captured</strong> — 2 catering leads, 3 complaints handled &amp; logged, 14 regulars greeted by name."]
+    ];
+    var pFeed = document.getElementById('phoneFeed');
+    if(pFeed){
+      var phSeen=false;
+      new IntersectionObserver(function(es){ es.forEach(function(e){
+        if(!e.isIntersecting || phSeen) return; phSeen=true;
+        NOTIFS.forEach(function(n,i){
+          setTimeout(function(){
+            var d=document.createElement('div'); d.className='notif';
+            d.innerHTML = '<span class="app">'+n[0]+'</span>'+n[1];
+            pFeed.appendChild(d);
+            requestAnimationFrame(function(){ requestAnimationFrame(function(){ d.classList.add('show'); }); });
+          }, 400 + i*1400);
+        });
+      }); }, {threshold:.35}).observe(pFeed);
+    }
+  })();
+  </script>
 </body>
 </html>
