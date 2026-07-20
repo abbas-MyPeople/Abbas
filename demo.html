@@ -76,8 +76,13 @@
     .cardmock h4{ font-family:"Fraunces",Georgia,serif; font-size:1rem; margin-bottom:6px; }
     .cardmock p{ font-size:.85rem; line-height:1.45; color:#3d3a33; margin-bottom:0; }
     .cardmock .qr{ width:52px; height:52px; border:2px solid #1b1a17; border-radius:8px; display:grid; place-items:center; font-size:.58rem; font-weight:700; margin:10px 0 4px; }
-    .counter{ font-family:"Fraunces",Georgia,serif; font-size:2.6rem; color:#97361e; line-height:1; }
     .mixbar{ margin-top:14px; }
+    /* growth-engine cycle */
+    .cycle{ display:flex; flex-direction:column; gap:8px; }
+    .cyc{ border:1px solid rgba(27,26,23,.14); border-left:4px solid rgba(27,26,23,.14); border-radius:10px; background:#fff; padding:10px 14px; transition:all .35s; opacity:.55; }
+    .cyc.on{ opacity:1; border-left-color:#c0492b; background:#fbf7ee; transform:translateX(4px); }
+    .cyc strong{ font-size:.72rem; letter-spacing:.12em; }
+    .cyc span{ display:block; font-size:.82rem; color:#6f685c; line-height:1.4; margin-top:2px; }
     .mixbar .brow{ grid-template-columns:130px 1fr 58px; }
 
     /* owner cockpit */
@@ -147,7 +152,6 @@
     <p class="lead" style="margin-top:12px">We embed in an independent restaurant, find where money and time are leaking, and engineer each one away — <strong>an existing tool chosen and wired</strong> where one exists, <strong>built ourselves</strong> where nothing off the shelf is good enough, <strong>behavioral</strong> where the answer isn't software at all. This page walks the engagement at our own restaurant — <strong>Wok &amp; Karahi</strong>, Spring TX (4.6★, 872 Google reviews; sales doubled in 18 months) — pain by pain. Everything is production. Every number is real, from our POS (absolute $ redacted, nothing else).</p>
     <div class="hero-strip">
       <a href="tel:+19036024012" class="btn btn--primary">Call the live agent — (903) 602-4012</a>
-      <span class="livepill" id="livepill" hidden><span class="dot"></span><span id="livetext">agent live</span></span>
       <span style="font-size:.85rem;color:#6f685c">2 of 5 founding pilots signed · <a href="case-study.html">full walkthrough →</a></span>
     </div>
 
@@ -169,28 +173,9 @@
       </div>
     </section>
 
-    <!-- CHAPTER 2: TABLETS -->
+    <!-- CHAPTER 2: AI VISIBILITY -->
     <section class="chap">
-      <p class="chap__pain">Pain 2 · three delivery tablets, orders re-typed by hand, lost in the rush</p>
-      <h2>Three tablets became one POS.</h2>
-      <span class="modepill modepill--wired">Chosen &amp; wired — the right existing tool, set up right</span>
-      <div class="chap__grid">
-        <div class="tabanim" id="tabanim" aria-hidden="true">
-          <div class="tab">DoorDash<span class="badge">2</span></div>
-          <div class="tab">Uber Eats<span class="badge">1</span></div>
-          <div class="tab">Grubhub<span class="badge">1</span></div>
-          <div class="pos"><strong>Clover POS</strong>all channels → one screen → kitchen printer <span class="ok">✓</span></div>
-        </div>
-        <div>
-          <p>This didn't need custom software — it needed someone who knew which of the 100+ integration tools actually works and how to wire it into Clover properly. That's the FDE judgment call: <strong>we don't rebuild what you can buy</strong>; we know the whole toolbox, pick right, and do the wiring every vendor skips.</p>
-          <p class="result"><strong>Result:</strong> live 1+ year. The manual re-typing step — and the lost, late, wrong orders that came with it — is gone.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CHAPTER 3: AI VISIBILITY -->
-    <section class="chap">
-      <p class="chap__pain">Pain 3 · invisible to the new front door — the site returned 403 to every AI crawler</p>
+      <p class="chap__pain">Pain 2 · invisible to the new front door — the site returned 403 to every AI crawler</p>
       <h2>Now when someone asks an AI where to eat, we're in the answer.</h2>
       <span class="modepill modepill--built">Built — an AEO-native site, rendered from the POS</span>
       <div class="chap__grid">
@@ -207,6 +192,28 @@
           <p class="aitog__q">“best halal food near Spring, TX?” — asked to an AI assistant</p>
           <div class="aitog__a" id="aitogA"></div>
           <p class="aitog__cap">Illustration of the mechanism — the before-state is what a 403-blocked site gets. Verify the after-state live in any assistant.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 3: THE GROWTH LOOP -->
+    <section class="chap">
+      <p class="chap__pain">Pain 3 · marketing was set-and-forget — a static site that never learned anything</p>
+      <h2>The website runs its own growth loop: measure, decide, test, ship, verify.</h2>
+      <span class="modepill modepill--built">Built — a closed loop, not a marketing retainer</span>
+      <div class="chap__grid">
+        <div>
+          <p>Most restaurant sites are built once and rot. Ours watches its own data — GA4, search queries, what AI assistants rank us for, and what the POS says actually sells — and decides what's most likely to move the goals that matter: <strong>direction requests, calls, catering-form submissions, direct online orders</strong>. Then it proposes the work itself: new local pages and guides, article drafts, FAQ answers tuned for AI search, sharper CTAs.</p>
+          <p>The owner approves by replying to an email. Approved changes ship automatically, revertible. Live experiments run as real A/B tests — two-proportion z-tests with minimum-sample gates — so winners stay because they won, not because someone liked them.</p>
+          <p class="result"><strong>Result:</strong> a website that compounds instead of rots — running on a schedule today, for ~$10–35/month all-in.</p>
+        </div>
+        <div class="cycle" aria-hidden="true">
+          <div class="cyc on"><strong>MEASURE</strong><span>GA4 · search terms · AI-answer rankings · POS sales</span></div>
+          <div class="cyc"><strong>DECIDE</strong><span>ranks ideas by expected impact on calls, catering forms, direct orders</span></div>
+          <div class="cyc"><strong>PROPOSE</strong><span>“new page: halal catering near The Woodlands” · article draft · CTA change</span></div>
+          <div class="cyc"><strong>APPROVE</strong><span>the owner replies APPROVE from his inbox — nothing ships without him</span></div>
+          <div class="cyc"><strong>SHIP</strong><span>auto-committed, deployed, revertible</span></div>
+          <div class="cyc"><strong>VERIFY</strong><span>z-tested A/B — winners stay, losers roll back, learnings feed the next cycle</span></div>
         </div>
       </div>
     </section>
@@ -236,28 +243,9 @@
       </div>
     </section>
 
-    <!-- CHAPTER 5: REVIEWS -->
+    <!-- CHAPTER 5: ANALYTICS -->
     <section class="chap">
-      <p class="chap__pain">Pain 5 · reviews stuck at ~400 while every star is worth 5–9% of revenue</p>
-      <h2>Reviews doubled in a year. The fix cost $2.</h2>
-      <span class="modepill modepill--behavioral">Behavioral — a card, a script, and the right moment</span>
-      <div class="chap__grid">
-        <div>
-          <p>Two cards, one rule. A <em>"scan me"</em> card comes to the table only when a guest is <strong>visibly happy</strong> — at the exact moment they'd say yes. An unhappy guest gets the <strong>owner's personal card</strong> instead, so the complaint comes to us before it becomes a 1-star review.</p>
-          <p class="result"><strong>Result (verifiable on Google right now):</strong> ~400 → 872 reviews at 4.6★, new ones running five-star.</p>
-        </div>
-        <div style="text-align:center">
-          <div class="counter"><span id="revCount">400</span> ★</div>
-          <p style="font-size:.85rem;color:#6f685c;margin-top:6px">Google reviews, ~12 months</p>
-          <div class="cardmock" style="margin:18px auto 0"><h4>Loved it? Scan me ⭐</h4><div class="qr">QR</div><p>Brought over only at the peak of a good visit.</p></div>
-          <div class="cardmock cardmock--alt" style="margin:12px auto 0"><h4>Something wrong? Call me — Abbas</h4><p>The owner's card — handed over before they go home and post about it.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CHAPTER 6: ANALYTICS -->
-    <section class="chap">
-      <p class="chap__pain">Pain 6 · flying blind — no idea what actually made money</p>
+      <p class="chap__pain">Pain 5 · flying blind — no idea what actually made money</p>
       <h2>Now the restaurant's own data decides what we build next.</h2>
       <span class="modepill modepill--built">Built — measurement first, everything else follows</span>
       <p style="max-width:760px">Before deploying anything at any restaurant, we measure where the next dollar is. This is that engine on our own POS — 90 days, 1,501 paid orders, $58.18 average ticket. The owner can also just ask it questions in plain English.</p>
@@ -291,9 +279,9 @@
       <p class="result" style="margin-top:16px;max-width:760px"><strong>Result:</strong> the agent's upsells, the site's content, the menu's steering and the commission fight are all decisions this data made — judgment by measured dollars, not vibes.</p>
     </section>
 
-    <!-- CHAPTER 7: THE OWNER -->
+    <!-- CHAPTER 6: THE OWNER -->
     <section class="chap">
-      <p class="chap__pain">Pain 7 · the owner was the bottleneck — everything needed him, nothing informed him</p>
+      <p class="chap__pain">Pain 6 · the owner was the bottleneck — everything needed him, nothing informed him</p>
       <h2>The owner runs all of it from his inbox.</h2>
       <span class="modepill modepill--built">Built — command &amp; control for someone who runs a kitchen, not a laptop</span>
       <div class="chap__grid">
@@ -308,6 +296,25 @@
             <div class="phone__feed" id="phoneFeed"></div>
           </div>
           <button class="phone__replay" id="phoneReplay" type="button">↻ replay the morning</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 7: TABLETS -->
+    <section class="chap">
+      <p class="chap__pain">Pain 7 · three delivery tablets, orders re-typed by hand, lost in the rush</p>
+      <h2>And sometimes the fix is boring: three tablets became one POS.</h2>
+      <span class="modepill modepill--wired">Chosen &amp; wired — the right existing tool, set up right</span>
+      <div class="chap__grid">
+        <div class="tabanim" id="tabanim" aria-hidden="true">
+          <div class="tab">DoorDash<span class="badge">2</span></div>
+          <div class="tab">Uber Eats<span class="badge">1</span></div>
+          <div class="tab">Grubhub<span class="badge">1</span></div>
+          <div class="pos"><strong>Clover POS</strong>all channels → one screen → kitchen printer <span class="ok">✓</span></div>
+        </div>
+        <div>
+          <p>Not every win needs to be clever. This one needed the FDE judgment call: knowing which of the 100+ integration tools actually works, and wiring it into Clover properly — <strong>we don't rebuild what you can buy</strong>, and we do the wiring every vendor skips.</p>
+          <p class="result"><strong>Result:</strong> live 1+ year — re-typing gone, and the lost, late, wrong orders with it. Simple, unglamorous, high-yield. The doctrine doesn't care about wow; it cares about the result.</p>
         </div>
       </div>
     </section>
@@ -330,6 +337,7 @@
       <h2>One founder, AI-leveraged — and the architecture is reusable.</h2>
       <p style="max-width:760px">~21,000 lines of production Python, 8 scheduled pipelines, 7 deployed apps — built and operated by one person using AI agents as the engineering team. The next restaurant is <strong>data + config</strong>. Also in this deployment:</p>
       <div class="also">
+        <div class="also__item"><span class="chip chip--run">Behavioral · running 1+ yr</span><strong>Review engine — ~400 → 872 Google reviews at 4.6★ in a year</strong>A "scan me" card only when a guest is visibly happy; unhappy guests get the owner's personal card before Google does. $2 of cardstock, our highest-ROI play. <em>(Verifiable on Google now.)</em></div>
         <div class="also__item"><span class="chip chip--built">Built · demoable</span><strong>Guest platform: rewards, CDP, receipt-scan spin-the-wheel</strong>A DoorDash customer scans their receipt, spins, and becomes a known direct customer on the spot — SMS-OTP identity, abuse prevention, staff/admin flows.</div>
         <div class="also__item"><span class="chip chip--run">Deployed</span><strong>Ops micro-apps</strong>Catering portion calculator (headcount → exact trays — grounds the phone agent too), employee handbook Q&amp;A, conversational POS assistant, an MCP server exposing the restaurant to AI tools.</div>
         <div class="also__item"><span class="chip chip--run">Running daily</span><strong>Automation fleet</strong>Eight scheduled pipelines — reports, newsletter with retry, AEO guard, reply-reader — all fail-closed: allowlisted senders, dry-run defaults, kill switches.</div>
@@ -344,14 +352,6 @@
   <script src="script.js"></script>
   <script>
   (function(){
-    /* live status pill */
-    fetch('data/agent-status.json').then(function(r){return r.json()}).then(function(s){
-      if(!s || !s.ok) return;
-      var mins = Math.max(0, Math.round((Date.now() - new Date(s.checked_at).getTime())/60000));
-      document.getElementById('livetext').textContent = 'production server: ok · ' + s.menu_items + ' menu items · checked ' + (mins<1?'just now':mins+'m ago');
-      document.getElementById('livepill').hidden = false;
-    }).catch(function(){});
-
     /* call simulator */
     var FLOW = [
       ['caller', "Hi, can I get a Crispy Beef and a chicken chow mein?"],
@@ -413,14 +413,16 @@
       });
     });
 
-    /* review counter */
-    var revEl = document.getElementById('revCount'), revDone=false;
-    new IntersectionObserver(function(es,obs){ es.forEach(function(e){
-      if(!e.isIntersecting || revDone) return; revDone=true;
-      var start=null;
-      function stepFn(ts){ if(!start) start=ts; var p=Math.min(1,(ts-start)/1800); revEl.textContent = Math.round(400 + (872-400)*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(stepFn); }
-      requestAnimationFrame(stepFn); obs.disconnect();
-    }); }, {threshold:.5}).observe(revEl);
+    /* growth-engine cycle */
+    var CYC = document.querySelectorAll('.cyc');
+    if(CYC.length){
+      var ci = 0;
+      setInterval(function(){
+        CYC.forEach(function(c){ c.classList.remove('on'); });
+        CYC[ci].classList.add('on');
+        ci = (ci + 1) % CYC.length;
+      }, 1900);
+    }
 
     /* owner cockpit */
     var NOTIFS = [
