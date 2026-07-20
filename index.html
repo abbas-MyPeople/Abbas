@@ -44,6 +44,21 @@
     .mode__tag--behavioral{ background:rgba(192,73,43,.12); color:#97361e; }
     .pcard .mode__tag{ margin-bottom:8px; }
     .possible__cta .btn--primary{ color:#fff; border-bottom:none; }
+    /* plain-words pain grid + trust chips */
+    .painrows{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:6px; }
+    @media (max-width:640px){ .painrows{ grid-template-columns:1fr; } }
+    .painrow{ border:1px solid rgba(27,26,23,.14); border-left:4px solid #c0492b; border-radius:12px; background:#fff; padding:14px 16px; }
+    .painrow strong{ display:block; font-family:"Fraunces",Georgia,serif; font-size:1.02rem; margin-bottom:3px; }
+    .painrow span{ font-size:.88rem; color:#6f685c; line-height:1.45; }
+    .trustchips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+    .trustchips span{ border:1px solid rgba(27,26,23,.18); border-radius:999px; padding:7px 14px; font-size:.82rem; background:#fbf7ee; }
+    /* mobile polish */
+    @media (max-width:640px){
+      .mode{ padding:18px; }
+      .ana{ font-size:.8rem; padding:7px 12px; }
+      .sim__feed{ min-height:240px; }
+      .phone{ min-height:320px; }
+    }
     /* anatomy grid */
     .anatomy{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:22px; }
     .ana{ display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(27,26,23,.18); border-radius:999px; padding:8px 16px; font-size:.86rem; background:#fff; }
@@ -140,9 +155,19 @@
     <section class="band">
       <div class="wrap band__inner reveal">
         <h2 class="h2">In plain words.</h2>
-        <p class="lead clarity__p"><strong>The problem:</strong> the big chains have whole departments whose only job is cutting costs, winning back customers, and planning the next move. You've got a kitchen to run and nothing left at the end of the day. So it piles up quietly: the apps take <strong>15–30% of every order</strong> and own the customer you earned, <strong>calls go unanswered</strong> in the rush, <strong>a dozen tools and logins don't talk to each other</strong>, you <strong>can't see your real numbers</strong>, you're getting harder to find online — and there's never a spare hour to step back and fix any of it. It isn't that you're doing it wrong. <strong>You're one person against a system built for giants.</strong></p>
+        <div class="painrows">
+          <div class="painrow"><strong>The apps take 15–30%</strong><span>of every order — and keep your customer's name and habits for themselves.</span></div>
+          <div class="painrow"><strong>Calls die in the rush</strong><span>and most callers never call back — they just order somewhere else.</span></div>
+          <div class="painrow"><strong>A dozen tools that don't talk</strong><span>eating hours every week that you never get back.</span></div>
+          <div class="painrow"><strong>Invisible where people now look</strong><span>ChatGPT and Google answer for your restaurant — often without you in it.</span></div>
+        </div>
+        <p class="lead clarity__p" style="margin-top:18px">It isn't that you're doing it wrong. <strong>You're one person against a system built for giants</strong> — the chains have whole departments for this, and you've got a kitchen to run.</p>
         <p class="lead clarity__p"><strong>The deal:</strong> we come to you, show you the plan and the numbers, and do all the work. You only pay once you're saving — that's guaranteed. One free call to start.</p>
-        <p class="lead clarity__p"><strong>And to be clear:</strong> "partner" means we work like it's our place — not that we take a piece of yours. No equity, no lock-in, no vendor commissions; your restaurant, your customers, and your data stay 100% yours. And "saving" isn't our word against yours — it's measured straight from your POS, month over month. Plans from $99/mo — <a href="details.html#pricing">full pricing, nothing hidden</a>.</p>
+        <div class="trustchips">
+          <span>No equity — "partner" means we work like it's ours, not that we own a piece</span>
+          <span>Savings measured from your own POS, month over month</span>
+          <span>Plans from $99/mo — <a href="details.html#pricing">nothing hidden</a></span>
+        </div>
       </div>
     </section>
 
