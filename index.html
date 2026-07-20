@@ -39,6 +39,16 @@
     .mode__tag--built{ background:#1b1a17; color:#f1e9da; }
     .mode__tag--behavioral{ background:rgba(192,73,43,.12); color:#97361e; }
     .pcard .mode__tag{ margin-bottom:8px; }
+    .possible__cta .btn--primary{ color:#fff; border-bottom:none; }
+    /* anatomy grid */
+    .anatomy{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:22px; }
+    .ana{ display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(27,26,23,.18); border-radius:999px; padding:8px 16px; font-size:.86rem; background:#fff; }
+    .ana i{ width:9px; height:9px; border-radius:50%; flex:none; }
+    .ana--live i{ background:#c0492b; }
+    .ana--ready{ background:transparent; }
+    .ana--ready i{ background:transparent; border:2px solid #6f685c; }
+    .ana-legend{ display:flex; gap:22px; justify-content:center; margin-top:16px; font-size:.8rem; color:#6f685c; flex-wrap:wrap; }
+    .ana-legend span{ display:inline-flex; align-items:center; gap:7px; }
     /* call simulator */
     .sim{ background:#fff; border:1px solid rgba(27,26,23,.16); border-radius:16px; padding:18px; }
     .sim__head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:.76rem; color:#6f685c; }
@@ -93,7 +103,7 @@
         <div class="hero__copy">
           <p class="kicker reveal">Your restaurant's technology &amp; growth partner · independent, family-run restaurants · Spring &amp; Greater Houston, TX</p>
           <h1 class="hero__title reveal">The partner your restaurant never had — <em>the brains to plan it, the hands to do it.</em></h1>
-          <p class="hero__lead reveal">Not a vendor selling one more tool. Not a consultant selling advice. A partner: we know restaurants (our family runs one — 4.6★, 872 reviews), we know the technology (ex-Google engineering), and <strong>we do the work ourselves</strong>. We study how your place actually runs, find what's costing you money or holding you back — <strong>the phone, online ordering, getting found, your regulars, your real numbers</strong> — then plan it and deploy it: the right existing tools set up deeply, connected to what you have, custom-built where nothing out there fits, and no software at all when a smarter play wins. <strong>You only pay once you're keeping more.</strong></p>
+          <p class="hero__lead reveal">Not a vendor selling one more tool. Not a consultant selling advice. A partner: we know restaurants (our family runs one — 4.6★, 872 Google reviews), we know the technology (ex-Google engineering), and <strong>we do the work ourselves</strong> — study your place, plan it, deploy it, run it. <strong>You only pay once you're keeping more.</strong></p>
           <div class="hero__cta reveal">
             <a href="#contact" class="btn btn--primary">Book your free call</a>
             <a href="case-study.html" class="btn btn--text">Step inside our restaurant <span aria-hidden="true">→</span></a>
@@ -127,7 +137,6 @@
       <div class="wrap band__inner reveal">
         <h2 class="h2">In plain words.</h2>
         <p class="lead clarity__p"><strong>The problem:</strong> the big chains have whole departments whose only job is cutting costs, winning back customers, and planning the next move. You've got a kitchen to run and nothing left at the end of the day. So it piles up quietly: the apps take <strong>15–30% of every order</strong> and own the customer you earned, <strong>calls go unanswered</strong> in the rush, <strong>a dozen tools and logins don't talk to each other</strong>, you <strong>can't see your real numbers</strong>, you're getting harder to find online — and there's never a spare hour to step back and fix any of it. It isn't that you're doing it wrong. <strong>You're one person against a system built for giants.</strong></p>
-        <p class="lead clarity__p"><strong>What we do:</strong> we're your partner, not another vendor — a restaurant family that also carries the engineering brain big companies pay for. We start by learning how <em>your</em> restaurant actually runs, operationally and technically. Then we plan and do all the work ourselves: sometimes the right existing tool, deeply set up and connected; sometimes software <strong>we build just for you</strong>; sometimes something as simple as a card on the table and the right words from your server — that one doubled our own reviews. <strong>A to Z, one partner</strong> — we don't rip out what's working, and you keep your customers, your data, and the upside.</p>
         <p class="lead clarity__p"><strong>The deal:</strong> we come to you, show you the plan and the numbers, and do all the work. You only pay once you're saving — that's guaranteed. One free call to start.</p>
       </div>
     </section>
@@ -166,7 +175,7 @@
         <div class="section__head reveal">
           <p class="kicker">One connected system — not 20 tools that don't talk</p>
           <h2 class="h2">Every layer of your restaurant, run as one system.</h2>
-          <p class="lead" style="margin-top:14px">Every restaurant operates differently — so before we prescribe anything, <strong>we study how yours actually works</strong>: a walk through your operation, your numbers, your goals. Then we make your technology behave like one coherent system. That's what a real partner brings — <strong>the architecture brain to plan it and the hands to deploy and run it</strong> — led by one person who's both the engineer and the restaurant operator. These are the five layers where we've already solved it, on our own restaurant first. And nothing ever runs without your say-so.</p>
+          <p class="lead" style="margin-top:14px">First <strong>we study how your place actually works</strong> — the floor, the numbers, the goals. Then your technology starts behaving like one system: five layers, each proven on our own restaurant first. Nothing runs without your say-so.</p>
         </div>
         <div class="stack reveal">
           <div class="layer"><span class="layer__n">01</span><div class="layer__body"><h3>The spine — your data &amp; POS</h3><p>One source of truth. Your delivery apps flow straight into your POS and the kitchen — instead of three tablets beeping while orders get re-keyed by hand.</p></div></div>
@@ -182,18 +191,51 @@
       </div>
     </section>
 
+    <!-- ANATOMY: proof of understanding -->
+    <section class="section" id="anatomy">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="kicker">We know every corner of a restaurant</p>
+          <h2 class="h2">Your whole operation, mapped.</h2>
+          <p class="lead" style="margin-top:14px">A partner has to understand the <em>whole</em> business — not just the part their product touches. Here's the map, and where we stand on each piece today:</p>
+        </div>
+        <div class="anatomy reveal">
+          <span class="ana ana--live"><i></i>Phone &amp; orders</span>
+          <span class="ana ana--live"><i></i>Delivery apps &amp; commissions</span>
+          <span class="ana ana--live"><i></i>Getting found — Google &amp; AI</span>
+          <span class="ana ana--live"><i></i>Website &amp; online ordering</span>
+          <span class="ana ana--live"><i></i>Reviews &amp; reputation</span>
+          <span class="ana ana--live"><i></i>Your numbers &amp; menu engineering</span>
+          <span class="ana ana--live"><i></i>Catering &amp; events</span>
+          <span class="ana ana--live"><i></i>Reservations &amp; no-shows</span>
+          <span class="ana ana--live"><i></i>Regulars, loyalty &amp; win-back</span>
+          <span class="ana ana--live"><i></i>Email &amp; text marketing</span>
+          <span class="ana ana--live"><i></i>Staff tools &amp; training</span>
+          <span class="ana ana--ready"><i></i>Inventory &amp; food cost</span>
+          <span class="ana ana--ready"><i></i>Kitchen display &amp; back-of-house</span>
+          <span class="ana ana--ready"><i></i>Payment processing &amp; fee audits</span>
+          <span class="ana ana--ready"><i></i>Delivery-app chargeback recovery</span>
+          <span class="ana ana--ready"><i></i>Scheduling &amp; labor</span>
+        </div>
+        <div class="ana-legend reveal">
+          <span><i style="width:9px;height:9px;border-radius:50%;background:#c0492b;display:inline-block"></i>Running at our own restaurant today</span>
+          <span><i style="width:9px;height:9px;border-radius:50%;border:2px solid #6f685c;display:inline-block"></i>In the toolbox — deployed when it pays for your place</span>
+        </div>
+      </div>
+    </section>
+
     <!-- VOICE -->
     <section class="section voice" id="voice">
       <div class="wrap">
         <div class="voice__grid">
           <div class="reveal">
-            <p class="kicker">The edge most owners overlook</p>
+            <p class="kicker">Calls die in the rush — and most callers never call back</p>
             <h2 class="h2">Your best employee — who never has an off day.</h2>
-            <p class="lead" style="margin-top:16px">Everyone calls it "a bot that answers the phone." It's far more: the best front-of-house person you've ever had, captured as AI — and the way you get to decide how your restaurant is experienced on every single call.</p>
+            <p class="lead" style="margin-top:16px">Not "a bot that answers the phone" — the best front-of-house hire you never made, on every call.</p>
             <ul class="voice__points">
-              <li><strong>The best human, captured as AI.</strong> Never forgets a special, never misquotes a price, never mangles a dish name — and handles every caller, even an upset one, with the same real care. Grounded in your menu and years of operator know-how, not a generic chatbot.</li>
-              <li><strong>Your restaurant's identity, your way.</strong> You choose the voice — the language, the accent, the warmth. At our own place it greets desi guests in Urdu and Hindi and says every dish right, so they feel at home the second they call.</li>
-              <li><strong>You control how you're experienced — everywhere.</strong> No call lost to the rush, no bad-day service. Your restaurant shows its best self at every touchpoint, every time.</li>
+              <li><strong>Never wrong.</strong> Never misquotes a price, never mangles a dish name, never sells what the kitchen ran out of — grounded in your real menu.</li>
+              <li><strong>Sounds like you.</strong> You pick the voice and the languages. Ours greets desi guests in Urdu and Hindi — they feel at home the second they call.</li>
+              <li><strong>Handles the hard calls.</strong> An upset guest gets real care — acknowledged, logged for you, routed right. Not a shrug and a hang-up.</li>
             </ul>
             <div class="voice__demo">
               <a href="tel:+19036024012" class="btn btn--primary">Hear it live — call (903)&nbsp;602-4012</a>
