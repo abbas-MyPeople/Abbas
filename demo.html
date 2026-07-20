@@ -77,6 +77,14 @@
     .cardmock p{ font-size:.85rem; line-height:1.45; color:#3d3a33; margin-bottom:0; }
     .cardmock .qr{ width:52px; height:52px; border:2px solid #1b1a17; border-radius:8px; display:grid; place-items:center; font-size:.58rem; font-weight:700; margin:10px 0 4px; }
     .mixbar{ margin-top:14px; }
+    /* guest card + catering calc */
+    .gcard,.catcalc{ background:#fff; border:1px solid rgba(27,26,23,.16); border-radius:16px; padding:18px; max-width:360px; margin:0 auto; }
+    .gcard__row,.catcalc__row{ display:flex; justify-content:space-between; gap:10px; padding:9px 4px; border-top:1px solid rgba(27,26,23,.08); font-size:.85rem; opacity:0; transform:translateY(6px); transition:opacity .4s, transform .4s; }
+    .gcard__row--head{ border-top:none; opacity:1; transform:none; font-size:.8rem; color:#6f685c; }
+    .gcard__row span,.catcalc__row span{ color:#6f685c; }
+    .gcard__row.show,.catcalc__row.show{ opacity:1; transform:none; }
+    .gcard__row--ok,.catcalc__row--ok{ background:#eaf5ee; border-radius:8px; border-top:none; color:#1e5c38; font-size:.8rem; }
+    .catcalc__q{ font-size:.9rem; padding-bottom:8px; }
     /* growth-engine cycle */
     .cycle{ display:flex; flex-direction:column; gap:8px; }
     .cyc{ border:1px solid rgba(27,26,23,.14); border-left:4px solid rgba(27,26,23,.14); border-radius:10px; background:#fff; padding:10px 14px; transition:all .35s; opacity:.55; }
@@ -300,9 +308,55 @@
       </div>
     </section>
 
-    <!-- CHAPTER 7: TABLETS -->
+    <!-- CHAPTER 7: GUESTS -->
     <section class="chap">
-      <p class="chap__pain">Pain 7 · three delivery tablets, orders re-typed by hand, lost in the rush</p>
+      <p class="chap__pain">Pain 7 · 54% of orders were anonymous — the apps knew our customers, we didn't</p>
+      <h2>Now the restaurant remembers its regulars. The apps don't own them anymore.</h2>
+      <span class="modepill modepill--built">Built — a guest memory the owner owns</span>
+      <div class="chap__grid">
+        <div>
+          <p>The delivery apps keep the customer's name, number and habits for themselves — we found only 32 identifiable repeat customers in 1,501 orders. So we built the guest layer the restaurant owns: the phone agent recognizes a returning caller and offers "the usual," a receipt-scan spin-the-wheel turns a DoorDash customer into a known direct one on the spot (SMS-OTP identity, abuse prevention, staff redemption flows), and every interaction feeds one guest history.</p>
+          <p class="result"><strong>Result:</strong> loyalty in the first ten seconds of the second call — and a customer list that belongs to the owner, not the apps.</p>
+        </div>
+        <div>
+          <div class="gcard" id="gcard">
+            <div class="gcard__row gcard__row--head"><strong>Incoming call · (832) ···-··41</strong></div>
+            <div class="gcard__row" data-i="1"><span>Name</span><strong>Priya S. — returning caller</strong></div>
+            <div class="gcard__row" data-i="2"><span>The usual</span><strong>Butter chicken · extra naan</strong></div>
+            <div class="gcard__row" data-i="3"><span>Prefers</span><strong>Mild · pickup · last visit 12 days ago</strong></div>
+            <div class="gcard__row gcard__row--ok" data-i="4"><strong>“Good to hear from you again, Priya! The usual?” ✓</strong></div>
+          </div>
+          <button class="phone__replay" id="gcardReplay" type="button">↻ replay the recognition</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 8: CATERING (OPPORTUNITY) -->
+    <section class="chap">
+      <p class="chap__pain">Opportunity 8 · not a leak — money nobody was chasing</p>
+      <h2>The data found a catering business hiding inside the restaurant. We built it a door.</h2>
+      <span class="modepill modepill--built">Built — discovered by measurement, unlocked by engineering</span>
+      <div class="chap__grid">
+        <div>
+          <p>An FDE doesn't only fix what hurts — it finds what's missing. The POS showed <strong>43 orders over $150 in 90 days</strong> that nothing was tracking: feast demand with no catering channel, at margins far above dine-in. So we built the door: the phone agent sizes catering from a headcount, a portion calculator turns people into exact trays, occasion pages catch the searches, and a form routes real inquiries to a human.</p>
+          <p class="result"><strong>Result:</strong> a catering channel where none existed — 8–10× the average ticket per order, found by the same measurement every deployment starts with.</p>
+        </div>
+        <div>
+          <div class="catcalc" id="catcalc">
+            <div class="catcalc__q">“We're feeding about <strong>40 people</strong> — what do we need?”</div>
+            <div class="catcalc__row" data-i="1"><span>Chicken Chow Mein</span><strong>2 full trays</strong></div>
+            <div class="catcalc__row" data-i="2"><span>Chicken Karahi</span><strong>1 full + 1 half tray</strong></div>
+            <div class="catcalc__row" data-i="3"><span>Naan</span><strong>50 pieces</strong></div>
+            <div class="catcalc__row catcalc__row--ok" data-i="4"><strong>Quote routed to a human ✓ — the agent never guesses on a $400 order</strong></div>
+          </div>
+          <p class="phone__cap">Illustrative output — the live portion calculator's real math grounds the phone agent's catering answers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 9: TABLETS -->
+    <section class="chap">
+      <p class="chap__pain">Pain 9 · three delivery tablets, orders re-typed by hand, lost in the rush</p>
       <h2>And sometimes the fix is boring: three tablets became one POS.</h2>
       <span class="modepill modepill--wired">Chosen &amp; wired — the right existing tool, set up right</span>
       <div class="chap__grid">
@@ -338,8 +392,9 @@
       <p style="max-width:760px">~21,000 lines of production Python, 8 scheduled pipelines, 7 deployed apps — built and operated by one person using AI agents as the engineering team. The next restaurant is <strong>data + config</strong>. Also in this deployment:</p>
       <div class="also">
         <div class="also__item"><span class="chip chip--run">Behavioral · running 1+ yr</span><strong>Review engine — ~400 → 872 Google reviews at 4.6★ in a year</strong>A "scan me" card only when a guest is visibly happy; unhappy guests get the owner's personal card before Google does. $2 of cardstock, our highest-ROI play. <em>(Verifiable on Google now.)</em></div>
-        <div class="also__item"><span class="chip chip--built">Built · demoable</span><strong>Guest platform: rewards, CDP, receipt-scan spin-the-wheel</strong>A DoorDash customer scans their receipt, spins, and becomes a known direct customer on the spot — SMS-OTP identity, abuse prevention, staff/admin flows.</div>
-        <div class="also__item"><span class="chip chip--run">Deployed</span><strong>Ops micro-apps</strong>Catering portion calculator (headcount → exact trays — grounds the phone agent too), employee handbook Q&amp;A, conversational POS assistant, an MCP server exposing the restaurant to AI tools.</div>
+        <div class="also__item"><span class="chip chip--built">Built</span><strong>No-shows &amp; reservations</strong>The agent books tables against the restaurant's real seating rules, confirms by text, and reminders cut the empty-table problem — no host stand required.</div>
+        <div class="also__item"><span class="chip chip--run">Advisory + audit</span><strong>The apps quietly short you</strong>Wrong charges, bogus refunds, missed payouts — we audit the delivery apps' statements and claw back what's actually owed, then keep watching.</div>
+        <div class="also__item"><span class="chip chip--run">Deployed</span><strong>Staff questions at 6pm on a Saturday</strong>An employee handbook Q&amp;A assistant, a conversational POS assistant, and an MCP server exposing the restaurant to AI tools — the small tools that keep a shift smooth.</div>
         <div class="also__item"><span class="chip chip--run">Running daily</span><strong>Automation fleet</strong>Eight scheduled pipelines — reports, newsletter with retry, AEO guard, reply-reader — all fail-closed: allowlisted senders, dry-run defaults, kill switches.</div>
         <div class="also__item"><span class="chip chip--built">Built &amp; battle-used</span><strong>M&amp;A-grade deal-room infrastructure</strong>For a confidential transaction: self-hosted NDA e-sign, two-tier proof-of-funds gating, per-recipient watermarks, IP/forwarding detection, and an autonomous daily funnel optimizer with significance-tested A/B. Same doctrine, harder problem.</div>
       </div>
@@ -446,6 +501,26 @@
     document.getElementById('phoneReplay').addEventListener('click', playPhone);
     var phSeen=false;
     new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !phSeen){ phSeen=true; playPhone(); } }); }, {threshold:.35}).observe(pFeed);
+
+    /* guest card + catering calc staged reveal */
+    function stagedReveal(rootId){
+      var root = document.getElementById(rootId);
+      if(!root) return;
+      function play(){
+        var rows = root.querySelectorAll('[data-i]');
+        rows.forEach(function(r){ r.classList.remove('show'); });
+        rows.forEach(function(r){
+          setTimeout(function(){ r.classList.add('show'); }, 400 + parseInt(r.dataset.i,10)*900);
+        });
+      }
+      var seen=false;
+      new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !seen){ seen=true; play(); } }); }, {threshold:.4}).observe(root);
+      return play;
+    }
+    var gPlay = stagedReveal('gcard');
+    stagedReveal('catcalc');
+    var gr = document.getElementById('gcardReplay');
+    if(gr && gPlay) gr.addEventListener('click', gPlay);
 
     /* loop diagram */
     var NODES = [
