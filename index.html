@@ -28,6 +28,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="canonical" href="https://azrestaurantpartners.com/index.html" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .modes{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px; }
+    @media (max-width:860px){ .modes{ grid-template-columns:1fr; } }
+    .mode{ border:1px solid rgba(27,26,23,.14); border-radius:16px; background:#fff; padding:22px 24px; }
+    .mode h3{ font-family:"Fraunces",Georgia,serif; font-size:1.08rem; margin:10px 0 8px; }
+    .mode p{ font-size:.93rem; line-height:1.58; color:#3d3a33; }
+    .mode__tag{ display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 12px; border-radius:999px; }
+    .mode__tag--wired{ background:rgba(27,26,23,.08); color:#1b1a17; }
+    .mode__tag--built{ background:#1b1a17; color:#f1e9da; }
+    .mode__tag--behavioral{ background:rgba(192,73,43,.12); color:#97361e; }
+    .pcard .mode__tag{ margin-bottom:8px; }
+    /* call simulator */
+    .sim{ background:#fff; border:1px solid rgba(27,26,23,.16); border-radius:16px; padding:18px; }
+    .sim__head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:.76rem; color:#6f685c; }
+    .sim__replay{ background:none; border:1px solid rgba(27,26,23,.3); border-radius:999px; padding:3px 12px; font:inherit; font-size:.75rem; cursor:pointer; }
+    .sim__feed{ min-height:280px; display:flex; flex-direction:column; gap:9px; }
+    .sim .bub{ max-width:85%; padding:9px 13px; border-radius:13px; font-size:.88rem; line-height:1.45; opacity:0; transform:translateY(6px); transition:opacity .3s, transform .3s; }
+    .sim .bub.show{ opacity:1; transform:none; }
+    .sim .bub--agent{ background:#f4eee2; border:1px solid rgba(27,26,23,.1); align-self:flex-start; }
+    .sim .bub--caller{ background:#1b1a17; color:#f1e9da; align-self:flex-end; }
+    .sim .bub--sys{ background:#eaf5ee; border:1px solid #bcdcc8; color:#1e5c38; align-self:center; font-size:.76rem; font-weight:600; max-width:100%; }
+    .typing{ display:inline-flex; gap:4px; align-items:center; }
+    .typing i{ width:6px; height:6px; border-radius:50%; background:#6f685c; animation:tblink 1s infinite; }
+    .typing i:nth-child(2){ animation-delay:.2s } .typing i:nth-child(3){ animation-delay:.4s }
+    @keyframes tblink{ 0%,100%{opacity:.25} 50%{opacity:1} }
+    /* owner inbox */
+    .phone{ width:min(320px,88vw); margin:0 auto; border:2px solid #1b1a17; border-radius:26px; background:#f4eee2; padding:16px 12px; min-height:360px; }
+    .phone__top{ text-align:center; font-size:.7rem; color:#6f685c; margin-bottom:10px; }
+    .phone__feed{ display:flex; flex-direction:column; gap:10px; }
+    .notif{ background:#fff; border:1px solid rgba(27,26,23,.12); border-radius:12px; padding:10px 12px; font-size:.78rem; line-height:1.4; opacity:0; transform:translateY(8px); transition:opacity .4s, transform .4s; }
+    .notif.show{ opacity:1; transform:none; }
+    .notif .app{ font-size:.64rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#97361e; display:block; margin-bottom:3px; }
+    .notif .approve{ display:inline-block; margin-top:6px; background:#1b1a17; color:#f1e9da; border-radius:999px; padding:3px 12px; font-size:.7rem; font-weight:600; }
+    .phone__replay{ display:block; margin:10px auto 0; background:none; border:1px solid rgba(27,26,23,.3); border-radius:999px; padding:4px 14px; font:inherit; font-size:.75rem; cursor:pointer; }
+  </style>
 </head>
 <body>
   <!-- NAV -->
@@ -97,6 +132,34 @@
       </div>
     </section>
 
+    <!-- METHOD (the doctrine, owner dialect) -->
+    <section class="section section--alt" id="method">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="kicker">How a real partner works</p>
+          <h2 class="h2">Use what works. Connect what you have. Build what's missing.</h2>
+          <p class="lead" style="margin-top:14px">We never show up with a package. Every engagement starts by learning how <em>your</em> restaurant actually runs — the floor, the kitchen, the numbers. Then, for each thing worth fixing or unlocking, the fix takes whichever shape actually pays:</p>
+        </div>
+        <div class="modes reveal">
+          <div class="mode">
+            <span class="mode__tag mode__tag--wired">Set up right</span>
+            <h3>The right existing tool, wired in properly</h3>
+            <p>There are 100+ restaurant tools out there — we know them all, so you never pay us to rebuild what you can just buy. We pick the few that fit your place, set them up deeply, and connect them to your POS. <em>At our place: three delivery tablets became one POS — no more re-typing orders in the rush.</em></p>
+          </div>
+          <div class="mode">
+            <span class="mode__tag mode__tag--built">Built for you</span>
+            <h3>Custom software, when nothing out there fits</h3>
+            <p>When no tool does what your restaurant needs, our engineers build it — that's the part almost nobody else offers. <em>At our place: an AI phone agent that answers every call in our guests' languages and writes orders straight into the POS, because nothing we could buy did it right.</em></p>
+          </div>
+          <div class="mode">
+            <span class="mode__tag mode__tag--behavioral">No software at all</span>
+            <h3>Sometimes the smartest fix is a $2 card</h3>
+            <p>Some money isn't lost to technology — it's lost to timing and words. <em>At our place: a review card brought only to visibly happy guests doubled our Google reviews to 872 at 4.6★.</em> The best play wins, whatever it's made of.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- PLATFORM -->
     <section class="section platform" id="platform">
       <div class="wrap">
@@ -112,7 +175,6 @@
           <div class="layer"><span class="layer__n">04</span><div class="layer__body"><h3>Keep the guest</h3><p>Your own guest list, loyalty and win-back, and a system that remembers your regulars — so the customer is yours, not the app's.</p></div></div>
           <div class="layer"><span class="layer__n">05</span><div class="layer__body"><h3>The brain</h3><p>See your real numbers in plain language, know exactly what sells and when — and a menu that optimizes its own pricing and deals, only with your approval.</p></div></div>
         </div>
-        <p class="lead reveal" style="text-align:center;margin:28px auto 0;max-width:760px"><strong>Use what works. Connect what you have. Build what's missing.</strong> We don't rebuild technology that already works — we set up the best existing tools deeply, connect them around your operation, and when nothing out there does what your restaurant needs, <strong>we build it ourselves</strong>. And when the best fix isn't software at all — a card on the table, the right words from a server, a smarter offer — we do that too.</p>
         <div class="pillars reveal">
           <div class="pillar"><h4>On your terms</h4><p>You own your customers and your data. Every change needs <strong>your</strong> authorization first. And we take <strong>no vendor commissions, ever</strong> — the only thing we recommend is what's right for you.</p></div>
           <div class="pillar"><h4>One mind, every layer</h4><p>It holds together because <strong>one operator-engineer</strong> — who's worked the rush and shipped the software — sets the standard and leads every engagement, with a <strong>team behind him</strong> building and running it. Singular expertise <em>and</em> real horsepower.</p></div>
@@ -139,12 +201,10 @@
             </div>
           </div>
           <aside class="reveal">
-            <div class="callcard">
-              <div class="callcard__top"><span class="callcard__dot"></span> Live call · 8:52 PM</div>
-              <div class="bubble bubble--agent">Thanks for calling Wok &amp; Karahi — good to hear from you again, Priya! The usual butter chicken, extra naan?</div>
-              <div class="bubble bubble--caller">Yes please — and is the karahi spicy tonight?</div>
-              <div class="bubble bubble--agent">I can have the kitchen make it mild for you — perfect chilly night for it. Want a mango lassi to cool it down?</div>
-              <p class="callcard__cap">Knows the regular · speaks their language · knows the menu · upsells like a friend — the same, on every call.</p>
+            <div class="sim">
+              <div class="sim__head"><span>What a call looks like — the live agent's real flow</span><button class="sim__replay" id="simReplay" type="button">↻ replay</button></div>
+              <div class="sim__feed" id="simFeed" aria-live="polite"></div>
+              <p class="callcard__cap" style="margin-top:10px">Knows the regular · speaks their language · knows the menu · writes the order into the POS — the same, on every call. <strong>Call it and try.</strong></p>
             </div>
           </aside>
         </div>
@@ -159,6 +219,27 @@
           <div class="vfeat"><strong>Speaks their language</strong>Warm, on-brand, multilingual — your customers feel at home, in the voice you chose.</div>
         </div>
         <p class="vfeatures__note reveal"><strong>And it never falsely confirms.</strong> If an action fails, it says so and stays fixable — no smiling "all set" on a dropped order. That's the difference between a demo and something you can put on your real phone line.</p>
+      </div>
+    </section>
+
+    <!-- OWNER IN COMMAND -->
+    <section class="section section--alt" id="command">
+      <div class="wrap">
+        <div class="voice__grid">
+          <div class="reveal">
+            <p class="kicker">You stay in command</p>
+            <h2 class="h2">The whole system reports to you — and asks permission.</h2>
+            <p class="lead" style="margin-top:16px">You don't get another dashboard login to ignore. You get a partner that reports in and waits for your yes: a daily sales report before the kitchen opens, website improvements proposed by email that ship when you reply, an alert the moment something needs eyes, and a weekly digest of everything the phone captured. <strong>Nothing that matters happens without your say-so</strong> — that's how our own restaurant runs mostly without us standing in it.</p>
+            <p class="possible__cta reveal" style="margin-top:14px"><a href="case-study.html">See the whole system on our restaurant →</a></p>
+          </div>
+          <aside class="reveal">
+            <div class="phone">
+              <div class="phone__top">the owner's morning — the real reports the system sends</div>
+              <div class="phone__feed" id="phoneFeed"></div>
+            </div>
+            <button class="phone__replay" id="phoneReplay" type="button">↻ replay the morning</button>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -192,21 +273,25 @@
         </div>
         <div class="proofcards reveal">
           <article class="pcard">
-            <p class="pcard__stat">~400 → 872</p>
+            <span class="mode__tag mode__tag--behavioral">No software at all</span>
+            <p class="pcard__stat">~400 → <span id="revCount">872</span></p>
             <h3>More reviews — running five-star</h3>
             <p>We bring a "scan me" card to the table only when a guest is clearly happy, and hand an unhappy one the owner's card to make it right first. Google reviews roughly doubled in a year — now 4.6★ across 872 — with new ones running five-star.</p>
           </article>
           <article class="pcard">
+            <span class="mode__tag mode__tag--wired">Set up right</span>
             <p class="pcard__stat">3 tablets → 1 POS</p>
             <h3>The tablet chaos, gone</h3>
             <p>DoorDash, Uber and Grubhub used to mean three tablets beeping while staff re-typed every order by hand — and dropped some in the rush. Now they flow straight into the POS and the kitchen. Clean for over a year.</p>
           </article>
           <article class="pcard">
+            <span class="mode__tag mode__tag--behavioral">No software at all</span>
             <p class="pcard__stat">Up to 50%</p>
             <h3>App customers, turned direct</h3>
             <p>Every third-party order leaves with a note: "Paying up to 50% extra? Order on our website." The apps mark our prices up and pile on fees — direct is cheaper, with $7.99 delivery inside 5 miles. It quietly moves customers to our own channel.</p>
           </article>
           <article class="pcard">
+            <span class="mode__tag mode__tag--built">Built for you</span>
             <p class="pcard__stat">Found by AI</p>
             <h3>A site ChatGPT can read</h3>
             <p>We rebuilt our own site so AI assistants and Maps can actually read the menu and hours — a static-rendered menu, full schema, no more "403 to bots." So when someone asks an AI where to eat, we're in the answer.</p>
@@ -331,5 +416,93 @@
 
   <script src="i18n.js"></script>
   <script src="script.js"></script>
+  <script>
+  (function(){
+    /* call simulator */
+    var FLOW = [
+      ['caller', "Hi, can I get a Crispy Beef and a chicken chow mein?"],
+      ['sys',    "menu check: “Crispy Beef” → beef auto-filled · chicken given — nothing re-asked"],
+      ['agent',  "Of course. How spicy would you like the order overall — mild, medium, or hot?"],
+      ['caller', "Medium. Is the biryani good here?"],
+      ['agent',  "The Dum Biryani’s one of our most-loved dishes — slow-cooked, comes with raita. Want to add one?"],
+      ['caller', "Not today. That’s it."],
+      ['agent',  "So that’s one Crispy Beef and one chicken chow mein, both medium, for pickup — about 20 minutes. Shall I place it?"],
+      ['caller', "Yes."],
+      ['sys',    "order sent to the POS ✓ — real menu, real prices, never a wrong ticket"],
+      ['agent',  "You’re all set — see you in about twenty minutes!"]
+    ];
+    var feed = document.getElementById('simFeed'), timers = [];
+    function playSim(){
+      if(!feed) return;
+      timers.forEach(clearTimeout); timers = []; feed.innerHTML = '';
+      var t = 400;
+      FLOW.forEach(function(step){
+        var who = step[0], text = step[1];
+        if(who !== 'sys'){
+          (function(at){ timers.push(setTimeout(function(){
+            var ty = document.createElement('div');
+            ty.className = 'bub bub--' + who + ' show typingrow';
+            ty.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+            feed.appendChild(ty);
+          }, at)); })(t);
+          t += who === 'agent' ? 900 : 700;
+        }
+        (function(at){ timers.push(setTimeout(function(){
+          var old = feed.querySelector('.typingrow'); if(old) old.remove();
+          var b = document.createElement('div');
+          b.className = 'bub bub--' + who; b.textContent = text;
+          feed.appendChild(b);
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ b.classList.add('show'); }); });
+        }, at)); })(t);
+        t += who === 'sys' ? 1300 : Math.min(2500, 900 + text.length * 17);
+      });
+    }
+    var sr = document.getElementById('simReplay');
+    if(sr) sr.addEventListener('click', playSim);
+    if(feed){
+      var simSeen = false;
+      new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !simSeen){ simSeen = true; playSim(); } }); }, {threshold:.3}).observe(feed);
+    }
+
+    /* owner inbox */
+    var NOTIFS = [
+      ['email · 7:00 am', "<strong>Daily sales report — yesterday</strong><br/>Orders, revenue vs last week, top dishes, channel mix — straight from the POS, before the kitchen opens."],
+      ['email · monday', "<strong>This week I propose:</strong><br/>1) new page: “halal catering near The Woodlands”<br/>2) sharper catering call-to-action<br/><span class='approve'>you reply: APPROVE → it ships itself</span>"],
+      ['text message', "⚠ <strong>Heads up:</strong> an online order failed → auto-retried ✓. You hear about problems from us — never from an angry customer."],
+      ['email · weekly', "<strong>What the phone captured</strong> — 2 catering leads, 3 complaints handled &amp; logged, 14 regulars greeted by name."]
+    ];
+    var pFeed = document.getElementById('phoneFeed'), pTimers=[];
+    function playPhone(){
+      if(!pFeed) return;
+      pTimers.forEach(clearTimeout); pTimers=[]; pFeed.innerHTML='';
+      NOTIFS.forEach(function(n,i){
+        pTimers.push(setTimeout(function(){
+          var d=document.createElement('div'); d.className='notif';
+          d.innerHTML = '<span class="app">'+n[0]+'</span>'+n[1];
+          pFeed.appendChild(d);
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ d.classList.add('show'); }); });
+        }, 400 + i*1400));
+      });
+    }
+    var pr = document.getElementById('phoneReplay');
+    if(pr) pr.addEventListener('click', playPhone);
+    if(pFeed){
+      var phSeen=false;
+      new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !phSeen){ phSeen=true; playPhone(); } }); }, {threshold:.35}).observe(pFeed);
+    }
+
+    /* review count-up */
+    var revEl = document.getElementById('revCount');
+    if(revEl){
+      var revDone=false;
+      new IntersectionObserver(function(es,obs){ es.forEach(function(e){
+        if(!e.isIntersecting || revDone) return; revDone=true;
+        var start=null;
+        function stepFn(ts){ if(!start) start=ts; var p=Math.min(1,(ts-start)/1600); revEl.textContent = Math.round(400 + (872-400)*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(stepFn); }
+        requestAnimationFrame(stepFn); obs.disconnect();
+      }); }, {threshold:.6}).observe(revEl);
+    }
+  })();
+  </script>
 </body>
 </html>
