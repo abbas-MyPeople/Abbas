@@ -13,3 +13,4 @@
 {"a": {"conv": 0, "rate": 0.0, "sessions": 22}, "b": {"conv": 0, "rate": 0.0, "sessions": 10}, "event": "measure", "id": "hero-headline-2026-07", "ts": "2026-07-18T12:32:24Z"}
 {"a": {"conv": 0, "rate": 0.0, "sessions": 22}, "b": {"conv": 0, "rate": 0.0, "sessions": 11}, "event": "measure", "id": "hero-headline-2026-07", "ts": "2026-07-19T12:32:03Z"}
 {"a": {"conv": 0, "rate": 0.0, "sessions": 24}, "b": {"conv": 0, "rate": 0.0, "sessions": 11}, "event": "measure", "id": "hero-headline-2026-07", "ts": "2026-07-20T12:57:02Z"}
+{"a": {"conv": 0, "rate": 0.0, "sessions": 28}, "b": {"conv": 0, "rate": 0.0, "sessions": 11}, "event": "measure", "id": "hero-headline-2026-07", "ts": "2026-07-21T12:43:46Z"}
