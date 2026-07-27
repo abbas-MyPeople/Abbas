@@ -205,6 +205,47 @@ That converts your worst six months into the spa's best six months — and it is
 
 ---
 
+## 5d. The introduction, and handling an interrogation format
+
+Word has spread. Staff know who you are and where your room is, so this will likely not be a staged meeting — people will come to *you* and ask what you do. **That is the better format.** When they ask, you have permission; you are pulled rather than pushing. The only way to lose it is to ramble or to pitch.
+
+### Two risks to manage before anything else
+
+**1. Don't become the man collecting complaints.** If staff start bringing you grievances and a manager notices, you become someone stirring up the workforce — and the people who trusted you get hurt. Listen warmly, take no notes in front of them, thank them, and move the conversation to what *works*. Never repeat a complaint upward in a form traceable to a person.
+
+**2. Don't humiliate anyone in front of the CEO.** Whoever is in that room is who would have to implement your pilot. If you make the property team look incompetent to Simón Pedro, you create enemies who will quietly kill the project no matter what he says in the moment. **Credit the staff generously and mean it** — the kitchen genuinely is good, the people genuinely are warm. Frame every gap as *opportunity the team hasn't been given the tools for*, never as failure.
+
+### The 20-second introduction (say this one a dozen times)
+
+> *"I'm Abbas. I'm a software engineer — I was at Google, and I build AI systems for hospitality; I did Hard Rock Cafe's first AI agents. I also own a restaurant back in Texas, so I'm the annoying guest who reads a resort like an operator. I'm here on holiday, honestly — I just can't switch it off."*
+
+Why it works: true, warm, self-deprecating, establishes both enterprise and operator credibility in one breath, and the last line invites the exact question you want — *"so what have you noticed?"* Never answer that question with everything you know.
+
+### The version for Simón Pedro
+
+> *"Don Simón — Abbas Zoeb. I'm an engineer. Google, then I built Hard Rock Cafe's first AI agents and the governance layer that made them safe to run at scale. I also own a restaurant, so I've worked the rush myself. I've been your guest here for a week and I haven't been able to stop diagnosing the place. I'd rather ask you one question than pitch you anything."*
+
+Then **ask the question and stop talking**:
+
+> *"Is the gap between what your app promises and what this property actually delivers something you already know about and have deprioritised — or is it just not visible from Palma?"*
+
+This is the strongest opening available to you. It proves the diagnosis without lecturing him, it hands him authority to correct you, and **either answer gives you a road**: "we know" → *"then the problem isn't diagnosis, it's that nobody owns it — give me one property"*; "we don't" → *"then let me show you what a week as a guest turns up."*
+
+### Escalating disclosure — answer in layers
+
+Have three answers ready and **never jump ahead**. Slight under-delivery makes them pull; a monologue makes them stop asking.
+
+- **20 sec** — the introduction above.
+- **90 sec** — *"Everything I found here is an information problem dressed as an operations problem. Your international station rotates, and the chef knows tomorrow's menu today — but the guest doesn't, so they think it's all Mexican. Your app store listing says I can book a restaurant; your own Maya page tells me to book at check-in. The information exists. It just never reaches the guest."*
+- **5 min** — the pattern, the owned-asset economics, the 2.74 app rating, and the lab ask.
+
+**Always hand the turn back with a question.** In an interrogation, whoever is asking is in control — so ask.
+
+### If several people are present
+Work out fast who actually decides (Simón Pedro, if he's there — nobody else matters for the ask) and address him, while being visibly respectful to everyone else. Give the operational credit to the property people out loud. It costs nothing and it buys you the implementers.
+
+---
+
 ## 6. The three wedges, ranked
 
 **① Agentic governance and reliability — strongest.**
