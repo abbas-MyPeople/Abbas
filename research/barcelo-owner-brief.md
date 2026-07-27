@@ -1,285 +1,260 @@
-# Barceló — Owner Briefing & Pitch Narrative
-**Prepared:** 2026-07-27 · **For:** Abbas Zoeb, AZ Restaurant Partners
-**Situation:** On-property at a Barceló Riviera Maya resort. A "Simón" from the owning family is on site. Objective: earn a real conversation, then a presentation slot.
+# Barceló — Field Brief for the Simón Conversation
+**Updated:** 2026-07-27 · **For:** Abbas Zoeb
+**Situation:** On-property at **Barceló Maya Riviera** (adults-only, part of the six-hotel Maya campus). A principal named **Simón** is on site, reportedly for ~2 more days.
+
+> **Supersedes the first draft of this file.** Merged with the full ChatGPT research thread
+> ([`barcelo/chatgpt-conversation-full.md`](barcelo/chatgpt-conversation-full.md)) and the resort cards
+> ([`barcelo/images/`](barcelo/images/)). Corrections to my earlier draft are in §12.
 
 ---
 
 ## 0. The 60-second version
 
-1. **The man in front of you is almost certainly Simón Barceló Tous** — co-president, 65, who ran Latin America for the group and **formally stepped down from all executive roles in January 2026** on hitting the statutory retirement age. He is in Mexico this year for a documented reason: he is personally supervising the **Comité de Dirección de México** through 2026 to hand the region to his nephew.
-2. **He is therefore not your buyer. He is your door.** He has no operational authority left. Asking him to buy anything misreads his position and will make you look unbriefed. Asking him to *open a door* is the one thing he can still do, costs him nothing, and flatters exactly the role he is currently playing.
-3. **The real buyers are** Antonio Tovar Barceló (new CEO Latin America, his nephew) and the Mexico management committee — plus, at group level, Íñigo Onieva (Chief Digital Business Officer) and Gregory Bulcaen (Chief Commercial Officer).
-4. **Your opening line is a compliment with a hook in it:** Barceló is **#1 among Spanish hotel groups for AI visibility (30.1% of AI answers)** — ahead of Meliá. But in **all-inclusive specifically**, they are **third: Iberostar 44.1%, RIU 40.0%, Barceló 37.3%.** Beaten by the other two Mallorcan families, in the category that pays for the Riviera Maya.
-5. **The wound you can actually fix** is inside the resort: 25 restaurants at Barceló Maya Grand, à-la-carte access **rationed to 4 vouchers per 7-night stay**, and guests reporting reservations are "almost impossible." That is scarcity managed by restriction rather than by allocation — and it is a revenue problem, not just a satisfaction problem.
-6. **The ask:** not a contract. *"Fifteen minutes with your Mexico committee before I fly home."*
+1. **Do not pitch restaurant technology.** Barceló is not technologically backward — they run Salesforce, Tealium, BEONx, Oracle Nor1, Workday, SAP, a Snowflake lakehouse, EISI and a group app. Pitching them "restaurant tech for independents" makes you small and gets you dismissed by a man who knows his own stack.
+2. **Pitch the thing you uniquely are:** the person who has built **autonomous agents that detect their own failures, recover, and expose every action through a unified governance layer** — at a global hospitality brand — *and* who has run the physical operation himself.
+3. **There is a deadline six days out.** EU AI Act transparency obligations begin applying **2 August 2026**. Barceló is EU-headquartered and running 40+ AI use cases. That is not a manufactured urgency; it is a real date on his calendar.
+4. **You are carrying evidence nobody else has:** a week of documented guest-journey failures inside their single most operationally complex property, plus the paper cards proving the resort already produces the data and just can't compute with it.
+5. **Two men are named Simón.** Which one determines the entire register. See §1 — and note the tells, because "the CEO" points one way and the Mexico assignment points the other.
+6. **The ask is an introduction, not a sale.** Named targets in §9.
 
 ---
 
-## 1. Who is actually in front of you
+## 1. Which Simón — and why it genuinely matters
 
-There are **two co-presidents named Simón**, and they are cousins. Getting this wrong is the fastest way to lose the room.
+Barceló restructured on **29 January 2026**, six months ago. This is the most important thing you can know that he will not expect a stranger to know.
 
 | | **Simón Barceló Tous** | **Simón Pedro Barceló Vadell** |
 |---|---|---|
-| Age | **65** (hit statutory retirement Jan 2026) | Younger (~59–60) |
-| Role now | **Co-president, non-executive** | **Co-president + Consejero Delegado (group CEO)** |
-| Until Jan 2026 | **CEO Hispanoamérica** — ran Latin America | Co-president |
-| Power today | Ceremonial + family authority | **Concentrated executive power through 2031** |
-| Why he'd be in Mexico | **Explicitly assigned to supervise the Mexico management committee during 2026** for succession | Possible, but no specific documented reason |
-| Public profile | Low | High — the family's public voice |
+| Age | **65** | ~59–60 |
+| Before Jan 2026 | Co-president + **CEO Hispanoamérica** | Co-president |
+| Now | **Co-president, NON-executive** | **Co-president + Consejero Delegado (group CEO)** |
+| Why he'd be here | **Formally assigned to supervise the Comité de Dirección de México through 2026**, handing over to his nephew | He is the CEO; travels the estate |
+| Mandate | Ends with the handover | **Full executive power through 2031** |
+| Can he buy? | **No.** No operational authority | **Yes. He is the single decision-maker.** |
 
-**Assessment (INFERENCE, high confidence):** the Simón on your property is **Simón Barceló Tous**. The January 2026 announcements state plainly that during this financial year he personally oversees Mexico's management committee alongside Antonio Tovar to ensure an orderly handover. That is a documented, specific reason for him to be walking a Riviera Maya resort in July 2026. Simón Pedro, by contrast, just took full executive control of a €7.9bn group and is based in Palma.
+**The genuine ambiguity:** if staff called him "the CEO," that is *literally correct* for **Simón Pedro** — he took the consejero delegado title in January. But the documented reason for a Barceló principal to be sitting in a Mexican resort in 2026 is **Tous's** Mexico committee assignment. I cannot resolve this remotely. **Resolve it before you open your mouth.**
 
-### How to confirm in ten seconds, without asking
-- If people around him defer but **he defers on decisions** → Tous (non-executive).
-- If he is travelling **with a younger family member** → that is likely **Antonio Tovar Barceló**, his nephew, the incoming CEO for Latin America. *Tovar is the person you actually want.*
-- If someone calls him "presidente" but operational questions get routed elsewhere → Tous.
-- Safe address either way: **"Don Simón"** or simply "Señor Barceló." Do not guess at a title.
+### Tells, in order of reliability
+- **Age.** Tous is 65 and visibly so. Simón Pedro is roughly six years younger.
+- **Who defers to whom.** If operational questions get routed *away* from him → Tous. If everything stops when he speaks → Simón Pedro.
+- **Travelling companion.** A younger family member is likely **Antonio Tovar Barceló** — fourth generation, son of Antonia Barceló Tous, **the new CEO for Latin America**. If Tovar is in the room, *he is the actual buyer* and the whole conversation should bend toward him.
+- **Ask a staff member** which one. This is a normal question and costs you nothing.
 
-### The January 2026 restructure (memorise this — it is six months old and shows you did work)
-- Simón Barceló Tous **resigned as executive director** on turning 65, per bylaws amended in 2018. **Retains the co-presidency without operational responsibility.**
-- **Simón Pedro Barceló Vadell** became **consejero delegado** — first time one person holds full executive power, mandate through 2031.
-- **Antonio Tovar Barceló** — fourth generation, son of Antonia Barceló Tous, **nephew of the man in front of you** — named **CEO for Latin America**.
-- The board praised Tous's "long and successful management trajectory," specifically **his development of the group in Latin America, where the company has achieved its best historical results.**
-- Management committee now: Simón P. Barceló (executive chairman), **Marta Barceló** (president, Crestline — the North American arm), **Antonio Tovar** (CEO LatAm), **Raúl González** (CEO EMEA), **Vicente Fenollar** (CFO + president of Ávoris).
+**Address either as "Don Simón."** Don't guess at titles.
 
-**What this means emotionally.** This is a man who spent his career turning Latin America into the best-performing region in the family company, was retired by a rule his own family wrote, and is now spending his last official year making sure his nephew doesn't drop what he built. He is not optimising for this quarter. **He is optimising for whether what he built keeps winning after he's gone.** Everything you say should be pointed at that.
+### If it's Simón Pedro (the group CEO)
+Play for the strategic conversation and the direct referral. He can create a meeting with Rafael Palou or Íñigo Onieva with one sentence. Speak at group level: agentic accountability across a federated estate, AI-search distribution risk, the gap between corporate capability and property reality. **Do not demo a product to him.**
+
+### If it's Simón Barceló Tous (non-executive)
+He cannot buy. But he built Latin America into the group's best-performing region — the board said so in writing — and he is spending his final official year making sure his nephew doesn't drop it. He is optimising for **legacy and continuity**, not this quarter. Your ask is one introduction, which costs him nothing and makes him look prescient to Antonio. That is a genuinely attractive thing to offer a man in his exact position.
+
+**Post-restructure management committee:** Simón P. Barceló (executive chairman) · Marta Barceló (president, Crestline, North America) · Antonio Tovar (CEO LatAm) · Raúl González (CEO EMEA) · Vicente Fenollar (CFO + president of Ávoris).
 
 ---
 
 ## 2. The numbers he expects you to know
 
-From the 2025 results, announced June 2026 — the best year in the company's history:
+- **2025 was the best year in the company's history:** revenue **€7,867M** (+4%), net profit **€313.4M** (+4%), EBITDA **€676M**
+- **Net financial debt: negative €184.2M** — they hold net cash and say so publicly
+- **286 hotels, 63,096 rooms, 32 countries, 38,600 employees**; 33 hotels added in 2025
+- **>€320M** of 2026 investment earmarked for innovation, quality and sustainability
+- Portfolio structure: **39% managed · 31% owned · 29% leased · 1% franchised**; ~45,000 rooms belong to ~90 third-party owners
+- **my Barceló: 6.4M members** (+21%), **41% repeat-booking rate**; **NPS 57.1** in 2025, up from 54.3
+- **Latin America is where they own the bricks** — and it has delivered their best historical results
+- Ávoris: ~59% of group revenue but only **8.8% of EBITDA**; they have reportedly explored selling it, while also acquiring **100% of Atrápalo** (June 2026)
 
-- **Revenue: €7,867M** (record, +4%)
-- **Net profit: €313.4M** (+4%)
-- **EBITDA: €676M** (+2%)
-- **Net financial debt: NEGATIVE €184.2M** — they hold net cash and say so publicly
-- **~€500M/year sustained investment**, 33 openings in 2025, asset purchases in Mexico, Italy, France, Morocco
-- **300+ four- and five-star hotels, ~65,000 rooms, 30 countries**; founded **1931** in Felanitx, Mallorca; third and fourth generation now in charge
-- **Latin America is where they own the bricks: ~14,000 of ~20,000 owned rooms.**
+**The line that matters:** in most of the world Barceló manages or leases. In Latin America they **own**. Margin you create in a Mexican resort lands on the family's own balance sheet. Say that and you've said something a consultant wouldn't think to say.
 
-**Why that last line is the most important number on this page.** In much of the world Barceló manages or leases. In Latin America they *own*. Every peso of margin you create in a Mexican resort lands on the family's own balance sheet, not a third-party asset owner's. **Mexico is the one place where making the operation better makes the family richer directly.** Say that, and you have said something a hired consultant would not think to say.
-
-They also do not need financing. Net cash, record profits. So do not sell savings as survival — sell it as *edge*.
-
----
-
-## 3. What they have already told the market they care about
-
-Barceló's own stated 2026 priorities, via CCO **Gregory Bulcaen** and Chief Digital Business Officer **Íñigo Onieva**: **AI, the direct channel, and selective expansion.**
-
-Specifically:
-- Adapting to AI and **its influence on how customers choose**
-- Digitalising **every contact point across the customer journey**
-- **Direct channel as a clear priority**; precise demand analysis, channel and market segmentation
-- Their own framing, nearly verbatim: *as a data-driven company, the advantage is not having data — it's how you activate it* — adjusting pricing, making distribution decisions, activating marketing in real time
-
-**This is your product described in their language.** Your "Brain" layer, the self-optimising menu, and commission rescue are the restaurant-level expression of exactly the thesis their own executives are publicly selling. You are not introducing a new idea. **You are telling them their strategy stops at the hotel door and never reaches the 25 restaurants inside.**
+**And they don't need money.** Net cash, record profits. Never sell savings as survival — sell edge.
 
 ---
 
-## 4. The competitive wound (use carefully — it is your best card)
+## 3. What Barceló already has (so you don't insult him)
 
-A 2026 study of **2,500+ AI-engine responses** about hotel search, widely covered in Spanish trade press:
+Memorise enough of this to signal you did the work. Naming two or three of these correctly buys you the rest of the conversation.
 
-**Overall Spanish hotel groups:**
-| Rank | Group | Share of AI answers |
-|---|---|---|
-| **1** | **Barceló** | **30.1%** |
-| 2 | Meliá | 22.7% |
-| 3 | Paradores | 15.5% |
+| Layer | What they run |
+|---|---|
+| Guest CRM | **BEA — Barceló Experience Assistant**, on Salesforce Service Cloud; deployed across company hotels |
+| Customer data | **Tealium** iQ + AudienceStream (they took data control back from agencies) |
+| Revenue management | **BEONx** (80+ hotels, with a co-developed Tour Operation module) |
+| Ancillary upsell | **Oracle Nor1** machine learning at check-in |
+| Hotel operations | **EISI HOTEL** — 40+ vacation properties; housekeeping, maintenance, HACCP, guest voice |
+| Guest app | Barceló App + **STAY** (since 2016); **Ari**, a trip-guidance AI interface |
+| Data platform | Snowflake lakehouse; **a corporate Data Office is being recruited right now** |
+| Enterprise | Workday (with CHRO Mª Carmen Oliver), SAP/S4HANA, B-Stores inventory (145 hotels) |
+| AI | **40+ use cases**, with a stated **3–6 month payback rule** |
 
-**But in all-inclusive — the category that pays for the Riviera Maya:**
-| Rank | Group | Share |
-|---|---|---|
-| 1 | **Iberostar** | **44.1%** |
-| 2 | **RIU** | **40.0%** |
-| **3** | **Barceló** | **37.3%** |
-
-Two more findings from the same study:
-- **48.2% of AI answers name no chain at all** — the category is still open.
-- **Presence is not leadership.** Barceló accumulates mention volume, but brands like Four Seasons **appear in first position** when recommended. *You get mentioned. Others get chosen.*
-
-**Why this lands personally.** Iberostar and RIU are not faceless competitors — they are the other two **Mallorcan family dynasties**, the Fluxàs and the Rius. Being third to them, in all-inclusive, in a machine-generated ranking, is not a spreadsheet problem. It is a family-pride problem. Deliver it flat and factual, never gloating, and let him react.
-
-**Context to have ready:** ~84% of hotels worldwide are effectively invisible to generative AI (only ~16% appear in AI recommendations); a 2026 TravelBoom study puts 83% of travellers as having used or being interested in AI trip planning; only 12.5% of hotel sites carry machine-readable rating data and 7.7% tag amenities correctly. Industry framing from HITEC 2026: **AI is becoming the new gatekeeper of hotel demand.**
+**The people who actually decide:**
+- **Rafael Palou** — Group CIO. Forbes España *Best CIO 2026*. Platform-and-control CIO: data governance, AI industrialisation, cybersecurity, SAP, EISI.
+- **Íñigo Onieva** — Chief Digital Business Officer. Owns direct channel and **publicly owns the ChatGPT/Gemini distribution problem**.
+- **Gregory Bulcaen** — CCO. Distribution, revenue quality, channel mix.
+- **Marga Juan** — SER Barceló, Processes & Brand Standards. Owns whether anything actually lands in a hotel.
+- **Alejandro Alemany** (Data/AI) · **André Rijo** (CRM) · **Jaume Comas** (IS EMEA) · **Sara Ramis** (Client/Marketing/Sustainability).
 
 ---
 
-## 5. The operational wound you can actually fix
+## 4. The time-critical hook
 
-This is where you stop being a consultant and start being an operator.
+**EU AI Act transparency obligations begin applying 2 August 2026 — six days from today.**
 
-**Barceló Maya Grand Resort: ~25 restaurants.** And from guest reviews (2025–2026):
-- À-la-carte dining is **rationed to 4 vouchers per 7-night stay** for non-Premium guests
-- Reservations described as **"almost impossible"** — one guest reported securing **one booking across a ten-night stay**
-- Recurring frustration about reservation scarcity and queueing, alongside genuine praise for cleanliness, staff and beach
+Barceló is EU-headquartered, runs 40+ AI use cases, and is moving from *AI that advises a person* to *AI that acts*: changes a reservation, contacts a guest, issues compensation, routes a task. The moment that shift happens, the governing question stops being "did the API return 200?" and becomes:
 
-**Read what that actually is.** They are managing scarce restaurant capacity by **restricting demand with vouchers** rather than by **allocating supply with data**. The predictable consequence — and this is what you ask him about rather than assert — is that **some restaurants run queues while others run half-empty on the same night**, because nothing is matching arrivals, occupancy, guest tier and stated preference to covers in real time.
+> Which agent acted? On whose authority? What did it observe? Which tools did it call? Did it break a business rule? What happened when the downstream system failed — did it retry, compensate, escalate, or *falsely report success*? Can the whole event be reconstructed?
 
-**Why it's a revenue problem, not a satisfaction problem.** The Premium tier *already exists* and already sells better à-la-carte access. So:
-- Better allocation → more guests experience the good restaurants → **more Premium upsell**, which is pure ancillary margin on an owned asset
-- Fewer "couldn't get a reservation" reviews → **higher review scores** → ADR and repeat-booking effects
-- Forecast covers per venue per night → **less food waste and better labour scheduling** across 25 kitchens
+**That is precisely the problem you solved at Hard Rock Cafe**: autonomous call-centre agents that detect failures and self-heal, plus the agent-manager layer giving span-level visibility and unified governance over every agentic action.
 
-**The line to say out loud:** *"You have twenty-five restaurants and you're rationing them with paper vouchers. That's not a food problem — it's an allocation problem, and allocation is a solved problem. I'd bet that on any given night you have queues at three of them and empty tables at six."*
-
-Then stop talking and let him answer. If he engages on that, you have him.
+This is your single strongest card, because it is: (a) real and yours, (b) enterprise-scale hospitality, (c) *ahead* of where they are rather than behind, and (d) on a legal clock that starts next week.
 
 ---
 
-## 6. The second wound: your restaurants are invisible, even though your brand isn't
+## 5. The evidence only you have
 
-This is the bridge from their strategy to your actual product.
+You spent a week inside their most operationally complex property. Use it as **observation**, never as complaint.
 
-Barceló leads Spanish groups in brand-level AI visibility. But **the individual restaurants inside the resorts have effectively no independent presence** — no meaningful standalone profiles, no independent review corpus, no structured data an AI assistant can read. So when a traveller asks an assistant *"which Riviera Maya all-inclusive has the best Japanese restaurant?"* or *"where can I eat well in Riviera Maya with a gluten allergy?"* — the resort's 25 venues cannot answer, because they are not legible to the machine.
+**The documented contradiction** — this is the sharpest single fact in the whole brief:
 
-**The framing:** *"Your brand is found. The experience inside it is not. You're winning the search for 'Barceló' and losing every search that describes what a guest actually wants for dinner."*
+> Barceló's own app store listing advertises restaurant booking, spa reservations, room service, poolside ordering and interactive maps. Barceló's **own Maya property pages** tell guests to use *"phone reservations,"* to *"book at check-in,"* to visit Guest Service in the lobby. **Sapporo, La Comédie, Dolce Vita and Agave — the Riviera restaurants — are publicly described as requiring booking at check-in.**
 
-That is precisely the AEO/structured-data problem you already solved at your own restaurant — including the "403 to bots" fix — and the MCP connector that makes a venue natively answerable inside ChatGPT and Claude.
+The corporate capability exists. It is not reaching this property. That is a far more interesting problem than "you need an app," and it is *their own published words*, not your opinion.
 
----
+**What you personally experienced:**
+- Welcome = a QR code to a **photograph of a map**, with no unit names and no structure
+- Shuttles: officially every 20 min, 08:00–02:30; actually 30+ min, **with zero visibility into whether one is coming**
+- Restaurants, activities and services: had to **physically walk to a desk** to book
+- Room service and any request: **dial the phone**
+- Paid activities booked at the dive shop; included activities booked in person, day-of
 
-## 7. The narrative arc (this is the pitch)
+**What the cards prove** (in `barcelo/images/`): the Barcy Club board, the four-theatre entertainment card, the gym/daytime activity sheet and the two spa menus are all **structured data pretending to be paper**. The resort *already produces* every field a live system would need — schedules, venues, age limits, durations, prices, inclusion status. It just can't compute with any of it. The activity sheet even carries the disclaimer that *activities may change without prior notice* — which is the information problem stated in the resort's own words.
 
-Five beats. It works at fifteen minutes or ninety seconds.
+**And the published data contradicts itself:** pools listed as 8 on one page and 11 on another; bowling lanes 4 vs 6; show times 9:30pm vs 8:00pm vs the printed card. Not typos — evidence there is no single governed source from which every interface answers.
 
-**1 — Standing (10 sec).**
-*"I'm an engineer. I was at Google. I built Hard Rock Cafe's first AI agents and the guardrail system that keeps them safe as they scale. And I own a restaurant, so I've run the rush myself."*
-That is peer standing, not vendor standing. Say it once and never again.
-
-**2 — The compliment, honestly meant.**
-Barceló is #1 in Spain for AI visibility, ahead of Meliá. That is not luck. Somebody there is paying attention.
-
-**3 — The turn.**
-In all-inclusive, it's Iberostar, then RIU, then Barceló. And mentions aren't recommendations — Four Seasons gets named *first*. The family that has been early since 1931 is currently third in the category it helped invent.
-
-**4 — The reason why, which is inside the building.**
-The brand is legible to AI. The 25 restaurants are not. And inside, they're being rationed by voucher instead of allocated by data — queues at some, empty tables at others, and reviews that say "we couldn't get a reservation." Guest experience and AI visibility are the same problem: **the machine can only recommend what it can see, and guests only praise what they can get into.**
-
-**5 — Why it's yours to take now.**
-Nobody owns the all-inclusive category in AI yet — 48% of answers name no chain. That window closes once someone structures their data properly. A family company can decide this in a hallway. A public company needs eighteen months and a committee. **Being early is the family's oldest habit.**
-
-**Then the ask.** See §9.
+**The campus, correctly understood:** six hotels — Beach, Caribe, Colonial, Tropical, Palace, Riviera — roughly **27 restaurant concepts**, along ~2km of beachfront, with an **entitlement graph** (which bracelet, which hotel, adults-only, Premium Level, remaining à-la-carte vouchers) layered on top. A guest can't just ask "where can I eat?" The honest framing: this is **a small city with permissions**, and it is both the hardest property to digitise and the most valuable one.
 
 ---
 
-## 8. The 15-minute presentation structure
+## 6. The three wedges, ranked
 
-If you get the slot. Ten slides maximum, and half of them are one number.
+**① Agentic governance and reliability — strongest.**
+Their AI is scaling; their accountability layer is not publicly evident. You've built exactly this. Speaks to customer trust, operational failure, audit exposure and the 2 August date. Lands with the CEO, Palou and Onieva.
 
-| # | Slide | Content |
-|---|---|---|
-| 1 | Who I am | Ex-Google · Hard Rock Cafe's first AI agents + the guardrail layer · owner-operator. Three lines. |
-| 2 | Why I'm here | "I've stayed in your resort for X days. I ate in your restaurants. Here's what I noticed." — earns everything that follows |
-| 3 | The scoreboard | The AI visibility table. Overall #1. All-inclusive #3, behind Iberostar and RIU |
-| 4 | What that costs | 84% of hotels invisible to AI; 83% of travellers using AI to plan; AI as the new gatekeeper of demand |
-| 5 | The wound inside | 25 restaurants · 4 vouchers / 7 nights · "almost impossible" — your own guest reviews, quoted |
-| 6 | The diagnosis | Allocation, not capacity. Queues here, empty tables there, nothing matching demand to covers |
-| 7 | The money | Premium upsell ↑ · review score → ADR · food waste ↓ · labour ↓ — **on assets you own**, unlike most of your portfolio |
-| 8 | What I'd do | The three-pilot menu (§10), one resort, 90 days, measured against a baseline you pick |
-| 9 | Why me | I built this for a global hospitality brand and I run it on my own restaurant. I've made the mistakes on mine, not yours |
-| 10 | The ask | One resort. 90 days. A number we agree on beforehand |
+**② The live resort operating layer — most demoable.**
+Not "an app." A **live resort graph**: static entities (venues, stops, paths), dynamic state (open/closed, capacity, last seating, vehicle position, weather hold), policy entities (bracelet, entitlement, dress code, vouchers) and transactions. Plus a **role-based employee app** — driver, restaurant host, activity operator, entertainment coordinator, spa — because *the guest app cannot maintain reality on its own.* The staff operating the physical thing are the only source of live truth.
 
-**Governance slide if challenged** (they will ask — they are a conservative family company): owner authorises every change, dry-run before live, everything revertible, human-in-the-loop, no vendor commissions ever. That posture is already how you work, and it is *exactly* what a fourth-generation family business needs to hear before letting software touch guests.
+The query that shows the whole idea in one line:
+> *"I'm at Riviera, it's 8:15pm, I'm vegetarian — where can I eat that's included, still serving when I arrive, and reachable before last seating?"*
 
----
+A static map cannot answer that. It contains pictures, not meaning.
 
-## 9. The ask — calibrated to his actual power
+**③ Restaurant-level AI visibility — fastest, smallest.**
+A 2026 study of 2,500+ AI-engine responses found **Barceló ranks #1 among Spanish hotel groups for AI visibility (30.1%)**, ahead of Meliá (22.7%). But **in all-inclusive specifically they are third — Iberostar 44.1%, RIU 40.0%, Barceló 37.3%** — behind the other two Mallorcan family dynasties. The same study notes that mention volume ≠ recommendation: Barceló gets named, Four Seasons gets named *first*. Meanwhile ~84% of hotels worldwide are effectively invisible to generative AI, and 48.2% of AI answers name no chain at all — the category is still open.
 
-**Do not ask Simón Barceló Tous to buy anything.** He cannot. He resigned executive authority in January.
-
-**Ask him for the door:**
-
-> *"Don Simón — I'm not going to try to sell you anything, you've just handed the region over. But you're the reason Latin America is the best-performing part of this company, and you're here making sure it stays that way. I've spent a week inside this resort as a guest and I've seen something worth fifteen minutes of your Mexico committee's time. Would you point me at the right person before I fly home?"*
-
-Why this works on him specifically:
-- It **acknowledges the handover** — showing you know something real and current about him
-- It **credits him with Latin America**, which the board itself did in writing
-- It costs him **one introduction**, not a decision or a budget
-- If it works, he looks prescient to his nephew — the elder statesman who spotted it. That is a genuinely attractive offer to a man in his exact position.
-
-**Fallback if he deflects:** *"Then who runs F&B for the Mexico properties? I'd rather spend my last day here talking to them than at the pool."* That is a smaller ask, almost never refused, and an F&B director is a perfectly good beachhead.
-
-**Ceiling:** the outcome you actually want is a meeting with **Antonio Tovar Barceló** or the Mexico committee. If Tovar is on site with him, that is the real prize in the room.
+Onieva has **publicly** named ChatGPT/Gemini visibility as a strategic challenge. This wedge is aimed directly at a problem their own executive has already admitted in print.
 
 ---
 
-## 10. Three pilots to have in your pocket
+## 7. The narrative
 
-Cheap, fast, measurable, no PMS replacement. Pick whichever he reacts to.
+**Beat 1 — standing, once, then never again.**
+> *"I'm an engineer — I was at Google, and I built Hard Rock Cafe's first AI agents plus the governance layer that made every agent action traceable and recoverable. I also own a restaurant, so I've worked the rush myself."*
 
-**A — Restaurant allocation (the strongest).**
-*Hypothesis:* covers are mis-allocated, not insufficient. *Do:* instrument one resort's 25 venues for 30 days — bookings, walk-ins, turn-downs, no-shows, covers vs capacity by night. Then a demand-matched allocation and release model. *Metric:* utilisation variance across venues, turn-down rate, F&B review sentiment, Premium upgrade attach. *Risk:* low — measurement first, no guest-facing change until they approve.
-*Note:* free reservations always produce heavy no-shows. Quantifying that no-show rate alone is worth the pilot, and nobody there has the number.
+**Beat 2 — the compliment, honestly meant.**
+Barceló is #1 in Spain for AI visibility, ahead of Meliá. Their commercial intelligence is genuinely strong. Somebody there is paying attention. *Mean it — it's true.*
 
-**B — Restaurant-level AI visibility.**
-*Do:* structured data, machine-readable menus and amenities, independent presence for the resort's signature restaurants; the MCP connector so venues are natively answerable inside ChatGPT and Claude. *Metric:* citation rate for "best [cuisine] Riviera Maya"-class queries, before and after. *Risk:* very low, no operational disruption. *This is the fastest visible win and maps to their own stated 2026 priority.*
+**Beat 3 — the turn, from their own words.**
+> *"Your app store listing says I can book a restaurant. Your Maya page tells me to book at check-in. I spent a week here and the page was right."*
 
-**C — The multilingual guest voice agent.**
-Your live agent already handles ordering, questions and upsell across languages. In a resort with British, Canadian, American, Mexican and European guests, an agent that handles reservations and requests in a guest's own language, consistently, at 2am, is an obvious fit — and it is the *demo you can run on your phone today.*
+**Beat 4 — the diagnosis, which is not an insult.**
+The gap isn't technology. It's **propagation** — the distance between corporate capability and daily property-level truth. And it's probably not even a software problem: restaurants control their own covers, transport may be outsourced, guest services may want human control, and nobody owns *"the guest can discover, reach and consume this service."* That's an ownership problem wearing a software costume.
 
-**Pricing note:** your published tiers ($149–$349/location) are built for independents and are **wrong for this room** — quoting them would shrink you. Frame this as a **paid pilot with a pre-agreed success metric**, priced against the value in one resort, and let them anchor first.
-
----
-
-## 11. What not to say
-
-- **Don't tell him his food is bad.** The reviews complain about *access*, not primarily quality. Access is fixable and blameless; quality is an insult to his chefs.
-- **Don't call it a "restaurant tech" pitch.** He runs a €7.9bn hotel group. It is guest experience, revenue and brand visibility.
-- **Don't lead with savings.** They have net cash and record profits. Lead with edge and with being early.
-- **Don't quote your independent-restaurant pricing.**
-- **Don't claim results you haven't delivered.** Your ledger is disciplined about this — keep it that way in the room. The SMS/loyalty layer is rolling out, the self-optimising menu is early build. Say so if asked. With a family company, being caught overstating once ends it permanently.
-- **Don't use the Hard Rock logo** in any leave-behind. Stating the fact is fine; the mark is theirs.
-- **Don't disparage Iberostar or RIU.** State the ranking, flat. He'll supply the feeling himself.
+**Beat 5 — why it's his to take, now.**
+Their AI is about to start *acting*, not just advising. The transparency clock starts 2 August. A family company can decide this in a hallway; a public company needs eighteen months and a committee. **Being early is the family's oldest habit** — they were in the Caribbean before the big brands made it obvious.
 
 ---
 
-## 12. Things to verify on the ground
+## 8. What not to say
 
-- **Which Simón.** High-confidence inference, not confirmed. Age is your tell: Tous is 65.
-- **Is Antonio Tovar Barceló with him?** If yes, he is the actual buyer.
-- **Which property you're on** — Barceló Maya Grand complex, Barceló Maya Riviera (adults-only), Occidental at Xcaret, or Royal Hideaway Playacar. The voucher/rationing detail is sourced to the Maya Grand complex; confirm it matches where you are before citing it.
-- **Test the wound yourself tonight.** Try to book an à-la-carte for tomorrow. Ask the host how many covers they turn away. Walk past three restaurants at 8pm and count empty tables. **First-hand observation from last night beats any slide** — and it is the single most persuasive thing you can bring to this conversation.
+- ❌ **"You need an app."** They have one. This is the fastest way to be dismissed.
+- ❌ **"You're behind on technology."** Factually wrong. Their commercial stack is mature and they know it.
+- ❌ **"Your food is bad."** The failures you hit were *access and information*, not cooking. Access is blameless; quality insults his chefs.
+- ❌ **Don't quote your published tiers** ($149–$349/location). Built for independents; quoting them shrinks you to vendor scale.
+- ❌ **Don't claim results you haven't delivered.** Your own ledger is disciplined about this — keep it that way. The self-optimising menu is early build; SMS/loyalty is rolling out. Say so if asked. With a family company, being caught overstating once ends it permanently.
+- ❌ **Don't use the Hard Rock logo** in anything you leave behind. Stating the fact is fine; the mark isn't yours.
+- ❌ **Don't disparage Iberostar or RIU.** State the ranking flat. He'll supply the feeling.
+- ❌ **Don't assume the friction is unknown to them.** They may know and have rationally deprioritised it. Ask, don't assert.
 
 ---
 
-## 13. The ninety-second hallway version
+## 9. The ask
 
-If all you get is a lift or a bar:
+**Not a contract.** The realistic best outcome is a referral.
 
-> *"Señor Barceló — I'm an engineer, I built Hard Rock Cafe's first AI agents, and I own a restaurant in Texas, so I'm the annoying guest who reads the menu like an operator. Can I tell you one thing I noticed this week? There's a study out this year on which hotel groups AI assistants actually recommend. You're number one in Spain — ahead of Meliá. But in all-inclusive you're third, behind Iberostar and RIU. And I think I know why, and it's not your marketing. It's that your twenty-five restaurants are invisible to the machines and rationed by voucher to the guests. Same root cause. I'd need fifteen minutes to show you the fix."*
+If it's **Simón Pedro** (executive):
+> *"I'm not going to pitch you — you have a CIO and a Chief Digital Business Officer for that. But I've spent a week inside your most complicated property, and I built agentic governance for Hard Rock before the AI Act made it mandatory. Fifteen minutes with Rafael Palou or Íñigo Onieva before I fly home would be worth more to me than an hour of your time."*
 
-Then hand him your phone and let him talk to your live agent: **(903) 602-4012.**
+If it's **Tous** (non-executive):
+> *"Don Simón — I know you handed the region over in January, so I'm not going to try to sell you anything. But you're the reason Latin America is the strongest part of this company, and you're here making sure it stays that way. I've seen something in this resort worth fifteen minutes of your Mexico committee's time. Would you point me at the right person?"*
 
-Nobody has ever pitched him by handing him a working product in a hallway. That is the thing he'll remember, and it's the thing he'll repeat to his nephew.
+**Fallback, almost never refused:** *"Then who runs F&B or guest experience for the Mexico properties? I'd rather spend my last day here talking to them than at the pool."*
+
+**Named targets, in order:** Antonio Tovar Barceló (CEO LatAm) → Rafael Palou (CIO) → Íñigo Onieva (CDBO) → the Mexico Comité de Dirección → Marga Juan (SER Barceló, if the conversation goes operational).
+
+---
+
+## 10. The demo — what to build if you get a second meeting
+
+A pretty interface proves nothing; thousands of people can generate one. **Your demo is only valuable if it shows the failure loop.**
+
+Build it from public and in-hand material — the resort guide PDF, your cards, the spa menus, manually modelled shuttle routes, synthetic availability, simulated driver GPS. No Barceló access required.
+
+The scene that closes the deal:
+> A guest books kayaking. The operator's system doesn't confirm. **The agent does not lie.** It detects the ambiguity, checks reservation state, prevents a duplicate booking, offers an alternative slot, escalates to a human, and records the entire span-level trace. Management sees the guest outcome *and* the operational cause.
+
+That single flow combines guest-experience insight, operator practicality, Hard Rock agentic reliability, governance, and your build speed. It is much harder to dismiss than a polished prototype.
+
+**Pair it with the control-room view**, because that's what converts anecdote into budget:
+> *"Riviera guests searched for late-night food 184 times this week. 61% got no viable result. 37 then contacted Guest Services."*
+
+That is a number a manager can act on. "The resort is confusing" is not.
+
+**The metric that governs the whole product:** trust = actions completed as promised ÷ actions promised. A false ETA or a phantom reservation makes the app *worse than nothing*, because it manufactures false certainty. Say that out loud — it proves you understand the risk better than the person selling them an app.
+
+---
+
+## 11. Verify on the ground tonight
+
+- **Which Simón.** Highest priority. Age is the tell.
+- **Is Antonio Tovar with him?** If yes, he's the real target.
+- **Try to book an à-la-carte for tomorrow**, and ask the host how many covers they turn away on a normal night.
+- **Walk past three restaurants at 8pm and count empty tables.** If some queue while others sit empty, that's an allocation failure you can name from first-hand observation — far stronger than any slide.
+- **Open the Barceló app on this property** and record exactly which functions are enabled here. That screenshot, next to the app store listing, *is* the pitch.
+
+---
+
+## 12. Corrections to my earlier draft
+
+Stated plainly, because you may have already read it:
+
+1. **The lead was wrong.** I framed this as a restaurant-technology and F&B-allocation pitch. Given their actual stack, the stronger and more honest lead is **agentic governance + the live resort operating layer**, with restaurant/AEO work as a fast supporting wedge.
+2. **"4 à-la-carte vouchers per 7 nights"** — sourced to a third-party guide about the Maya *Grand* complex, and **not corroborated**. You're at *Riviera*. Don't cite it unless you confirm it on your own booking.
+3. **"~25 restaurants"** → more precisely **~27 restaurant concepts across the six-hotel campus** (16 core + 6 Palace + 5 Riviera).
+4. **I over-committed to Simón Barceló Tous.** "The CEO" is literally Simón Pedro's title since January. Genuinely ambiguous — resolve on sight.
+5. **The AI-visibility ranking and the January 2026 succession remain new and correct** — neither appears in the ChatGPT thread, and both are strong material.
 
 ---
 
 ## Sources
 
-- [Hosteltur — Barceló's 2026 priorities: AI, direct channel, selective expansion](https://www.hosteltur.com/175821_ia-canal-digital-y-expansion-selectiva-las-prioridades-de-barcelo-en-un-escenario-desafiante.html)
-- [Hosteltur — 84% of the world's hotels are invisible to AI](https://www.hosteltur.com/175879_la-inteligencia-artificial-condena-a-la-invisibilidad-al-84-de-los-hoteles-del-mundo.html)
-- [Hosteltur — leadership change: the board after Simón Barceló Tous's departure](https://www.hosteltur.com/173905_asi-queda-el-consejo-de-grupo-barcelo-tras-la-salida-de-simon-barcelo-tous.html)
-- [Hosteltur — Grupo Barceló passes €7bn revenue, €313M profit](https://www.hosteltur.com/176587_grupo-barcelo-supera-los-7000-m-de-facturacion-y-logra-un-beneficio-de-313-m.html)
-- [El Economista — Simón Barceló Tous leaves executive role, remains co-president](https://www.eleconomista.es/transportes-turismo/noticias/13750606/01/26/simon-barcelo-tous-deja-su-cargo-ejecutivo-en-el-grupo-barcelo-pero-se-mantiene-como-copresidente.html)
-- [El Economista — record 2025 results, €7,867M revenue](https://www.eleconomista.es/transportes-turismo/noticias/13947255/06/26/barcelo-logra-nuevo-record-de-ingresos-en-2025-con-7867-millones-y-mejora-beneficio-un-4.html)
-- [Forbes España — Simón Pedro Barceló named consejero delegado](https://forbes.es/nombramientos/865799/simon-pedro-barcelo-nuevo-consejero-delegado-del-grupo-barcelo/)
-- [Preferente — family succession: Antonio Tovar, new CEO for Latin America](https://www.preferente.com/noticias-de-hoteles/sucesion-familiar-en-barcelo-antonio-tovar-nuevo-ceo-para-latinoamerica-347896.html)
-- [Reportur — Barceló chooses Antonio Tovar Barceló as CEO of Latin America](https://www.reportur.com/mexico/2026/01/29/barcelo-elige-ceo-de-america-a-antonio-tovar-barcelo/)
-- [Hispanidad — Simón Pedro assumes full power through 2031](https://www.hispanidad.com/economia/barcelo-simon-pedro-barcelo-asume-por-primera-vez-todo-poder-hasta-2031_12065147_102.html)
-- [Barceló Grupo — official communiqué, January 2026](https://www.barcelogrupo.com/prensa/2026/01/comunicado-oficial/)
-- [Barceló Grupo — management team](https://www.barcelogrupo.com/en/about-us/management-team/)
-- [Nexotur — Barceló leads AI-engine visibility in Spanish hospitality](https://nexotur.com/barcelo-lidera-la-visibilidad-en-los-motores-de-ia-del-sector-hotelero-espanol/)
-- [Marketing4eCommerce — the AI hotel visibility ranking, by segment](https://marketing4ecommerce.net/estos-son-los-hoteles-que-lideran-la-visibilidad-en-tiempos-de-ia-claves-del-nuevo-seo-hotelero/)
-- [Marketing Directo — Meliá, Marriott and Barceló lead AI visibility](https://www.marketingdirecto.com/anunciantes-general/publicaciones/ranking-visibilidad-grupos-hoteleros-ia)
-- [Hospitality Net / Hotelworld AI — AI is becoming the new gatekeeper of hotel demand (HITEC 2026)](https://www.hospitalitynet.org/whitepaper/4133014/hotelworld-ai-reveals-second-edition-of-hospitalitys-largest-ai-visibility-study-at-hitec-ai-is-becoming-the-new-gatekeeper-of-hotel-demand)
-- [Reportur — Barceló concentrates owned hotels in the Americas](https://www.reportur.com/mexico/2021/10/07/barcelo-centramos-america-hoteles-propiedad/)
-- [Reportur — Barceló boasts no debt and strong cash position](https://www.reportur.com/mexico/2026/06/01/barcelo-presume-de-no-tener-deuda-y-si-mucha-tesoreria/)
-- [All-Inclusive Guide — Barceló Maya Grand Resort complex review (restaurant count, voucher system)](https://all-inclusive-guide.com/resorts/barcelo-maya-grand/)
-- [Tripadvisor — Barceló Maya Grand Resort reviews](https://www.tripadvisor.com/Hotel_Review-g27717290-d27717589-Reviews-Barcelo_Maya_Grand_Resort-Barcelo_Maya_Solidaridad_Yucatan_Peninsula.html)
+Company and leadership: [Hosteltur — board after Simón Barceló Tous's departure](https://www.hosteltur.com/173905_asi-queda-el-consejo-de-grupo-barcelo-tras-la-salida-de-simon-barcelo-tous.html) · [El Economista — Tous leaves executive role](https://www.eleconomista.es/transportes-turismo/noticias/13750606/01/26/simon-barcelo-tous-deja-su-cargo-ejecutivo-en-el-grupo-barcelo-pero-se-mantiene-como-copresidente.html) · [Forbes España — Simón Pedro named consejero delegado](https://forbes.es/nombramientos/865799/simon-pedro-barcelo-nuevo-consejero-delegado-del-grupo-barcelo/) · [Preferente — Antonio Tovar, CEO LatAm](https://www.preferente.com/noticias-de-hoteles/sucesion-familiar-en-barcelo-antonio-tovar-nuevo-ceo-para-latinoamerica-347896.html) · [Barceló — official communiqué Jan 2026](https://www.barcelogrupo.com/prensa/2026/01/comunicado-oficial/) · [Barceló — management team](https://www.barcelogrupo.com/en/about-us/management-team/)
 
----
+Financials: [Hosteltur — €7bn revenue, €313M profit](https://www.hosteltur.com/176587_grupo-barcelo-supera-los-7000-m-de-facturacion-y-logra-un-beneficio-de-313-m.html) · [El Economista — record 2025 results](https://www.eleconomista.es/transportes-turismo/noticias/13947255/06/26/barcelo-logra-nuevo-record-de-ingresos-en-2025-con-7867-millones-y-mejora-beneficio-un-4.html) · [Barceló — 2025 executive summary](https://www.barcelogrupo.com/content/dam/barcelo-group/comunicaci%C3%B3n/annual-report/EXECUTIVE%20SUMMARY%202025.pdf)
 
-**Confidence notes.** Leadership changes, financials and the AI-visibility rankings are CONFIRMED against multiple independent sources. *Which* Simón is on site is INFERENCE — strong, but verify. The claim that some venues queue while others sit empty is INFERENCE from the rationing model and guest reports; pose it as a question, never as an assertion, until they give you the data.
+Strategy and technology: [Hosteltur — Barceló's 2026 priorities: AI, direct channel, selective expansion](https://www.hosteltur.com/175821_ia-canal-digital-y-expansion-selectiva-las-prioridades-de-barcelo-en-un-escenario-desafiante.html) · [EISI Hotel — Barceló digital transformation](https://eisihotel.com/es/novedades/barcelo-hotel-group-apuesta-por-la-innovacion-de-eisi-hotel) · [Tealium case study](https://tealium.com/resource/case-study/barcelo-data-transformation-results-increased-revenue-decreased-marketing-costs/) · [BEONx partnership](https://beonx.com/knowledge/articles/barcelo-and-beonx-a-partnership-to-transform-and-digitalize-revenue-management/) · [Oracle Nor1 at Barceló](https://www.hospitalitynet.org/news/4115352/how-oracles-nor1-machine-learning-helps-barcelo-hotel-group-extend-their-revenue-strategy-and-maintain-their-human-connection) · [Forbes España — Best CIO 2026](https://forbes.es/listas/945212/lista-forbes-espana-best-cio-2026/)
+
+AI visibility: [Nexotur — Barceló leads AI-engine visibility](https://nexotur.com/barcelo-lidera-la-visibilidad-en-los-motores-de-ia-del-sector-hotelero-espanol/) · [Marketing4eCommerce — ranking by segment](https://marketing4ecommerce.net/estos-son-los-hoteles-que-lideran-la-visibilidad-en-tiempos-de-ia-claves-del-nuevo-seo-hotelero/) · [Hosteltur — 84% of hotels invisible to AI](https://www.hosteltur.com/175879_la-inteligencia-artificial-condena-a-la-invisibilidad-al-84-de-los-hoteles-del-mundo.html)
+
+Property: [Barceló Maya Grand Resort — cuisine (the "book at check-in" pages)](https://www.barcelo.com/en-us/barcelo-maya-grand-resort/cuisine/) · [Maya Resort Guide PDF](https://www.barcelo.com/static/Estructura_PDF/Mexico/Complejo_Maya/Maya-ResortGuide.pdf) · [Barceló Maya Riviera](https://www.barcelo.com/en-us/barcelo-maya-riviera/) · [Barceló app](https://www.barcelo.com/en-us/bhg/discover-the-barcelo-app/)
+
+Regulatory: [European Commission — European approach to AI](https://digital-strategy.ec.europa.eu/en/policies/european-approach-artificial-intelligence)
+
+**Confidence.** Leadership changes, financials, AI-visibility rankings and the app-vs-property contradiction are CONFIRMED against multiple sources. Which Simón is on site is UNRESOLVED. Vendor-reported figures (Tealium's 37% revenue lift, Talkdesk's NPS claims, EISI's "34 hours/day") establish that systems exist, **not** causality — do not repeat them as fact.
