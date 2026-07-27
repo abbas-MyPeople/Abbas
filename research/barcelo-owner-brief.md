@@ -275,6 +275,42 @@ That single paragraph does four things: it flatters the CIO accurately, isolates
 
 ---
 
+## 5f. Owned vs. operated — the numbers, and why they're your best argument
+
+**Barceló Hotel Group (the four branded chains): ~286–288 hotels, ~63,096 rooms, 32 countries.**
+Split by operating model, most recently reported: **31% owned · 39% management · ~21–29% rental/lease · 1% franchise.**
+
+| Regime | Share | Approx. hotels | What it means for you |
+|---|---|---|---|
+| **Owned** | **31%** | **~89** | **Simón Pedro can decide alone.** No third-party owner to persuade. |
+| Management | 39% | ~112 | Barceló operates; someone else owns the asset and funds capex |
+| Rental / lease | ~21–29% | ~60–83 | Barceló runs the business, doesn't own the building |
+| Franchise | 1% | ~3 | Effectively discarded — see below |
+
+**Rooms:** roughly **20,000 owned**, of which **~14,000 are in Latin America**. Around **45,000+ rooms belong to ~90 different third-party owners**.
+
+**Plus Crestline** — the piece most people miss. Barceló bought back the outstanding stake and now owns **100% of Crestline Hotels & Resorts**, its US management company, run by **Marta Barceló**. Crestline manages **~120 hotels and conference centres across 25 states and DC** — for *other people's* asset ownership, largely under other brands. These appear to sit **outside** the ~288 Barceló-branded count, so the group touches roughly **400+ properties in total while owning fewer than 90 of them.**
+
+> **Honest caveat:** the published figures don't reconcile perfectly — hotel counts move between 275/286/288 across sources and reporting periods, and the regime percentages sum to ~92% rather than 100%. Use **"about 290 hotels, roughly a third owned"** rather than a false-precision number. If he corrects you on the exact figure, that's fine — being roughly right and openly approximate reads as competent; being confidently wrong does not.
+
+### Why this is your strongest structural argument
+
+Barceló is **deliberately counter-trend**. While the industry sprints toward asset-light, Barceló publicly reaffirms a balance of ownership, rental and management — and has **shelved franchising entirely**. That is a family-company conviction: they want to control both the asset *and* the operation.
+
+That gives you two things:
+
+**1. The lab has to happen on an owned asset — and you're standing on one.**
+At a managed or leased hotel, any guest-experience investment needs an owner's consent, splits the benefit, and dies in a negotiation. At the ~89 owned hotels — concentrated in Latin America, which is where 14,000 of the 20,000 owned rooms sit — **the CEO is the only person who has to agree.** That's not a rhetorical flourish; it's why your ask is realistic here and would be unrealistic at most of their portfolio.
+
+**2. The scale story he'll ask for next.**
+He will ask, in some form, *"and then what?"* The answer:
+
+> *"Prove it where you own it. Then it stops being a cost and becomes the reason someone hands you their hotel. You already market your operating platform to owners — BEA, revenue management, purchasing, standards. Right now none of that includes a guest experience an owner can feel. Ninety owners and a hundred and twenty Crestline properties are the distribution."*
+
+That converts a one-resort pilot into a **management-contract differentiator** across ~400 properties, without Barceló spending capex on assets it doesn't own. For a CEO deciding where to put a small budget, that is the difference between an expense and a strategic option.
+
+---
+
 ## 6. The three wedges, ranked
 
 **① Agentic governance and reliability — strongest.**
