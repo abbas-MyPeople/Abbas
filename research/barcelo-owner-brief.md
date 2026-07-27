@@ -311,6 +311,66 @@ That converts a one-resort pilot into a **management-contract differentiator** a
 
 ---
 
+## 5g. "Best CIO" vs. a 2.74 app — resolving the contradiction
+
+There is no contradiction. Both facts are true, and understanding *why* is the most sophisticated thing you can say in that room.
+
+### ⚠️ First — a number that could have burned you
+
+**Do not walk in and say "your app is 2.74."**
+
+- **Google Play: 2.74 / 5** from ~4,200 ratings — real and verified.
+- **But Barceló's own site advertises the app at 4.7 / 5 from 4,800+ reviews** (iOS skews far higher, and it's the number their marketing uses).
+
+If you lead with 2.74 and he answers "our app is rated 4.7," you look like you cherry-picked, and you lose the room over a statistic. **Use the content of the complaints, not the score.** Complaint content is unarguable and can't be countered with a different number:
+
+> *"A guest booked a massage in your app three days ahead. The hotel had no record of it. Staff told them they were having a lot of problems with the app."*
+
+If you must use a figure, be precise and volunteer the other side yourself: *"Your Android rating is 2.74 across four thousand ratings — iOS is much better, which is itself interesting."* Volunteering the counter-evidence is what makes you credible.
+
+### What the Forbes list actually is
+- **First edition ever**, held at Forbes House on **18 June 2026** — about a month ago. **"Powered by KPMG España."**
+- Selection criteria, as published: demonstrated impact of projects, strategic trajectory at major companies, and leadership in **AI, cloud and cybersecurity** — explicitly including *"recent media coverage between 2024 and 2026"* and prior recognitions such as the CIO 100 Awards.
+- **No public jury detail.** It is a **recognition list built on narrative, project delivery and media presence — not an audit of product quality**, and certainly not of app-store ratings. "One of 50 recognised CIOs in Spain" is a real professional honour; it is not a measurement of guest experience.
+
+### Palou's actual record is genuinely strong — don't underestimate him
+He has real, hard wins on the corporate plane:
+- **16 business-critical systems — ERP, BI, B2B CRM — migrated to AWS in six weeks**, with a reported **20–25% SAP performance improvement**, and a network redesign so any hotel with an internet connection can reach SAP.
+- Snowflake lakehouse and the corporate data platform; **Workday**; SAP S/4HANA; the Cybersecure Hotel Model; sponsoring EISI with SER Barceló.
+
+That is a serious infrastructure CIO doing serious infrastructure work. **Assume he is good, because the evidence says he is.**
+
+### Why the app is still bad: it isn't his KPI
+The guest app does not sit with the CIO. It sits with **Digital Business (Íñigo Onieva)**, alongside e-commerce, conversion and the direct channel — and its in-stay content depends on **property operations** and **SER Barceló's** processes.
+
+So the ownership of a single guest's stay is split across:
+
+| Layer | Owner |
+|---|---|
+| Infrastructure, data, security, corporate systems | **Palou (CIO)** |
+| App, direct channel, conversion, digital commerce | **Onieva (CDBO)** |
+| Brand and guest-experience concepts | Mulet / Ramis |
+| Operating processes and standards | **Marga Juan (SER Barceló)** |
+| Whether any of it is switched on at *this* hotel | **The property** |
+
+**Every one of them can hit their number while the guest still can't book dinner.** That is the same pattern as your head chef saying the kitchen runs perfectly — local optimisation, global failure. Nobody owns the end-to-end sentence.
+
+### The regional gap — possibly the real answer
+Barceló's publicly identifiable regional IT leader is **Jaume Comas, Director of Information Systems *EMEA***. **No equivalent Americas or LatAm information-systems leader appears publicly.** Mexico is not EMEA. EISI's 40+ property rollout was EMEA-led. That is consistent with what you experienced: the corporate platform is strong, the EMEA edge is being digitised, and **the Americas edge may simply be further back in the queue** — in the region that holds 14,000 of their 20,000 owned rooms.
+
+Treat this as a **question to ask, not a claim to make** — it's an absence of public evidence, not proof.
+
+### Is it just this resort?
+**No, and yes.**
+- **No:** the Android rating is global, not Maya-specific. The complaint themes recur across properties.
+- **Yes:** capability is genuinely enabled property-by-property. Barceló Lanzarote's own pages offer app-based restaurant reservation; Barceló Maya's pages say *book at check-in*. Their app privacy policy states outright that **the catalogue of services depends on the hotel**.
+
+So the honest formulation — and it's a much stronger line than "your app sucks":
+
+> *"Your platform is real and your CIO has done hard work. The app isn't his job, and the in-stay experience isn't anyone's job. It's enabled hotel by hotel, and this one — your biggest owned resort, in the region where you own the most rooms — hasn't been switched on."*
+
+---
+
 ## 6. The three wedges, ranked
 
 **① Agentic governance and reliability — strongest.**
