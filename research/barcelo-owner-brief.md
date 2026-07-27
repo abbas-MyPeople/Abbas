@@ -14,6 +14,7 @@
 2. **Pitch the thing you uniquely are:** the person who has built **autonomous agents that detect their own failures, recover, and expose every action through a unified governance layer** — at a global hospitality brand — *and* who has run the physical operation himself.
 3. **There is a deadline six days out.** EU AI Act transparency obligations begin applying **2 August 2026**. Barceló is EU-headquartered and running 40+ AI use cases. That is not a manufactured urgency; it is a real date on his calendar.
 4. **You are carrying evidence nobody else has:** a week of documented guest-journey failures inside their single most operationally complex property, plus the paper cards proving the resort already produces the data and just can't compute with it.
+4b. **Their own app is rated 2.74/5 from ~4,200 ratings on Google Play** — and the reviews describe your product thesis and a trust failure, verbatim. See §5b. This is the most quotable fact in the brief.
 5. **Two men are named Simón.** Which one determines the entire register. See §1 — and note the tells, because "the CEO" points one way and the Mexico assignment points the other.
 6. **The ask is an introduction, not a sale.** Named targets in §9.
 
@@ -63,7 +64,9 @@ He cannot buy. But he built Latin America into the group's best-performing regio
 - **Latin America is where they own the bricks** — and it has delivered their best historical results
 - Ávoris: ~59% of group revenue but only **8.8% of EBITDA**; they have reportedly explored selling it, while also acquiring **100% of Atrápalo** (June 2026)
 
-**The line that matters:** in most of the world Barceló manages or leases. In Latin America they **own**. Margin you create in a Mexican resort lands on the family's own balance sheet. Say that and you've said something a consultant wouldn't think to say.
+**The line that matters:** in most of the world Barceló manages or leases. In Latin America they **own** — roughly 14,000 of their ~20,000 owned rooms sit there, and they are the **third-largest foreign hotel operator in Mexico** (22 hotels, 8,901 rooms), having put **$250M+** into the Riviera Maya complex and the Maya Arena convention centre. *(Direct investment at that scale strongly implies the Maya campus is owned rather than managed — treat as strong inference, worth confirming.)*
+
+**Why that is your best economic argument.** At a managed or franchised property, a guest-experience improvement mostly benefits somebody else's balance sheet, and the operator has to negotiate with an owner to fund it. Here, **the family owns the asset, the brand and the operation**. There is no third-party owner to persuade, no capex committee outside the room, and every point of margin or reputation you create accrues directly to them. This is the one place in the portfolio where a principal can simply *decide*. Say that — it reframes your ask from "please buy something" to "you are the only person who needs to agree."
 
 **And they don't need money.** Net cash, record profits. Never sell savings as survival — sell edge.
 
@@ -133,6 +136,25 @@ The corporate capability exists. It is not reaching this property. That is a far
 
 ---
 
+## 5b. The app rating — your single most quotable fact
+
+**Barceló Hotel Group app: 2.74 / 5 from ~4,200 ratings on Google Play.** Last updated 6 May 2026, so it is actively maintained — this is not an abandoned product, which makes the score worse, not better.
+
+The recurring complaints are almost eerily aligned with what you want to build:
+
+- *"Useless… says nothing about the hotels."*
+- *It **"should have restaurant menus, maps and locations of everything and entertainment schedules."*** — that is your product thesis, written by their own guest, unprompted.
+- **The trust failure, and the best single anecdote you have:** a guest booked a massage through the app three days in advance; **the hotel had no record of it**, and staff said they were *"having lots of problems with the app."*
+- Not all properties are available in the app.
+
+**Why the massage story is the whole pitch in one sentence.** The app made a promise. The physical operation never received it. Nobody detected the gap, and the guest discovered it at the counter. That is exactly the failure class you built detection, recovery and span-level tracing for at Hard Rock — an action reported as complete that was never completed. It is also the metric that governs the entire product: *actions completed as promised ÷ actions promised.*
+
+Say it plainly and without relish: *"Your app is at 2.74 with four thousand ratings, and the top complaints are people asking for restaurant menus, maps and schedules. Your guests have already written your product spec."*
+
+**Handle with care.** State it once, flat, as a fact you looked up — never as mockery. A family principal hears criticism of the app as criticism of his people. The tone that works is *"this is a solvable problem that's costing you brand equity,"* not *"this is embarrassing."*
+
+---
+
 ## 6. The three wedges, ranked
 
 **① Agentic governance and reliability — strongest.**
@@ -198,6 +220,28 @@ If it's **Tous** (non-executive):
 **Fallback, almost never refused:** *"Then who runs F&B or guest experience for the Mexico properties? I'd rather spend my last day here talking to them than at the pool."*
 
 **Named targets, in order:** Antonio Tovar Barceló (CEO LatAm) → Rafael Palou (CIO) → Íñigo Onieva (CDBO) → the Mexico Comité de Dirección → Marga Juan (SER Barceló, if the conversation goes operational).
+
+### 9b. The real ask: the lab
+
+You don't need a detailed proposal, and pretending to have one would be worse than not having one — you'd be guessing at their internals in front of a man who knows them. But **you do need one concrete sentence**, or the conversation evaporates into "very interesting, send me something." This is that sentence:
+
+> *"Give me one property, a small budget and a few months. Treat it as a lab. I'll pick the problems, build the thing, and carry the reliability risk myself. If it doesn't work, you've lost a rounding error. If it works, you own it and you roll it out."*
+
+**Why this is the right ask for this specific buyer:**
+- It matches how family companies actually move — they back a person, not an RFP. There is no procurement cycle in a hallway.
+- It's bounded and cheap, so it doesn't need a committee.
+- It matches what you genuinely are: fast, scrappy, and right — someone who ships while an enterprise process is still scoping.
+- It sidesteps your real weakness. You cannot credibly claim you can deploy across 286 hotels. You can absolutely claim you can transform one.
+
+**On "there's nothing at stake for him."** That instinct is right but the phrasing is dangerous — say it that way and a serious operator will immediately think of what *is* at stake: guest data, GDPR, brand, PCI, property network access, and his nephew's transition year. If you appear not to have thought about those, you look junior. Say the sharper version instead:
+
+> *"The only things you're risking are a small budget and my time. I'll carry the reliability risk. And I won't touch a single real guest until you've watched it work on synthetic data."*
+
+That is the same asymmetry, stated by someone who has clearly done this before — and it pre-answers the objection instead of inviting it.
+
+**The credential line, expanded.** Your background is broader than the repo shows, and the hospitality depth matters most here: **ex-Google (YouTube, Android Auto), Hard Rock Cafe's first AI agents and the agent-governance layer, Hilton**, plus NDTV, government and education sector work — and an owner-operator restaurant of your own. Lead with **Hard Rock and Hilton**: two global hospitality brands is the credential that makes you a peer rather than a supplier. *(Be careful never to imply you'd bring anything confidential from Hilton into a Barceló engagement — with a competitor's name in play, discretion is itself a credential.)*
+
+**The live demo.** Your main voice line is currently switched off, but the agent is reachable on the alternate AI line. **Confirm that number works before you need it.** Handing him a phone and letting him talk to a working agent is worth more than any slide — but a demo that fails to connect is worse than no demo at all.
 
 ---
 
