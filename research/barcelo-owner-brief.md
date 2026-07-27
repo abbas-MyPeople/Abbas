@@ -155,6 +155,56 @@ Say it plainly and without relish: *"Your app is at 2.74 with four thousand rati
 
 ---
 
+## 5c. Ground intel from staff — and how to use it at CEO altitude
+
+**CONFIRMED: the meeting is with Simón Pedro Barceló Vadell, group CEO.** Full executive authority through 2031. He is the decision-maker; there is nobody to be referred to. That raises the ceiling on the ask and lowers your tolerance for anything that sounds like a snag list.
+
+### Protect your sources first
+Kitchen and buffet staff spoke candidly to a guest. **Never attribute anything to a named person, a shift, or a station.** Frame every observation as *your own* — "I noticed," "I asked around," "as a guest I couldn't tell." If a CEO traces a complaint back to a specific employee, you have cost someone their job to make a point, and any operator worth respecting will hold that against you.
+
+### What was actually found
+| Observation | Surface reading | What it really is |
+|---|---|---|
+| Guests perceive "only Mexican food" | Menu variety problem | **Information problem.** The international station *does* rotate — the head chef sets it and knows the next day's menu in advance. Guests never see it. |
+| Shortage of umbrellas | Supply problem | Possibly supply — but at least partly **"guests don't know where or when."** No live view of what's available where. |
+| Sargassum ~6 months a year | Regional misfortune, not fixable | **A merchandising trigger.** Beach condition is knowable daily; what the resort recommends that day is not adjusted to it. |
+| Head chef: *"everything runs perfectly smooth"* | A non-finding | **The single most important finding in the brief.** See below. |
+
+### The pattern — this is the CEO-level sentence
+Every problem found is **an information problem wearing an operations costume**:
+
+> *"The international station exists and rotates — guests don't know. The umbrellas exist somewhere — guests don't know. Your head chef knows tomorrow's menu today — guests don't know. Your kitchen runs perfectly, and the guest still leaves thinking there was only Mexican food. You don't have a supply problem here. You have a distribution problem for information you already produce every single day."*
+
+**Why this lands with a CEO and a snag list does not.** More umbrellas and more chefs cost real capex and payroll. Surfacing what already exists costs almost nothing. In an all-inclusive the guest has *already paid* — their satisfaction is almost entirely a function of what they discover and successfully access. So the return on information is enormous and the return on more supply is poor. That is a margin argument, not a hospitality complaint.
+
+### Why "everything runs perfectly smooth" is the finding
+Of course the head chef said that. But he is very likely *telling the truth by his own metrics* — food out on time, HACCP clean, covers served, no waste incident. The kitchen is measuring **"did we serve the food."** The guest is measuring **"did I get what I wanted, and did I know it existed."**
+
+Both can be fully satisfied. Nobody owns the gap between them.
+
+> *"Every department here is hitting its own numbers. The kitchen is genuinely excellent. And the guest still can't find dinner. That's not a failure of any department — it's that no single person owns the sentence 'the guest discovered, reached and consumed the thing.' That's the job I'd want to take."*
+
+That is the argument for a lab that reports high, rather than a project buried inside F&B or IT.
+
+### The international station — your best worked example
+Use this as the concrete proof, because it's small, true, free and instantly testable:
+
+- The rotation already exists and is decided a day ahead.
+- Guests have no way to know it, so they generalise from what they saw today.
+- They conclude "it's all Mexican," and that lands in reviews and NPS.
+- **The food is already there. Only the information is missing.**
+- Fix: surface tomorrow's station in the app and on the boards. Zero ingredients change. Perceived variety changes immediately.
+- It's measurable: track the "limited variety" complaint rate before and after.
+
+### Sargassum as a merchandising trigger, not an excuse
+Six months of seaweed is not Barceló's fault and cannot be engineered away — say so plainly, because pretending otherwise destroys credibility. But beach condition is **knowable every morning**, and nothing currently adapts to it. On a bad-beach day the system should be pushing the pools, the spa, the cenote and reef excursions, bowling, the water park — i.e. the *paid* inventory that works precisely when the free one doesn't.
+
+> *"You can't control the sargassum. You can control what the resort recommends on a sargassum morning. Right now it recommends the same thing it does on a perfect day."*
+
+That converts your worst six months into the spa's best six months — and it is the "relevance, not banners" upsell logic applied to a real, recurring, regional problem.
+
+---
+
 ## 6. The three wedges, ranked
 
 **① Agentic governance and reliability — strongest.**
