@@ -246,6 +246,35 @@ Work out fast who actually decides (Simón Pedro, if he's there — nobody else 
 
 ---
 
+## 5e. Who owns technology — and why you must not bash it
+
+**No family member runs technology. CONFIRMED.** There is no CTO; the function is split between two professionals:
+
+- **Rafael Palou — CIO, Grupo Barceló.** Not family. Leads global technology and data strategy: modernised the core toward open digital architectures, cloud and scalable platforms integrating booking, revenue management and analytics; now leads AI into personalisation, predictive decisions and intelligent automation.
+- **Íñigo Onieva — Chief Digital Business Officer.** Not family. Balearics-based, previously at **BD Travel / Best Day Travel Group — a Cancún-headquartered Mexican travel company.** He owns direct channel and publicly owns the ChatGPT/Gemini distribution problem. *(Earlier name-collision flag on this person is resolved — different individual, travel-industry background.)*
+
+Family in leadership is **Simón Pedro Barceló Vadell** (CEO), **Simón Barceló Tous** (co-president), **Antonio Tovar Barceló** (CEO LatAm) and **Marta Barceló** (Crestline). None of them own the tech function.
+
+### The trap
+Technically you *can* criticise the technology without insulting the family. **Don't.**
+
+Barceló just publicly celebrated Palou — he made **Forbes España's first-ever 50 Best CIO list (2026)**, and the company's own communications credit him with the transformation. So attacking the technology means attacking a man the CEO is publicly proud of. Simón Pedro will move to **defend** rather than engage, and you'll have spent your one meeting making him protective.
+
+Worse: **Palou is the person who would either sponsor or kill anything you propose.** An outsider who says *"your CIO is failing"* gets destroyed by the CIO within a week. An outsider who says *"your CIO built a good platform and it isn't reaching the edge — I want to work at the edge"* becomes something Palou can *use*.
+
+### The framing that keeps everyone on your side
+Separate **the corporate stack** from **property execution**. This is also simply the truth:
+
+> *"Your platform is not the problem. What's been built centrally is genuinely strong — the revenue systems, the CRM, the data work. The problem is the last hundred metres: it isn't reaching this property, and nobody's job is to make sure it does. I don't want to rebuild anything your CIO owns. I want to work at the edge he can't reach from Palma."*
+
+That single paragraph does four things: it flatters the CIO accurately, isolates a problem no one currently owns, makes you an ally rather than a threat, and asks for the one thing that doesn't require anyone to lose.
+
+**The app is the one exception** — it is publicly rated 2.74 by ~4,200 people, so it's a fact, not an opinion. Even there, attribute it to guests, never to a team: *"your guests are telling you"*, not *"your people got this wrong."*
+
+**Bonus hook:** Onieva came from Best Day, a Cancún company. If you get to him, he already understands this market from the inside — and he's the executive who has publicly said AI search is a strategic threat, which is your wedge ③.
+
+---
+
 ## 6. The three wedges, ranked
 
 **① Agentic governance and reliability — strongest.**
