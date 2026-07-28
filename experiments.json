@@ -19,9 +19,17 @@
       },
       "min_sessions_per_variant": 200,
       "max_days": 21,
-      "status": "running",
+      "status": "reverted",
       "started": "2026-07-07",
-      "result": null
+      "result": {
+        "winner": null,
+        "lift_pct": null,
+        "p": null,
+        "n_a": 30,
+        "n_b": 15,
+        "reason": "max_days (21) reached without minimum samples (A 30/200, B 15/200, 0 conv) — reverting (inconclusive)",
+        "decided": "2026-07-28"
+      }
     }
   ]
 }
