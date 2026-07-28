@@ -157,7 +157,9 @@ Say it plainly and without relish: *"Your app is at 2.74 with four thousand rati
 
 ## 5c. Ground intel from staff — and how to use it at CEO altitude
 
-**CONFIRMED: the meeting is with Simón Pedro Barceló Vadell, group CEO.** Full executive authority through 2031. He is the decision-maker; there is nobody to be referred to. That raises the ceiling on the ask and lowers your tolerance for anything that sounds like a snag list.
+**UPDATED: the meeting is with Simón Barceló Tous, co-president.** *(Read from "it's Simón Barceló" — Simón Pedro's full name is Simón Pedro Barceló **Vadell**; the plain "Simón Barceló Tous" is the co-president. If he is younger than ~60 and everyone stops talking when he speaks, it's actually Simón Pedro — see §1.)*
+
+**He is non-executive.** He resigned every executive role in January 2026 on hitting 65, per bylaws the family wrote in 2018. He cannot approve a budget or sign a pilot. **See §5h — this is a different conversation, and in several ways a better one.** Do not bring him a snag list either way.
 
 ### Protect your sources first
 Kitchen and buffet staff spoke candidly to a guest. **Never attribute anything to a named person, a shift, or a station.** Frame every observation as *your own* — "I noticed," "I asked around," "as a guest I couldn't tell." If a CEO traces a complaint back to a specific employee, you have cost someone their job to make a point, and any operator worth respecting will hold that against you.
@@ -368,6 +370,52 @@ Treat this as a **question to ask, not a claim to make** — it's an absence of 
 So the honest formulation — and it's a much stronger line than "your app sucks":
 
 > *"Your platform is real and your CIO has done hard work. The app isn't his job, and the in-stay experience isn't anyone's job. It's enabled hotel by hotel, and this one — your biggest owned resort, in the region where you own the most rooms — hasn't been switched on."*
+
+---
+
+## 5h. Playing Simón Barceló Tous — the man who built this
+
+### Why this is better than it looks
+He can't buy anything. But on almost every other axis he is the *more* valuable conversation:
+
+- **He has time.** A non-executive co-president on a resort visit isn't running a €7.9bn company between calls. Simón Pedro would give you ten minutes; Tous could give you two hours over dinner.
+- **This is his region and probably his building.** The board publicly credited him with developing the group in Latin America, *"where the company has achieved its best historical results."* He very likely built this complex.
+- **He is here on operational business.** He's supervising the **Comité de Dirección de México through 2026** to hand the region to Antonio Tovar. He is *already* in Mexico review mode — the exact frame where a guest-experience diagnosis is relevant rather than intrusive.
+- **His introduction carries family blessing.** A referral from the man who built LatAm to the nephew inheriting it is worth more than a cold fifteen minutes with the group CEO.
+
+### The one big risk: you are critiquing his life's work
+With Simón Pedro, the Maya complex is an asset on a balance sheet. **With Tous, it is his achievement.** Every criticism of this resort is, emotionally, a criticism of him — and he is a 65-year-old man who just handed over his career. Get this wrong and he becomes defensive, politely ends the conversation, and you never hear from anyone again.
+
+**The framing that avoids it entirely: the world changed, he wasn't wrong.**
+
+> *"What you built here is genuinely extraordinary — six hotels, two kilometres of beach, the theatres, the water parks, the convention centre. Physically, this is world-class, and it holds up. The only thing that's changed is that guests now expect to reach it through their phone. That's not a flaw in what you built. It's a layer that didn't exist when you built it."*
+
+That lets him agree without conceding a thing — and it's true.
+
+### The emotional spine: continuity, not disruption
+He is optimising for whether what he built keeps winning after he's gone. Speak to that directly:
+
+> *"You spent a career making this the best-performing region in the company. The physical standard you set is done — nobody's going to out-build you here. The next generation's version of that same standard is informational: whether a guest can find, reach and get the thing. I'd like to help your successor hold the standard you set, in the medium he'll be judged in."*
+
+That is the sentence for this specific man. It costs him no admission, credits him fully, and makes helping you the same thing as protecting his legacy.
+
+### Ask questions — he knows more than you
+On umbrellas, sargassum, buffet rotation and shuttle timing, **he has forgotten more than you've observed in a week.** Do not tell him about his own operation. Ask:
+
+- *"How much of the guest experience here do you think is a technology problem versus an operating-model problem?"*
+- *"When you built this, what did you assume guests would need that turned out to be wrong?"*
+- *"Is the app situation something the region has chosen to deprioritise, or is it just not visible from Palma?"*
+
+He will enjoy these questions. Men in his position are rarely asked what they think any more — they're asked for things.
+
+### The ask, calibrated to what he can actually give
+Never a contract. **One introduction**, and ideally a specific one:
+
+> *"Don Simón — I'm not going to sell you anything; you handed the region over in January. But you're here making sure Antonio inherits it in good shape. I've spent a week inside this resort as a guest and as an engineer, and I've seen something worth fifteen minutes of the Mexico committee's time. Would you point me at the right person before I fly home?"*
+
+**If Antonio Tovar is on the property, that is the real prize** — ask to be introduced to him by name. A warm handoff from his uncle is the single most valuable outcome available from this trip.
+
+**Fallback:** *"Then who runs guest experience for the Mexico properties? I'd rather spend my last day here talking to them than at the pool."*
 
 ---
 
