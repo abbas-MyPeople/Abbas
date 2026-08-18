@@ -24,8 +24,7 @@ th{text-align:left;font-weight:680;color:var(--ink);border-bottom:2px solid var(
 td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
 hr{border:0;border-top:1px solid var(--line);margin:34px auto}
 h1+p{font-size:17px;color:var(--ink2)}
-</style>
-<h1>Restaurant Intelligence Dossier - architecture</h1>
+</style><h1>Restaurant Intelligence Dossier - architecture</h1>
 <p>The template every restaurant runs through. Written before the collectors, on purpose,</p>
 <p>because the guardrails are the valuable part and they are hard to retrofit.</p>
 <p>Version 1, 2026-08-18.</p>
@@ -71,7 +70,10 @@ L5  Demand-shape read from their own POS, prep and roster to the peak, phone
 <ul><li>Never skip a rung. L0 to L4 without L2 and L3 is a guess dressed as analysis.</li><li>L3 must name something an owner could actually change.</li><li>L4 must show its arithmetic and its assumptions, and mark every assumption.</li><li>Where the ladder cannot reach L3 honestly, stop at L2 and say so.</li></ul>
 <hr>
 <h2>2. Collection domains</h2>
-<p>Ten domains. Each field carries the tier block from section 0.</p>
+<p>Fourteen domains. Each field carries the tier block from section 0.</p>
+<p>Domains A-J are collection. K-N are the reads that turn collection into a</p>
+<p>conversation: the menu teardown (section 4), the guest journey (5), the two</p>
+<p>discovery scores (6) and the improvement map (7).</p>
 <h3>A. Identity and premises</h3>
 <div class="tw"><table><tr><th>Field</th><th>Source</th><th>Obtainable</th></tr><tr><td>Legal name, DBA, owner entity</td><td>HCAD, TX Comptroller, TABC</td><td>Free, public record</td></tr><tr><td>Address, suite, centre name</td><td>Their site, Maps</td><td>Free</td></tr><tr><td><strong>Building square footage, year built</strong></td><td><strong>HCAD (public.hcad.org)</strong></td><td><strong>Free, public record</strong></td></tr><tr><td>Lease vs own, land value</td><td>HCAD</td><td>Free</td></tr><tr><td>Estimated seats</td><td>sqft heuristic, photos, reservation grid</td><td>Derived, low confidence</td></tr><tr><td>Kitchen type (hood, patio, drive-thru)</td><td>HCAD improvements, photos</td><td>Free</td></tr><tr><td>Alcohol permit, type, issue date</td><td>TABC public inquiry</td><td>Free, public record</td></tr><tr><td>Sales tax permit, start date, tenure</td><td>TX Comptroller</td><td>Free, public record</td></tr></table></div>
 <p>Why this matters: square footage and permit dates are the only hard, verifiable facts we</p>
@@ -149,7 +151,100 @@ staff warmth      staff shortage   management response</code></pre>
 <p>understaffing, kitchen capacity, a menu with too many made-to-order items, or a POS that</p>
 <p>slows the pass. <strong>The dossier proposes; only the owner's own numbers confirm.</strong></p>
 <hr>
-<h2>4. Site crawl specification</h2>
+<h2>4. The menu teardown</h2>
+<p>The menu is the only document a restaurant publishes that is simultaneously its product</p>
+<p>catalogue, its pricing strategy and its margin structure. Most owners have never had it read</p>
+<p>back to them as any of those.</p>
+<h3>4.1 Structure</h3>
+<ul><li>Category count, order of categories, item count per category</li><li>Items per category: 5-7 reads as curated, 20+ reads as a kitchen that cannot say no</li><li>Is the first category the one they want to sell, or the one convention expects</li><li>Total item count. Above roughly 60, prep complexity and waste usually climb faster than sales</li><li>Navigation depth on a phone: taps from landing to a given dish</li></ul>
+<h3>4.2 Price architecture</h3>
+<ul><li>Min, median, max per category, and the spread</li><li><strong>Price anchoring:</strong> is there a high item that makes the middle look reasonable, or does the</li></ul>
+<p>  menu open at the top and fall</p>
+<ul><li>Price clustering: three items within 50 cents means no deliberate tiering</li><li>Currency formatting. <code>$</code> signs measurably increase price salience; plain numerals do not</li><li>Charm pricing (.99 / .95) vs round. Round reads premium, charm reads value. Mixed reads accidental</li><li><strong>Direct vs third-party delta per dish.</strong> If 3P prices are not marked up, they are absorbing</li></ul>
+<p>  the full commission and have not done the arithmetic</p>
+<h3>4.3 Add-ons, modifiers and the attach rate</h3>
+<p>This is the single largest untouched lever on average order value in almost every independent.</p>
+<ul><li>Do modifiers exist at all in the online flow, or only in person</li><li>Are they priced, and are they free-text or structured</li><li>Required vs optional modifiers, and default selections</li><li>Are the profitable attaches offered: drinks, sides, sauces, extra protein, dessert</li><li>Is anything suggested <strong>at the right moment</strong> in the order flow, or only listed</li><li>Combos, family packs, bundles - and whether the bundle actually saves the guest anything</li><li>Catering minimums, per-head pricing, lead time</li></ul>
+<p>Cheap attaches with high margin - a drink, a side, a sauce - are worth more per week than most</p>
+<p>marketing. If the online flow offers none, that is a specific, fixable number.</p>
+<h3>4.4 Beverage programme</h3>
+<p>Separate because it is the highest-margin line on any menu.</p>
+<ul><li>Is there a beverage menu at all, or an afterthought list</li><li>Soft drink, tea, coffee, speciality, alcohol</li><li>Cross-referenced with the TABC permit: a permit and no visible drinks list is money on the floor</li><li>Are drinks visible in the online ordering flow</li></ul>
+<h3>4.5 Description and merchandising</h3>
+<ul><li>Do items have descriptions, or only names. A name sells nothing to a first-timer</li><li>Description length and whether it names ingredients, origin, heat, or preparation</li><li><strong>Photo coverage:</strong> share of items with a photo. Photos are the strongest single conversion</li></ul>
+<p>  lever in online ordering</p>
+<ul><li>Dietary and allergen labelling: vegetarian, vegan, gluten, halal, spice level</li><li>Signature or recommended markers</li><li>Does anything explain what a guest unfamiliar with the cuisine should order first</li></ul>
+<h3>4.6 Menu engineering, as far as we honestly can</h3>
+<p>The real matrix needs popularity and food cost, and we have neither. What we can do:</p>
+<ul><li><strong>Popularity proxy</strong> from review dish mentions, weighted by recency</li><li><strong>Margin proxy</strong> from category heuristics: rice, noodle, bread, fried and beverage items</li></ul>
+<p>  are typically high margin; whole protein and seafood typically low</p>
+<ul><li>Place items on the matrix, and label the whole thing <code>INFERRED</code> with the reasoning visible</li><li>The output is a question for the owner, not a verdict: "these look like your stars and these</li></ul>
+<p>  look like they cost you money - does that match your numbers"</p>
+<h3>4.7 Change history</h3>
+<p>Wayback diff on the menu page. Frequency of change, direction of price change over 24 months,</p>
+<p>and whether items were cut or added. A menu untouched for three years while food costs rose is</p>
+<p>itself a finding.</p>
+<hr>
+<h2>5. The guest journey audit</h2>
+<p>Everything above is what we can measure. This is what a normal person actually feels, stage by</p>
+<p>stage, run <strong>on a phone</strong>, timed and counted, by walking the funnel as a first-time guest.</p>
+<p>For every stage: what they see, how long it takes, how many taps, where they would give up,</p>
+<p>and a one-line impression written in a guest's voice rather than ours.</p>
+<div class="tw"><table><tr><th>#</th><th>Stage</th><th>What we capture</th><th>The felt question</th></tr><tr><td>1</td><td>Intent</td><td>Search "&lt;cuisine&gt; near me" and 4 more prompts. Do they appear, in what position, on Maps and in AI answers</td><td>Do they exist at all</td></tr><tr><td>2</td><td>First glance</td><td>Maps card: rating, count, photo quality, category, hours accuracy, price band</td><td>Does this look like somewhere I would eat</td></tr><tr><td>3</td><td>Consider</td><td>Tap through. Load time, what is above the fold, is the phone tappable</td><td>Do I trust this</td></tr><tr><td>4</td><td>Menu</td><td>Taps to menu, readable on a phone, current, prices visible</td><td>Can I decide</td></tr><tr><td>5</td><td>Decide</td><td>Is there any path to order, and is it obvious</td><td>Can I act</td></tr><tr><td>6</td><td>Order</td><td>Taps to complete, account required, guest checkout, minimums, fees revealed early or late, upsells</td><td>How hard is this</td></tr><tr><td>7</td><td>Confirm</td><td>Confirmation clarity, time estimate, tracking</td><td>Do I know what happens now</td></tr><tr><td>8</td><td>Receive</td><td>Accuracy and packaging themes from reviews</td><td>Did I get what I chose</td></tr><tr><td>9</td><td>Return</td><td>Any review request, any way to be remembered, any reason to come back</td><td>Will I ever hear from them again</td></tr></table></div>
+<p><strong>Scoring per stage:</strong> 0 impossible, 1 painful, 2 works, 3 good, 4 better than the neighbours.</p>
+<p>Report the <strong>weakest stage, not the average.</strong> A funnel is only as good as its worst step, and</p>
+<p>the fix belongs there rather than wherever we happen to be strongest.</p>
+<p><strong>Two hard rules.</strong></p>
+<p>Run it on a phone viewport, because that is where the decision is made.</p>
+<p><strong>Never complete an order.</strong> Walk to the final confirm screen and stop. We do not place real</p>
+<p>orders on other people's kitchens to fill in a spreadsheet.</p>
+<p>Output is a nine-line narrative, in a guest's voice. Read aloud to an owner it is usually the</p>
+<p>most persuasive thing in the dossier, because it is their restaurant described by a stranger.</p>
+<hr>
+<h2>6. Discovery scores: SEO and AEO, kept apart</h2>
+<p>Two scores, never one. They are related and not the same, and being strong on one does not</p>
+<p>carry you on the other. Both 0-100, both reported <strong>against the local competitive median</strong>,</p>
+<p>because an absolute number means nothing in isolation.</p>
+<h3>6.1 SEO score</h3>
+<div class="tw"><table><tr><th>Weight</th><th>Component</th></tr><tr><td>25</td><td><strong>Google Business Profile:</strong> claimed, categories, hours, attributes, photo count and recency, posts, Q&amp;A</td></tr><tr><td>20</td><td><strong>Reviews as a ranking input:</strong> count, velocity, recency, response rate</td></tr><tr><td>15</td><td><strong>Technical:</strong> HTTPS, mobile, load, no blocking robots, indexed pages</td></tr><tr><td>15</td><td><strong>On-page:</strong> title, meta, headings, menu as real text, location named</td></tr><tr><td>15</td><td><strong>NAP consistency</strong> across Google, Yelp, Facebook, TripAdvisor, directories</td></tr><tr><td>10</td><td><strong>Content and links:</strong> pages beyond the menu, referring domains, local press</td></tr></table></div>
+<h3>6.2 AEO score</h3>
+<div class="tw"><table><tr><th>Weight</th><th>Component</th></tr><tr><td>30</td><td><strong>Named in AI answers.</strong> Ask each engine the same standard prompt set and log the verbatim answer. This is the only component that measures the outcome rather than a proxy</td></tr><tr><td>20</td><td><strong>Structured data:</strong> Restaurant, Menu, hours, geo, FAQ, and whether it validates</td></tr><tr><td>15</td><td><strong>Machine-readable menu:</strong> text beats PDF beats image beats JS-only</td></tr><tr><td>15</td><td><strong>Entity clarity:</strong> name, cuisine and location described identically everywhere. Assistants resolve entities, and contradictions make them cautious</td></tr><tr><td>10</td><td><strong>Answerable content:</strong> does anything on the site answer a question a person would ask</td></tr><tr><td>10</td><td><strong>Crawler access:</strong> are GPTBot, ClaudeBot, PerplexityBot and the rest permitted. Many sites block them by accident through a template <code>robots.txt</code></td></tr></table></div>
+<p><strong>The standard prompt set</strong> - identical for every restaurant, so results compare:</p>
+<ol><li>best &lt;cuisine&gt; restaurant in &lt;city&gt; TX</li><li>where should I eat &lt;cuisine&gt; near &lt;landmark&gt;</li><li>&lt;restaurant name&gt; - what do you know about it</li><li>good &lt;cuisine&gt; for a family near &lt;city&gt;</li><li>who caters &lt;cuisine&gt; in &lt;city&gt; TX</li></ol>
+<p>Log the verbatim answer, whether they were named, in what position, and whether the description</p>
+<p>was accurate. <strong>A wrong description is worse than an absence</strong> and is one of the most convincing</p>
+<p>findings we can show an owner.</p>
+<hr>
+<h2>7. The improvement map</h2>
+<p>Where the dossier turns into work. Every finding produces candidate moves, and each move is</p>
+<p>classified honestly, because the credibility of the whole exercise rests on not recommending</p>
+<p>software when the answer is not software.</p>
+<p><strong>Two kinds, kept separate:</strong></p>
+<ul><li><strong>Technological</strong> - something we build, buy, connect or configure.</li><li><strong>Operational</strong> - a change to how the restaurant runs. Prep timing, roster shape, phone</li></ul>
+<p>  cover during the rush, a script for asking for a review, which dish leads the menu.</p>
+<p>  Frequently the higher return, almost always the cheaper, and nobody sells it to them</p>
+<p>  because there is no commission in it.</p>
+<p>Every move carries:</p>
+<pre><code>{
+  "move": "", "kind": "technological | operational",
+  "job": "getting found | winning the order | growing the order |
+          keeping the guest | keeping the money | watching it",
+  "addresses": ["finding-id"],
+  "effort_hours": 0, "owner_effort_hours": 0,
+  "depends_on": [], "cost_to_them": 0,
+  "expected_effect": { "metric": "", "direction": "", "size": "", "confidence": 0.0 },
+  "time_to_signal_days": 0,
+  "evidence_tier": "INFERRED"
+}</code></pre>
+<p><strong>Sequencing rules</strong></p>
+<ol><li>Anything that makes them findable comes before anything that improves conversion. Traffic</li></ol>
+<p>   you do not have cannot convert.</p>
+<ol><li>Fix leaks before adding channels. A new channel pouring into a broken order flow wastes it.</li><li>First move must show signal inside 14 days, or momentum dies.</li><li>Owner effort near zero for the first two weeks. They are already working every hour.</li><li><strong>If the best move is operational and free, say so first.</strong> That single habit is what makes</li></ol>
+<p>   the paid work believable afterwards.</p>
+<p>Output is ranked by <code>expected_effect / (effort + owner_effort)</code>, not by what is most impressive</p>
+<p>to build.</p>
+<hr>
+<h2>8. Site crawl specification</h2>
 <p>Written because version 1 got this wrong: it treated HTTP 200 as "has a website" and</p>
 <p>reported 38 working sites when only 26 were substantive. Twelve were parked domains, empty</p>
 <p>shells or JS apps that served an empty body.</p>
@@ -168,7 +263,7 @@ STATIC      text present, parseable</code></pre>
 <p><strong>Also capture:</strong> Wayback first and last snapshot, redirect chain, page weight, mobile</p>
 <p>viewport, and whether the phone number is a <code>tel:</code> link.</p>
 <hr>
-<h2>5. Guardrails</h2>
+<h2>9. Guardrails</h2>
 <p><strong>Sources</strong></p>
 <ul><li>Public, unauthenticated pages only. Never anything behind a login.</li><li>Honour <code>robots.txt</code> and platform terms. Where terms forbid automated collection, the field</li></ul>
 <p>  is collected manually or marked <code>UNKNOWN</code>. It is never quietly scraped anyway.</p>
@@ -186,7 +281,7 @@ STATIC      text present, parseable</code></pre>
 <p><strong>Freshness</strong></p>
 <ul><li>Every field has an expiry. Reviews 14 days, site 30, social 14, public records 180.</li><li>A dossier older than 30 days is re-run before it is used, or it is shown as stale.</li></ul>
 <hr>
-<h2>6. Output shape</h2>
+<h2>10. Output shape</h2>
 <pre><code>outreach/
   targets/&lt;area&gt;.json          the input list
   dossiers/&lt;slug&gt;.json         one full dossier per restaurant
@@ -196,10 +291,16 @@ STATIC      text present, parseable</code></pre>
 <pre><code>{
   "restaurant": { "name": "", "slug": "", "area": "" },
   "collected_at": "",
-  "completeness": { "domains_attempted": 10, "domains_returned": 7, "unknown_fields": 23 },
+  "completeness": { "domains_attempted": 14, "domains_returned": 7, "unknown_fields": 23 },
   "domains": { "identity": {}, "discovery": {}, "reputation": {},
                "ordering": {}, "menu": {}, "social": {}, "media": {},
                "competitive": {}, "operations": {}, "owner": {} },
+  "menu_teardown": { "structure": {}, "price": {}, "modifiers": {},
+                     "beverage": {}, "merchandising": {}, "engineering": {} },
+  "journey": { "stages": [], "weakest_stage": "", "narrative": [] },
+  "scores": { "seo": { "total": 0, "components": {}, "vs_local_median": 0 },
+              "aeo": { "total": 0, "components": {}, "prompts": [] } },
+  "improvement_map": [],
   "ladder": [ { "l0": "", "l1": "", "l2": "", "l3": "", "l4": {}, "l5": {} } ],
   "headline": { "one_thing": "", "evidence": "", "money_per_week": 0, "tier": "" },
   "opener": "",
@@ -211,8 +312,8 @@ STATIC      text present, parseable</code></pre>
 <p>family member. Knowing it and not leading with it is the difference between a partner and a</p>
 <p>vendor.</p>
 <hr>
-<h2>7. Obtainability, honestly</h2>
-<div class="tw"><table><tr><th>Tier</th><th>Domains</th><th>Cost</th></tr><tr><td>Automatable now, free</td><td>Site crawl, schema, ordering, menu, HCAD, TABC, Comptroller, health scores, Wayback, mention search</td><td>Time only</td></tr><tr><td>Automatable, paid API</td><td>Google Places reviews, PageSpeed at volume, SERP ranks, backlinks</td><td>Metered</td></tr><tr><td>Manual, high value</td><td>AI answer checks, social top-posts, influencer mentions, competitor AI ranking</td><td>Minutes per restaurant</td></tr><tr><td>Not obtainable, ever</td><td>Revenue, margins, labour cost, rent, covers, POS data, owner intent</td><td>Only the owner has these</td></tr></table></div>
+<h2>11. Obtainability, honestly</h2>
+<div class="tw"><table><tr><th>Tier</th><th>Domains</th><th>Cost</th></tr><tr><td>Automatable now, free</td><td>Site crawl, schema, ordering, menu parse, price architecture, modifiers, HCAD, TABC, Comptroller, health scores, Wayback, mention search, robots crawler-access</td><td>Time only</td></tr><tr><td>Automatable, paid API</td><td>Google Places reviews, PageSpeed at volume, SERP ranks, backlinks</td><td>Metered</td></tr><tr><td>Manual, high value</td><td>AI answer checks against the standard prompt set, the nine-stage guest journey, social top-posts, influencer mentions, competitor AI ranking</td><td>20-30 min per restaurant</td></tr><tr><td>Not obtainable, ever</td><td>Revenue, margins, food cost, labour, rent, covers, item popularity, POS data, owner intent</td><td>Only the owner has these</td></tr></table></div>
 <p>That last row is the discipline. **We can see everything about how a restaurant appears and</p>
 <p>nothing about how it performs.** The dossier is a map of the surface and a set of honest</p>
 <p>hypotheses about what is under it. The moment we pretend otherwise, the first conversation</p>
@@ -220,5 +321,9 @@ STATIC      text present, parseable</code></pre>
 <p>Which is also the pitch: we can show them the outside better than anyone. They have the</p>
 <p>inside. Put the two together and the leaks are obvious.</p>
 <hr>
-<h2>8. Build order</h2>
-<ol><li>Site crawl with proper classification and rendering - fixes the known v1 defect</li><li>Public records: HCAD, TABC, Comptroller, health scores - free, hard facts, nobody else does it</li><li>Review teardown - richest signal, needs the Places API for volume</li><li>Menu and catering parse</li><li>Social and mentions</li><li>Competitive set, by running 1-5 on the neighbours</li><li>Ladder synthesis and the board</li></ol>
+<h2>12. Build order</h2>
+<ol><li>Site crawl with proper classification and rendering - fixes the known v1 defect</li><li>Menu teardown - structure, price architecture, modifiers, beverage, photo coverage.</li></ol>
+<p>   Highest ratio of insight to effort, and entirely free</p>
+<ol><li>Public records: HCAD, TABC, Comptroller, health scores - hard facts nobody else pulls</li><li>The guest journey, manual, on a phone. Slowest per restaurant and the most persuasive</li></ol>
+<p>   thing we produce, so it is worth the 20 minutes on anyone we are serious about</p>
+<ol><li>AEO score, because the prompt set is manual and the results are startling</li><li>Review teardown - richest signal, needs the Places API for volume</li><li>Social and mentions</li><li>SEO score, once GBP reading is automated</li><li>Competitive set, by running 1-8 on the neighbours</li><li>Ladder synthesis, improvement map, board</li></ol>
