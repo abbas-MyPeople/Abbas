@@ -1,0 +1,130 @@
+<title>Google Profile Completion</title>
+<style>
+:root{--bg:#faf8f4;--ink:#1a1a17;--ink2:#4f4b43;--ink3:#8a857a;--line:#e4dfd4;--card:#fff;--hot:#a8331f;--warn:#b3701a;--cool:#6f6859;--go:#1c4739;--soft:#f2eee5}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#14130f;--ink:#f0ece2;--ink2:#b6b0a3;--ink3:#7c766a;--line:#2e2b24;--card:#1c1a15;--hot:#e0705a;--warn:#d9a04a;--cool:#8d8578;--go:#7fbfa2;--soft:#201e18}}
+:root[data-theme=dark]{--bg:#14130f;--ink:#f0ece2;--ink2:#b6b0a3;--ink3:#7c766a;--line:#2e2b24;--card:#1c1a15;--hot:#e0705a;--warn:#d9a04a;--cool:#8d8578;--go:#7fbfa2;--soft:#201e18}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);padding:36px 20px 90px;font:16px/1.55 ui-sans-serif,system-ui,-apple-system,sans-serif}
+.w{max-width:880px;margin:0 auto}
+h1{font-size:clamp(1.6rem,3.5vw,2.15rem);font-weight:820;letter-spacing:-.03em;margin:0 0 6px}
+.sub{color:var(--ink2);margin:0 0 8px;max-width:72ch}
+h2{font-size:1.14rem;font-weight:760;margin:38px 0 6px;padding-top:16px;border-top:1px solid var(--line)}
+h2+p{color:var(--ink2);margin:0 0 16px;font-size:14.6px;max-width:70ch}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin-bottom:8px}
+.cat.primary{border-color:var(--go);border-left:3px solid var(--go)}
+.ch{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ch b{font-size:15.6px}
+.tag{font-size:10px;letter-spacing:.1em;padding:3px 8px;border-radius:999px;border:1px solid currentColor}
+.t-primary{color:var(--go)} .t-core{color:var(--hot)} .t-if-true{color:var(--cool)}
+.cat p{margin:8px 0 0;font-size:14.2px;color:var(--ink2)}
+.cp{display:flex;flex-direction:column;gap:8px;margin:10px 0 4px}
+textarea{width:100%;min-height:150px;resize:vertical;font:14px/1.55 inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.c{font:600 13px inherit;background:var(--go);color:#fff;border:0;border-radius:7px;padding:8px 15px;cursor:pointer;align-self:flex-start}
+.c.mini{padding:3px 9px;font-size:11.5px;margin-left:8px;vertical-align:middle}
+.c.done{opacity:.7}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+td{padding:10px 12px 10px 0;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+td:first-child{width:250px;color:var(--ink)}
+.fx{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:7px}
+.fx summary{cursor:pointer;padding:12px 15px;list-style:none;font-weight:600;font-size:14.8px}
+.fx summary::-webkit-details-marker{display:none}
+.fx p{margin:0;padding:0 15px 14px;font-size:14.2px;color:var(--ink2);border-top:1px solid var(--line);padding-top:11px}
+.sev{font-size:10px;letter-spacing:.09em;padding:2px 7px;border-radius:999px;border:1px solid currentColor;margin-right:8px}
+.s-high{color:var(--hot)} .s-medium{color:var(--warn)} .s-low{color:var(--cool)}
+.note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 11px 11px 0;padding:14px 16px;margin:16px 0;color:var(--ink2);font-size:14.6px}
+.note b{color:var(--ink)}
+ol{padding-left:20px} ol li{margin-bottom:9px;color:var(--ink2)} ol li b{color:var(--ink)}
+code{background:var(--soft);padding:1px 6px;border-radius:5px;font:13px ui-monospace,Menlo,monospace}
+</style>
+<div class="w">
+<h1>Finishing the Google profile</h1>
+<p class="sub">Read off your live listing on 18 August 2026. Everything below is copy-ready. Do it in the order on this page - the first two changes are worth more than the other eight combined.</p>
+
+<div class="note"><b>One thing before you start.</b> You asked for all ten category slots filled.
+Google's own 2026 guidance is that categories describe what a business <b>is</b>, not what it
+wants to rank for, and that padding the list dilutes relevance rather than adding reach. So the
+list below is ranked: change the primary, add the three core, and take the remaining six only
+where the service is genuinely something you deliver. Ten accurate categories beat ten aspirational
+ones, and an inaccurate one can suppress the whole profile.</div>
+
+<h2>Categories</h2>
+<p>One primary and up to nine more. The primary carries most of the weight, so it is the single most valuable field on the profile.</p>
+<div class="cat primary"><div class="ch"><span class="tag t-primary">PRIMARY</span>
+   <b>Business management consultant</b><button class="c mini" type="button" data-copy="Business management consultant">Copy</button></div>
+   <p>Carries the most ranking weight of anything on the profile. Replaces the generic <em>Consultant</em> you have now, which is close to unsearchable. It matches what you actually sell - running the operational and technical side of a business - and it is far less saturated in Houston than Marketing agency, which matters because a service-area business with no address is already fighting uphill in the local pack.</p></div><div class="cat core"><div class="ch"><span class="tag t-core">CORE</span>
+   <b>Marketing agency</b><button class="c mini" type="button" data-copy="Marketing agency">Copy</button></div>
+   <p>Highest search volume of any category you qualify for. You will not win it outright against established Houston agencies, but as a secondary it captures the owner who searches in those words without staking your primary on the hardest term.</p></div><div class="cat core"><div class="ch"><span class="tag t-core">CORE</span>
+   <b>Website designer</b><button class="c mini" type="button" data-copy="Website designer">Copy</button></div>
+   <p>Very high local intent and you genuinely do it. 'Website designer near me' is one of the few searches a restaurant owner runs with a credit card already out.</p></div><div class="cat core"><div class="ch"><span class="tag t-core">CORE</span>
+   <b>Internet marketing service</b><button class="c mini" type="button" data-copy="Internet marketing service">Copy</button></div>
+   <p>Covers the getting-found half of the offer - Google, Maps and AI answers - without the word SEO, which you avoid for good reason.</p></div><div class="cat if-true"><div class="ch"><span class="tag t-if-true">IF TRUE</span>
+   <b>Software company</b><button class="c mini" type="button" data-copy="Software company">Copy</button></div>
+   <p>Add it. You build custom software when nothing off the shelf fits, and it separates you from every agency that only resells.</p></div><div class="cat if-true"><div class="ch"><span class="tag t-if-true">IF TRUE</span>
+   <b>Advertising agency</b><button class="c mini" type="button" data-copy="Advertising agency">Copy</button></div>
+   <p>Only if you actually run paid campaigns for clients. If you do not, leave it off - it invites the wrong enquiry and dilutes the rest.</p></div><div class="cat if-true"><div class="ch"><span class="tag t-if-true">IF TRUE</span>
+   <b>Computer consultant</b><button class="c mini" type="button" data-copy="Computer consultant">Copy</button></div>
+   <p>Fits the POS, integrations and systems work. Lower volume, but very close to what an owner with a broken system types.</p></div><div class="cat if-true"><div class="ch"><span class="tag t-if-true">IF TRUE</span>
+   <b>Telecommunications service provider</b><button class="c mini" type="button" data-copy="Telecommunications service provider">Copy</button></div>
+   <p>Only because of the AI phone line. Genuinely defensible, but expect calls about phone systems, so add it last.</p></div><div class="cat if-true"><div class="ch"><span class="tag t-if-true">IF TRUE</span>
+   <b>Business development service</b><button class="c mini" type="button" data-copy="Business development service">Copy</button></div>
+   <p>Catering, loyalty and win-back are revenue development, not marketing. Low volume, accurate.</p></div><div class="cat if-true"><div class="ch"><span class="tag t-if-true">IF TRUE</span>
+   <b>Data analyst</b><button class="c mini" type="button" data-copy="Data analyst">Copy</button></div>
+   <p>The dashboard and the numbers work. Thin on volume - take it only if you want the tenth slot filled.</p></div>
+
+<h2>Description</h2>
+<p>748 of the 750 characters Google allows. Your current one still ends on the old "you only pay once you're keeping more" deal, which no longer matches the site.</p>
+<div class="cp"><textarea readonly>We are the technology team an independent restaurant does not have. We find where your money is going, build or buy whatever fixes it, and then run it for you - getting found on Google and in AI answers, a phone line that never rings out, commission-free direct ordering, reviews and loyalty, catering, and one clear view of your real numbers. Operator founded and vendor neutral: we take no commission from any platform, so we will tell you when the right move is to spend nothing. Run by Abbas Zoeb, who engineered at Google and owns a restaurant in Spring, Texas, where everything we sell runs first. Founding partners: three months free, then $99/month. No contract, and you keep everything we build.</textarea><button class="c" type="button">Copy</button></div>
+
+<h2>Services</h2>
+<p>Add these under the categories once they are set. Services are free text, each takes a description, and almost nobody in this market fills them in - which is exactly why they are worth the twenty minutes.</p>
+<table><tbody><tr><td><b>Restaurant technology audit</b><button class="c mini" type="button" data-copy="Restaurant technology audit">Copy</button></td><td>We read how your restaurant actually runs, find where the money is leaking, and hand you the list in plain English. No obligation and no software required.<button class="c mini" type="button" data-copy="We read how your restaurant actually runs, find where the money is leaking, and hand you the list in plain English. No obligation and no software required.">Copy</button></td></tr><tr><td><b>Commission-free online ordering</b><button class="c mini" type="button" data-copy="Commission-free online ordering">Copy</button></td><td>Direct ordering that is faster than the delivery apps, so guests who already know you stop costing you 15 to 30 percent.<button class="c mini" type="button" data-copy="Direct ordering that is faster than the delivery apps, so guests who already know you stop costing you 15 to 30 percent.">Copy</button></td></tr><tr><td><b>AI phone answering</b><button class="c mini" type="button" data-copy="AI phone answering">Copy</button></td><td>A voice line that knows your menu and tonight's sold-out dishes, takes orders into your POS, and switches off from your staff's phone during a rush.<button class="c mini" type="button" data-copy="A voice line that knows your menu and tonight's sold-out dishes, takes orders into your POS, and switches off from your staff's phone during a rush.">Copy</button></td></tr><tr><td><b>Getting found on Google and Maps</b><button class="c mini" type="button" data-copy="Getting found on Google and Maps">Copy</button></td><td>Google Business Profile, local search and the accuracy of every listing, so you appear when someone nearby is deciding.<button class="c mini" type="button" data-copy="Google Business Profile, local search and the accuracy of every listing, so you appear when someone nearby is deciding.">Copy</button></td></tr><tr><td><b>Getting recommended by AI assistants</b><button class="c mini" type="button" data-copy="Getting recommended by AI assistants">Copy</button></td><td>Being named, and described correctly, when someone asks ChatGPT, Gemini or Perplexity where to eat near them.<button class="c mini" type="button" data-copy="Being named, and described correctly, when someone asks ChatGPT, Gemini or Perplexity where to eat near them.">Copy</button></td></tr><tr><td><b>Restaurant website design</b><button class="c mini" type="button" data-copy="Restaurant website design">Copy</button></td><td>A site that loads fast on a phone, shows a menu that is actually current, and takes the order without sending the guest elsewhere.<button class="c mini" type="button" data-copy="A site that loads fast on a phone, shows a menu that is actually current, and takes the order without sending the guest elsewhere.">Copy</button></td></tr><tr><td><b>POS selection and migration</b><button class="c mini" type="button" data-copy="POS selection and migration">Copy</button></td><td>Vendor neutral advice on whether to keep or change your POS, and the migration run away from your rush if you change.<button class="c mini" type="button" data-copy="Vendor neutral advice on whether to keep or change your POS, and the migration run away from your rush if you change.">Copy</button></td></tr><tr><td><b>Reviews and reputation</b><button class="c mini" type="button" data-copy="Reviews and reputation">Copy</button></td><td>A method for asking the right guest at the right moment, and answering the ones that matter.<button class="c mini" type="button" data-copy="A method for asking the right guest at the right moment, and answering the ones that matter.">Copy</button></td></tr><tr><td><b>Loyalty and guest win-back</b><button class="c mini" type="button" data-copy="Loyalty and guest win-back">Copy</button></td><td>A guest list you own, and a reason for people to come back that does not depend on a platform.<button class="c mini" type="button" data-copy="A guest list you own, and a reason for people to come back that does not depend on a platform.">Copy</button></td></tr><tr><td><b>Catering and corporate lunches</b><button class="c mini" type="button" data-copy="Catering and corporate lunches">Copy</button></td><td>Turning catering from occasional enquiries into a channel with pricing, minimums and a way to order.<button class="c mini" type="button" data-copy="Turning catering from occasional enquiries into a channel with pricing, minimums and a way to order.">Copy</button></td></tr><tr><td><b>Custom software and integrations</b><button class="c mini" type="button" data-copy="Custom software and integrations">Copy</button></td><td>When nothing off the shelf fits, we build it. You approve the number before we start, and you own what we make.<button class="c mini" type="button" data-copy="When nothing off the shelf fits, we build it. You approve the number before we start, and you own what we make.">Copy</button></td></tr><tr><td><b>Restaurant analytics and reporting</b><button class="c mini" type="button" data-copy="Restaurant analytics and reporting">Copy</button></td><td>One view of sales, costs and true profit per order, with nightly checks so a broken thing is found before a guest finds it.<button class="c mini" type="button" data-copy="One view of sales, costs and true profit per order, with nightly checks so a broken thing is found before a guest finds it.">Copy</button></td></tr></tbody></table>
+
+<h2>Service areas</h2>
+<p>Replace "Texas, USA" with these fifteen. They are the same cities you now have pages for, so the profile and the site tell Google the same story.</p>
+<div class="cp"><textarea readonly>Spring, TX
+The Woodlands, TX
+Houston, TX
+Cypress, TX
+Katy, TX
+Tomball, TX
+Sugar Land, TX
+Klein, TX
+Conroe, TX
+Humble, TX
+Kingwood, TX
+Magnolia, TX
+Pearland, TX
+Missouri City, TX
+Stafford, TX</textarea><button class="c" type="button">Copy all 15</button></div>
+
+<h2>Website link with attribution</h2>
+<p>Use this in the website field instead of the bare domain. Your site already captures utm parameters and attaches them to every lead email, so this makes GBP-sourced leads visible in GA4 for the first time.</p>
+<div class="cp"><textarea readonly>https://azrestaurantpartners.com/?utm_source=google&amp;utm_medium=organic&amp;utm_campaign=gbp</textarea><button class="c" type="button">Copy</button></div>
+
+<h2>What else is wrong or missing</h2>
+<p>Tap any to see why it matters.</p>
+<details class="fx"><summary><span class="sev s-high">high</span> Description still sells the old offer</summary><p>Your live description ends 'You only pay once you're keeping more.' That was the v1 deal. The site, the llms.txt and every new page now say three months free then $99/month. An owner who reads one thing on Google and another on your site trusts neither. Replacement below, 748 of the 750 characters allowed.</p></details><details class="fx"><summary><span class="sev s-high">high</span> Primary category is 'Consultant'</summary><p>The single highest-leverage field on the profile and it is currently the most generic option available. Change it first, before anything else on this page.</p></details><details class="fx"><summary><span class="sev s-medium">medium</span> Language attribute is missing Urdu</summary><p>English and Hindi are pending. You speak Urdu, and in Cy-Fair that is an advantage almost no competitor has. Add it.</p></details><details class="fx"><summary><span class="sev s-medium">medium</span> Service area leads with 'Texas, USA'</summary><p>A whole-state service area dilutes the local signal. Google's guidance is to keep the area within about a two hour drive. Drop the state entry and list the metro cities instead - the same fifteen you now have pages for, so the profile and the site agree.</p></details><details class="fx"><summary><span class="sev s-low">low</span> Open 24 hours, seven days</summary><p>Defensible because the AI phone line genuinely is 24/7, and it is worth keeping for that reason. But if any human callback expectation sits behind it, set real hours and use the special-hours field, because a missed 2am call reads worse than being closed.</p></details><details class="fx"><summary><span class="sev s-low">low</span> Website link carries no attribution</summary><p>Your site now captures utm parameters on every event and attaches them to the lead email. Adding the tag below to the profile's website field means every GBP-sourced lead is labelled in GA4, and you can finally see what the listing is worth.</p></details><details class="fx"><summary><span class="sev s-medium">medium</span> No photos, no posts, no seeded questions</summary><p>Photo count and recency are real ranking inputs, and the profile has none. Start with the logo and the Open Graph card, both now in the repo, then the restaurant. Post weekly and seed three questions in the Q&A yourself - Google allows the owner to both ask and answer.</p></details>
+
+<h2>Order of work</h2>
+<ol>
+  <li><b>Primary category</b> to Business management consultant. Two minutes, biggest single gain.</li>
+  <li><b>Description</b> replaced, so Google and your site stop disagreeing about the price.</li>
+  <li><b>Three core categories</b> added.</li>
+  <li><b>Service areas</b> swapped from the state to the fifteen cities.</li>
+  <li><b>Urdu</b> added to languages.</li>
+  <li><b>Photos</b> - logo and the Open Graph card first, then the restaurant.</li>
+  <li><b>Services</b> pasted in. This is the long one, so do it last, but do it.</li>
+  <li><b>Website link</b> swapped for the tagged version, then watch GA4 for <code>utm_campaign=gbp</code>.</li>
+</ol>
+</div>
+<script>
+document.addEventListener("click", function(e){
+  var b = e.target.closest(".c"); if(!b) return;
+  var txt = b.dataset.copy || (b.parentElement.querySelector("textarea")||{}).value;
+  if(!txt) return;
+  navigator.clipboard.writeText(txt).then(function(){
+    var o=b.textContent; b.textContent="Copied"; b.classList.add("done");
+    setTimeout(function(){b.textContent=o;b.classList.remove("done");},1300);
+  });
+});
+</script>
