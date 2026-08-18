@@ -1,0 +1,224 @@
+<title>Restaurant Dossier Architecture</title>
+<style>
+:root{--bg:#faf8f4;--ink:#1a1a17;--ink2:#4f4b43;--ink3:#8a857a;--line:#e4dfd4;--card:#fff;--accent:#a8331f;--go:#1c4739;--code:#f2eee5}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#14130f;--ink:#f0ece2;--ink2:#b6b0a3;--ink3:#7c766a;--line:#2e2b24;--card:#1c1a15;--accent:#e0705a;--go:#7fbfa2;--code:#201e18}}
+:root[data-theme=dark]{--bg:#14130f;--ink:#f0ece2;--ink2:#b6b0a3;--ink3:#7c766a;--line:#2e2b24;--card:#1c1a15;--accent:#e0705a;--go:#7fbfa2;--code:#201e18}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);padding:40px 20px 90px;
+ font:16px/1.62 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,h4,p,ul,ol,pre,.tw,hr{max-width:860px;margin-left:auto;margin-right:auto}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:820;letter-spacing:-.035em;margin:0 0 6px}
+h2{font-size:1.32rem;font-weight:760;letter-spacing:-.02em;margin:44px 0 12px;padding-top:16px;border-top:1px solid var(--line)}
+h3{font-size:1.06rem;font-weight:720;margin:26px 0 8px}
+h4{font-size:.95rem;font-weight:700;margin:20px 0 6px;color:var(--ink2)}
+p{margin:0 0 13px;color:var(--ink2)}
+strong{color:var(--ink);font-weight:660}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin-bottom:6px;color:var(--ink2)}
+code{background:var(--code);border-radius:5px;padding:1px 5px;font:13.2px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink)}
+pre{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:15px 17px;overflow-x:auto;margin:0 0 16px}
+pre code{background:none;padding:0;font-size:12.9px;line-height:1.62;white-space:pre}
+.tw{overflow-x:auto;margin:0 0 18px}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+th{text-align:left;font-weight:680;color:var(--ink);border-bottom:2px solid var(--line);padding:9px 12px 9px 0;vertical-align:top}
+td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+hr{border:0;border-top:1px solid var(--line);margin:34px auto}
+h1+p{font-size:17px;color:var(--ink2)}
+</style>
+<h1>Restaurant Intelligence Dossier - architecture</h1>
+<p>The template every restaurant runs through. Written before the collectors, on purpose,</p>
+<p>because the guardrails are the valuable part and they are hard to retrofit.</p>
+<p>Version 1, 2026-08-18.</p>
+<hr>
+<h2>0. The one rule</h2>
+<p><strong>Every field carries its own provenance and its own evidence tier. No exceptions.</strong></p>
+<pre><code>{
+  "value": "no direct ordering",
+  "tier": "OBSERVED",
+  "source": "https://example.com/",
+  "method": "static fetch + link scan",
+  "observed_at": "2026-08-18T14:22:07Z",
+  "confidence": 0.95,
+  "expires": "2026-09-18"
+}</code></pre>
+<p>Four tiers, and they never blur:</p>
+<div class="tw"><table><tr><th>Tier</th><th>Means</th><th>Example</th></tr><tr><td><code>OBSERVED</code></td><td>We saw it directly, at a URL, at a time</td><td>3.9 stars, 412 reviews, read 18 Aug</td></tr><tr><td><code>DERIVED</code></td><td>Arithmetic on observed values only</td><td>Review velocity fell 60% year over year</td></tr><tr><td><code>INFERRED</code></td><td>Our judgement about cause. Always carries confidence and an alternative</td><td>Slow weeknight service is a staffing pattern, 0.55</td></tr><tr><td><code>UNKNOWN</code></td><td>We could not get it. Says so out loud</td><td>Weekly covers</td></tr></table></div>
+<p><strong>Why this rule exists and is not negotiable:</strong> the failure mode is a hedge hardening into a</p>
+<p>fact as it moves from collection to summary to conversation. An inference that loses its tier</p>
+<p>becomes something we say to an owner as though we know it. That is how you lose a room.</p>
+<p>Corollary: <strong>an empty field is a finding, never a blank.</strong> <code>UNKNOWN</code> with a reason beats a</p>
+<p>guessed value every time.</p>
+<hr>
+<h2>1. The abstraction ladder</h2>
+<p>He asked for surface, then why, then deeper. That is six rungs, and a finding that stops</p>
+<p>below rung 4 is noise.</p>
+<pre><code>L0  SIGNAL     what we literally saw
+L1  PATTERN    what repeats across signals
+L2  MECHANISM  the operational behaviour that produces the pattern
+L3  ROOT       the decision, constraint or absence underneath it
+L4  MONEY      what it costs per week, with the arithmetic shown
+L5  MOVE       what we would do, effort, and what changes first</code></pre>
+<p>Worked example, all six rungs:</p>
+<pre><code>L0  17 of 60 recent reviews mention waiting; 12 of those posted Fri or Sat
+L1  Complaints cluster Fri/Sat 6-8pm, not spread through the week
+L2  The room fills faster than the kitchen or the front can absorb at peak
+L3  Staffing and prep are planned to a weekly average, not to the peak shape
+L4  ~8 tables/wk turned away or soured x avg ticket $46 = ~$370/wk, plus the
+    rating drag on future discovery
+L5  Demand-shape read from their own POS, prep and roster to the peak, phone
+    coverage during the rush. Two weeks. Wait complaints move first.</code></pre>
+<p><strong>Rules for the ladder</strong></p>
+<ul><li>Never skip a rung. L0 to L4 without L2 and L3 is a guess dressed as analysis.</li><li>L3 must name something an owner could actually change.</li><li>L4 must show its arithmetic and its assumptions, and mark every assumption.</li><li>Where the ladder cannot reach L3 honestly, stop at L2 and say so.</li></ul>
+<hr>
+<h2>2. Collection domains</h2>
+<p>Ten domains. Each field carries the tier block from section 0.</p>
+<h3>A. Identity and premises</h3>
+<div class="tw"><table><tr><th>Field</th><th>Source</th><th>Obtainable</th></tr><tr><td>Legal name, DBA, owner entity</td><td>HCAD, TX Comptroller, TABC</td><td>Free, public record</td></tr><tr><td>Address, suite, centre name</td><td>Their site, Maps</td><td>Free</td></tr><tr><td><strong>Building square footage, year built</strong></td><td><strong>HCAD (public.hcad.org)</strong></td><td><strong>Free, public record</strong></td></tr><tr><td>Lease vs own, land value</td><td>HCAD</td><td>Free</td></tr><tr><td>Estimated seats</td><td>sqft heuristic, photos, reservation grid</td><td>Derived, low confidence</td></tr><tr><td>Kitchen type (hood, patio, drive-thru)</td><td>HCAD improvements, photos</td><td>Free</td></tr><tr><td>Alcohol permit, type, issue date</td><td>TABC public inquiry</td><td>Free, public record</td></tr><tr><td>Sales tax permit, start date, tenure</td><td>TX Comptroller</td><td>Free, public record</td></tr></table></div>
+<p>Why this matters: square footage and permit dates are the only hard, verifiable facts we</p>
+<p>can get about the physical business. Tenure separates an operator with ten years of habits</p>
+<p>from one still finding their feet. Alcohol permit tells you whether bar margin is even on</p>
+<p>the table.</p>
+<h3>B. Discovery</h3>
+<div class="tw"><table><tr><th>Field</th><th>Source</th><th>Obtainable</th></tr><tr><td>Site status: dead / parked / JS-shell / real</td><td>Our crawler</td><td>Free</td></tr><tr><td>HTTPS, mobile, Core Web Vitals proxy</td><td>Fetch, PSI API</td><td>Free</td></tr><tr><td>Restaurant / LocalBusiness schema</td><td>Parse</td><td>Free</td></tr><tr><td>Menu format: HTML, PDF, image, JS-only</td><td>Crawl</td><td>Free</td></tr><tr><td>Hours published, and do they agree across surfaces</td><td>Site vs Maps vs Yelp</td><td>Free</td></tr><tr><td>GBP claimed, categories, attributes, photo count</td><td>Maps</td><td>Free to read</td></tr><tr><td>Ranks for "&lt;cuisine&gt; near me" style queries</td><td>Manual or SERP API</td><td>Paid or sampled</td></tr><tr><td><strong>Named by ChatGPT / Gemini / Perplexity for local prompts</strong></td><td>Prompt each, log verbatim</td><td>Free, manual</td></tr><tr><td>Indexed page count</td><td><code>site:</code> query</td><td>Free</td></tr></table></div>
+<h3>C. Reputation - the deep one</h3>
+<p>See section 3. This is the richest source and the most misread.</p>
+<h3>D. Ordering and channel economics</h3>
+<div class="tw"><table><tr><th>Field</th><th>Source</th></tr><tr><td>Direct ordering platform (Toast, Owner, ChowNow, Square, Popmenu, Menufy, Slice)</td><td>Link scan</td></tr><tr><td>Third-party presence: DoorDash, Uber Eats, Grubhub</td><td>Their site, each app</td></tr><tr><td>Menu price delta between direct and 3P</td><td>Compare same dish</td></tr><tr><td>Delivery radius and fees</td><td>3P listing</td></tr><tr><td>Estimated commission exposure</td><td>Derived, assumptions marked</td></tr><tr><td>Reservations platform</td><td>Link scan</td></tr><tr><td>Gift cards, merch</td><td>Site</td></tr></table></div>
+<p>The price delta is the sharpest single number we can hand an owner: if their DoorDash price</p>
+<p>is already marked up 15%, they have felt the commission and responded to it. If it is not,</p>
+<p>they may not have done the arithmetic yet.</p>
+<h3>E. Menu and offer</h3>
+<div class="tw"><table><tr><th>Field</th><th>Source</th></tr><tr><td>Item count, category count, price band, min/median/max</td><td>Menu parse</td></tr><tr><td>Last menu change we can detect</td><td>Wayback diff</td></tr><tr><td><strong>Catering: offered? how ordered? minimums? lead time?</strong></td><td>Site crawl of /catering</td></tr><tr><td>Private dining, events, buyouts</td><td>Site, Maps attributes</td></tr><tr><td>Lunch special, happy hour, daypart offers</td><td>Menu</td></tr><tr><td>Dietary coverage (veg, halal, gluten)</td><td>Menu text</td></tr><tr><td>Family packs, bundles</td><td>Menu</td></tr></table></div>
+<p><strong>On catering specifically, since it was called out:</strong> the interesting question is never</p>
+<p>"do they cater" but "why not, and what is in the way". Distinguish these cases, because the</p>
+<p>pitch differs completely:</p>
+<ol><li>No catering anywhere. Capability unknown. Usually never considered.</li><li>Catering mentioned, no way to order or price it. Demand exists, channel does not.</li><li>Catering page exists, stale or broken. Tried, no owner of it.</li><li>Catering with a real order path. Competent, look for volume levers instead.</li></ol>
+<h3>F. Social and content</h3>
+<div class="tw"><table><tr><th>Field</th><th>Source</th><th>Note</th></tr><tr><td>Platforms, handles, follower counts</td><td>Public profiles</td><td>Free</td></tr><tr><td>Posting cadence, last post date</td><td>Public profile</td><td>Dormancy is the signal</td></tr><tr><td><strong>Top posts by views, and what they are about</strong></td><td>Public profile</td><td>Tells you what their audience actually responds to</td></tr><tr><td>Comment volume and whether the owner replies</td><td>Public post</td><td>Engagement is not reach</td></tr><tr><td><strong>Creators and influencers who posted about them</strong></td><td>Search handle mentions</td><td>Free, manual</td></tr><tr><td>Whether creator content was reshared by the venue</td><td>Compare</td><td>A missed reshare is free reach thrown away</td></tr><tr><td>UGC volume: tagged posts, location tag count</td><td>Location page</td><td>Free</td></tr><tr><td>Video content: exists? phone-shot? menu-led?</td><td>Profile</td><td>Free</td></tr></table></div>
+<p>The point is not vanity metrics. It is: **who is already doing their marketing for them for</p>
+<p>free, and are they even picking it up.**</p>
+<h3>G. Earned media and mentions</h3>
+<div class="tw"><table><tr><th>Field</th><th>Source</th></tr><tr><td>Local press: Community Impact, Houston Chronicle, Houstonia, CultureMap, Chron</td><td>Search</td></tr><tr><td>Neighbourhood media: Cypress Digest, MyNeighborhoodNews</td><td>Search</td></tr><tr><td>Blogs, roundups, "best of" lists</td><td>Search</td></tr><tr><td>Reddit r/houston, r/CyFair threads</td><td>Search, read only</td></tr><tr><td>Nextdoor recommendations</td><td>Search</td></tr><tr><td>Awards, mentions, TV</td><td>Search</td></tr><tr><td>Backlinks and referring domains</td><td>Paid tool, or approximate by mention search</td></tr><tr><td>Directory presence and NAP consistency</td><td>Yelp, TripAdvisor, MenuPix, YellowPages</td></tr></table></div>
+<p>NAP consistency (name, address, phone) across directories is unglamorous and one of the most</p>
+<p>common silent killers of local ranking.</p>
+<h3>H. Competitive set</h3>
+<div class="tw"><table><tr><th>Field</th><th>Method</th></tr><tr><td>Same cuisine within 3 miles</td><td>Maps</td></tr><tr><td>Their rating and review count vs this restaurant</td><td>Maps</td></tr><tr><td>Which competitors have direct ordering, schema, catering</td><td>Run this same dossier on them</td></tr><tr><td>Who is winning the AI answer for the obvious prompts</td><td>Prompt and log</td></tr></table></div>
+<p>A finding is only actionable relative to the neighbours. 4.1 stars is strong in a 3.9</p>
+<p>neighbourhood and weak in a 4.6 one.</p>
+<h3>I. Operations and compliance signals</h3>
+<div class="tw"><table><tr><th>Field</th><th>Source</th></tr><tr><td>Health inspection scores and history</td><td>Harris County Public Health, public</td></tr><tr><td>Violation themes over time</td><td>Same</td></tr><tr><td>Hours changed or reduced recently</td><td>Maps edits, Wayback</td></tr><tr><td>"Temporarily closed" history</td><td>Maps</td></tr><tr><td>Job postings, and for which roles</td><td>Indeed, their socials</td></tr></table></div>
+<p>Hiring for front of house repeatedly is a retention signal. Reduced hours is a labour or</p>
+<p>demand signal. Both change what you lead with.</p>
+<h3>J. Owner and tenure</h3>
+<p>Business-level only. Owner entity from public record, years trading, number of locations,</p>
+<p>whether the owner appears in their own content. **Never build a profile of a private</p>
+<p>individual.** See guardrails.</p>
+<hr>
+<h2>3. The review teardown</h2>
+<p>The richest signal and the one most often read lazily. Star average alone is nearly useless.</p>
+<h3>3.1 Shape</h3>
+<ul><li>Volume, and velocity: reviews per month over 24 months</li><li><strong>Velocity trend</strong>, which matters far more than the average. Falling velocity means fading</li></ul>
+<p>  relevance even when the rating holds</p>
+<ul><li>Distribution across 1-5, not just the mean. A 4.2 made of 5s and 1s is a consistency</li></ul>
+<p>  problem; a 4.2 made of 4s is a ceiling problem</p>
+<ul><li>Rating trajectory: last 90 days vs lifetime</li><li>Platform spread: Google vs Yelp vs TripAdvisor vs Facebook, and where they disagree</li></ul>
+<h3>3.2 Owner response behaviour</h3>
+<ul><li>Response rate, split by rating. Many owners answer only 5-star reviews, which is backwards</li><li>Median response latency</li><li>Template detection: are replies near-identical</li><li>Tone on negatives: defensive, apologetic, corrective, absent</li><li>Does a reply ever resolve, or only acknowledge</li></ul>
+<p>Response behaviour is a proxy for whether anyone owns reputation at all.</p>
+<h3>3.3 Theme extraction</h3>
+<p>Classify every review into recurring themes, and track each theme's own trend:</p>
+<pre><code>food quality      consistency      portion vs price
+speed of service  wait for a table wait for food
+order accuracy    missing items    delivery condition
+phone unanswered  booking friction parking
+cleanliness       noise            temperature of room
+staff warmth      staff shortage   management response</code></pre>
+<p>For each theme: count, share of total, sentiment, direction over time, and **the exact</p>
+<p>verbatim quotes**, because the quote is what an owner reacts to.</p>
+<h3>3.4 Temporal analysis</h3>
+<ul><li>Day of week distribution of negatives</li><li>Daypart where inferable from the text ("Friday night", "at lunch")</li><li>Seasonality</li><li><strong>Incident clusters:</strong> three or more negatives inside a fortnight after a quiet period</li></ul>
+<p>  usually marks a real event - a departure, a menu change, a POS migration, an ownership</p>
+<p>  change. Find the cluster, then look for what changed around it</p>
+<h3>3.5 Entity extraction</h3>
+<ul><li>Dishes named, split by positive and negative. This is the single most useful output for an</li></ul>
+<p>  operator: which dishes create advocates and which create refunds</p>
+<ul><li>Occasions named: date night, family, business lunch, catering, large party</li><li>Competitors named in comparisons</li></ul>
+<h3>3.6 Root-cause hypotheses</h3>
+<p>For each theme that matters, produce candidate causes with confidence, and always at least</p>
+<p>one alternative explanation. Wait complaints clustered on Friday nights could be</p>
+<p>understaffing, kitchen capacity, a menu with too many made-to-order items, or a POS that</p>
+<p>slows the pass. <strong>The dossier proposes; only the owner's own numbers confirm.</strong></p>
+<hr>
+<h2>4. Site crawl specification</h2>
+<p>Written because version 1 got this wrong: it treated HTTP 200 as "has a website" and</p>
+<p>reported 38 working sites when only 26 were substantive. Twelve were parked domains, empty</p>
+<p>shells or JS apps that served an empty body.</p>
+<p><strong>Classify before analysing:</strong></p>
+<pre><code>DEAD        no response, DNS failure, or &lt; 500 bytes
+PARKED      registrar or "coming soon" fingerprint, ~1 link, no menu
+JS_SHELL    links present, text absent  -&gt;  must render before any claim
+STATIC      text present, parseable</code></pre>
+<p><strong>Substance test, and nothing is claimed until it passes:</strong></p>
+<p><code>text &gt;= 150 words AND internal links &gt;= 3 AND (menu OR hours OR contact present)</code></p>
+<p><strong>Crawl, do not just fetch the homepage.</strong> Follow, up to 15 pages, one host:</p>
+<p><code>/menu /menus /catering /order /about /contact /hours /events /private-dining /specials /reviews</code></p>
+<p><strong>Render JS shells</strong> with headless Chrome. A JS shell is not a finding of absence; it is a</p>
+<p>finding that a static read is insufficient. Reporting "no menu" on an unrendered React app</p>
+<p>is a false negative that would embarrass us in front of an owner.</p>
+<p><strong>Also capture:</strong> Wayback first and last snapshot, redirect chain, page weight, mobile</p>
+<p>viewport, and whether the phone number is a <code>tel:</code> link.</p>
+<hr>
+<h2>5. Guardrails</h2>
+<p><strong>Sources</strong></p>
+<ul><li>Public, unauthenticated pages only. Never anything behind a login.</li><li>Honour <code>robots.txt</code> and platform terms. Where terms forbid automated collection, the field</li></ul>
+<p>  is collected manually or marked <code>UNKNOWN</code>. It is never quietly scraped anyway.</p>
+<ul><li>Identify honestly in the user agent. Rate limit to one request per host per two seconds.</li><li>Cache aggressively. Never re-hit a host for data we already hold and that has not expired.</li></ul>
+<p><strong>People</strong></p>
+<ul><li>This is business intelligence, not people intelligence.</li><li>Staff named in reviews are <strong>aggregated and never named in output</strong>. "Reviews name the same</li></ul>
+<p>  server positively 14 times" is useful. Naming them is not ours to publish.</p>
+<ul><li>Owner information is limited to what public business records already state.</li><li>No home addresses, no personal social accounts, no family.</li></ul>
+<p><strong>Claims</strong></p>
+<ul><li>Nothing enters the dossier without source and timestamp.</li><li>Inference is labelled as inference wherever it is displayed, not only where it is stored.</li><li>Every money figure shows its arithmetic and marks its assumptions.</li><li>Competitor comparisons use the same method for both sides or they are not made.</li></ul>
+<p><strong>Use</strong></p>
+<ul><li>The dossier informs a conversation. It is never sent to the restaurant.</li><li>We do not open with a list of their failings. We open with one thing, and we are right</li></ul>
+<p>  about it.</p>
+<ul><li>If a finding would embarrass an owner in front of staff, it does not go in an opener.</li></ul>
+<p><strong>Freshness</strong></p>
+<ul><li>Every field has an expiry. Reviews 14 days, site 30, social 14, public records 180.</li><li>A dossier older than 30 days is re-run before it is used, or it is shown as stale.</li></ul>
+<hr>
+<h2>6. Output shape</h2>
+<pre><code>outreach/
+  targets/&lt;area&gt;.json          the input list
+  dossiers/&lt;slug&gt;.json         one full dossier per restaurant
+  board-&lt;area&gt;.html            the working board
+  ARCHITECTURE.md              this file</code></pre>
+<p>Each dossier:</p>
+<pre><code>{
+  "restaurant": { "name": "", "slug": "", "area": "" },
+  "collected_at": "",
+  "completeness": { "domains_attempted": 10, "domains_returned": 7, "unknown_fields": 23 },
+  "domains": { "identity": {}, "discovery": {}, "reputation": {},
+               "ordering": {}, "menu": {}, "social": {}, "media": {},
+               "competitive": {}, "operations": {}, "owner": {} },
+  "ladder": [ { "l0": "", "l1": "", "l2": "", "l3": "", "l4": {}, "l5": {} } ],
+  "headline": { "one_thing": "", "evidence": "", "money_per_week": 0, "tier": "" },
+  "opener": "",
+  "do_not_say": []
+}</code></pre>
+<p><code>completeness</code> is deliberately prominent. A dossier that returned 3 of 10 domains must look</p>
+<p>different from one that returned 10, so nobody mistakes thin for clean.</p>
+<p><code>do_not_say</code> carries anything true but unusable - a health violation, a bad review naming a</p>
+<p>family member. Knowing it and not leading with it is the difference between a partner and a</p>
+<p>vendor.</p>
+<hr>
+<h2>7. Obtainability, honestly</h2>
+<div class="tw"><table><tr><th>Tier</th><th>Domains</th><th>Cost</th></tr><tr><td>Automatable now, free</td><td>Site crawl, schema, ordering, menu, HCAD, TABC, Comptroller, health scores, Wayback, mention search</td><td>Time only</td></tr><tr><td>Automatable, paid API</td><td>Google Places reviews, PageSpeed at volume, SERP ranks, backlinks</td><td>Metered</td></tr><tr><td>Manual, high value</td><td>AI answer checks, social top-posts, influencer mentions, competitor AI ranking</td><td>Minutes per restaurant</td></tr><tr><td>Not obtainable, ever</td><td>Revenue, margins, labour cost, rent, covers, POS data, owner intent</td><td>Only the owner has these</td></tr></table></div>
+<p>That last row is the discipline. **We can see everything about how a restaurant appears and</p>
+<p>nothing about how it performs.** The dossier is a map of the surface and a set of honest</p>
+<p>hypotheses about what is under it. The moment we pretend otherwise, the first conversation</p>
+<p>with an owner who knows their own numbers goes badly.</p>
+<p>Which is also the pitch: we can show them the outside better than anyone. They have the</p>
+<p>inside. Put the two together and the leaks are obvious.</p>
+<hr>
+<h2>8. Build order</h2>
+<ol><li>Site crawl with proper classification and rendering - fixes the known v1 defect</li><li>Public records: HCAD, TABC, Comptroller, health scores - free, hard facts, nobody else does it</li><li>Review teardown - richest signal, needs the Places API for volume</li><li>Menu and catering parse</li><li>Social and mentions</li><li>Competitive set, by running 1-5 on the neighbours</li><li>Ladder synthesis and the board</li></ol>
