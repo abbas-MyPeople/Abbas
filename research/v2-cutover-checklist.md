@@ -26,6 +26,23 @@ Static analysis passed all three of these. They were found by looking.
 3. **The rotator phrases ghosted over each other.** A symmetric 0.38s crossfade left
    two lines of 3rem type both legible. The outgoing phrase now leaves in 0.16s and
    the incoming arrives over 0.34s after a beat.
+4. **The pinned call to action covered the form it points at.** Two earlier versions
+   of the hide logic looked right and did nothing: an `IntersectionObserver` against
+   a target taller than the viewport, then a `requestAnimationFrame` throttle whose
+   `ticking` flag latched shut the moment a frame callback was deferred. It is now a
+   single `getBoundingClientRect` read run inline on scroll, and the bar clears the
+   moment the form crosses 92% of viewport height.
+
+## Header and the pinned action
+
+The header is the brand and the scroll rail, nothing else. The only call to action on
+the page is a bar pinned to the bottom of the screen, which hides itself whenever the
+form is visible so it never sits on top of the fields.
+
+Note for anyone testing this: **programmatic scrolling in the Chrome automation
+context does not dispatch scroll events at all** — a listener added by hand records
+zero hits after `window.scrollTo`. Verify by scrolling, then dispatching
+`new Event('scroll')` by hand, or the behaviour will look broken when it is not.
 
 ## Verified
 
