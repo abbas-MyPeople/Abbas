@@ -1,0 +1,2672 @@
+{
+ "area": "Cypress, TX (Harris County)",
+ "generated": "2026-08-18T14:32:23",
+ "restaurants": [
+  {
+   "name": "Murdoch's Backyard Pub",
+   "address": "18541 Mueschke Road, Cypress, TX",
+   "site": "https://murdochsbackyard.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.murdochsbackyard.com/",
+    "https": true,
+    "mobile_ready": false,
+    "bytes": 387345,
+    "schema": [
+     "BreadcrumbList",
+     "FAQPage",
+     "ImageObject",
+     "Organization",
+     "WebPage",
+     "WebSite"
+    ],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram",
+     "TikTok",
+     "X"
+    ],
+    "menu_is_pdf": true,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "Not built for phones",
+     "why": "Almost every restaurant decision is made on a phone."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "Menu is a PDF",
+     "why": "A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 2
+  },
+  {
+   "name": "Pho Binh Noodle and Grill",
+   "address": "12312 Barker Cypress Road Ste 1000, Cypress, TX",
+   "site": "https://phobinhgrill.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.phobinhgrill.com/",
+    "https": true,
+    "mobile_ready": false,
+    "bytes": 34359,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "Not built for phones",
+     "why": "Almost every restaurant decision is made on a phone."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 2
+  },
+  {
+   "name": "Giannina's Pizza and Catering",
+   "address": "9740 Barker Cypress Road, Cypress, TX",
+   "site": "https://gianninaspizza.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://gianninaspizza.com",
+    "https": true,
+    "mobile_ready": false,
+    "bytes": 114,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "Not built for phones",
+     "why": "Almost every restaurant decision is made on a phone."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 2
+  },
+  {
+   "name": "Vero Italian Kitchen",
+   "address": "13621 Skinner Road, Cypress, TX",
+   "site": "https://veroitaliankitchen.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://veroitaliankitchen.com",
+    "https": true,
+    "mobile_ready": false,
+    "bytes": 114,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "Not built for phones",
+     "why": "Almost every restaurant decision is made on a phone."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 2
+  },
+  {
+   "name": "Taqueria Mi Tierra",
+   "address": "13710 Cypress North Houston Road, Cypress, TX",
+   "site": "https://taqueriamitierra.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://taqueriamitierra.com",
+    "https": true,
+    "mobile_ready": false,
+    "bytes": 1084,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "Not built for phones",
+     "why": "Almost every restaurant decision is made on a phone."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 2
+  },
+  {
+   "name": "Nyam Nyam Cafe",
+   "address": "15201 Mason Road Ste 1100, Cypress, TX",
+   "site": "https://nyamnyamcafe.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://nyamnyamcafe.com",
+    "https": true,
+    "mobile_ready": false,
+    "bytes": 114,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "Not built for phones",
+     "why": "Almost every restaurant decision is made on a phone."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 2
+  },
+  {
+   "name": "Pizza Fino",
+   "address": "16206 Spring Cypress Road, Cypress, TX",
+   "site": "https://mypizzafino.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.mypizzafino.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 77819,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram"
+    ],
+    "menu_is_pdf": true,
+    "copyright_year": 2024,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "Menu is a PDF",
+     "why": "A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask."
+    },
+    {
+     "job": "Getting found",
+     "severity": "low",
+     "gap": "Site looks unmaintained (\u00a9 2024)",
+     "why": "Stale signals suggest stale hours and a stale menu."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Yoko Japanese Restaurant",
+   "address": "28404 Hwy 290 Ste G-11, Cypress, TX",
+   "site": "https://yokojk.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.yokojk.com/Welcome.tpl",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 24787,
+    "schema": [
+     "WebSite"
+    ],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": 2015,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Getting found",
+     "severity": "low",
+     "gap": "Site looks unmaintained (\u00a9 2015)",
+     "why": "Stale signals suggest stale hours and a stale menu."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Carl's BBQ",
+   "address": "21920 Hwy 290, Cypress, TX",
+   "site": "https://carlsbbq.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.carlsbbq.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 399980,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Hanan's Cafe",
+   "address": "25282 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://hananscafe.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.hananscafe.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 101813,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Manny's Pizza & Pasta",
+   "address": "7630 Fry Road Ste 200, Cypress, TX",
+   "site": "https://mymannyspizza.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://mymannyspizza.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 38856,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Rudy's Grill and Cantina",
+   "address": "11760 Grant Road, Cypress, TX",
+   "site": "https://rudyscantina.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://rudyscantina.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 96799,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": true,
+    "copyright_year": 2026,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "Menu is a PDF",
+     "why": "A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Floyd's Cajun Seafood",
+   "address": "27126 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://floydscajunseafood.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.monashoressingingchristmastree.com/the-singing-christmas-tree/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 27504,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "d'Vine Wine Bar",
+   "address": "25202 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://dvine-winebar.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.dvine-winebar.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 159186,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [
+     "DoorDash"
+    ],
+    "social": [
+     "Facebook",
+     "Instagram",
+     "X"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": 2021,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Getting found",
+     "severity": "low",
+     "gap": "Site looks unmaintained (\u00a9 2021)",
+     "why": "Stale signals suggest stale hours and a stale menu."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "Only third-party ordering (DoorDash)",
+     "why": "Every order pays a commission, including from guests who already knew the name. This is usually the single largest recoverable leak."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Gourmand Kitchen",
+   "address": "9818 Fry Road Ste 130, Cypress, TX",
+   "site": "https://gourmandkitchen.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.brandbucket.com/names/gourmandkitchen",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 309176,
+    "schema": [
+     "BreadcrumbList",
+     "Organization",
+     "Product"
+    ],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram",
+     "X"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": 2007,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Getting found",
+     "severity": "low",
+     "gap": "Site looks unmaintained (\u00a9 2007)",
+     "why": "Stale signals suggest stale hours and a stale menu."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Season's Harvest Cafe",
+   "address": "17303 Shaw Road, Cypress, TX",
+   "site": "https://seasonsharvest.farm",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.seasonsharvest.farm/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 399896,
+    "schema": [
+     "LocalBusiness",
+     "WebSite"
+    ],
+    "has_restaurant_schema": true,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Edojin Japanese Cuisine",
+   "address": "12344 Barker Cypress Road Ste 120, Cypress, TX",
+   "site": "https://edojin.net",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://edojin.net",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 22662,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Hunan River Bistro",
+   "address": "13133 Louetta Road, Cypress, TX",
+   "site": "https://myhunan.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.myhunan.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 60799,
+    "schema": [
+     "BreadcrumbList",
+     "ImageObject",
+     "Organization",
+     "Person",
+     "WebPage",
+     "WebSite"
+    ],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "X"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": 2026,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Yokohamaya Japanese Restaurant",
+   "address": "27200 Hwy 290 Ste 150, Cypress, TX",
+   "site": "https://yokohamayacypress.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://randylemmon.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 399975,
+    "schema": [
+     "BreadcrumbList",
+     "ImageObject",
+     "Organization",
+     "WebPage",
+     "WebSite"
+    ],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "Instagram"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Rice and Beans Cuisine",
+   "address": "26321 Hwy 290 Ste 212, Cypress, TX",
+   "site": "https://riceandbeanscubancuisine.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://riceandbeanscubancuisine.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 152691,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram",
+     "TikTok",
+     "X"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Brother's Pizzeria",
+   "address": "25282 Hwy 290 Ste 120, Cypress, TX",
+   "site": "https://brotherspizzeriahouston.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://brotherspizzeriahouston.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 229584,
+    "schema": [
+     "Organization",
+     "WebSite"
+    ],
+    "has_restaurant_schema": false,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "X"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Taquito Joes",
+   "address": "12904 Fry Road, Cypress, TX",
+   "site": "https://taquitojoes.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://taquitojoes.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 219887,
+    "schema": [
+     "Article",
+     "FAQPage",
+     "LocalBusiness",
+     "Organization",
+     "WebApplication",
+     "WebSite"
+    ],
+    "has_restaurant_schema": true,
+    "direct_ordering": [],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram",
+     "TikTok",
+     "X"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": 2025,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Winning the order",
+     "severity": "high",
+     "gap": "No online ordering at all",
+     "why": "Orders are limited to whoever gets through on the phone."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "BB's Cafe",
+   "address": "26010 Hempstead Road, Cypress, TX",
+   "site": "https://bbscafe.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "LT's Sports Bar and Grill",
+   "address": "11808 Barker Cypress Road Ste H, Cypress, TX",
+   "site": "https://ltssportsbarandgrill.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Mac's Sports Bar-N-Grill",
+   "address": "12650 Telge Road, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Masones Bar and Grill",
+   "address": "26281 Hwy 290 Ste 150, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Masones Pub and Grill",
+   "address": "13131 Louetta Road, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Revi's Grill and Family Restaurant",
+   "address": "15202 Mason Road Ste 700, Cypress, TX",
+   "site": "https://revisgrill.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "The Shack Burger Resort",
+   "address": "16602 Cypress Rosehill Road, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Skip's Farm",
+   "address": "16702 House and Hahl Road, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "TaD's Steak and Seafood",
+   "address": "13215 Grant Road, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Atsumi Asian Kitchen and Sushi Bar",
+   "address": "17333 Spring Cypress Road Ste H, Cypress, TX",
+   "site": "https://atsumicypress.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Ayie's Traditional Filipino-American Food",
+   "address": "12215 Grant Road, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Bangkok Bistro",
+   "address": "26084 Hwy 290 Ste 150, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Bo Bo Garden",
+   "address": "14041 Grant Road Ste 190, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "China Inn Cafe",
+   "address": "12343 Barker Cypress Road Ste 150, Cypress, TX",
+   "site": "https://chinainncafe5cypress.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "China Wok Cypress",
+   "address": "12312 Barker Cypress Road, Cypress, TX",
+   "site": "https://chinawokcypress.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Ginza Japanese Restaurant",
+   "address": "12728 Grant Road, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Golden China",
+   "address": "15202 Mason Road Ste 400, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Golden Spoon Chinese Restaurant",
+   "address": "12740 Grant Road, Cypress, TX",
+   "site": "https://goldenspooncypress.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Imperial City Chinese Cafe",
+   "address": "17330 Spring Cypress Road Ste 100, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Jade Bamboo",
+   "address": "7029 Barker Cypress Road, Cypress, TX",
+   "site": "https://jadebb.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "JB Pho and Grill",
+   "address": "7955 Barker Cypress Road Ste 900, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Kobe Hana Japanese Steakhouse",
+   "address": "24110 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://kobehanajapanese.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Matu Chinese Restaurant",
+   "address": "7751 Barker Cypress Road Ste 600, Cypress, TX",
+   "site": "https://matucr.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Mekong Grill Vietnamese Cuisine",
+   "address": "11808 Barker Cypress Road Ste K, Cypress, TX",
+   "site": "https://mekongrestaurantcypresstx.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "North Harbor Bistro",
+   "address": "10920 Fry Road Ste 600, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Shogun Japanese Grill & Sushi",
+   "address": "25712 Hwy 290 Ste K, Cypress, TX",
+   "site": "https://shogungrill.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Slurping Noodles",
+   "address": "28404 Hwy 290 Ste G-19, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Taisho Japanese Grill and Sushi Bar",
+   "address": "9955 Barker Cypress Road Ste 102, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Top Sushi",
+   "address": "7751 Barker Cypress Road Ste 900, Cypress, TX",
+   "site": "https://topsushirestaurantcypresstx.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "The Bake Shoppe & Cafe",
+   "address": "12724 Grant Road, Cypress, TX",
+   "site": "https://bakeshoppeandcafe.com",
+   "analysis": {
+    "reachable": false,
+    "status": 403,
+    "error": "no response"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Breakfast Brunch Cafe",
+   "address": "9955 Barker Cypress Road Ste 110, Cypress, TX",
+   "site": "https://bbcboardwalk.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "The Daily Brew",
+   "address": "12303 N Eldridge Parkway Ste A, Cypress, TX",
+   "site": "https://mydailybrew.net",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Jaxton's Bistro",
+   "address": "9955 Barker Cypress Road Ste 104, Cypress, TX",
+   "site": "https://jaxtonsbistro.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Annam Indian Bistro",
+   "address": "24120 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://annamus.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Azul Italian Kitchen",
+   "address": "26281 Hwy 290, Cypress, TX",
+   "site": "https://azulitaliankitchen.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Cafe Bella",
+   "address": "12303 N Eldridge Parkway, Cypress, TX",
+   "site": "https://cafebellacuisine.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Graziana's Pizza and Pasta",
+   "address": "10730 Barker Cypress Road Ste E, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Mezzanotte Ristorante",
+   "address": "13215 Grant Road, Cypress, TX",
+   "site": "https://mezzanotte.tv",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "New York and Chicago Pizza Company",
+   "address": "12361 Barker Cypress Road Ste 900, Cypress, TX",
+   "site": "https://nychicagopizza.com",
+   "analysis": {
+    "reachable": false,
+    "status": 404,
+    "error": "no response"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Tutto Bene",
+   "address": "15103 Mason Road Ste B3, Cypress, TX",
+   "site": "https://tutto-beneitalian.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Villa Roma Italian Ristorante",
+   "address": "12640 Telge Road Ste E, Cypress, TX",
+   "site": "https://villaromafinedining.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "El Jimador Mexican Restaurant",
+   "address": "12600 Telge Road, Cypress, TX",
+   "site": "https://eljimadorrestaurant.com",
+   "analysis": {
+    "reachable": false,
+    "status": 520,
+    "error": "no response"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Sergio's Mexican Grill",
+   "address": "29110 Hwy 290 Ste 500, Cypress, TX",
+   "site": "https://sergios-mexicangrill.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Taco de Oro",
+   "address": "9740 Barker Cypress Road Ste 105, Cypress, TX",
+   "site": null,
+   "analysis": {
+    "reachable": false,
+    "error": "no website listed"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Tacoland Mex-Mex Tacos",
+   "address": "22224 Hwy 290 Ste B, Cypress, TX",
+   "site": "https://tacolandmexmex.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "The 21st Amendment Lounge",
+   "address": "12810 Telge Road, Cypress, TX",
+   "site": "https://21stcypress.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Cork Cafe",
+   "address": "25712 Hwy 290 Ste C, Cypress, TX",
+   "site": "https://corkcafe.com",
+   "analysis": {
+    "reachable": false,
+    "status": 0,
+    "error": "URLError"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "Hidden Cellar",
+   "address": "16518 House & Hahl Road, Cypress, TX",
+   "site": "https://hiddencellarcypress.com",
+   "analysis": {
+    "reachable": false,
+    "status": 404,
+    "error": "no response"
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "high",
+     "gap": "No working website",
+     "why": "A guest deciding right now has nothing to look at, and an AI assistant has nothing to read. Everything else is downstream of this."
+    }
+   ],
+   "high": 1
+  },
+  {
+   "name": "JAX Burgers",
+   "address": "12714 Grant Road, Cypress, TX",
+   "site": "https://jaxburgers.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://jaxburgers.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 303878,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "ChowNow"
+    ],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": 2024,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Getting found",
+     "severity": "low",
+     "gap": "Site looks unmaintained (\u00a9 2024)",
+     "why": "Stale signals suggest stale hours and a stale menu."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Tomiko Sushi Bar and Grill",
+   "address": "29110 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://tomikorestaurant.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.tomikorestaurant.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 399980,
+    "schema": [
+     "LocalBusiness",
+     "WebSite"
+    ],
+    "has_restaurant_schema": true,
+    "direct_ordering": [
+     "Owner.com"
+    ],
+    "third_party": [
+     "DoorDash"
+    ],
+    "social": [],
+    "menu_is_pdf": true,
+    "copyright_year": 2025,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "Menu is a PDF",
+     "why": "A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Up Thai Kitchen",
+   "address": "12904 Fry Road Ste 600, Cypress, TX",
+   "site": "https://upthaikitchen.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://upthaikitchen.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 400000,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Charlie D's Pizza",
+   "address": "7160 Barker Cypress Road Ste H, Cypress, TX",
+   "site": "https://charliedspizza.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://charliedspizza.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 399991,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Locatelli's Pizza",
+   "address": "13215 Grant Road Ste 500, Cypress, TX",
+   "site": "https://locatellis.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.locatellis.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 399962,
+    "schema": [
+     "Restaurant",
+     "WebSite"
+    ],
+    "has_restaurant_schema": true,
+    "direct_ordering": [
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": true,
+    "copyright_year": 2019,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "Menu is a PDF",
+     "why": "A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask."
+    },
+    {
+     "job": "Getting found",
+     "severity": "low",
+     "gap": "Site looks unmaintained (\u00a9 2019)",
+     "why": "Stale signals suggest stale hours and a stale menu."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Frio Hill Country Grill",
+   "address": "16410 Mueschke Road, Cypress, TX",
+   "site": "https://friogrill.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.friogrill.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 399964,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Clover",
+     "Popmenu",
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram",
+     "X"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Texas Mesquite Grill",
+   "address": "27104 Hwy 290, Cypress, TX",
+   "site": "https://texasmesquitegrill.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://texasmesquitegrill.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 306521,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Keeping the guest",
+     "severity": "low",
+     "gap": "No social presence linked",
+     "why": "Nothing to bring a past guest back with."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Cypress Breakfast House",
+   "address": "12344 Barker Cypress Road Ste 120, Cypress, TX",
+   "site": "https://cypressbreakfasthouse.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.cypressbreakfasthouse.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 399978,
+    "schema": [
+     "WebSite"
+    ],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Marvino's Italian Kitchen",
+   "address": "24002 Hwy 290, Cypress, TX",
+   "site": "https://marvinositaliankitchen.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://marvinositaliansteakhouse.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 143995,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram",
+     "X"
+    ],
+    "menu_is_pdf": true,
+    "copyright_year": null,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "Menu is a PDF",
+     "why": "A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "La Maria Mexican Restaurant",
+   "address": "17445 Spring Cypress Road Ste A, Cypress, TX",
+   "site": "https://lamaria.net",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://lamaria.net",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 109886,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Square"
+    ],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    },
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Dario's American Cuisine",
+   "address": "14315 Cypress Rosehill Road, Cypress, TX",
+   "site": "https://dariosamericancuisine.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://dariossteakhouse.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 119158,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram",
+     "X"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Wood Fired Pizza",
+   "address": "15210 Spring Cypress Road, Cypress, TX",
+   "site": "https://wfpizza.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://wfpizza.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 123065,
+    "schema": [
+     "LocalBusiness"
+    ],
+    "has_restaurant_schema": true,
+    "direct_ordering": [
+     "Owner.com"
+    ],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram",
+     "Yelp"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": 2018,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "low",
+     "gap": "Site looks unmaintained (\u00a9 2018)",
+     "why": "Stale signals suggest stale hours and a stale menu."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Alicia's Mexican Grille",
+   "address": "26326 Hwy 290, Cypress, TX",
+   "site": "https://aliciasmexicangrille.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://aliciasmexicangrille.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 120108,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "La Hacienda",
+   "address": "12503 Telge Road, Cypress, TX",
+   "site": "https://lahaciendaonthecreek.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://lahaciendaonthecreek.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 249377,
+    "schema": [],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Toast"
+    ],
+    "third_party": [],
+    "social": [
+     "Facebook"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Las Mananitas",
+   "address": "15202 Mason Road, Cypress, TX",
+   "site": "https://lasmananitasmexicanrestaurant.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://lasmananitasmexicanrestaurant.com",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 399829,
+    "schema": [
+     "WebSite"
+    ],
+    "has_restaurant_schema": false,
+    "direct_ordering": [
+     "Owner.com"
+    ],
+    "third_party": [],
+    "social": [
+     "Instagram",
+     "TikTok"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": true
+   },
+   "findings": [
+    {
+     "job": "Getting found",
+     "severity": "medium",
+     "gap": "No Restaurant structured data",
+     "why": "Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu \u2014 or skip the restaurant."
+    }
+   ],
+   "high": 0
+  },
+  {
+   "name": "Romero's Las Brazas",
+   "address": "11734 Barker Cypress Road, Cypress, TX",
+   "site": "https://romeroslasbrazas.com",
+   "analysis": {
+    "reachable": true,
+    "status": 200,
+    "final_url": "https://www.romeroslasbrazas.com/",
+    "https": true,
+    "mobile_ready": true,
+    "bytes": 395478,
+    "schema": [
+     "Restaurant"
+    ],
+    "has_restaurant_schema": true,
+    "direct_ordering": [
+     "Clover",
+     "Popmenu"
+    ],
+    "third_party": [],
+    "social": [
+     "Facebook",
+     "Instagram"
+    ],
+    "menu_is_pdf": false,
+    "copyright_year": null,
+    "phone_on_page": false
+   },
+   "findings": [
+    {
+     "job": "Winning the order",
+     "severity": "low",
+     "gap": "No tap-to-call number",
+     "why": "On a phone, a number that is not a link is a number not dialled."
+    }
+   ],
+   "high": 0
+  }
+ ]
+}

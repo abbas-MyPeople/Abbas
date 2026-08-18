@@ -1,0 +1,436 @@
+{
+ "area": "Cypress, TX (Harris County)",
+ "source": "Community Impact Cy-Fair locally-owned dining guide, cross-checked live",
+ "restaurants": [
+  {
+   "name": "BB's Cafe",
+   "address": "26010 Hempstead Road, Cypress, TX",
+   "site": "https://bbscafe.com"
+  },
+  {
+   "name": "Dario's American Cuisine",
+   "address": "14315 Cypress Rosehill Road, Cypress, TX",
+   "site": "https://dariosamericancuisine.com"
+  },
+  {
+   "name": "Frio Hill Country Grill",
+   "address": "16410 Mueschke Road, Cypress, TX",
+   "site": "https://friogrill.com"
+  },
+  {
+   "name": "Gourmand Kitchen",
+   "address": "9818 Fry Road Ste 130, Cypress, TX",
+   "site": "https://gourmandkitchen.com"
+  },
+  {
+   "name": "JAX Burgers",
+   "address": "12714 Grant Road, Cypress, TX",
+   "site": "https://jaxburgers.com"
+  },
+  {
+   "name": "LT's Sports Bar and Grill",
+   "address": "11808 Barker Cypress Road Ste H, Cypress, TX",
+   "site": "https://ltssportsbarandgrill.com"
+  },
+  {
+   "name": "Mac's Sports Bar-N-Grill",
+   "address": "12650 Telge Road, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Masones Bar and Grill",
+   "address": "26281 Hwy 290 Ste 150, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Masones Pub and Grill",
+   "address": "13131 Louetta Road, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Murdoch's Backyard Pub",
+   "address": "18541 Mueschke Road, Cypress, TX",
+   "site": "https://murdochsbackyard.com"
+  },
+  {
+   "name": "Revi's Grill and Family Restaurant",
+   "address": "15202 Mason Road Ste 700, Cypress, TX",
+   "site": "https://revisgrill.com"
+  },
+  {
+   "name": "Season's Harvest Cafe",
+   "address": "17303 Shaw Road, Cypress, TX",
+   "site": "https://seasonsharvest.farm"
+  },
+  {
+   "name": "The Shack Burger Resort",
+   "address": "16602 Cypress Rosehill Road, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Skip's Farm",
+   "address": "16702 House and Hahl Road, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "TaD's Steak and Seafood",
+   "address": "13215 Grant Road, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Texas Mesquite Grill",
+   "address": "27104 Hwy 290, Cypress, TX",
+   "site": "https://texasmesquitegrill.com"
+  },
+  {
+   "name": "Atsumi Asian Kitchen and Sushi Bar",
+   "address": "17333 Spring Cypress Road Ste H, Cypress, TX",
+   "site": "https://atsumicypress.com"
+  },
+  {
+   "name": "Ayie's Traditional Filipino-American Food",
+   "address": "12215 Grant Road, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Bangkok Bistro",
+   "address": "26084 Hwy 290 Ste 150, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Bo Bo Garden",
+   "address": "14041 Grant Road Ste 190, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "China Inn Cafe",
+   "address": "12343 Barker Cypress Road Ste 150, Cypress, TX",
+   "site": "https://chinainncafe5cypress.com"
+  },
+  {
+   "name": "China Wok Cypress",
+   "address": "12312 Barker Cypress Road, Cypress, TX",
+   "site": "https://chinawokcypress.com"
+  },
+  {
+   "name": "Edojin Japanese Cuisine",
+   "address": "12344 Barker Cypress Road Ste 120, Cypress, TX",
+   "site": "https://edojin.net"
+  },
+  {
+   "name": "Ginza Japanese Restaurant",
+   "address": "12728 Grant Road, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Golden China",
+   "address": "15202 Mason Road Ste 400, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Golden Spoon Chinese Restaurant",
+   "address": "12740 Grant Road, Cypress, TX",
+   "site": "https://goldenspooncypress.com"
+  },
+  {
+   "name": "Hunan River Bistro",
+   "address": "13133 Louetta Road, Cypress, TX",
+   "site": "https://myhunan.com"
+  },
+  {
+   "name": "Imperial City Chinese Cafe",
+   "address": "17330 Spring Cypress Road Ste 100, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Jade Bamboo",
+   "address": "7029 Barker Cypress Road, Cypress, TX",
+   "site": "https://jadebb.com"
+  },
+  {
+   "name": "JB Pho and Grill",
+   "address": "7955 Barker Cypress Road Ste 900, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Kobe Hana Japanese Steakhouse",
+   "address": "24110 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://kobehanajapanese.com"
+  },
+  {
+   "name": "Matu Chinese Restaurant",
+   "address": "7751 Barker Cypress Road Ste 600, Cypress, TX",
+   "site": "https://matucr.com"
+  },
+  {
+   "name": "Mekong Grill Vietnamese Cuisine",
+   "address": "11808 Barker Cypress Road Ste K, Cypress, TX",
+   "site": "https://mekongrestaurantcypresstx.com"
+  },
+  {
+   "name": "North Harbor Bistro",
+   "address": "10920 Fry Road Ste 600, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Pho Binh Noodle and Grill",
+   "address": "12312 Barker Cypress Road Ste 1000, Cypress, TX",
+   "site": "https://phobinhgrill.com"
+  },
+  {
+   "name": "Shogun Japanese Grill & Sushi",
+   "address": "25712 Hwy 290 Ste K, Cypress, TX",
+   "site": "https://shogungrill.com"
+  },
+  {
+   "name": "Slurping Noodles",
+   "address": "28404 Hwy 290 Ste G-19, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Taisho Japanese Grill and Sushi Bar",
+   "address": "9955 Barker Cypress Road Ste 102, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Tomiko Sushi Bar and Grill",
+   "address": "29110 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://tomikorestaurant.com"
+  },
+  {
+   "name": "Top Sushi",
+   "address": "7751 Barker Cypress Road Ste 900, Cypress, TX",
+   "site": "https://topsushirestaurantcypresstx.com"
+  },
+  {
+   "name": "Up Thai Kitchen",
+   "address": "12904 Fry Road Ste 600, Cypress, TX",
+   "site": "https://upthaikitchen.com"
+  },
+  {
+   "name": "Yokohamaya Japanese Restaurant",
+   "address": "27200 Hwy 290 Ste 150, Cypress, TX",
+   "site": "https://yokohamayacypress.com"
+  },
+  {
+   "name": "Yoko Japanese Restaurant",
+   "address": "28404 Hwy 290 Ste G-11, Cypress, TX",
+   "site": "https://yokojk.com"
+  },
+  {
+   "name": "Carl's BBQ",
+   "address": "21920 Hwy 290, Cypress, TX",
+   "site": "https://carlsbbq.com"
+  },
+  {
+   "name": "The Bake Shoppe & Cafe",
+   "address": "12724 Grant Road, Cypress, TX",
+   "site": "https://bakeshoppeandcafe.com"
+  },
+  {
+   "name": "Breakfast Brunch Cafe",
+   "address": "9955 Barker Cypress Road Ste 110, Cypress, TX",
+   "site": "https://bbcboardwalk.com"
+  },
+  {
+   "name": "Cypress Breakfast House",
+   "address": "12344 Barker Cypress Road Ste 120, Cypress, TX",
+   "site": "https://cypressbreakfasthouse.com"
+  },
+  {
+   "name": "The Daily Brew",
+   "address": "12303 N Eldridge Parkway Ste A, Cypress, TX",
+   "site": "https://mydailybrew.net"
+  },
+  {
+   "name": "Hanan's Cafe",
+   "address": "25282 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://hananscafe.com"
+  },
+  {
+   "name": "Jaxton's Bistro",
+   "address": "9955 Barker Cypress Road Ste 104, Cypress, TX",
+   "site": "https://jaxtonsbistro.com"
+  },
+  {
+   "name": "Annam Indian Bistro",
+   "address": "24120 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://annamus.com"
+  },
+  {
+   "name": "Azul Italian Kitchen",
+   "address": "26281 Hwy 290, Cypress, TX",
+   "site": "https://azulitaliankitchen.com"
+  },
+  {
+   "name": "Brother's Pizzeria",
+   "address": "25282 Hwy 290 Ste 120, Cypress, TX",
+   "site": "https://brotherspizzeriahouston.com"
+  },
+  {
+   "name": "Cafe Bella",
+   "address": "12303 N Eldridge Parkway, Cypress, TX",
+   "site": "https://cafebellacuisine.com"
+  },
+  {
+   "name": "Charlie D's Pizza",
+   "address": "7160 Barker Cypress Road Ste H, Cypress, TX",
+   "site": "https://charliedspizza.com"
+  },
+  {
+   "name": "Giannina's Pizza and Catering",
+   "address": "9740 Barker Cypress Road, Cypress, TX",
+   "site": "https://gianninaspizza.com"
+  },
+  {
+   "name": "Graziana's Pizza and Pasta",
+   "address": "10730 Barker Cypress Road Ste E, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Locatelli's Pizza",
+   "address": "13215 Grant Road Ste 500, Cypress, TX",
+   "site": "https://locatellis.com"
+  },
+  {
+   "name": "Manny's Pizza & Pasta",
+   "address": "7630 Fry Road Ste 200, Cypress, TX",
+   "site": "https://mymannyspizza.com"
+  },
+  {
+   "name": "Marvino's Italian Kitchen",
+   "address": "24002 Hwy 290, Cypress, TX",
+   "site": "https://marvinositaliankitchen.com"
+  },
+  {
+   "name": "Mezzanotte Ristorante",
+   "address": "13215 Grant Road, Cypress, TX",
+   "site": "https://mezzanotte.tv"
+  },
+  {
+   "name": "New York and Chicago Pizza Company",
+   "address": "12361 Barker Cypress Road Ste 900, Cypress, TX",
+   "site": "https://nychicagopizza.com"
+  },
+  {
+   "name": "Pizza Fino",
+   "address": "16206 Spring Cypress Road, Cypress, TX",
+   "site": "https://mypizzafino.com"
+  },
+  {
+   "name": "Tutto Bene",
+   "address": "15103 Mason Road Ste B3, Cypress, TX",
+   "site": "https://tutto-beneitalian.com"
+  },
+  {
+   "name": "Vero Italian Kitchen",
+   "address": "13621 Skinner Road, Cypress, TX",
+   "site": "https://veroitaliankitchen.com"
+  },
+  {
+   "name": "Villa Roma Italian Ristorante",
+   "address": "12640 Telge Road Ste E, Cypress, TX",
+   "site": "https://villaromafinedining.com"
+  },
+  {
+   "name": "Wood Fired Pizza",
+   "address": "15210 Spring Cypress Road, Cypress, TX",
+   "site": "https://wfpizza.com"
+  },
+  {
+   "name": "Alicia's Mexican Grille",
+   "address": "26326 Hwy 290, Cypress, TX",
+   "site": "https://aliciasmexicangrille.com"
+  },
+  {
+   "name": "El Jimador Mexican Restaurant",
+   "address": "12600 Telge Road, Cypress, TX",
+   "site": "https://eljimadorrestaurant.com"
+  },
+  {
+   "name": "La Hacienda",
+   "address": "12503 Telge Road, Cypress, TX",
+   "site": "https://lahaciendaonthecreek.com"
+  },
+  {
+   "name": "La Maria Mexican Restaurant",
+   "address": "17445 Spring Cypress Road Ste A, Cypress, TX",
+   "site": "https://lamaria.net"
+  },
+  {
+   "name": "Las Mananitas",
+   "address": "15202 Mason Road, Cypress, TX",
+   "site": "https://lasmananitasmexicanrestaurant.com"
+  },
+  {
+   "name": "Rice and Beans Cuisine",
+   "address": "26321 Hwy 290 Ste 212, Cypress, TX",
+   "site": "https://riceandbeanscubancuisine.com"
+  },
+  {
+   "name": "Romero's Las Brazas",
+   "address": "11734 Barker Cypress Road, Cypress, TX",
+   "site": "https://romeroslasbrazas.com"
+  },
+  {
+   "name": "Rudy's Grill and Cantina",
+   "address": "11760 Grant Road, Cypress, TX",
+   "site": "https://rudyscantina.com"
+  },
+  {
+   "name": "Sergio's Mexican Grill",
+   "address": "29110 Hwy 290 Ste 500, Cypress, TX",
+   "site": "https://sergios-mexicangrill.com"
+  },
+  {
+   "name": "Taco de Oro",
+   "address": "9740 Barker Cypress Road Ste 105, Cypress, TX",
+   "site": null
+  },
+  {
+   "name": "Tacoland Mex-Mex Tacos",
+   "address": "22224 Hwy 290 Ste B, Cypress, TX",
+   "site": "https://tacolandmexmex.com"
+  },
+  {
+   "name": "Taqueria Mi Tierra",
+   "address": "13710 Cypress North Houston Road, Cypress, TX",
+   "site": "https://taqueriamitierra.com"
+  },
+  {
+   "name": "Taquito Joes",
+   "address": "12904 Fry Road, Cypress, TX",
+   "site": "https://taquitojoes.com"
+  },
+  {
+   "name": "Nyam Nyam Cafe",
+   "address": "15201 Mason Road Ste 1100, Cypress, TX",
+   "site": "https://nyamnyamcafe.com"
+  },
+  {
+   "name": "Floyd's Cajun Seafood",
+   "address": "27126 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://floydscajunseafood.com"
+  },
+  {
+   "name": "The 21st Amendment Lounge",
+   "address": "12810 Telge Road, Cypress, TX",
+   "site": "https://21stcypress.com"
+  },
+  {
+   "name": "Cork Cafe",
+   "address": "25712 Hwy 290 Ste C, Cypress, TX",
+   "site": "https://corkcafe.com"
+  },
+  {
+   "name": "d'Vine Wine Bar",
+   "address": "25202 Hwy 290 Ste 100, Cypress, TX",
+   "site": "https://dvine-winebar.com"
+  },
+  {
+   "name": "Hidden Cellar",
+   "address": "16518 House & Hahl Road, Cypress, TX",
+   "site": "https://hiddencellarcypress.com"
+  }
+ ]
+}

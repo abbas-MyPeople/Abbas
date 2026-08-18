@@ -1,0 +1,445 @@
+<title>Cypress Outreach Board</title>
+<style>
+:root{--bg:#faf8f4;--ink:#1a1a17;--ink2:#57534b;--ink3:#8a857a;--line:#e2ddd2;--card:#fff;--hot:#a8331f;--warn:#b3701a;--cool:#6b6357;--go:#1c4739}
+:root:not([data-theme=light]) {}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#15140f;--ink:#f0ece2;--ink2:#b3ada0;--ink3:#7d776b;--line:#2f2c25;--card:#1d1b15;--hot:#e0705a;--warn:#d9a04a;--cool:#8e877a;--go:#7fbfa2}}
+:root[data-theme=dark]{--bg:#15140f;--ink:#f0ece2;--ink2:#b3ada0;--ink3:#7d776b;--line:#2f2c25;--card:#1d1b15;--hot:#e0705a;--warn:#d9a04a;--cool:#8e877a;--go:#7fbfa2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;padding:34px 20px 80px}
+.w{max-width:940px;margin:0 auto}
+h1{font-size:clamp(1.6rem,3.4vw,2.2rem);letter-spacing:-.03em;margin:0 0 6px;font-weight:800}
+.sub{color:var(--ink2);margin:0 0 26px;max-width:70ch}
+h2{font-size:1.12rem;letter-spacing:-.01em;margin:34px 0 12px;font-weight:750}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0 6px}
+.k{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.k b{display:block;font-size:1.5rem;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.k span{font-size:12.4px;color:var(--ink2);line-height:1.35;display:block;margin-top:3px}
+.note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--hot);border-radius:0 11px 11px 0;padding:15px 17px;margin:16px 0}
+.note p{margin:0 0 8px} .note p:last-child{margin:0}
+.r{background:var(--card);border:1px solid var(--line);border-radius:11px;margin-bottom:8px;overflow:hidden}
+.r summary{cursor:pointer;padding:13px 16px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;list-style:none}
+.r summary::-webkit-details-marker{display:none}
+.n{font-weight:680;min-width:210px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chips i{font-style:normal;font-size:11px;letter-spacing:.02em;padding:3px 8px;border-radius:999px;border:1px solid currentColor}
+.s-high{color:var(--hot)} .s-medium{color:var(--warn)} .s-low{color:var(--cool)}
+.body{padding:2px 16px 16px;border-top:1px solid var(--line)}
+.addr{font-size:13px;color:var(--ink3);margin:12px 0 10px}
+.chan{font-size:13.5px;color:var(--ink2);background:var(--bg);border-radius:8px;padding:9px 11px;margin:0 0 12px}
+.body p{font-size:14.4px;margin:0 0 10px;color:var(--ink2)}
+.body p b{color:var(--ink)}
+.job{font-size:11px;color:var(--ink3);border:1px solid var(--line);padding:1px 7px;border-radius:999px;margin-left:5px}
+.msg{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+textarea{width:100%;min-height:96px;resize:vertical;font:14px/1.5 inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.copy{align-self:flex-start;font:600 13.5px inherit;background:var(--go);color:#fff;border:0;border-radius:8px;padding:9px 16px;cursor:pointer}
+.copy.done{opacity:.75}
+a{color:inherit}
+ol{padding-left:20px} ol li{margin-bottom:9px;color:var(--ink2)} ol li b{color:var(--ink)}
+</style>
+
+<div class="w">
+<h1>Cypress outreach board</h1>
+<p class="sub">86 locally owned Cypress restaurants read from their own public websites on 18 August 2026. Sorted by what is visibly costing them orders. Open one to see the angle and copy an opener written from that restaurant's actual gaps.</p>
+
+<div class="kpis">
+  <div class="k"><b>86</b><span>independents checked</span></div>
+  <div class="k"><b>38</b><span>with a working website</span></div>
+  <div class="k"><b>48</b><span>no reachable site</span></div>
+  <div class="k"><b>38</b><span>live sites with a gap</span></div>
+</div>
+<div class="kpis"><div class="k"><b>48</b><span>No working website</span></div><div class="k"><b>32</b><span>No Restaurant structured data</span></div><div class="k"><b>26</b><span>No tap-to-call number</span></div><div class="k"><b>21</b><span>No online ordering at all</span></div><div class="k"><b>17</b><span>No social presence linked</span></div><div class="k"><b>7</b><span>Site looks unmaintained</span></div></div>
+
+<div class="note">
+  <p><b>Read this before you use the list.</b> The 48 with no reachable site are not all
+  opportunities. That directory is from 2018, so an unreachable domain can mean closed, not
+  invisible. Verify each is still trading before you approach it - Google Maps in ten seconds.</p>
+  <p>The 38 with live sites are confirmed trading and every one has at least one visible gap.
+  That is your first list.</p>
+</div>
+
+<h2>Cypress vs Katy - you were right to hesitate</h2>
+<div class="note">
+  <p>Katy is in a build cycle: new retail and restaurant openings are the story there in 2026.
+  Operators who are opening or expanding are spending on build-out, not looking for someone to
+  fix a leak. Felt pain is lower.</p>
+  <p>Cypress is growing too, but the independents in this list are established rather than new -
+  many trading a decade or more - and the metro around them lost 119 restaurants in six months,
+  more than any city in the US or Canada. Established operator plus visible squeeze is the
+  combination that converts. Start Cypress, keep Katy for when you have proof to lead with.</p>
+</div>
+
+<h2>The play</h2>
+<ol>
+  <li><b>Walk in, do not email.</b> You are an operator in Spring, not an agency. Between 2pm
+  and 4pm on Tuesday to Thursday the owner is usually there and not in the weeds. That single
+  fact is your entire advantage over everyone else calling them.</li>
+  <li><b>Lead with their thing, not yours.</b> Every opener below names something real on their
+  own site. Show it on your phone. Do not pitch six services.</li>
+  <li><b>Leave the one-pager</b> (AZ-RP-leave-behind.pdf) and the free-pilot line. Three months,
+  nothing to sign, they keep whatever you build.</li>
+  <li><b>Follow up once</b> by Instagram or Facebook DM within 48 hours, referencing the visit.
+  Once. Not a sequence.</li>
+  <li><b>Five a day, three days a week.</b> 38 targets is about three weeks. You only need to
+  fill three founding spots.</li>
+</ol>
+
+<h2>Targets - live sites, worst first</h2>
+<details class="r"><summary>
+        <span class="n">1. Murdoch&#x27;s Backyard Pub</span>
+        <span class="chips"><i class="s-high">Not built for phones</i><i class="s-medium">No Restaurant structured data</i><i class="s-medium">Menu is a PDF</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">18541 Mueschke Road, Cypress, TX &middot; <a href="https://www.murdochsbackyard.com/" target="_blank" rel="noopener">https://www.murdochsbackyard.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: Facebook, Instagram, TikTok, X | phone link: no</p>
+        <p><b>Not built for phones</b> <span class="job">Getting found</span><br>Almost every restaurant decision is made on a phone.</p><p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>Menu is a PDF</b> <span class="job">Getting found</span><br>A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi over in Spring. I was looking at Murdoch&#x27;s Backyard Pub on my phone and the site is hard to use on a small screen, which is where nearly every order decision gets made now. I fix this kind of thing for restaurants around Cy-Fair and I am doing it free for three months for a few places. Worth ten minutes?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">2. Pho Binh Noodle and Grill</span>
+        <span class="chips"><i class="s-high">Not built for phones</i><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">12312 Barker Cypress Road Ste 1000, Cypress, TX &middot; <a href="https://www.phobinhgrill.com/" target="_blank" rel="noopener">https://www.phobinhgrill.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>Not built for phones</b> <span class="job">Getting found</span><br>Almost every restaurant decision is made on a phone.</p><p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi over in Spring. I was looking at Pho Binh Noodle and Grill on my phone and the site is hard to use on a small screen, which is where nearly every order decision gets made now. I fix this kind of thing for restaurants around Cy-Fair and I am doing it free for three months for a few places. Worth ten minutes?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">3. Giannina&#x27;s Pizza and Catering</span>
+        <span class="chips"><i class="s-high">Not built for phones</i><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">9740 Barker Cypress Road, Cypress, TX &middot; <a href="https://gianninaspizza.com" target="_blank" rel="noopener">https://gianninaspizza.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>Not built for phones</b> <span class="job">Getting found</span><br>Almost every restaurant decision is made on a phone.</p><p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi over in Spring. I was looking at Giannina&#x27;s Pizza and Catering on my phone and the site is hard to use on a small screen, which is where nearly every order decision gets made now. I fix this kind of thing for restaurants around Cy-Fair and I am doing it free for three months for a few places. Worth ten minutes?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">4. Vero Italian Kitchen</span>
+        <span class="chips"><i class="s-high">Not built for phones</i><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">13621 Skinner Road, Cypress, TX &middot; <a href="https://veroitaliankitchen.com" target="_blank" rel="noopener">https://veroitaliankitchen.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>Not built for phones</b> <span class="job">Getting found</span><br>Almost every restaurant decision is made on a phone.</p><p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi over in Spring. I was looking at Vero Italian Kitchen on my phone and the site is hard to use on a small screen, which is where nearly every order decision gets made now. I fix this kind of thing for restaurants around Cy-Fair and I am doing it free for three months for a few places. Worth ten minutes?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">5. Taqueria Mi Tierra</span>
+        <span class="chips"><i class="s-high">Not built for phones</i><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">13710 Cypress North Houston Road, Cypress, TX &middot; <a href="https://taqueriamitierra.com" target="_blank" rel="noopener">https://taqueriamitierra.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>Not built for phones</b> <span class="job">Getting found</span><br>Almost every restaurant decision is made on a phone.</p><p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi over in Spring. I was looking at Taqueria Mi Tierra on my phone and the site is hard to use on a small screen, which is where nearly every order decision gets made now. I fix this kind of thing for restaurants around Cy-Fair and I am doing it free for three months for a few places. Worth ten minutes?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">6. Nyam Nyam Cafe</span>
+        <span class="chips"><i class="s-high">Not built for phones</i><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">15201 Mason Road Ste 1100, Cypress, TX &middot; <a href="https://nyamnyamcafe.com" target="_blank" rel="noopener">https://nyamnyamcafe.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>Not built for phones</b> <span class="job">Getting found</span><br>Almost every restaurant decision is made on a phone.</p><p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi over in Spring. I was looking at Nyam Nyam Cafe on my phone and the site is hard to use on a small screen, which is where nearly every order decision gets made now. I fix this kind of thing for restaurants around Cy-Fair and I am doing it free for three months for a few places. Worth ten minutes?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">7. Pizza Fino</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-medium">Menu is a PDF</i><i class="s-low">Site looks unmaintained (© 2024)</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">16206 Spring Cypress Road, Cypress, TX &middot; <a href="https://www.mypizzafino.com/" target="_blank" rel="noopener">https://www.mypizzafino.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: Facebook, Instagram | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>Menu is a PDF</b> <span class="job">Getting found</span><br>A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask.</p><p><b>Site looks unmaintained (© 2024)</b> <span class="job">Getting found</span><br>Stale signals suggest stale hours and a stale menu.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Pizza Fino has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">8. Yoko Japanese Restaurant</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">Site looks unmaintained (© 2015)</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">28404 Hwy 290 Ste G-11, Cypress, TX &middot; <a href="https://www.yokojk.com/Welcome.tpl" target="_blank" rel="noopener">https://www.yokojk.com/Welcome.tpl</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: Facebook, Instagram | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>Site looks unmaintained (© 2015)</b> <span class="job">Getting found</span><br>Stale signals suggest stale hours and a stale menu.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Yoko Japanese Restaurant has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">9. Carl&#x27;s BBQ</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">21920 Hwy 290, Cypress, TX &middot; <a href="https://www.carlsbbq.com/" target="_blank" rel="noopener">https://www.carlsbbq.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Carl&#x27;s BBQ has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">10. Hanan&#x27;s Cafe</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">25282 Hwy 290 Ste 100, Cypress, TX &middot; <a href="https://www.hananscafe.com/" target="_blank" rel="noopener">https://www.hananscafe.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Hanan&#x27;s Cafe has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">11. Manny&#x27;s Pizza &amp; Pasta</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">7630 Fry Road Ste 200, Cypress, TX &middot; <a href="https://mymannyspizza.com" target="_blank" rel="noopener">https://mymannyspizza.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Manny&#x27;s Pizza &amp; Pasta has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">12. Rudy&#x27;s Grill and Cantina</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-medium">Menu is a PDF</i><i class="s-high">No online ordering at all</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">11760 Grant Road, Cypress, TX &middot; <a href="https://rudyscantina.com" target="_blank" rel="noopener">https://rudyscantina.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>Menu is a PDF</b> <span class="job">Getting found</span><br>A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Rudy&#x27;s Grill and Cantina has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">13. Floyd&#x27;s Cajun Seafood</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">27126 Hwy 290 Ste 100, Cypress, TX &middot; <a href="https://www.monashoressingingchristmastree.com/the-singing-christmas-tree/" target="_blank" rel="noopener">https://www.monashoressingingchristmastree.com/the-singing-c</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Floyd&#x27;s Cajun Seafood has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">14. d&#x27;Vine Wine Bar</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">Site looks unmaintained (© 2021)</i><i class="s-high">Only third-party ordering (DoorDash)</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">25202 Hwy 290 Ste 100, Cypress, TX &middot; <a href="https://www.dvine-winebar.com/" target="_blank" rel="noopener">https://www.dvine-winebar.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> apps: DoorDash | social: Facebook, Instagram, X | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>Site looks unmaintained (© 2021)</b> <span class="job">Getting found</span><br>Stale signals suggest stale hours and a stale menu.</p><p><b>Only third-party ordering (DoorDash)</b> <span class="job">Winning the order</span><br>Every order pays a commission, including from guests who already knew the name. This is usually the single largest recoverable leak.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. d&#x27;Vine Wine Bar is taking orders through the delivery apps but has no direct option, so you are paying commission even on regulars who already knew your name. That is the leak I fix first. Free for three months for a few Cy-Fair restaurants - interested?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">15. Gourmand Kitchen</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">Site looks unmaintained (© 2007)</i><i class="s-high">No online ordering at all</i></span></summary>
+      <div class="body">
+        <p class="addr">9818 Fry Road Ste 130, Cypress, TX &middot; <a href="https://www.brandbucket.com/names/gourmandkitchen" target="_blank" rel="noopener">https://www.brandbucket.com/names/gourmandkitchen</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: Facebook, Instagram, X | phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>Site looks unmaintained (© 2007)</b> <span class="job">Getting found</span><br>Stale signals suggest stale hours and a stale menu.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Gourmand Kitchen has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">16. Season&#x27;s Harvest Cafe</span>
+        <span class="chips"><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">17303 Shaw Road, Cypress, TX &middot; <a href="https://www.seasonsharvest.farm/" target="_blank" rel="noopener">https://www.seasonsharvest.farm/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> phone link: no</p>
+        <p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Season&#x27;s Harvest Cafe has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">17. Edojin Japanese Cuisine</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">12344 Barker Cypress Road Ste 120, Cypress, TX &middot; <a href="https://edojin.net" target="_blank" rel="noopener">https://edojin.net</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: Facebook, Instagram | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Edojin Japanese Cuisine has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">18. Hunan River Bistro</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">13133 Louetta Road, Cypress, TX &middot; <a href="https://www.myhunan.com/" target="_blank" rel="noopener">https://www.myhunan.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: X | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Hunan River Bistro has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">19. Yokohamaya Japanese Restaurant</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">27200 Hwy 290 Ste 150, Cypress, TX &middot; <a href="https://randylemmon.com/" target="_blank" rel="noopener">https://randylemmon.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: Instagram | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Yokohamaya Japanese Restaurant has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">20. Rice and Beans Cuisine</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">26321 Hwy 290 Ste 212, Cypress, TX &middot; <a href="https://riceandbeanscubancuisine.com" target="_blank" rel="noopener">https://riceandbeanscubancuisine.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: Facebook, Instagram, TikTok, X | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Rice and Beans Cuisine has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">21. Brother&#x27;s Pizzeria</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-high">No online ordering at all</i></span></summary>
+      <div class="body">
+        <p class="addr">25282 Hwy 290 Ste 120, Cypress, TX &middot; <a href="https://brotherspizzeriahouston.com" target="_blank" rel="noopener">https://brotherspizzeriahouston.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: Facebook, X | phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Brother&#x27;s Pizzeria has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">22. Taquito Joes</span>
+        <span class="chips"><i class="s-high">No online ordering at all</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">12904 Fry Road, Cypress, TX &middot; <a href="https://taquitojoes.com" target="_blank" rel="noopener">https://taquitojoes.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> social: Facebook, Instagram, TikTok, X | phone link: no</p>
+        <p><b>No online ordering at all</b> <span class="job">Winning the order</span><br>Orders are limited to whoever gets through on the phone.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. I noticed Taquito Joes has no way to take an order online, so everything has to come through the phone during service. That is usually the biggest recoverable loss in a week. I am setting a few Cy-Fair places up free for three months. Can I show you what I mean?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">23. JAX Burgers</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">Site looks unmaintained (© 2024)</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">12714 Grant Road, Cypress, TX &middot; <a href="https://jaxburgers.com" target="_blank" rel="noopener">https://jaxburgers.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: ChowNow | phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>Site looks unmaintained (© 2024)</b> <span class="job">Getting found</span><br>Stale signals suggest stale hours and a stale menu.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, JAX Burgers is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">24. Tomiko Sushi Bar and Grill</span>
+        <span class="chips"><i class="s-medium">Menu is a PDF</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">29110 Hwy 290 Ste 100, Cypress, TX &middot; <a href="https://www.tomikorestaurant.com/" target="_blank" rel="noopener">https://www.tomikorestaurant.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Owner.com | apps: DoorDash | phone link: no</p>
+        <p><b>Menu is a PDF</b> <span class="job">Getting found</span><br>A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring, and I do the technology side for restaurants around Cy-Fair. I had a look at Tomiko Sushi Bar and Grill and there are a couple of things costing you orders that would take me an afternoon. Free for three months. Worth a chat?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">25. Up Thai Kitchen</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">12904 Fry Road Ste 600, Cypress, TX &middot; <a href="https://upthaikitchen.com" target="_blank" rel="noopener">https://upthaikitchen.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Toast | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, Up Thai Kitchen is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">26. Charlie D&#x27;s Pizza</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">No tap-to-call number</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">7160 Barker Cypress Road Ste H, Cypress, TX &middot; <a href="https://charliedspizza.com" target="_blank" rel="noopener">https://charliedspizza.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Toast | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, Charlie D&#x27;s Pizza is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">27. Locatelli&#x27;s Pizza</span>
+        <span class="chips"><i class="s-medium">Menu is a PDF</i><i class="s-low">Site looks unmaintained (© 2019)</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">13215 Grant Road Ste 500, Cypress, TX &middot; <a href="https://www.locatellis.com/" target="_blank" rel="noopener">https://www.locatellis.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Toast | phone link: yes</p>
+        <p><b>Menu is a PDF</b> <span class="job">Getting found</span><br>A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask.</p><p><b>Site looks unmaintained (© 2019)</b> <span class="job">Getting found</span><br>Stale signals suggest stale hours and a stale menu.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring, and I do the technology side for restaurants around Cy-Fair. I had a look at Locatelli&#x27;s Pizza and there are a couple of things costing you orders that would take me an afternoon. Free for three months. Worth a chat?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">28. Frio Hill Country Grill</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">16410 Mueschke Road, Cypress, TX &middot; <a href="https://www.friogrill.com/" target="_blank" rel="noopener">https://www.friogrill.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Clover, Popmenu, Toast | social: Facebook, Instagram, X | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, Frio Hill Country Grill is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">29. Texas Mesquite Grill</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">No social presence linked</i></span></summary>
+      <div class="body">
+        <p class="addr">27104 Hwy 290, Cypress, TX &middot; <a href="https://texasmesquitegrill.com" target="_blank" rel="noopener">https://texasmesquitegrill.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Toast | phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No social presence linked</b> <span class="job">Keeping the guest</span><br>Nothing to bring a past guest back with.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, Texas Mesquite Grill is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">30. Cypress Breakfast House</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">12344 Barker Cypress Road Ste 120, Cypress, TX &middot; <a href="https://www.cypressbreakfasthouse.com/" target="_blank" rel="noopener">https://www.cypressbreakfasthouse.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Toast | social: Facebook, Instagram | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, Cypress Breakfast House is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">31. Marvino&#x27;s Italian Kitchen</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-medium">Menu is a PDF</i></span></summary>
+      <div class="body">
+        <p class="addr">24002 Hwy 290, Cypress, TX &middot; <a href="https://marvinositaliansteakhouse.com/" target="_blank" rel="noopener">https://marvinositaliansteakhouse.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Toast | social: Facebook, Instagram, X | phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>Menu is a PDF</b> <span class="job">Getting found</span><br>A PDF menu is close to unreadable on a phone and largely invisible to the assistants people now ask.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, Marvino&#x27;s Italian Kitchen is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">32. La Maria Mexican Restaurant</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">17445 Spring Cypress Road Ste A, Cypress, TX &middot; <a href="https://lamaria.net" target="_blank" rel="noopener">https://lamaria.net</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Square | social: Facebook, Instagram | phone link: no</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p><p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, La Maria Mexican Restaurant is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">33. Dario&#x27;s American Cuisine</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i></span></summary>
+      <div class="body">
+        <p class="addr">14315 Cypress Rosehill Road, Cypress, TX &middot; <a href="https://dariossteakhouse.com/" target="_blank" rel="noopener">https://dariossteakhouse.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Toast | social: Facebook, Instagram, X | phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, Dario&#x27;s American Cuisine is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">34. Wood Fired Pizza</span>
+        <span class="chips"><i class="s-low">Site looks unmaintained (© 2018)</i></span></summary>
+      <div class="body">
+        <p class="addr">15210 Spring Cypress Road, Cypress, TX &middot; <a href="https://wfpizza.com" target="_blank" rel="noopener">https://wfpizza.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Owner.com | social: Facebook, Instagram, Yelp | phone link: yes</p>
+        <p><b>Site looks unmaintained (© 2018)</b> <span class="job">Getting found</span><br>Stale signals suggest stale hours and a stale menu.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring, and I do the technology side for restaurants around Cy-Fair. I had a look at Wood Fired Pizza and there are a couple of things costing you orders that would take me an afternoon. Free for three months. Worth a chat?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">35. Alicia&#x27;s Mexican Grille</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i></span></summary>
+      <div class="body">
+        <p class="addr">26326 Hwy 290, Cypress, TX &middot; <a href="https://aliciasmexicangrille.com" target="_blank" rel="noopener">https://aliciasmexicangrille.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Toast | social: Facebook, Instagram | phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, Alicia&#x27;s Mexican Grille is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">36. La Hacienda</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i></span></summary>
+      <div class="body">
+        <p class="addr">12503 Telge Road, Cypress, TX &middot; <a href="https://lahaciendaonthecreek.com" target="_blank" rel="noopener">https://lahaciendaonthecreek.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Toast | social: Facebook | phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, La Hacienda is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">37. Las Mananitas</span>
+        <span class="chips"><i class="s-medium">No Restaurant structured data</i></span></summary>
+      <div class="body">
+        <p class="addr">15202 Mason Road, Cypress, TX &middot; <a href="https://lasmananitasmexicanrestaurant.com" target="_blank" rel="noopener">https://lasmananitasmexicanrestaurant.com</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Owner.com | social: Instagram, TikTok | phone link: yes</p>
+        <p><b>No Restaurant structured data</b> <span class="job">Getting found</span><br>Search and AI assistants read structured data first. Without it they guess the cuisine, hours and menu — or skip the restaurant.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring. When someone asks ChatGPT or Google for food near Cypress, Las Mananitas is harder to surface than it should be, because the site does not describe itself in the format those systems read. It is a quick fix and I am doing it free for three months for a few places here.</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details><details class="r"><summary>
+        <span class="n">38. Romero&#x27;s Las Brazas</span>
+        <span class="chips"><i class="s-low">No tap-to-call number</i></span></summary>
+      <div class="body">
+        <p class="addr">11734 Barker Cypress Road, Cypress, TX &middot; <a href="https://www.romeroslasbrazas.com/" target="_blank" rel="noopener">https://www.romeroslasbrazas.com/</a></p>
+        <p class="chan"><b>How they reach guests today:</b> direct: Clover, Popmenu | social: Facebook, Instagram | phone link: no</p>
+        <p><b>No tap-to-call number</b> <span class="job">Winning the order</span><br>On a phone, a number that is not a link is a number not dialled.</p>
+        <div class="msg"><textarea readonly>Hi - I run Wok &amp; Karahi in Spring, and I do the technology side for restaurants around Cy-Fair. I had a look at Romero&#x27;s Las Brazas and there are a couple of things costing you orders that would take me an afternoon. Free for three months. Worth a chat?</textarea>
+          <button class="copy" type="button">Copy opener</button></div>
+      </div></details>
+
+<h2>Needs a status check first (48)</h2>
+<p class="sub">No reachable website. Confirm open on Google Maps, then treat "no website at all" as the strongest possible opening.</p>
+<div class="note"><p>BB&#x27;s Cafe, LT&#x27;s Sports Bar and Grill, Mac&#x27;s Sports Bar-N-Grill, Masones Bar and Grill, Masones Pub and Grill, Revi&#x27;s Grill and Family Restaurant, The Shack Burger Resort, Skip&#x27;s Farm, TaD&#x27;s Steak and Seafood, Atsumi Asian Kitchen and Sushi Bar, Ayie&#x27;s Traditional Filipino-American Food, Bangkok Bistro, Bo Bo Garden, China Inn Cafe, China Wok Cypress, Ginza Japanese Restaurant, Golden China, Golden Spoon Chinese Restaurant, Imperial City Chinese Cafe, Jade Bamboo, JB Pho and Grill, Kobe Hana Japanese Steakhouse, Matu Chinese Restaurant, Mekong Grill Vietnamese Cuisine, North Harbor Bistro, Shogun Japanese Grill &amp; Sushi, Slurping Noodles, Taisho Japanese Grill and Sushi Bar, Top Sushi, The Bake Shoppe &amp; Cafe, Breakfast Brunch Cafe, The Daily Brew, Jaxton&#x27;s Bistro, Annam Indian Bistro, Azul Italian Kitchen, Cafe Bella, Graziana&#x27;s Pizza and Pasta, Mezzanotte Ristorante, New York and Chicago Pizza Company, Tutto Bene, Villa Roma Italian Ristorante, El Jimador Mexican Restaurant, Sergio&#x27;s Mexican Grill, Taco de Oro, Tacoland Mex-Mex Tacos, The 21st Amendment Lounge, Cork Cafe, Hidden Cellar</p></div>
+</div>
+
+<script>
+document.addEventListener("click", function(e){
+  var b = e.target.closest(".copy"); if(!b) return;
+  var ta = b.parentElement.querySelector("textarea");
+  navigator.clipboard.writeText(ta.value).then(function(){
+    var t = b.textContent; b.textContent = "Copied"; b.classList.add("done");
+    setTimeout(function(){ b.textContent = t; b.classList.remove("done"); }, 1400);
+  });
+});
+</script>
