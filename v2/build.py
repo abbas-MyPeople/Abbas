@@ -10,7 +10,7 @@ Two modes, because the same markup has to serve two very different hosts:
 
 Images stay inlined in both modes; they are small and it keeps the page one file.
 """
-import base64, mimetypes, pathlib, re, subprocess, sys
+import base64, html, json, mimetypes, pathlib, re, subprocess, sys
 
 HERE = pathlib.Path(__file__).parent          # <repo>/v2
 REPO = HERE.parent
@@ -46,11 +46,33 @@ VIDEOS = {
 
 # The tracking core is one file shared by every page, so the two can never drift.
 TRACK = HERE / "track.js"
+I18N  = HERE / "i18n.js"
+LANGS = {"hi": HERE / "hi.json", "ur": HERE / "ur.json"}
+
+def lang_tables() -> str:
+    """Per-language lookups, keyed the way innerHTML actually reads back.
+
+    The sources are written with entities (&mdash;, &rsquo;, &amp;), but a
+    browser returns innerHTML with only & < > re-escaped and every other
+    entity resolved to its character. Keys built straight from the source
+    would never match, so they are unescaped and then minimally re-escaped.
+    """
+    def key(s: str) -> str:
+        # Resolve every entity, then put back only the one the browser re-escapes.
+        # Real markup such as <br> must stay literal or it can never match.
+        return html.unescape(s).replace("&", "&amp;")
+    tables = {}
+    for lang, path in LANGS.items():
+        raw = json.loads(path.read_text())
+        tables[lang] = {" ".join(key(en).split()): tr for en, tr in raw.items()}
+    return json.dumps(tables, ensure_ascii=False, separators=(",", ":"))
 
 def render(src: pathlib.Path, mode: str, page_id: str) -> str:
     t = src.read_text()
     if "__TRACKING__" in t:
         t = t.replace("__TRACKING__", TRACK.read_text().replace("__PAGEID__", page_id))
+    if "__I18N__" in t:
+        t = t.replace("__I18N__", I18N.read_text().replace("__LANG_TABLES__", lang_tables()))
     for token, fn in IMAGES.items():
         if token in t:
             t = t.replace(token, fn())

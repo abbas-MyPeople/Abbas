@@ -198,3 +198,67 @@ and all 149 sitemap URLs resolve. Nothing 404s.
   CORS-open (`OPTIONS` → 200, `access-control-allow-origin: *`), and the payload
   is correct, but sending a real lead into the inbox is not something to do
   without being asked.
+
+---
+
+# Cut over, 2026-08-18
+
+`index.html` and `investors.html` are now the v2 build. Backups:
+
+    tag    live-pre-v2-cutover-20260818
+    files  .backup/index.pre-v2-cutover-20260818.html
+           .backup/investors.pre-v2-cutover-20260818.html
+
+Revert with `cp .backup/index.pre-v2-cutover-20260818.html index.html`.
+
+## Three languages
+
+English, Hindi and Urdu, switched from the header. 210 strings per language in
+`v2/hi.json` and `v2/ur.json`; brand and product names (Google, Toast, the POS
+comparisons, the contact address) stay in English on purpose.
+
+Matching is on text, not on hand-placed keys, so new copy becomes translatable
+the moment its translation is added — nothing needs tagging in the markup. Two
+things that were not obvious and both broke it once:
+
+- **Keys must be normalised to what `innerHTML` actually returns.** The sources
+  are written with entities, but a browser resolves everything except `& < >`.
+  Keys built straight from the source never match. Worse, escaping `<` breaks
+  any string containing real markup, such as `3 months.<br>Completely free.`
+- **Text sitting beside a child element belongs to no leaf.** "Stop worrying
+  about" sits next to the rotator span, so it was skipped entirely and stayed in
+  English while everything around it translated. Those loose runs are now wrapped
+  in `<t9n>` at startup — a custom element, deliberately, because no stylesheet
+  rule can match it and the wrap cannot disturb layout.
+
+Urdu additionally flips the document to RTL and needs its own line boxes: the
+rotating headline reserves its height by hand (`min-height` on `.rot`), and
+1.08em fits Latin only — Devanagari hangs matras above and below, Nastaliq
+descends across most of a line. Both now have their own reserved height.
+
+## The AZ page on the dashboard
+
+`analytics/web/sections/az.js` in the restaurant repo, in ORDER, so it appears in
+the hamburger as **AZ**. Backed by `/api/az` → `analytics/az_ga4.py`, which reads
+AZ's own GA4 property and never mixes it with the restaurant's.
+
+It shows leads first (the only number that is money), then form starts, visits,
+people, pages and calls, then where they came from and what they read.
+
+Still needs two owner actions, and says so on the page itself rather than showing
+zeros: set `GA4_AZ_PROPERTY_ID` to the numeric id for G-3GEL1D477G, and grant
+`ga4-reader@ga4-reader-500818.iam.gserviceaccount.com` Viewer on that property.
+GA4 is already collecting, so nothing is lost while this waits.
+
+## Video playback — verified, and an earlier conclusion corrected
+
+The clips play. Confirmed on both paths:
+
+    file path (site build)   readyState 4 · 101.3s · 848x478 · playing · no error
+    blob (artifact build)    readyState 4 · 101.3s · 848x478 · playing · no error
+
+An earlier note in this file said this browser could not decode media at all.
+That was wrong. The real cause was that `python -m http.server` answers a Range
+request with **200 instead of 206**, and Chrome's media element stalls forever
+without Range. Testing video against the stdlib server proves nothing; use a
+206-capable server. Production serves Range correctly.
