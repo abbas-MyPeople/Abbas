@@ -65,9 +65,10 @@ zero hits after `window.scrollTo`. Verify by scrolling, then dispatching
 
 ## The pinned button
 
-Full width of the bar, capped at the page's content measure so it aligns with
-everything else on a desktop instead of sprawling edge to edge. On a phone that cap
-never binds, so it is literally edge to edge.
+Edge to edge at every width, with a 12px gutter on each side and no maximum. An
+earlier version capped it at the page's content measure to keep it aligned with the
+rest of the layout on a desktop; that was wrong — it read as a button that had failed
+to fill its bar. The cap is gone and cannot bind at any viewport.
 
 The border is live: a solid fill painted on the padding box, a conic gradient painted
 on the border box, and a transparent 2px border letting the gradient through as a rim.
