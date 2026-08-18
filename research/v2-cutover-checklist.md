@@ -262,3 +262,38 @@ That was wrong. The real cause was that `python -m http.server` answers a Range
 request with **200 instead of 206**, and Chrome's media element stalls forever
 without Range. Testing video against the stdlib server proves nothing; use a
 206-capable server. Production serves Range correctly.
+
+## Why the site still showed v1 after the push
+
+The push was fine. GitHub Pages was the problem, and it will be again.
+
+Pages on this repo is the **legacy** build type, source `main` at `/`. Every
+commit triggers a rebuild — including the bots. There were **16 commits in two
+hours**, almost all automated:
+
+    stocks-market-snapshot   every 5 min, 13:30-20:00 UTC weekdays
+    az-growth-inbox          every 15 min
+    az-reply-agent           every 20 min
+    agent-status             every 30 min
+
+`[skip ci]` in those commit messages skips **Actions**, not Pages. So the site
+rebuilds every few minutes, builds queue and supersede each other, and the losers
+report `errored` with `duration: 0` and the generic "Page build failed". Four in a
+row failed that way, including the cutover commit — which is why the live site sat
+at v1 while `origin/main` already had v2.
+
+It resolved on its own once a build won the race: the cutover went live at
+build `7a1b643f`, and the served file is now byte-identical to `index.html`.
+
+Diagnosis worth keeping: `duration: 0` plus the generic message means the build
+never started — look at build frequency, not at the repo contents. Repo size is
+nowhere near a limit here (311 files, largest 5.5MB).
+
+    gh api repos/abbas-MyPeople/Abbas/pages/builds | head
+    gh api -X POST repos/abbas-MyPeople/Abbas/pages/builds   # force one
+
+**The fix, when you want it:** move Pages to the GitHub Actions build type with a
+deploy workflow that ignores the bot-written paths (`stocks/**`,
+`growth_engine/**`, agent status files). Then only real content changes redeploy,
+and failures come with readable logs instead of "Page build failed." I have not
+made that change — it alters how the site deploys, so it should be your call.
