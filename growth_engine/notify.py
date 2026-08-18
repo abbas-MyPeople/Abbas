@@ -41,6 +41,39 @@ def _record_batch(rec):
         f.write(json.dumps(rec, sort_keys=True) + "\n")
 
 
+def _worth_sending(counts: dict) -> bool:
+    """Does this brief have anything the owner has to act on?
+
+    ALERTS or PROPOSALS, and nothing else. `watching` is the count of things being monitored and
+    is almost always the same number as yesterday — a brief carrying only that is a brief saying
+    "still watching seven things", which is not news.
+
+    WHY THIS GATE EXISTS (2026-08-18, owner's instruction). The engine sent 47 briefs between 6
+    July and 17 August. The last ten all carried `proposals: 0, surfaced: []`. Twelve of the last
+    fourteen had the byte-identical subject "growth update: 5 shipped recently", re-announcing the
+    same five items each morning. The owner's last reply was 12 July — thirty-six briefs earlier.
+    A daily email that says the same thing every day teaches its reader to stop opening it, and
+    then the one that finally matters arrives in an inbox nobody is reading. billing-watch in the
+    sister repo already works this way: silent when healthy, and therefore believed when it speaks.
+
+    WHAT THE REPLAY ACTUALLY SHOWED, including the part against me. Run over all 48 batches this
+    gate keeps 16 and silences 32 — and it would have silenced ALL THREE briefs the owner ever
+    replied to. That looks disqualifying until you read those three: every one carried
+    `alerts: 0, proposals: 0, surfaced: []`, and his replies were "Let's finish all that is in the
+    pipeline", "I approve, keep shipping, now!", "Approved. Let's built it all out asap". Standing
+    directives fired at the channel, not answers to anything the email said — indistinguishable, by
+    counts, from the thirty-two it ignored. So `counts` is not evidence of what he found valuable;
+    nothing in the record is. The gate is still the right call because 32 content-free sends is the
+    thing being fixed, but it is an argued call, not a proven one, and this paragraph is here so
+    nobody later mistakes it for proven. The directive channel survives regardless: the reply reader
+    matches on the X-AZ-Batch header, so replying to the most recent brief still lands.
+    """
+    try:
+        return int(counts.get("alerts") or 0) > 0 or int(counts.get("proposals") or 0) > 0
+    except (TypeError, ValueError, AttributeError):
+        return True          # a malformed count is not a reason to swallow a brief
+
+
 def send_daily(verbose: bool = True) -> dict:
     """Compose from the current finding queue and send (or dry-run). Returns the batch record."""
     if _disabled():
@@ -56,6 +89,16 @@ def send_daily(verbose: bool = True) -> dict:
     rec = {"batch_id": batch_id, "ts": model.now(), "message_id": msg_id,
            "subject": e["subject"], "counts": e["counts"], "surfaced": e.get("surfaced", []),
            "sent": False, "dry_run": True}
+
+    # NOTHING TO SAY → SAY NOTHING. The batch is still recorded, so the run is not invisible and
+    # "how often does it actually have something?" stays answerable from the ledger.
+    # WK_ENGINE_FORCE=1 overrides, for testing the path end to end.
+    if os.environ.get("WK_ENGINE_FORCE") != "1" and not _worth_sending(e["counts"]):
+        rec.update(skipped="nothing to act on", dry_run=False)
+        _record_batch(rec)
+        if verbose:
+            print(f"notify: nothing to act on ({e['counts']}) — no email sent.")
+        return rec
 
     if not (email_addr and app_pw):
         _record_batch(rec)
