@@ -1,175 +1,145 @@
 #!/usr/bin/env python3
-"""Turn the analysis into a board Abbas can actually work from.
-
-Every restaurant gets an opening line built from what is genuinely broken on
-their own site, so the first sentence is about them. No em dashes anywhere in
-the copy - hyphens only.
-"""
+"""Board built from the dossiers. Evidence tier is visible on every claim."""
 import json, pathlib, html, collections
 
 REPO = pathlib.Path(__file__).parent.parent
-D = json.loads((REPO / "outreach/analysis-cypress.json").read_text())
-rs = [r for r in D["restaurants"] if r["analysis"].get("reachable")]
-rs.sort(key=lambda r: (-r["high"], -len(r["findings"])))
-dead = [r for r in D["restaurants"] if not r["analysis"].get("reachable")]
+ds = [json.loads(p.read_text()) for p in sorted((REPO/"outreach/dossiers").glob("*.json"))]
+E = lambda s: html.escape(str(s), quote=False)
+V = lambda f: (f or {}).get("value")
 
-def opener(r):
-    a, g = r["analysis"], [f["gap"] for f in r["findings"]]
-    n = r["name"]
-    if "Not built for phones" in g:
-        return (f"Hi - I run Wok & Karahi over in Spring. I was looking at {n} on my phone "
-                f"and the site is hard to use on a small screen, which is where nearly every "
-                f"order decision gets made now. I fix this kind of thing for restaurants "
-                f"around Cy-Fair and I am doing it free for three months for a few places. "
-                f"Worth ten minutes?")
-    if "No online ordering at all" in g:
-        return (f"Hi - I run Wok & Karahi in Spring. I noticed {n} has no way to take an order "
-                f"online, so everything has to come through the phone during service. That is "
-                f"usually the biggest recoverable loss in a week. I am setting a few Cy-Fair "
-                f"places up free for three months. Can I show you what I mean?")
-    if any(x.startswith("Only third-party") for x in g):
-        return (f"Hi - I run Wok & Karahi in Spring. {n} is taking orders through the delivery "
-                f"apps but has no direct option, so you are paying commission even on regulars "
-                f"who already knew your name. That is the leak I fix first. Free for three "
-                f"months for a few Cy-Fair restaurants - interested?")
-    if "No Restaurant structured data" in g:
-        return (f"Hi - I run Wok & Karahi in Spring. When someone asks ChatGPT or Google for "
-                f"food near Cypress, {n} is harder to surface than it should be, because the "
-                f"site does not describe itself in the format those systems read. It is a "
-                f"quick fix and I am doing it free for three months for a few places here.")
-    return (f"Hi - I run Wok & Karahi in Spring, and I do the technology side for restaurants "
-            f"around Cy-Fair. I had a look at {n} and there are a couple of things costing you "
-            f"orders that would take me an afternoon. Free for three months. Worth a chat?")
+real = [d for d in ds if V(d["site"]["status"]) in ("STATIC", "STATIC_AFTER_RENDER")]
+check = [d for d in ds if V(d["site"]["status"]) not in ("STATIC", "STATIC_AFTER_RENDER")]
 
-rows = []
-for i, r in enumerate(rs, 1):
-    a = r["analysis"]
-    chips = "".join(f'<i class="s-{f["severity"]}">{html.escape(f["gap"])}</i>' for f in r["findings"])
-    detail = "".join(
-        f'<p><b>{html.escape(f["gap"])}</b> <span class="job">{html.escape(f["job"])}</span><br>{html.escape(f["why"])}</p>'
-        for f in r["findings"])
-    ch = []
-    if a["direct_ordering"]: ch.append("direct: " + ", ".join(a["direct_ordering"]))
-    if a["third_party"]: ch.append("apps: " + ", ".join(a["third_party"]))
-    if a["social"]: ch.append("social: " + ", ".join(a["social"]))
-    ch.append("phone link: " + ("yes" if a["phone_on_page"] else "no"))
-    msg = opener(r)
-    rows.append(f'''<details class="r"><summary>
-        <span class="n">{i}. {html.escape(r["name"])}</span>
-        <span class="chips">{chips}</span></summary>
-      <div class="body">
-        <p class="addr">{html.escape(r["address"])} &middot; <a href="{html.escape(a["final_url"])}" target="_blank" rel="noopener">{html.escape(a["final_url"][:60])}</a></p>
-        <p class="chan"><b>How they reach guests today:</b> {html.escape(" | ".join(ch))}</p>
-        {detail}
-        <div class="msg"><textarea readonly>{html.escape(msg)}</textarea>
-          <button class="copy" type="button">Copy opener</button></div>
-      </div></details>''')
+def score(d):
+    n = 0
+    if not V(d["discovery"]["restaurant_schema"]): n += 2
+    if V(d["ordering"]["channel_state"]) == "none online": n += 3
+    if V(d["ordering"]["channel_state"]) == "third-party only": n += 3
+    if V(d["catering"]["state"]) in ("ABSENT", "MENTIONED_ONLY"): n += 2
+    if not V(d["discovery"]["mobile_viewport"]): n += 3
+    if not V(d["discovery"]["tel_link"]): n += 1
+    if V(d["discovery"]["menu_is_pdf"]): n += 1
+    if V(d["discovery"].get("ai_crawlers_blocked")): n += 2
+    return n
+real.sort(key=score, reverse=True)
 
-gapc = collections.Counter(f["gap"].split(" (")[0] for r in D["restaurants"] for f in r["findings"])
-stat = "".join(f'<div class="k"><b>{n}</b><span>{html.escape(g)}</span></div>' for g, n in gapc.most_common(6))
+CAT = {"ABSENT":"no catering anywhere","MENTIONED_ONLY":"named, no way to order it",
+       "PAGE_NO_PRICING":"page exists, no minimums or pricing","OPERATIONAL":"real order path"}
 
-page = f'''<title>Cypress Outreach Board</title>
+def tier(f):
+    t = (f or {}).get("tier","")
+    return f'<em class="t t-{t.lower()}">{t}</em>' if t else ""
+
+def card(d, i):
+    r, s, dis, o, c, m = d["restaurant"], d["site"], d["discovery"], d["ordering"], d["catering"], d.get("menu",{})
+    chips = []
+    if V(o["channel_state"]) in ("none online","third-party only"): chips.append(("hot", V(o["channel_state"])))
+    if not V(dis["restaurant_schema"]): chips.append(("hot","invisible to AI answers"))
+    if not V(dis["mobile_viewport"]): chips.append(("hot","not built for phones"))
+    if V(c["state"]) in ("ABSENT","MENTIONED_ONLY"): chips.append(("warn", CAT[V(c["state"])]))
+    if V(dis["menu_is_pdf"]): chips.append(("warn","menu is a PDF"))
+    if not V(dis["tel_link"]): chips.append(("cool","no tap-to-call"))
+    if V(dis.get("ai_crawlers_blocked")): chips.append(("hot","blocks AI crawlers"))
+    chipsh = "".join(f'<i class="c-{k}">{E(v)}</i>' for k,v in chips) or '<i class="c-ok">nothing obvious</i>'
+
+    price = ""
+    if V(m.get("price_median")):
+        price = (f'<tr><td>Menu prices</td><td>{V(m["prices_found"])} parsed, '
+                 f'${V(m["price_min"]):.2f} to ${V(m["price_max"]):.2f}, median '
+                 f'${V(m["price_median"]):.2f}, {E(V(m["pricing_style"]))} pricing '
+                 f'{tier(m["pricing_style"])}</td></tr>')
+    gifts = "".join(f"<li>{E(g)}</li>" for g in d.get("first_gift",[]))
+    return f'''<details class="r"><summary><span class="n">{i}. {E(r["name"])}</span>
+      <span class="chips">{chipsh}</span></summary><div class="b">
+      <p class="a">{E(r["address"])} &middot; <a href="{E(V(s["final_url"]))}" target="_blank" rel="noopener">{E(str(V(s["final_url"]))[:58])}</a></p>
+      <table>
+        <tr><td>Site</td><td>{E(V(s["status"]))}, {V(s["words"])} words across {V(s["pages_crawled"])} pages
+            {"<b>(only readable after rendering)</b>" if V(s["rendered_with_browser"]) else ""} {tier(s["status"])}</td></tr>
+        <tr><td>Ordering</td><td>{E(V(o["channel_state"]))}{(" &middot; " + ", ".join(V(o["direct_platforms"]))) if V(o["direct_platforms"]) else ""}{(" &middot; apps: " + ", ".join(V(o["third_party"]))) if V(o["third_party"]) else ""} {tier(o["channel_state"])}</td></tr>
+        <tr><td>Catering</td><td>{E(CAT.get(V(c["state"]),V(c["state"])))} {tier(c["state"])}<br><span class="w">{E(V(c["state"]) and c["state"].get("note",""))}</span></td></tr>
+        <tr><td>AI readable</td><td>Restaurant schema: <b>{"yes" if V(dis["restaurant_schema"]) else "no"}</b>
+            &middot; menu as PDF: {"yes" if V(dis["menu_is_pdf"]) else "no"}
+            &middot; crawlers blocked: {E(V(dis.get("ai_crawlers_blocked")) or "none")} {tier(dis["restaurant_schema"])}</td></tr>
+        {price}
+      </table>
+      <p class="g"><b>First gift</b> - what we can do before they owe us anything, no access needed:</p>
+      <ul>{gifts}</ul></div></details>'''
+
+cards = "".join(card(d,i) for i,d in enumerate(real,1))
+noschema = sum(1 for d in real if not V(d["discovery"]["restaurant_schema"]))
+noorder  = sum(1 for d in real if V(d["ordering"]["channel_state"])=="none online")
+nocater  = sum(1 for d in real if V(d["catering"]["state"]) in ("ABSENT","MENTIONED_ONLY"))
+byst = collections.Counter(V(d["site"]["status"]) for d in ds)
+
+page = f'''<title>Cypress Dossiers</title>
 <style>
-:root{{--bg:#faf8f4;--ink:#1a1a17;--ink2:#57534b;--ink3:#8a857a;--line:#e2ddd2;--card:#fff;--hot:#a8331f;--warn:#b3701a;--cool:#6b6357;--go:#1c4739}}
-:root:not([data-theme=light]) {{}}
-@media (prefers-color-scheme:dark){{:root:not([data-theme=light]){{--bg:#15140f;--ink:#f0ece2;--ink2:#b3ada0;--ink3:#7d776b;--line:#2f2c25;--card:#1d1b15;--hot:#e0705a;--warn:#d9a04a;--cool:#8e877a;--go:#7fbfa2}}}}
-:root[data-theme=dark]{{--bg:#15140f;--ink:#f0ece2;--ink2:#b3ada0;--ink3:#7d776b;--line:#2f2c25;--card:#1d1b15;--hot:#e0705a;--warn:#d9a04a;--cool:#8e877a;--go:#7fbfa2}}
+:root{{--bg:#faf8f4;--ink:#1a1a17;--ink2:#4f4b43;--ink3:#8a857a;--line:#e4dfd4;--card:#fff;--hot:#a8331f;--warn:#b3701a;--cool:#6f6859;--ok:#2f6b4f;--go:#1c4739;--soft:#f2eee5}}
+@media (prefers-color-scheme:dark){{:root:not([data-theme=light]){{--bg:#14130f;--ink:#f0ece2;--ink2:#b6b0a3;--ink3:#7c766a;--line:#2e2b24;--card:#1c1a15;--hot:#e0705a;--warn:#d9a04a;--cool:#8d8578;--ok:#7fbfa2;--go:#7fbfa2;--soft:#201e18}}}}
+:root[data-theme=dark]{{--bg:#14130f;--ink:#f0ece2;--ink2:#b6b0a3;--ink3:#7c766a;--line:#2e2b24;--card:#1c1a15;--hot:#e0705a;--warn:#d9a04a;--cool:#8d8578;--ok:#7fbfa2;--go:#7fbfa2;--soft:#201e18}}
 *{{box-sizing:border-box}}
-body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;padding:34px 20px 80px}}
-.w{{max-width:940px;margin:0 auto}}
-h1{{font-size:clamp(1.6rem,3.4vw,2.2rem);letter-spacing:-.03em;margin:0 0 6px;font-weight:800}}
-.sub{{color:var(--ink2);margin:0 0 26px;max-width:70ch}}
-h2{{font-size:1.12rem;letter-spacing:-.01em;margin:34px 0 12px;font-weight:750}}
-.kpis{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0 6px}}
-.k{{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px}}
-.k b{{display:block;font-size:1.5rem;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}}
-.k span{{font-size:12.4px;color:var(--ink2);line-height:1.35;display:block;margin-top:3px}}
-.note{{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--hot);border-radius:0 11px 11px 0;padding:15px 17px;margin:16px 0}}
-.note p{{margin:0 0 8px}} .note p:last-child{{margin:0}}
-.r{{background:var(--card);border:1px solid var(--line);border-radius:11px;margin-bottom:8px;overflow:hidden}}
-.r summary{{cursor:pointer;padding:13px 16px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;list-style:none}}
+body{{margin:0;background:var(--bg);color:var(--ink);padding:36px 20px 90px;font:16px/1.55 ui-sans-serif,system-ui,-apple-system,sans-serif}}
+.w{{max-width:900px;margin:0 auto}}
+h1{{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:820;letter-spacing:-.03em;margin:0 0 6px}}
+.sub{{color:var(--ink2);margin:0 0 24px;max-width:72ch}}
+h2{{font-size:1.1rem;font-weight:750;margin:34px 0 12px}}
+.k{{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:16px 0}}
+.k div{{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px}}
+.k b{{display:block;font-size:1.45rem;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}}
+.k span{{font-size:12.3px;color:var(--ink2);display:block;margin-top:3px;line-height:1.35}}
+.note{{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--hot);border-radius:0 11px 11px 0;padding:14px 16px;margin:16px 0;color:var(--ink2)}}
+.note b{{color:var(--ink)}}
+.r{{background:var(--card);border:1px solid var(--line);border-radius:11px;margin-bottom:8px}}
+.r summary{{cursor:pointer;padding:13px 15px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;list-style:none}}
 .r summary::-webkit-details-marker{{display:none}}
-.n{{font-weight:680;min-width:210px}}
+.n{{font-weight:680;min-width:205px}}
 .chips{{display:flex;flex-wrap:wrap;gap:5px}}
-.chips i{{font-style:normal;font-size:11px;letter-spacing:.02em;padding:3px 8px;border-radius:999px;border:1px solid currentColor}}
-.s-high{{color:var(--hot)}} .s-medium{{color:var(--warn)}} .s-low{{color:var(--cool)}}
-.body{{padding:2px 16px 16px;border-top:1px solid var(--line)}}
-.addr{{font-size:13px;color:var(--ink3);margin:12px 0 10px}}
-.chan{{font-size:13.5px;color:var(--ink2);background:var(--bg);border-radius:8px;padding:9px 11px;margin:0 0 12px}}
-.body p{{font-size:14.4px;margin:0 0 10px;color:var(--ink2)}}
-.body p b{{color:var(--ink)}}
-.job{{font-size:11px;color:var(--ink3);border:1px solid var(--line);padding:1px 7px;border-radius:999px;margin-left:5px}}
-.msg{{display:flex;flex-direction:column;gap:8px;margin-top:14px}}
-textarea{{width:100%;min-height:96px;resize:vertical;font:14px/1.5 inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:11px 13px}}
-.copy{{align-self:flex-start;font:600 13.5px inherit;background:var(--go);color:#fff;border:0;border-radius:8px;padding:9px 16px;cursor:pointer}}
-.copy.done{{opacity:.75}}
+.chips i{{font-style:normal;font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid currentColor}}
+.c-hot{{color:var(--hot)}} .c-warn{{color:var(--warn)}} .c-cool{{color:var(--cool)}} .c-ok{{color:var(--ok)}}
+.b{{padding:4px 15px 16px;border-top:1px solid var(--line)}}
+.a{{font-size:12.6px;color:var(--ink3);margin:11px 0 10px}}
+table{{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:12px}}
+td{{padding:7px 0;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}}
+td:first-child{{width:112px;color:var(--ink3);font-size:12.4px;text-transform:uppercase;letter-spacing:.05em;padding-right:12px}}
+.w{{color:var(--ink3);font-size:13px}}
+.t{{font-style:normal;font-size:9.5px;letter-spacing:.08em;padding:1px 5px;border-radius:4px;background:var(--soft);color:var(--ink3);margin-left:4px}}
+.t-inferred{{color:var(--warn)}} .t-unknown{{color:var(--hot)}}
+.g{{font-size:13.6px;margin:14px 0 6px;color:var(--ink)}}
+.b ul{{margin:0;padding-left:20px}} .b li{{font-size:14px;color:var(--ink2);margin-bottom:6px}}
 a{{color:inherit}}
-ol{{padding-left:20px}} ol li{{margin-bottom:9px;color:var(--ink2)}} ol li b{{color:var(--ink)}}
 </style>
-
 <div class="w">
-<h1>Cypress outreach board</h1>
-<p class="sub">86 locally owned Cypress restaurants read from their own public websites on 18 August 2026. Sorted by what is visibly costing them orders. Open one to see the angle and copy an opener written from that restaurant's actual gaps.</p>
+<h1>Cypress dossiers</h1>
+<p class="sub">86 locally owned Cypress restaurants, collected 18 August 2026. Site classified and rendered where needed, menu and catering read from their own pages. Every claim shows its evidence tier. Sorted by how much is visibly broken.</p>
 
-<div class="kpis">
-  <div class="k"><b>86</b><span>independents checked</span></div>
-  <div class="k"><b>38</b><span>with a working website</span></div>
-  <div class="k"><b>48</b><span>no reachable site</span></div>
-  <div class="k"><b>38</b><span>live sites with a gap</span></div>
+<div class="k">
+  <div><b>86</b><span>collected</span></div>
+  <div><b>{len(real)}</b><span>real, readable sites</span></div>
+  <div><b>{noschema}</b><span>invisible to AI answers</span></div>
+  <div><b>{noorder}</b><span>no online ordering at all</span></div>
+  <div><b>{nocater}</b><span>catering absent or unorderable</span></div>
 </div>
-<div class="kpis">{stat}</div>
 
 <div class="note">
-  <p><b>Read this before you use the list.</b> The 48 with no reachable site are not all
-  opportunities. That directory is from 2018, so an unreachable domain can mean closed, not
-  invisible. Verify each is still trading before you approach it - Google Maps in ten seconds.</p>
-  <p>The 38 with live sites are confirmed trading and every one has at least one visible gap.
-  That is your first list.</p>
+  <p><b>Correcting my own earlier number.</b> The first pass reported 38 working websites by
+  treating HTTP 200 as a site. Reading them properly gives <b>{len(real)}</b>. The rest are
+  {byst.get("DEAD",0)} dead, {byst.get("NO_SITE_LISTED",0)} with no site listed,
+  {byst.get("PARKED",0)} parked and {byst.get("JS_SHELL",0)} JavaScript shells that would not
+  render. Edojin looked empty to a static read and has 98 words once rendered - that class of
+  false negative is exactly what would have embarrassed us in front of an owner.</p>
 </div>
 
-<h2>Cypress vs Katy - you were right to hesitate</h2>
 <div class="note">
-  <p>Katy is in a build cycle: new retail and restaurant openings are the story there in 2026.
-  Operators who are opening or expanding are spending on build-out, not looking for someone to
-  fix a leak. Felt pain is lower.</p>
-  <p>Cypress is growing too, but the independents in this list are established rather than new -
-  many trading a decade or more - and the metro around them lost 119 restaurants in six months,
-  more than any city in the US or Canada. Established operator plus visible squeeze is the
-  combination that converts. Start Cypress, keep Katy for when you have proof to lead with.</p>
+  <p><b>Still provisional.</b> This is the free, automatable half: site, menu, catering,
+  crawler access. Winnability, access, reviews, the guest journey and the AI-answer check are
+  not in here yet, so no verdict is final. The directory is from 2018, so anything without a
+  live site needs confirming as still trading before you go near it.</p>
 </div>
 
-<h2>The play</h2>
-<ol>
-  <li><b>Walk in, do not email.</b> You are an operator in Spring, not an agency. Between 2pm
-  and 4pm on Tuesday to Thursday the owner is usually there and not in the weeds. That single
-  fact is your entire advantage over everyone else calling them.</li>
-  <li><b>Lead with their thing, not yours.</b> Every opener below names something real on their
-  own site. Show it on your phone. Do not pitch six services.</li>
-  <li><b>Leave the one-pager</b> (AZ-RP-leave-behind.pdf) and the free-pilot line. Three months,
-  nothing to sign, they keep whatever you build.</li>
-  <li><b>Follow up once</b> by Instagram or Facebook DM within 48 hours, referencing the visit.
-  Once. Not a sequence.</li>
-  <li><b>Five a day, three days a week.</b> 38 targets is about three weeks. You only need to
-  fill three founding spots.</li>
-</ol>
+<h2>Readable sites, worst first</h2>
+{cards}
 
-<h2>Targets - live sites, worst first</h2>
-{"".join(rows)}
-
-<h2>Needs a status check first ({len(dead)})</h2>
-<p class="sub">No reachable website. Confirm open on Google Maps, then treat "no website at all" as the strongest possible opening.</p>
-<div class="note"><p>{html.escape(", ".join(r["name"] for r in dead))}</p></div>
-</div>
-
-<script>
-document.addEventListener("click", function(e){{
-  var b = e.target.closest(".copy"); if(!b) return;
-  var ta = b.parentElement.querySelector("textarea");
-  navigator.clipboard.writeText(ta.value).then(function(){{
-    var t = b.textContent; b.textContent = "Copied"; b.classList.add("done");
-    setTimeout(function(){{ b.textContent = t; b.classList.remove("done"); }}, 1400);
-  }});
-}});
-</script>'''
-(REPO / "outreach/board-cypress.html").write_text(page)
-print("board written:", len(page), "bytes |", len(rows), "targets |", len(dead), "to verify")
+<h2>Needs a status check first ({len(check)})</h2>
+<div class="note"><p>{E(", ".join(d["restaurant"]["name"] for d in check))}</p></div>
+</div>'''
+(REPO/"outreach/board-cypress.html").write_text(page)
+print("board:", len(page), "bytes |", len(real), "real |", len(check), "to verify")
