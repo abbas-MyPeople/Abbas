@@ -123,3 +123,78 @@ H.264 as "probably", and a byte-for-byte check proved the base64 round trip is e
 (4,003,377 bytes in and out, valid `ftyp` box). Also note `python -m http.server`
 answers a Range request with **200, not 206**, so no local file-URL video will ever
 play against it. Both clips still need a human to press play once.
+
+---
+
+# Pre-cutover audit, 2026-08-18
+
+Run against the question "is the measurement and the SEO safe to cut over?"
+It was not. What follows is what was found and what was done.
+
+## Found and fixed
+
+1. **GA4 was never loading on v2.** `GA_ID` was declared and never used: no
+   `gtag/js` script, no `gtag("config")`. Every `track()` call pushed into a
+   `dataLayer` nothing consumed. Cutting over would have taken analytics to zero
+   while looking fine — v1 collects today via `script.js`.
+2. **The GTM container was dropped.** v1 loads `GTM-K6GTGXP9`. Any pixel added
+   through the GTM UI (Meta, Google Ads) would have silently stopped.
+3. **Campaign attribution was dropped.** v1 captures utm_*, referrer and landing
+   once per visit and attaches them to every event. v2 sent none, so no lead
+   could be traced to a campaign.
+4. **The investors page had no measurement at all** — a single `data-track`
+   attribute with no listener behind it.
+5. **The lead email lost its source line.** v1 posts `source: attrString()` so
+   the email says where the lead came from. Restored, along with `_template` and
+   `_captcha`, which v2 was also missing.
+6. **`google-site-verification` was dropped.** That meta tag is a Search Console
+   verification method; removing it can un-verify the property and stop GSC data.
+7. **No `og:image`.** Every share of the new homepage would have had a blank card.
+   v1 ships `assets/og.png`.
+8. **The investors page had a `<title>` and nothing else** — no description,
+   canonical, robots, Open Graph or structured data.
+9. **Site-mode output was a headless fragment.** No doctype, no `<html>`, no
+   `<head>` — canonical, Open Graph and ld+json would all have rendered inside
+   `<body>`. `build.py` now wraps a real document for the site and leaves the
+   fragment alone for the artifact viewer, which supplies its own skeleton.
+10. **investors.html was missing from sitemap.xml.** Added.
+
+All measurement now lives in one file, `v2/track.js`, injected into both pages by
+the build, so the two can never drift apart again.
+
+### Verified in the browser, not by reading code
+
+    https://www.googletagmanager.com/gtag/js?id=G-3GEL1D477G      loaded
+    https://www.googletagmanager.com/gtm.js?id=GTM-K6GTGXP9       loaded
+    https://www.google-analytics.com/g/collect ... en=page_view    sent
+    ... en=cutover_selftest  page=az_home       utm_source, utm_medium, landing
+    ... en=inv_selftest      page=az_investors  attribution carried across pages
+
+Attribution surviving the hop between two pages is the proof the shared
+`azattr` sessionStorage key works, and it is the same key v1 uses.
+
+Also checked: all 42 internal links on the homepage resolve to files that exist,
+and all 149 sitemap URLs resolve. Nothing 404s.
+
+## Not fixed — these need the owner
+
+- **The /data dashboard is not wired to AZ, and never was.** It reads GA4
+  property `455917909` (`G-8TZEXDMNMJ`, the restaurant). AZ is a different
+  property, `G-3GEL1D477G`. There is no AZ code path in the Wok repo at all.
+  To build one, two things are needed that only the account owner can do:
+    1. the numeric property ID for `G-3GEL1D477G` (the Admin API is disabled on
+       project 609382430768, so it cannot be looked up with the current key)
+    2. `ga4-reader@ga4-reader-500818.iam.gserviceaccount.com` granted Viewer on
+       that GA4 property, and on the Search Console property if impressions are
+       wanted — GA4 has no impressions dimension, those come from GSC
+  None of this blocks cutover: GA4 retains the data, so the dashboard can be
+  built afterwards without losing a day.
+
+- **EN / HI / UR is still a regression.** v1 loads `i18n.js`, 103KB of
+  translations. v2 has none, so cutting over drops Hindi and Urdu. Rebuilding it
+  means translating v2's copy, which is entirely new text.
+
+- **The form has still never been test-fired.** The endpoint is live and
+  CORS-open (`OPTIONS` → 200, `access-control-allow-origin: *`), and the payload
+  is correct, but sending a real lead into the inbox is not something to do
+  without being asked.
