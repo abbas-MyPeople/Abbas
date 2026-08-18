@@ -81,3 +81,45 @@ Checked against DoorDash first, since that was the reference: **DoorDash does no
 this.** doordash.com has zero animated elements and zero gradient buttons;
 merchants.doordash.com has only `fadeIn` keyframes. Whatever the reference was, it is
 not on their web surfaces.
+
+## Video
+
+Two clips, deliberately different in weight:
+
+    assets/video/founder-pitch.mp4   848x478  1:41  3.8MB   homepage, secondary
+    assets/video/yc-pitch.mp4        478x850  0:51  5.5MB   investors page, hero
+
+Both were re-encoded from the WhatsApp originals (15MB and 9.4MB) at CRF 28 with
+faststart and 64k mono audio. Posters are single frames picked by eye from a contact
+sheet, not the first frame.
+
+On the homepage the founder clip sits directly above the enquiry form, under "Who
+you'd be working with" — the last thing before someone fills anything in, not the
+centrepiece. On the investors page the YC pitch is the hero, in its own column at a
+phone's proportions beside the thesis; below 860px the hero stacks and the video lands
+between the thesis and the numbers.
+
+Neither preloads. Both are click-to-load behind a poster and a play button, so the
+page costs nothing until someone asks.
+
+### The build, and why it exists
+
+`v2/build.py` renders both pages from `v2/*-src.html` in one of two modes:
+
+    python3 v2/build.py site        # videos as assets/video/… paths
+    python3 v2/build.py artifact    # videos as base64 payloads, decoded to Blob URLs
+
+The artifact viewer's CSP allows no external requests, so the preview has to carry its
+own media. **Do not inline video as a `data:` URI** — Chrome will not stream media from
+one, and a 5MB `data:` URI leaves the element at `readyState 0` indefinitely with no
+error event. The page ships the clip as base64 inside an inert
+`<script type="text/plain">` and converts it to a Blob URL on click instead.
+
+### What could not be tested here
+
+Playback. This Chrome never fires `loadedmetadata` or `error` for any video, from a
+file URL, a data URI, or a Blob URL. Two things were ruled out: `canPlayType` reports
+H.264 as "probably", and a byte-for-byte check proved the base64 round trip is exact
+(4,003,377 bytes in and out, valid `ftyp` box). Also note `python -m http.server`
+answers a Range request with **200, not 206**, so no local file-URL video will ever
+play against it. Both clips still need a human to press play once.
