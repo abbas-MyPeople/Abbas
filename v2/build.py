@@ -44,8 +44,13 @@ VIDEOS = {
     "__YCVID__":      ("yc-pitch.mp4",      "assets/video/yc-pitch.mp4",      "p-yc"),
 }
 
-def render(src: pathlib.Path, mode: str) -> str:
+# The tracking core is one file shared by every page, so the two can never drift.
+TRACK = HERE / "track.js"
+
+def render(src: pathlib.Path, mode: str, page_id: str) -> str:
     t = src.read_text()
+    if "__TRACKING__" in t:
+        t = t.replace("__TRACKING__", TRACK.read_text().replace("__PAGEID__", page_id))
     for token, fn in IMAGES.items():
         if token in t:
             t = t.replace(token, fn())
@@ -84,26 +89,34 @@ def check_js(html: str, label: str) -> None:
         if css.count("{") != css.count("}"):
             raise SystemExit(f"{label} style {n} has unbalanced braces")
 
-SKEL = ('<!doctype html><html lang="en"><head><meta charset="utf-8">'
-        '<meta name="viewport" content="width=device-width,initial-scale=1">'
-        '%s</head><body>%s</body></html>')
+SKEL = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
+        '%s\n</head>\n<body>\n%s\n</body>\n</html>\n')
+
+def document(fragment: str) -> str:
+    """Wrap a source fragment in a real document.
+
+    The sources are written head-first: every meta, link and ld+json block comes
+    before the opening <nav>. The artifact host supplies its own skeleton, but a
+    file served as index.html must supply its own — otherwise canonical, Open
+    Graph and the structured data all end up inside <body>, where they are at
+    best unreliable and at worst ignored.
+    """
+    i = fragment.index("<nav>")
+    return SKEL % (fragment[:i].strip(), fragment[i:].strip())
 
 def main(mode: str = "artifact", out: str | None = None) -> None:
     global OUT
     OUT = pathlib.Path(out) if out else OUT
     OUT.mkdir(parents=True, exist_ok=True)
-    home = render(HERE / "az-v2-src.html", mode)
-    check_js(home, "home")
-    (OUT / "az-v2.html").write_text(home)
-    # The artifact host supplies the document skeleton; the local harness does not.
-    i = home.index("<nav>")
-    (OUT / "test-home.html").write_text(SKEL % (home[:i], home[i:]))
-
-    inv = render(HERE / "az-investors-src.html", mode)
-    check_js(inv, "investors")
-    (OUT / "az-investors.html").write_text(inv)
-    j = inv.index("<nav>")
-    (OUT / "test-investors.html").write_text(SKEL % (inv[:j], inv[j:]))
+    for src, out, page in (("az-v2-src.html",        "az-v2.html",        "az_home"),
+                           ("az-investors-src.html", "az-investors.html", "az_investors")):
+        frag = render(HERE / src, mode, page)
+        check_js(frag, page)
+        # site mode ships a real file, so it needs a real <head>; artifact mode is a
+        # fragment because the viewer wraps it. The local test copy always needs one.
+        (OUT / out).write_text(frag if mode == "artifact" else document(frag))
+        (OUT / ("test-" + out.replace("az-", "").replace("v2", "home"))).write_text(document(frag))
 
     for name in ("az-v2.html", "az-investors.html"):
         mb = (OUT / name).stat().st_size / 1e6

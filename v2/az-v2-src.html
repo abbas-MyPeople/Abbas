@@ -1,6 +1,14 @@
 <title>AZ Restaurant Partners — the technology team your restaurant doesn't have</title>
 <meta name="description" content="The technology team your restaurant doesn't have. We find where your money is going, build whatever fixes it, and run it for you. Spring, Houston and The Woodlands. First three months free for founding partners.">
 <link rel="canonical" href="https://azrestaurantpartners.com/">
+<meta name="google-site-verification" content="F8A4-IefmF4_kWHwF7q0awyq4Nas47RurTdXRQ7wElg">
+<meta name="theme-color" content="#f6f4ef">
+<link rel="icon" href="https://azrestaurantpartners.com/assets/og.png" sizes="any">
+<meta property="og:image" content="https://azrestaurantpartners.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AZ Restaurant Partners">
+<meta name="twitter:image" content="https://azrestaurantpartners.com/assets/og.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AZ Restaurant Partners">
 <meta property="og:title" content="Stop worrying about the technology side">
@@ -1168,86 +1176,7 @@ dtabs.forEach(function(tb,i){tb.addEventListener("click",function(){dgo(i)});
 if(dtabs.length)dpaint(0);
 
 
-/* ══ MEASUREMENT ═══════════════════════════════════════════════════════════
-   Same pattern the restaurant runs on: one delegated listener, every element
-   carrying data-track fires an event, and every data-track-* becomes a
-   parameter. Nothing is hand-instrumented, so a new button is measured the
-   moment it is added.
-   Beyond clicks we record what the restaurant's setup taught us actually
-   matters: how far people read, which sections they truly saw, how long they
-   stayed, and where they gave up. Queues until gtag exists so nothing is lost
-   on a cold load.                                                           */
-var GA_ID="G-3GEL1D477G";
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-function track(name,params){
-  params=params||{};
-  params.page="az_home";
-  try{ gtag("event",name,params); }catch(e){}
-}
-window.azTrack=track;
-
-/* 1 — every [data-track] element, with its data-track-* params */
-document.addEventListener("click",function(e){
-  var el=e.target.closest("[data-track]"); if(!el) return;
-  var p={};
-  for(var i=0;i<el.attributes.length;i++){
-    var a=el.attributes[i];
-    if(a.name.indexOf("data-track-")===0) p[a.name.slice(11).replace(/-/g,"_")]=a.value;
-  }
-  track(el.getAttribute("data-track"),p);
-},true);
-
-/* 2 — outbound links and taps on the phone number, without tagging each one */
-document.addEventListener("click",function(e){
-  var a=e.target.closest("a"); if(!a) return;
-  var h=a.getAttribute("href")||"";
-  if(h.indexOf("tel:")===0) track("call_tap",{number:h.slice(4)});
-  else if(h.indexOf("mailto:")===0) track("email_tap",{});
-  else if(/^https?:/.test(h) && a.hostname!==location.hostname)
-    track("outbound_click",{domain:a.hostname,label:(a.textContent||"").trim().slice(0,40)});
-  else if(h.charAt(0)==="#") track("anchor_click",{to:h});
-},true);
-
-/* 3 — how far they actually read */
-(function(){
-  var hit={};
-  addEventListener("scroll",function(){
-    var d=document.documentElement,
-        pct=Math.round((scrollY+innerHeight)/d.scrollHeight*100);
-    [25,50,75,90].forEach(function(m){ if(pct>=m&&!hit[m]){hit[m]=1;track("scroll_depth",{percent:m});} });
-  },{passive:true});
-})();
-
-/* 4 — which sections were genuinely seen, and for how long */
-(function(){
-  if(!("IntersectionObserver" in window)) return;
-  var seen={},since={};
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(en){
-      var id=en.target.id||en.target.querySelector(".kick")&&en.target.querySelector(".kick").textContent.trim().toLowerCase().replace(/\s+/g,"_")||"section";
-      if(en.isIntersecting){
-        since[id]=Date.now();
-        if(!seen[id]){seen[id]=1;track("section_view",{section:id});}
-      }else if(since[id]){
-        var s=Math.round((Date.now()-since[id])/1000); since[id]=0;
-        if(s>=3) track("section_dwell",{section:id,seconds:s});
-      }
-    });
-  },{threshold:.35});
-  [].forEach.call(document.querySelectorAll("section"),function(s){io.observe(s);});
-})();
-
-/* 5 — total time, reported once on the way out */
-(function(){
-  var t0=Date.now(),sent=false;
-  function bye(){
-    if(sent) return; sent=true;
-    track("time_on_page",{seconds:Math.round((Date.now()-t0)/1000)});
-  }
-  addEventListener("visibilitychange",function(){ if(document.visibilityState==="hidden") bye(); });
-  addEventListener("pagehide",bye);
-})();
+__TRACKING__
 
 /* ── FORM ───────────────────────────────────────────────────────────────── */
 (function(){
@@ -1262,6 +1191,9 @@ document.addEventListener("click",function(e){
     track("form_submit",{form:"pilot"});
     var d={}; new FormData(f).forEach(function(v,k){ if(k!=="_honey") d[k]=v; });
     d._subject="AZ pilot enquiry \u2014 "+(d.restaurant||d.name||"new");
+    d.source=(window.azSource&&window.azSource())||"direct / none";  /* where the lead came from */
+    d._template="table";
+    d._captcha="false";
     fetch("https://formsubmit.co/ajax/azoeb27@gmail.com",{
       method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
       body:JSON.stringify(d)})
