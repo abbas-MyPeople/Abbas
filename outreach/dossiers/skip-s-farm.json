@@ -1,0 +1,32 @@
+{
+ "restaurant": {
+  "name": "Skip's Farm",
+  "address": "16702 House and Hahl Road, Cypress, TX",
+  "site": null
+ },
+ "collected_at": "2026-08-18T20:15:58+00:00",
+ "site": {
+  "status": {
+   "value": "NO_SITE_LISTED",
+   "tier": "UNKNOWN",
+   "source": null,
+   "method": "directory had none",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  }
+ },
+ "verdict": {
+  "value": "VERIFY_FIRST",
+  "tier": "INFERRED",
+  "source": "directory",
+  "method": "no site listed",
+  "observed_at": "2026-08-18T20:15:58+00:00",
+  "confidence": 0.5,
+  "expires": "2026-09-17",
+  "note": "confirm still trading before any approach"
+ },
+ "first_gift": [
+  "Show them that searching their name returns no website at all."
+ ]
+}

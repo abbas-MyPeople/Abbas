@@ -1,0 +1,344 @@
+{
+ "restaurant": {
+  "name": "Marvino's Italian Kitchen",
+  "address": "24002 Hwy 290, Cypress, TX",
+  "site": "https://marvinositaliankitchen.com"
+ },
+ "collected_at": "2026-08-18T20:15:58+00:00",
+ "site": {
+  "status": {
+   "value": "STATIC",
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "fetch, classify, render fallback",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "rendered_with_browser": {
+   "value": false,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "playwright chromium",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "final_url": {
+   "value": "https://marvinositaliansteakhouse.com/",
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliankitchen.com",
+   "method": "redirect chain",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "https": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "scheme",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "words": {
+   "value": 3710,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "text after tag strip",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "pages_crawled": {
+   "value": 6,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "path probe",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "substantive": {
+   "value": true,
+   "tier": "DERIVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "section 8 substance test",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  }
+ },
+ "discovery": {
+  "restaurant_schema": {
+   "value": false,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "ld+json parse",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "schema_types": {
+   "value": [],
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "ld+json parse",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "mobile_viewport": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "meta scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "tel_link": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "link scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "menu_is_pdf": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "link scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "robots_txt": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/robots.txt",
+   "method": "fetch",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "ai_crawlers_blocked": {
+   "value": [],
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/robots.txt",
+   "method": "per-agent disallow scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "llms_txt": {
+   "value": false,
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/llms.txt",
+   "method": "fetch",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  }
+ },
+ "ordering": {
+  "direct_platforms": {
+   "value": [
+    "Toast"
+   ],
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "link and fingerprint scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "third_party": {
+   "value": [
+    "ezCater"
+   ],
+   "tier": "OBSERVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "link scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "channel_state": {
+   "value": "both",
+   "tier": "DERIVED",
+   "source": "https://marvinositaliansteakhouse.com/",
+   "method": "from platforms found",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  }
+ },
+ "menu": {
+  "prices_found": {
+   "value": 10,
+   "tier": "OBSERVED",
+   "source": "site",
+   "method": "regex over rendered text",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "price_min": {
+   "value": 5.0,
+   "tier": "OBSERVED",
+   "source": "site",
+   "method": "min of parsed prices",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "price_median": {
+   "value": 25.0,
+   "tier": "DERIVED",
+   "source": "site",
+   "method": "median of parsed prices",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "price_max": {
+   "value": 55.0,
+   "tier": "OBSERVED",
+   "source": "site",
+   "method": "max of parsed prices",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "price_spread": {
+   "value": 50.0,
+   "tier": "DERIVED",
+   "source": "site",
+   "method": "max minus min",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "charm_pricing_share": {
+   "value": 0.0,
+   "tier": "DERIVED",
+   "source": "site",
+   "method": "share ending .99/.95/.49/.89",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "round_pricing_share": {
+   "value": 1.0,
+   "tier": "DERIVED",
+   "source": "site",
+   "method": "share at whole dollars",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "pricing_style": {
+   "value": "round",
+   "tier": "INFERRED",
+   "source": "site",
+   "method": "dominant ending across parsed prices",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 0.7,
+   "expires": "2026-09-17",
+   "note": "mixed usually means prices were set item by item rather than to a policy"
+  },
+  "dollar_signs_used": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "site",
+   "method": "literal scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "large_format_prices": {
+   "value": [
+    109.0,
+    109.0,
+    120.0,
+    120.0,
+    135.0
+   ],
+   "tier": "OBSERVED",
+   "source": "site",
+   "method": "$80-1500, read as catering trays or party packages rather than dishes",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "price_deciles": {
+   "value": [
+    5.0,
+    5.0,
+    10.0,
+    12.0,
+    12.0,
+    13.0,
+    25.0,
+    40.0,
+    45.0,
+    50.0,
+    55.0
+   ],
+   "tier": "DERIVED",
+   "source": "site",
+   "method": "so the distribution can be sanity-checked rather than trusted on a single median",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "_caveat": "Prices are parsed from unstructured page text, not a menu API. Treat the shape as indicative and confirm any number before quoting it to an owner."
+ },
+ "catering": {
+  "state": {
+   "value": "OPERATIONAL",
+   "tier": "INFERRED",
+   "source": "site crawl",
+   "method": "keyword and path analysis",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 0.7,
+   "expires": "2026-09-17",
+   "note": "Catering has a real path. Look for volume levers rather than setup."
+  },
+  "has_catering_page": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "site crawl",
+   "method": "path scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "priced": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "site crawl",
+   "method": "per-head or catering-adjacent price",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  }
+ },
+ "first_gift": [
+  "Write their structured data and hand it over as a file. Twenty minutes, needs no login, and their web person can paste it in."
+ ],
+ "verdict": {
+  "value": "PURSUE_NOW",
+  "tier": "INFERRED",
+  "source": "collector",
+  "method": "site substance only - winnability needs public records and a human read",
+  "observed_at": "2026-08-18T20:15:58+00:00",
+  "confidence": 0.4,
+  "expires": "2026-09-17",
+  "note": "provisional. section 13.1 verdict needs the records collector"
+ }
+}

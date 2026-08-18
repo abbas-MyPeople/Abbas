@@ -1,0 +1,239 @@
+{
+ "restaurant": {
+  "name": "Pizza Fino",
+  "address": "16206 Spring Cypress Road, Cypress, TX",
+  "site": "https://mypizzafino.com"
+ },
+ "collected_at": "2026-08-18T20:15:58+00:00",
+ "site": {
+  "status": {
+   "value": "STATIC",
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "fetch, classify, render fallback",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "rendered_with_browser": {
+   "value": false,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "playwright chromium",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "final_url": {
+   "value": "https://www.mypizzafino.com/",
+   "tier": "OBSERVED",
+   "source": "https://mypizzafino.com",
+   "method": "redirect chain",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "https": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "scheme",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "words": {
+   "value": 7011,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "text after tag strip",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "pages_crawled": {
+   "value": 5,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "path probe",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "substantive": {
+   "value": true,
+   "tier": "DERIVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "section 8 substance test",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  }
+ },
+ "discovery": {
+  "restaurant_schema": {
+   "value": false,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "ld+json parse",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "schema_types": {
+   "value": [],
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "ld+json parse",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "mobile_viewport": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "meta scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "tel_link": {
+   "value": false,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "link scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "menu_is_pdf": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "link scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "robots_txt": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/robots.txt",
+   "method": "fetch",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "ai_crawlers_blocked": {
+   "value": [],
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/robots.txt",
+   "method": "per-agent disallow scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "llms_txt": {
+   "value": false,
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/llms.txt",
+   "method": "fetch",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  }
+ },
+ "ordering": {
+  "direct_platforms": {
+   "value": [
+    "HungerRush"
+   ],
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "link and fingerprint scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "third_party": {
+   "value": [],
+   "tier": "OBSERVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "link scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "channel_state": {
+   "value": "direct only",
+   "tier": "DERIVED",
+   "source": "https://www.mypizzafino.com/",
+   "method": "from platforms found",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  }
+ },
+ "menu": {
+  "prices_found": {
+   "value": 0,
+   "tier": "OBSERVED",
+   "source": "site",
+   "method": "regex over rendered text",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "price_architecture": {
+   "value": null,
+   "tier": "UNKNOWN",
+   "reason": "no prices published on the pages we could read",
+   "source": null,
+   "observed_at": "2026-08-18T20:15:58+00:00"
+  }
+ },
+ "catering": {
+  "state": {
+   "value": "PAGE_NO_PRICING",
+   "tier": "INFERRED",
+   "source": "site crawl",
+   "method": "keyword and path analysis",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 0.7,
+   "expires": "2026-09-17",
+   "note": "There is a catering page but no minimums or per-head pricing, so every enquiry becomes a manual conversation."
+  },
+  "has_catering_page": {
+   "value": true,
+   "tier": "OBSERVED",
+   "source": "site crawl",
+   "method": "path scan",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  },
+  "priced": {
+   "value": false,
+   "tier": "OBSERVED",
+   "source": "site crawl",
+   "method": "per-head or catering-adjacent price",
+   "observed_at": "2026-08-18T20:15:58+00:00",
+   "confidence": 1.0,
+   "expires": "2026-09-17"
+  }
+ },
+ "first_gift": [
+  "Write their structured data and hand it over as a file. Twenty minutes, needs no login, and their web person can paste it in."
+ ],
+ "verdict": {
+  "value": "PURSUE_NOW",
+  "tier": "INFERRED",
+  "source": "collector",
+  "method": "site substance only - winnability needs public records and a human read",
+  "observed_at": "2026-08-18T20:15:58+00:00",
+  "confidence": 0.4,
+  "expires": "2026-09-17",
+  "note": "provisional. section 13.1 verdict needs the records collector"
+ }
+}
