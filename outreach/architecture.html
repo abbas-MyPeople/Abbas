@@ -24,7 +24,12 @@ th{text-align:left;font-weight:680;color:var(--ink);border-bottom:2px solid var(
 td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
 hr{border:0;border-top:1px solid var(--line);margin:34px auto}
 h1+p{font-size:17px;color:var(--ink2)}
-</style><h1>Restaurant Intelligence Dossier - architecture</h1>
+</style>
+<style>
+h2{scroll-margin-top:20px}
+h3{color:var(--ink);border-left:2px solid var(--accent);padding-left:12px;margin-left:-14px}
+</style>
+<h1>Restaurant Intelligence Dossier - architecture</h1>
 <p>The template every restaurant runs through. Written before the collectors, on purpose,</p>
 <p>because the guardrails are the valuable part and they are hard to retrofit.</p>
 <p>Version 1, 2026-08-18.</p>
@@ -327,3 +332,125 @@ STATIC      text present, parseable</code></pre>
 <ol><li>Public records: HCAD, TABC, Comptroller, health scores - hard facts nobody else pulls</li><li>The guest journey, manual, on a phone. Slowest per restaurant and the most persuasive</li></ol>
 <p>   thing we produce, so it is worth the 20 minutes on anyone we are serious about</p>
 <ol><li>AEO score, because the prompt set is manual and the results are startling</li><li>Review teardown - richest signal, needs the Places API for volume</li><li>Social and mentions</li><li>SEO score, once GBP reading is automated</li><li>Competitive set, by running 1-8 on the neighbours</li><li>Ladder synthesis, improvement map, board</li></ol>
+<hr>
+<h2>13. What changes once you have actually run a restaurant</h2>
+<p>Everything above this line is written by someone analysing restaurants. This section is</p>
+<p>written by someone who has closed one at 11pm and opened it again at 9am, and who has also</p>
+<p>tried to sell to the person doing that. It reshapes the rest.</p>
+<p>The analyst assumes three things that are all false: that every restaurant is a target, that</p>
+<p>a good finding leads to a fix, and that a fix gets implemented. Operating both sides tells you</p>
+<p>otherwise.</p>
+<h3>13.1 Winnability, and the courage to disqualify</h3>
+<p>The dossier currently ranks by pain. Pain is only half of it. Some restaurants are unwinnable,</p>
+<p>and some are not worth winning, and an operator can usually tell inside five minutes.</p>
+<p>Capture, and let it override severity:</p>
+<div class="tw"><table><tr><th>Signal</th><th>Where from</th><th>What it means</th></tr><tr><td>Closing or failing</td><td>Hours cut, "temporarily closed" history, sale listing, permit lapse</td><td>Do not pitch. Nothing is crueller than selling growth to someone winding down</td></tr><tr><td>Franchise or licensed brand</td><td>Brand naming, footer legal</td><td>They cannot change the menu, the site or the ordering. Not our customer</td></tr><tr><td>Locked platform</td><td>Site is POS-issued and cannot be exported</td><td>The website work is not available to sell</td></tr><tr><td>Nephew-does-the-website</td><td>Amateur build, personal-domain email, a name in the footer</td><td>A political blocker, not a technical one. The pitch has to protect that relationship or it dies</td></tr><tr><td>Price floor</td><td>$-band, cash-only, no card minimums</td><td>If $99/month is a real decision for them, they are not the customer yet</td></tr><tr><td>No felt pain</td><td>Strong on every surface, queue out the door</td><td>Fine. Revisit in six months</td></tr><tr><td>Too new</td><td>Permit under 12 months</td><td>Drowning in build-out. Come back</td></tr><tr><td>Language</td><td>Site or reviews mostly in another language</td><td>Not a barrier. Abbas speaks Urdu and Hindi, and it is an advantage almost nobody else in Cy-Fair has</td></tr></table></div>
+<p>Output a verdict, not a score: <code>PURSUE NOW</code> / <code>PURSUE LATER</code> / <code>DO NOT PURSUE</code> with the reason.</p>
+<p><strong>A dossier that ends in "do not pursue" is a success.</strong> It bought back an afternoon.</p>
+<h3>13.2 Access, which decides whether any of this is real</h3>
+<p>An improvement map that ignores access is fiction. Every fix needs a key, and independents</p>
+<p>have usually lost half of them. This is the single biggest gap in the spec above.</p>
+<p>For every asset, capture: <strong>who holds it, and can they prove it.</strong></p>
+<ul><li>Domain registrar, and whether the owner has the login. Very often registered by a web guy</li></ul>
+<p>  who has moved on, or a relative overseas</p>
+<ul><li>DNS, separately from the registrar</li><li>Google Business Profile ownership. Frequently claimed by a former marketer or, worse, by</li></ul>
+<p>  the POS vendor</p>
+<ul><li>The Facebook page, often owned by an ex-employee's personal account</li><li>Instagram, usually the son or daughter</li><li>POS: admin versus manager access, and whether the owner has admin</li><li>Ordering platform: who signed, and can they export the menu</li><li>Email: is it a real business domain or a personal Gmail</li></ul>
+<p>Then the number that actually matters: <strong>time-to-first-change.</strong> With full access, adding</p>
+<p>structured data is twenty minutes. With a domain registered to a cousin in Karachi who is not</p>
+<p>answering, it is three weeks and two phone calls. Same finding. Completely different product.</p>
+<p><strong>Sequencing rule this forces, and it overrides the ones in section 7:</strong> *the first thing we</p>
+<p>do must require no credentials at all.* Nobody hands the keys to their business to a stranger</p>
+<p>on day one, and asking is how you lose the second meeting. Find something we can fix or prove</p>
+<p>from the outside, do it, then ask.</p>
+<h3>13.3 The vendor graveyard</h3>
+<p>Almost every independent has already been sold something that did not work. What is in that</p>
+<p>graveyard determines which words are usable.</p>
+<p>Observable, and worth digging for:</p>
+<ul><li>Abandoned platform fingerprints: a dead Popmenu or BentoBox stub, an orphaned loyalty widget,</li></ul>
+<p>  a landing page from a campaign that stopped</p>
+<ul><li>Structured data from a vendor who is long gone</li><li>A blog with three posts, all from the same month, two years ago</li><li>A phone number in the footer that is a tracking number nobody is tracking</li><li>Reviews or posts mentioning a rebrand or a "new website" that never shipped</li></ul>
+<p>If they were burned by an SEO agency, <strong>the word SEO cannot be in your first sentence</strong> - not</p>
+<p>because it is wrong, but because it now means "the last guy who took my money". Say "showing up</p>
+<p>when someone nearby is deciding" instead. Same work, no scar tissue.</p>
+<p>Field: <code>burned_by: []</code> and <code>words_to_avoid: []</code>.</p>
+<h3>13.4 Who actually decides</h3>
+<p>Independent restaurants have a decision structure that never appears on the website, and</p>
+<p>approaching the wrong person costs you the account.</p>
+<p>Partially observable: who replies to reviews, who posts on Instagram, whose name is on the</p>
+<p>TABC permit, whose name is on the HCAD record, who answers the phone.</p>
+<p>The common shapes:</p>
+<ul><li><strong>Chef-owner.</strong> Guards the menu. Never open with menu changes. Open with the phone or the reviews</li><li><strong>Spouse controls the money.</strong> The pitch has to survive being repeated to someone not in the room,</li></ul>
+<p>  which means it has to be one sentence and a number</p>
+<ul><li><strong>Son or daughter runs the digital side.</strong> Your best ally or your worst blocker. Bring them in</li></ul>
+<p>  early and give them the credit</p>
+<ul><li><strong>Silent partner or landlord involved.</strong> Long decisions. Do not chase</li></ul>
+<p><strong>Business-level only.</strong> We note the role, never build a profile of the person. That line is in</p>
+<p>the guardrails and it does not move.</p>
+<h3>13.5 Money in their units, and when it lands</h3>
+<p>The ladder's money rung is currently in marketing units. An owner does not think in conversion</p>
+<p>rate. Translate every figure into what they actually manage:</p>
+<pre><code>covers            ticket average       food cost %
+labour %          prime cost           voids and comps
+turns             covers per labour hour</code></pre>
+<p>So <code>~$370/wk</code> becomes <code>about 8 covers a week, or roughly one server-hour a day</code>. Same number,</p>
+<p>lands completely differently.</p>
+<p><strong>And timing beats size, always.</strong> Independents are cash-flow managed, not P&amp;L managed. A fix</p>
+<p>worth $200 this Friday beats one worth $600 in eight weeks, every time. Every move carries</p>
+<p><code>cash_timing: this_week | this_month | this_quarter</code>, and the first move should always be</p>
+<p><code>this_week</code> even where it is the smaller number.</p>
+<p>One line the analyst version misses entirely: <strong>a 1-star review is usually a comped meal.</strong></p>
+<p>Reviews are not only a marketing surface, they are a refund line the owner already felt. That</p>
+<p>reframing alone changes how the reputation work gets heard.</p>
+<h3>13.6 Does it survive a rush</h3>
+<p>The test that kills most restaurant software, and the reason ours has a kill switch on the</p>
+<p>staff's own phone.</p>
+<p><strong>Any system that requires a human action during service will not be used.</strong> Not sometimes.</p>
+<p>Ever. At 7:15pm on a Friday nobody is tagging a customer, opening a dashboard or remembering a</p>
+<p>script. If a move depends on staff behaviour mid-service it has already failed, and proposing</p>
+<p>it marks you as someone who has never worked a pass.</p>
+<p>Every move gets a required flag:</p>
+<pre><code>"survives_rush": true,
+"requires_staff_action_during_service": false,
+"owner_minutes_per_week": 0</code></pre>
+<p>Anything with <code>requires_staff_action_during_service: true</code> is either redesigned to run without</p>
+<p>a human, or dropped. Anything above roughly 15 owner-minutes a week will decay by month two,</p>
+<p>however good it is.</p>
+<h3>13.7 Proof they can pull themselves</h3>
+<p>Nothing a stranger says about someone's business is believed. What converts is when they check</p>
+<p>their own numbers and we were right.</p>
+<p>So every hypothesis carries the check <strong>they</strong> can run, in their own system, in under five</p>
+<p>minutes:</p>
+<div class="tw"><table><tr><th>Our hypothesis</th><th>What we ask them to pull</th></tr><tr><td>Losing orders to an unanswered phone</td><td>Missed-call count on Friday between 6 and 8</td></tr><tr><td>Paying commission on regulars</td><td>Repeat-customer share in the DoorDash portal</td></tr><tr><td>Wait complaints are a peak-shape problem</td><td>Ticket times, Friday vs Tuesday, same hour</td></tr><tr><td>Catering demand exists and has no channel</td><td>Count catering enquiries in the last 90 days</td></tr><tr><td>The menu has no attach</td><td>Average items per ticket, this quarter vs last</td></tr></table></div>
+<p>Field: <code>owner_verifiable_check</code>. <strong>A finding without one stays a claim.</strong> With one, the second</p>
+<p>meeting starts with them telling us we were right, which is a completely different conversation.</p>
+<h3>13.8 The smallest first ask</h3>
+<p>The spec above jumps from analysis to engagement. In practice there is a rung between, and it</p>
+<p>is the whole game.</p>
+<p>Never open by asking for an engagement, credentials, or a meeting with the decision-maker.</p>
+<p>Open by having **already done one thing, free, from the outside, that they can verify without</p>
+<p>giving us anything.** Fixing their hours where three surfaces disagree. Writing the structured</p>
+<p>data and handing it over as a file. Showing them the verbatim answer ChatGPT gives about their</p>
+<p>restaurant, wrong.</p>
+<p><code>first_gift</code> is a required field on every dossier: one specific thing we can do or show before</p>
+<p>they owe us anything, needing no access. If we cannot name one, we are not ready to walk in.</p>
+<h3>13.9 When to walk in</h3>
+<p>Timing is operator knowledge and it is cheap to get right.</p>
+<ul><li><strong>Google Popular Times</strong> gives their actual slow hours. Free, and it is per-restaurant rather</li></ul>
+<p>  than a rule of thumb. Use theirs, not Tuesday-at-3 as dogma</p>
+<ul><li>Never in a rush. Never a Friday. Never the week either side of a major holiday</li><li>Cuisine calendars matter: Ramadan, Diwali, Lent and Christmas move demand hard for particular</li></ul>
+<p>  kitchens, in both directions</p>
+<ul><li>Bad timing regardless of hour: just opened a second location, just had a health inspection,</li></ul>
+<p>  just had a public bad review, mid-refit</p>
+<p>Field: <code>best_window</code> per restaurant, from their own popular-times curve.</p>
+<h3>13.10 What this changes in the structure above</h3>
+<div class="tw"><table><tr><th>Where</th><th>Change</th></tr><tr><td>§1 ladder</td><td>L4 money is expressed in covers, ticket and labour-hours, and carries <code>cash_timing</code>. Add L4b: the check they can run themselves</td></tr><tr><td>§2 domains</td><td>Add O Winnability, P Access and lock-in, Q Vendor graveyard, R Decision structure, S Contactability</td></tr><tr><td>§7 improvement map</td><td>Every move adds <code>access_required</code>, <code>time_to_first_change</code>, <code>survives_rush</code>, <code>requires_staff_action_during_service</code>, <code>owner_minutes_per_week</code>, <code>cash_timing</code></td></tr><tr><td>§7 sequencing</td><td>New rule 0, above all others: the first move requires no credentials</td></tr><tr><td>§10 output</td><td>Add <code>verdict</code>, <code>first_gift</code>, <code>burned_by</code>, <code>words_to_avoid</code>, <code>best_window</code>, <code>owner_verifiable_check</code> per finding</td></tr><tr><td>Board</td><td>Sort by winnability first, pain second. A <code>DO NOT PURSUE</code> never appears in the working list</td></tr><tr><td>§9 guardrails</td><td>Add: never pitch a restaurant that is visibly closing</td></tr></table></div>
+<h3>13.11 The one that is not a field</h3>
+<p>Every one of these restaurants is somebody's whole life, usually with family money in it and</p>
+<p>frequently with family working in it. The dossier is a list of things that are wrong with</p>
+<p>something a person built.</p>
+<p>Which is exactly why the free three months exists, why the operational advice comes before the</p>
+<p>paid work, and why <code>do_not_say</code> is a required field rather than a nicety. Read any of this out</p>
+<p>in the wrong order and you are just another person telling an owner their restaurant is not</p>
+<p>good enough, in a year when 119 of their neighbours have already closed.</p>
+<p>The dossier earns the right to the conversation. It is not the conversation.</p>

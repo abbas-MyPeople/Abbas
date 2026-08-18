@@ -594,3 +594,218 @@ inside. Put the two together and the leaks are obvious.
 8. SEO score, once GBP reading is automated
 9. Competitive set, by running 1-8 on the neighbours
 10. Ladder synthesis, improvement map, board
+
+---
+
+## 13. What changes once you have actually run a restaurant
+
+Everything above this line is written by someone analysing restaurants. This section is
+written by someone who has closed one at 11pm and opened it again at 9am, and who has also
+tried to sell to the person doing that. It reshapes the rest.
+
+The analyst assumes three things that are all false: that every restaurant is a target, that
+a good finding leads to a fix, and that a fix gets implemented. Operating both sides tells you
+otherwise.
+
+### 13.1 Winnability, and the courage to disqualify
+
+The dossier currently ranks by pain. Pain is only half of it. Some restaurants are unwinnable,
+and some are not worth winning, and an operator can usually tell inside five minutes.
+
+Capture, and let it override severity:
+
+| Signal | Where from | What it means |
+|---|---|---|
+| Closing or failing | Hours cut, "temporarily closed" history, sale listing, permit lapse | Do not pitch. Nothing is crueller than selling growth to someone winding down |
+| Franchise or licensed brand | Brand naming, footer legal | They cannot change the menu, the site or the ordering. Not our customer |
+| Locked platform | Site is POS-issued and cannot be exported | The website work is not available to sell |
+| Nephew-does-the-website | Amateur build, personal-domain email, a name in the footer | A political blocker, not a technical one. The pitch has to protect that relationship or it dies |
+| Price floor | $-band, cash-only, no card minimums | If $99/month is a real decision for them, they are not the customer yet |
+| No felt pain | Strong on every surface, queue out the door | Fine. Revisit in six months |
+| Too new | Permit under 12 months | Drowning in build-out. Come back |
+| Language | Site or reviews mostly in another language | Not a barrier. Abbas speaks Urdu and Hindi, and it is an advantage almost nobody else in Cy-Fair has |
+
+Output a verdict, not a score: `PURSUE NOW` / `PURSUE LATER` / `DO NOT PURSUE` with the reason.
+**A dossier that ends in "do not pursue" is a success.** It bought back an afternoon.
+
+### 13.2 Access, which decides whether any of this is real
+
+An improvement map that ignores access is fiction. Every fix needs a key, and independents
+have usually lost half of them. This is the single biggest gap in the spec above.
+
+For every asset, capture: **who holds it, and can they prove it.**
+
+- Domain registrar, and whether the owner has the login. Very often registered by a web guy
+  who has moved on, or a relative overseas
+- DNS, separately from the registrar
+- Google Business Profile ownership. Frequently claimed by a former marketer or, worse, by
+  the POS vendor
+- The Facebook page, often owned by an ex-employee's personal account
+- Instagram, usually the son or daughter
+- POS: admin versus manager access, and whether the owner has admin
+- Ordering platform: who signed, and can they export the menu
+- Email: is it a real business domain or a personal Gmail
+
+Then the number that actually matters: **time-to-first-change.** With full access, adding
+structured data is twenty minutes. With a domain registered to a cousin in Karachi who is not
+answering, it is three weeks and two phone calls. Same finding. Completely different product.
+
+**Sequencing rule this forces, and it overrides the ones in section 7:** *the first thing we
+do must require no credentials at all.* Nobody hands the keys to their business to a stranger
+on day one, and asking is how you lose the second meeting. Find something we can fix or prove
+from the outside, do it, then ask.
+
+### 13.3 The vendor graveyard
+
+Almost every independent has already been sold something that did not work. What is in that
+graveyard determines which words are usable.
+
+Observable, and worth digging for:
+- Abandoned platform fingerprints: a dead Popmenu or BentoBox stub, an orphaned loyalty widget,
+  a landing page from a campaign that stopped
+- Structured data from a vendor who is long gone
+- A blog with three posts, all from the same month, two years ago
+- A phone number in the footer that is a tracking number nobody is tracking
+- Reviews or posts mentioning a rebrand or a "new website" that never shipped
+
+If they were burned by an SEO agency, **the word SEO cannot be in your first sentence** - not
+because it is wrong, but because it now means "the last guy who took my money". Say "showing up
+when someone nearby is deciding" instead. Same work, no scar tissue.
+
+Field: `burned_by: []` and `words_to_avoid: []`.
+
+### 13.4 Who actually decides
+
+Independent restaurants have a decision structure that never appears on the website, and
+approaching the wrong person costs you the account.
+
+Partially observable: who replies to reviews, who posts on Instagram, whose name is on the
+TABC permit, whose name is on the HCAD record, who answers the phone.
+
+The common shapes:
+- **Chef-owner.** Guards the menu. Never open with menu changes. Open with the phone or the reviews
+- **Spouse controls the money.** The pitch has to survive being repeated to someone not in the room,
+  which means it has to be one sentence and a number
+- **Son or daughter runs the digital side.** Your best ally or your worst blocker. Bring them in
+  early and give them the credit
+- **Silent partner or landlord involved.** Long decisions. Do not chase
+
+**Business-level only.** We note the role, never build a profile of the person. That line is in
+the guardrails and it does not move.
+
+### 13.5 Money in their units, and when it lands
+
+The ladder's money rung is currently in marketing units. An owner does not think in conversion
+rate. Translate every figure into what they actually manage:
+
+```
+covers            ticket average       food cost %
+labour %          prime cost           voids and comps
+turns             covers per labour hour
+```
+
+So `~$370/wk` becomes `about 8 covers a week, or roughly one server-hour a day`. Same number,
+lands completely differently.
+
+**And timing beats size, always.** Independents are cash-flow managed, not P&L managed. A fix
+worth $200 this Friday beats one worth $600 in eight weeks, every time. Every move carries
+`cash_timing: this_week | this_month | this_quarter`, and the first move should always be
+`this_week` even where it is the smaller number.
+
+One line the analyst version misses entirely: **a 1-star review is usually a comped meal.**
+Reviews are not only a marketing surface, they are a refund line the owner already felt. That
+reframing alone changes how the reputation work gets heard.
+
+### 13.6 Does it survive a rush
+
+The test that kills most restaurant software, and the reason ours has a kill switch on the
+staff's own phone.
+
+**Any system that requires a human action during service will not be used.** Not sometimes.
+Ever. At 7:15pm on a Friday nobody is tagging a customer, opening a dashboard or remembering a
+script. If a move depends on staff behaviour mid-service it has already failed, and proposing
+it marks you as someone who has never worked a pass.
+
+Every move gets a required flag:
+
+```json
+"survives_rush": true,
+"requires_staff_action_during_service": false,
+"owner_minutes_per_week": 0
+```
+
+Anything with `requires_staff_action_during_service: true` is either redesigned to run without
+a human, or dropped. Anything above roughly 15 owner-minutes a week will decay by month two,
+however good it is.
+
+### 13.7 Proof they can pull themselves
+
+Nothing a stranger says about someone's business is believed. What converts is when they check
+their own numbers and we were right.
+
+So every hypothesis carries the check **they** can run, in their own system, in under five
+minutes:
+
+| Our hypothesis | What we ask them to pull |
+|---|---|
+| Losing orders to an unanswered phone | Missed-call count on Friday between 6 and 8 |
+| Paying commission on regulars | Repeat-customer share in the DoorDash portal |
+| Wait complaints are a peak-shape problem | Ticket times, Friday vs Tuesday, same hour |
+| Catering demand exists and has no channel | Count catering enquiries in the last 90 days |
+| The menu has no attach | Average items per ticket, this quarter vs last |
+
+Field: `owner_verifiable_check`. **A finding without one stays a claim.** With one, the second
+meeting starts with them telling us we were right, which is a completely different conversation.
+
+### 13.8 The smallest first ask
+
+The spec above jumps from analysis to engagement. In practice there is a rung between, and it
+is the whole game.
+
+Never open by asking for an engagement, credentials, or a meeting with the decision-maker.
+Open by having **already done one thing, free, from the outside, that they can verify without
+giving us anything.** Fixing their hours where three surfaces disagree. Writing the structured
+data and handing it over as a file. Showing them the verbatim answer ChatGPT gives about their
+restaurant, wrong.
+
+`first_gift` is a required field on every dossier: one specific thing we can do or show before
+they owe us anything, needing no access. If we cannot name one, we are not ready to walk in.
+
+### 13.9 When to walk in
+
+Timing is operator knowledge and it is cheap to get right.
+
+- **Google Popular Times** gives their actual slow hours. Free, and it is per-restaurant rather
+  than a rule of thumb. Use theirs, not Tuesday-at-3 as dogma
+- Never in a rush. Never a Friday. Never the week either side of a major holiday
+- Cuisine calendars matter: Ramadan, Diwali, Lent and Christmas move demand hard for particular
+  kitchens, in both directions
+- Bad timing regardless of hour: just opened a second location, just had a health inspection,
+  just had a public bad review, mid-refit
+
+Field: `best_window` per restaurant, from their own popular-times curve.
+
+### 13.10 What this changes in the structure above
+
+| Where | Change |
+|---|---|
+| §1 ladder | L4 money is expressed in covers, ticket and labour-hours, and carries `cash_timing`. Add L4b: the check they can run themselves |
+| §2 domains | Add O Winnability, P Access and lock-in, Q Vendor graveyard, R Decision structure, S Contactability |
+| §7 improvement map | Every move adds `access_required`, `time_to_first_change`, `survives_rush`, `requires_staff_action_during_service`, `owner_minutes_per_week`, `cash_timing` |
+| §7 sequencing | New rule 0, above all others: the first move requires no credentials |
+| §10 output | Add `verdict`, `first_gift`, `burned_by`, `words_to_avoid`, `best_window`, `owner_verifiable_check` per finding |
+| Board | Sort by winnability first, pain second. A `DO NOT PURSUE` never appears in the working list |
+| §9 guardrails | Add: never pitch a restaurant that is visibly closing |
+
+### 13.11 The one that is not a field
+
+Every one of these restaurants is somebody's whole life, usually with family money in it and
+frequently with family working in it. The dossier is a list of things that are wrong with
+something a person built.
+
+Which is exactly why the free three months exists, why the operational advice comes before the
+paid work, and why `do_not_say` is a required field rather than a nicety. Read any of this out
+in the wrong order and you are just another person telling an owner their restaurant is not
+good enough, in a year when 119 of their neighbours have already closed.
+
+The dossier earns the right to the conversation. It is not the conversation.
