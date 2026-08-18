@@ -61,6 +61,9 @@ def head(title: str, desc: str, path: str, schema: str) -> str:
   <meta property="og:url" content="{SITE}/{path}" />
   <meta property="og:image" content="{SITE}/assets/og.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{SITE}/assets/brand/logo-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="{SITE}/assets/brand/logo-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{SITE}/assets/brand/logo-180.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -84,6 +87,7 @@ def business(area_name: str, url: str, extra: dict | None = None) -> dict:
         "telephone": "+1-408-393-6716",
         "priceRange": "$$",
         "image": f"{SITE}/assets/og.png",
+        "logo": f"{SITE}/assets/brand/logo-512.png",
         "address": {"@type": "PostalAddress", "addressLocality": "Spring",
                     "addressRegion": "TX", "postalCode": "77388", "addressCountry": "US"},
         "geo": {"@type": "GeoCoordinates", "latitude": 30.0799, "longitude": -95.4172},
