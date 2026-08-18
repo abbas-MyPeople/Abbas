@@ -1,0 +1,273 @@
+{
+  "_note": "Local pages. Each city carries its own verifiable specifics — county, real commercial corridors, the kind of independent restaurant that actually trades there — because near-identical city pages get filtered as doorway pages and deserve to be. Nothing here is invented: corridors are real roads, counties are correct, and the only statistic used sitewide is the H1-2026 closure figure, attributed on the page.",
+  "cities": [
+    {
+      "slug": "spring",
+      "name": "Spring",
+      "county": "Harris County",
+      "drive": "home — our own restaurant is here",
+      "corridors": [
+        "FM 2920",
+        "Kuykendahl Road",
+        "Louetta Road",
+        "Old Town Spring"
+      ],
+      "scene": "Old Town Spring trades on foot traffic and weekends; the FM 2920 and Louetta corridors are strip-centre restaurants living on pickup, delivery and the lunch rush from nearby offices.",
+      "angle": "We run Wok & Karahi here. Everything we sell was tested on our own P&L, in this ZIP code, before it was offered to anyone else.",
+      "first": "Because we trade here ourselves, the first look is usually a comparison rather than an audit: what your covers, your review velocity and your direct-order share look like next to a restaurant we run three miles away. That is a benchmark almost nobody else in Spring can hand you.",
+      "q": "You run a restaurant in Spring. Are you not a competitor?",
+      "a": "Only if you sell what we sell. We run one Pakistani-Chinese kitchen in Spring, so for almost every restaurant here the honest answer is no — and where there is genuine overlap, we say so before you sign anything."
+    },
+    {
+      "slug": "the-woodlands",
+      "name": "The Woodlands",
+      "county": "Montgomery County",
+      "drive": "about 15 minutes north",
+      "corridors": [
+        "Market Street",
+        "Hughes Landing",
+        "Research Forest Drive",
+        "Woodlands Parkway"
+      ],
+      "scene": "A master-planned market with high rents and demanding guests. Market Street and Hughes Landing sit next to national brands with real marketing departments, and the corporate campuses along Research Forest make weekday catering a genuine line of business.",
+      "angle": "Competing beside chains means your online presence gets compared to theirs directly. That is a technology problem before it is a food problem.",
+      "first": "First look is nearly always the gap between how good the room is and how it reads online. Woodlands independents are frequently better than their listings suggest, and they are being compared side by side with national brands that have staff whose entire job is that comparison.",
+      "q": "Our rent is high and margins are thin. Is $99 a month worth it here?",
+      "a": "If it is not, we will say so. The first three months cost nothing precisely so the answer comes from your numbers rather than from a pitch — and the first thing we look for in The Woodlands is catering from the Research Forest and Hughes Landing offices, which usually pays for everything else."
+    },
+    {
+      "slug": "houston",
+      "name": "Houston",
+      "county": "Harris County",
+      "drive": "25 to 45 minutes, depending on where you are",
+      "corridors": [
+        "Westheimer Road",
+        "Bellaire Boulevard",
+        "Washington Avenue",
+        "Long Point Road",
+        "Harrisburg Boulevard"
+      ],
+      "scene": "One of the most competitive independent restaurant markets in the country, and one of the most diverse. Bellaire and Long Point are dense with family-run kitchens where the owner is also the operator, the buyer and the closer.",
+      "angle": "Houston lost more restaurants in the first half of 2026 than any city in the United States or Canada. Being good is no longer enough on its own.",
+      "first": "With this much competition the first look is discovery: whether you appear at all when someone two miles away is deciding, in Search, in Maps, and in whatever assistant they asked instead. In a city this dense, being invisible for one search radius is the whole problem.",
+      "q": "There are thousands of restaurants in Houston. Why would you take mine?",
+      "a": "We take a small number of partners at a time, and we would rather work with an owner who wants a long relationship than sign everyone. Density is also the opportunity: in a market this crowded, small advantages in how you are found compound quickly."
+    },
+    {
+      "slug": "katy",
+      "name": "Katy",
+      "county": "Harris, Fort Bend and Waller Counties",
+      "drive": "about 50 minutes west",
+      "corridors": [
+        "Katy Freeway (I-10)",
+        "Grand Parkway",
+        "Cinco Ranch Boulevard",
+        "Mason Road"
+      ],
+      "scene": "Fast-growing suburban families, heavy on takeout and third-party delivery. The Cinco Ranch and Grand Parkway centres fill up early on weeknights and empty between rushes.",
+      "angle": "Suburban families order on their phones. If your direct ordering is slower than the app, you pay a commission for a customer who already knew your name.",
+      "first": "First look is the direct-versus-app split. Katy households order on their phones out of habit, and most independents here are paying a commission on guests who already knew the restaurant by name — which is the most expensive kind of order there is.",
+      "q": "Most of our orders come through DoorDash. Do we have to leave?",
+      "a": "No, and we will not ask you to. The apps bring guests who have never heard of you, which is worth paying for. The work is turning those first-timers into direct repeat orders, so the apps become how you are discovered rather than how you make a living."
+    },
+    {
+      "slug": "sugar-land",
+      "name": "Sugar Land",
+      "county": "Fort Bend County",
+      "drive": "about an hour south-west",
+      "corridors": [
+        "Highway 6",
+        "Sugar Land Town Square",
+        "University Boulevard",
+        "Highway 90A"
+      ],
+      "scene": "One of the most diverse suburbs in Texas, and it shows on the menus. Town Square carries premium rents; the Highway 6 and 90A corridors are where the independents trade.",
+      "angle": "A menu that is genuinely regional is worth explaining properly online — most listings flatten it into one wrong word and lose the guest who wanted exactly that.",
+      "first": "First look is usually the menu itself — how it is described online, how it is categorised, and whether the thing that makes it worth driving for is legible to someone who has never eaten it. In Fort Bend that is often the single biggest unforced loss.",
+      "q": "Our food is regional and hard to describe. Does that hurt us online?",
+      "a": "It does today, and it is very fixable. Search and AI assistants both work from how a dish is described, and most listings flatten a specific regional cuisine into one wrong generic word — which loses exactly the guest who was looking for it."
+    },
+    {
+      "slug": "cypress",
+      "name": "Cypress",
+      "county": "Harris County",
+      "drive": "about 35 minutes west",
+      "corridors": [
+        "Highway 290",
+        "Barker Cypress Road",
+        "Fry Road",
+        "Bridgeland"
+      ],
+      "scene": "Newer rooftops with young families and long commutes down 290. Dinner arrives in a compressed window and catering demand tracks the school calendar.",
+      "angle": "When your entire night happens in ninety minutes, a phone that rings out is not an inconvenience. It is the night's margin.",
+      "first": "First look is the shape of the evening. Cypress dinner demand arrives in a compressed window after the 290 commute, so we start with what happens to the phone, the kitchen and the queue inside that ninety minutes.",
+      "q": "Our whole night happens in about two hours. What can technology actually do?",
+      "a": "Make sure nothing is lost inside it. A phone that answers every call during the rush, prep planned to the pattern rather than the average, and promotions aimed at the quiet hours you can already see coming."
+    },
+    {
+      "slug": "tomball",
+      "name": "Tomball",
+      "county": "Harris County",
+      "drive": "about 20 minutes north-west",
+      "corridors": [
+        "Main Street",
+        "Highway 249",
+        "FM 2920"
+      ],
+      "scene": "A genuine small-town main street plus the 249 corridor. Regulars matter more here than reach — a lot of business comes back weekly and knows the owner by name.",
+      "angle": "When your business is repeat guests, the highest-return work is a guest list you own, not another ad.",
+      "first": "First look is the guest list. Tomball trades on regulars, and most independents here have served the same families for years without ever owning a way to reach them that is not a social platform they do not control.",
+      "q": "We already have loyal regulars. What would you even add?",
+      "a": "A way to reach them that belongs to you. Most of our work in Tomball is turning a room full of regulars into a list you own, so a slow Tuesday is something you can act on rather than watch."
+    },
+    {
+      "slug": "conroe",
+      "name": "Conroe",
+      "county": "Montgomery County",
+      "drive": "about 30 minutes north",
+      "corridors": [
+        "Interstate 45",
+        "Lake Conroe",
+        "Downtown Conroe",
+        "Highway 105"
+      ],
+      "scene": "Lake Conroe makes the weekend, and the weekend makes the month. Downtown has been steadily filling with independents; the I-45 frontage lives on travellers and pickup.",
+      "angle": "A business built on weekends and visitors is decided by what a stranger finds when they search — or ask an assistant — from the car.",
+      "first": "First look is what a stranger sees. Conroe's weekends are made by visitors and lake traffic, so we start with hours, photos, menus and AI answers — the things someone checks from a car before deciding where to stop.",
+      "q": "A lot of our business is weekend visitors. Does local marketing still apply?",
+      "a": "It matters more, not less. A visitor has no loyalty and no local knowledge — they take the first credible answer they are given, which makes being findable and accurate the entire game."
+    },
+    {
+      "slug": "humble-kingwood",
+      "name": "Humble & Kingwood",
+      "county": "Harris County",
+      "drive": "about 30 minutes east",
+      "corridors": [
+        "FM 1960",
+        "Kingwood Drive",
+        "Northpark Drive",
+        "Highway 59"
+      ],
+      "scene": "Kingwood is settled and loyal; the FM 1960 corridor near the airport is transient and price-sensitive. The same operator often serves both in one week.",
+      "angle": "Two different guests need two different plays. One generic marketing package serves neither.",
+      "first": "First look is segmentation. The same operator here often serves settled Kingwood regulars and price-sensitive FM 1960 traffic in the same week, and one generic marketing package quietly underserves both.",
+      "q": "Kingwood and 1960 feel like two different businesses. Can one system serve both?",
+      "a": "One system, two plays. The guest data separates cleanly once you are collecting it, and after that the offers, the timing and the messaging can differ without you running two of everything."
+    },
+    {
+      "slug": "pearland",
+      "name": "Pearland",
+      "county": "Brazoria County",
+      "drive": "about an hour south",
+      "corridors": [
+        "Broadway Street (FM 518)",
+        "Pearland Parkway",
+        "Highway 288",
+        "Silverlake"
+      ],
+      "scene": "One of the fastest-growing suburbs in the metro. Broadway is the spine, and most independents there are competing with a chain within the same shopping centre.",
+      "angle": "Growth brings competitors. The restaurants that hold their ground are the ones a guest can find, order from and come back to without friction.",
+      "first": "First look is the shopping-centre comparison — how you read against the chain fifty feet away, on the surfaces a guest actually checks before walking in. Pearland is growing fast enough that this gets harder every year, not easier.",
+      "q": "There is a chain in our centre with a marketing department. How do we compete?",
+      "a": "Not by outspending them. By being easier to find, faster to order from, and better at bringing a guest back a second time — three things a chain is usually slower at than you would expect."
+    },
+    {
+      "slug": "missouri-city-stafford",
+      "name": "Missouri City & Stafford",
+      "county": "Fort Bend County",
+      "drive": "about an hour south-west",
+      "corridors": [
+        "Highway 6",
+        "Murphy Road",
+        "Texas Parkway",
+        "Highway 90A"
+      ],
+      "scene": "Dense, diverse and value-driven. A lot of the strongest kitchens here are small rooms with big catering potential that never gets marketed.",
+      "angle": "Catering is usually the highest-margin thing an independent already knows how to do and does not sell.",
+      "first": "First look is catering. There is more unsold catering capacity in Missouri City and Stafford than almost anywhere else we work — strong kitchens, real capability, and no channel that asks for the business.",
+      "q": "We do catering occasionally. Is it worth taking seriously?",
+      "a": "Usually it is the single highest-margin thing an independent already knows how to do. It needs a way to be found, quoted and repeated — which is a technology problem, not a kitchen one."
+    },
+    {
+      "slug": "magnolia-montgomery",
+      "name": "Magnolia & Montgomery",
+      "county": "Montgomery County",
+      "drive": "about 30 minutes north-west",
+      "corridors": [
+        "FM 1488",
+        "FM 149",
+        "Highway 105"
+      ],
+      "scene": "Spread out and growing fast along 1488. Guests drive to eat here, which makes discovery and accurate hours worth more than they are anywhere denser.",
+      "angle": "When people drive twenty minutes to reach you, a wrong closing time online costs a whole table.",
+      "first": "First look is the basics that carry disproportionate weight out here: accurate hours, an up-to-date menu, and appearing when someone twenty minutes away is deciding whether the drive is worth it.",
+      "q": "People drive to reach us. How much do online details matter?",
+      "a": "More than in a dense area. A guest who is willing to drive twenty minutes will not risk a wrong closing time — one stale detail costs a whole table, and those are the cheapest mistakes to fix."
+    }
+  ],
+  "services": [
+    {
+      "slug": "restaurant-pos-houston",
+      "title": "Restaurant POS in Houston",
+      "h1": "Choosing and running a restaurant POS in Houston",
+      "intent": "An owner comparing POS systems, or stuck on one that no longer fits.",
+      "body": "We are not a POS reseller and we take no commission from any of them, so the honest answer is sometimes that the system you have is fine and the problem is how it is configured. When it genuinely needs replacing, we run the migration — menu, modifiers, printers, integrations and staff training — and we do it away from your rush.",
+      "links": [
+        "best-restaurant-pos.html",
+        "restaurant-pos-cost.html",
+        "toast-vs-clover.html",
+        "square-vs-toast.html"
+      ]
+    },
+    {
+      "slug": "ai-phone-answering-houston-restaurants",
+      "title": "AI phone answering for Houston restaurants",
+      "h1": "The phone that never rings out, for Houston restaurants",
+      "intent": "An owner losing orders to a phone nobody can reach during service.",
+      "body": "A voice line that knows your menu, tonight's sold-out dishes and what the kitchen can realistically do, and writes the order into your POS. Your staff can switch it off from their own phone when they are drowning. Ours is live — you are welcome to call it before you decide anything.",
+      "links": [
+        "ai-phone-answering-restaurants.html",
+        "ai-phone-answering-cost.html",
+        "stop-restaurant-no-shows.html"
+      ]
+    },
+    {
+      "slug": "commission-free-online-ordering-houston",
+      "title": "Commission-free online ordering in Houston",
+      "h1": "Commission-free online ordering for Houston restaurants",
+      "intent": "An owner watching 15–30% of an order disappear to a delivery app.",
+      "body": "Third-party apps are a real channel and we will never tell you to switch them off — they bring guests who have never heard of you. The work is converting those guests into direct, repeat orders you keep the full value of, so the apps become discovery rather than your whole business.",
+      "links": [
+        "commission-free-online-ordering-systems.html",
+        "online-ordering-without-doordash.html",
+        "cut-delivery-commissions.html",
+        "first-party-ordering-roi-calculator.html"
+      ]
+    },
+    {
+      "slug": "restaurant-local-seo-houston",
+      "title": "Restaurant local SEO in Houston",
+      "h1": "Getting found in Houston — search, maps and AI answers",
+      "intent": "An owner who is invisible when someone nearby is deciding where to eat.",
+      "body": "Three surfaces now decide who gets found: Google Search, Google Maps, and the assistants people increasingly ask instead. They are related but not the same, and being strong on one does not carry you on the others. We work all three and check the AI answers three times a week, because they move.",
+      "links": [
+        "local-seo-for-restaurants.html",
+        "get-restaurant-on-google-maps.html",
+        "get-your-restaurant-recommended-by-ai.html",
+        "get-more-restaurant-reviews.html"
+      ]
+    },
+    {
+      "slug": "restaurant-website-houston",
+      "title": "Restaurant website in Houston",
+      "h1": "Restaurant websites in Houston that take the order",
+      "intent": "An owner with a website that looks fine and sells nothing.",
+      "body": "Most restaurant websites are brochures. The job is narrower than it looks: load fast on a phone, show a menu that is actually current, and take the order without sending the guest anywhere else. Whatever we build stays in your name and you keep it if you leave.",
+      "links": [
+        "restaurant-website-cost.html",
+        "commission-free-online-ordering-systems.html",
+        "local-seo-for-restaurants.html"
+      ]
+    }
+  ]
+}
