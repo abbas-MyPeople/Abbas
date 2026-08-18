@@ -627,8 +627,15 @@
   .pcn .now{font-size:3rem;font-weight:830;letter-spacing:-.05em;line-height:.95;color:var(--deep)}
   .pcn em{font-style:normal;font-size:.95rem;font-weight:600;color:var(--ink-3)}
   .pcs{font-size:14.4px;color:var(--ink-2);margin:12px 0 0;line-height:1.45;max-width:32ch}
-  .pcards.std .was{display:none}
-  .pcards.std .now{color:var(--ink)}
+  /* Toggle OFF = standard pricing. The founding-only $0 must disappear and the
+     real price becomes the headline number — not the other way round, which is
+     what this did originally and it read as "everything is free, always". */
+  .p-std{display:none}
+  #pricing.std .p-found{display:none}
+  #pricing.std .p-std{display:inline}
+  .pcards.std .now{display:none}
+  .pcards.std .was{font-size:3rem;font-weight:830;letter-spacing:-.05em;line-height:.95;
+                   color:var(--ink);text-decoration:none}
   /* the loop */
   .loopbox{margin:24px 0 0}
   .looptrack{display:flex;flex-wrap:wrap;gap:8px}
@@ -1004,9 +1011,9 @@
   </div>
 </div></section>
 
-<section class="band"><div class="w rise">
+<section class="band"><div class="w rise" id="pricing">
   <p class="kick">What it costs</p>
-  <h2>Two numbers. Both zero right now.</h2>
+  <h2><span class="p-found">Two numbers. Both zero right now.</span><span class="p-std">Two numbers. That&rsquo;s the whole price list.</span></h2>
 
   <div class="switchrow">
     <button class="switch on" id="fswitch" role="switch" aria-checked="true" data-track="price_toggle">
@@ -1269,6 +1276,8 @@ __TRACKING__
     var on=sw.classList.toggle("on");
     sw.setAttribute("aria-checked",on?"true":"false");
     cards.classList.toggle("std",!on);
+    var box=document.getElementById("pricing");
+    if(box) box.classList.toggle("std",!on);   /* the heading has to agree with the numbers */
     track("price_toggle",{founding:on?"on":"off"});
   });
 })();
