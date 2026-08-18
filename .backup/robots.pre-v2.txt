@@ -1,0 +1,77 @@
+# ══════════════════════════════════════════════════════════════════════════
+# AI crawlers are named EXPLICITLY, one group each.
+#
+# A single "User-agent: *  Allow: /" is not the same thing. Several of these
+# agents are refused by default at the edge by hosts and CDNs, and an assistant
+# that cannot fetch the page cannot cite it. The restaurant site fixed exactly
+# this problem — it now gets named in 100% of Perplexity probes — and the same
+# list is used here so nothing has to be rediscovered.
+#
+# Three distinct jobs per vendor, and they use different agents for each:
+#   SEARCH/GROUNDING — indexes us so we can be cited in an answer
+#   USER-FETCH       — a person asked the assistant to open this page
+#   TRAINING         — corpus collection
+# ══════════════════════════════════════════════════════════════════════════
+
+# OpenAI — SEARCH/GROUNDING (ChatGPT search citeability)
+User-agent: OAI-SearchBot
+Allow: /
+
+# OpenAI — USER-FETCH (a ChatGPT user asked it to visit)
+User-agent: ChatGPT-User
+Allow: /
+
+# OpenAI — TRAINING
+User-agent: GPTBot
+Allow: /
+
+# OpenAI — SEARCH/GROUNDING (ads grounding fetch)
+User-agent: OAI-AdsBot
+Allow: /
+
+# Microsoft Bing / Copilot — SEARCH/GROUNDING
+User-agent: Bingbot
+Allow: /
+
+# Perplexity — SEARCH/GROUNDING (index & citeability)
+User-agent: PerplexityBot
+Allow: /
+
+# Perplexity — USER-FETCH (a Perplexity user asked it to visit)
+User-agent: Perplexity-User
+Allow: /
+
+# Anthropic Claude — SEARCH/GROUNDING (search citeability)
+User-agent: Claude-SearchBot
+Allow: /
+
+# Anthropic Claude — USER-FETCH (a Claude user asked it to visit)
+User-agent: Claude-User
+Allow: /
+
+# Anthropic Claude — TRAINING
+User-agent: ClaudeBot
+Allow: /
+
+# Google — TRAINING / Gemini grounding opt-in (no effect on Google Search ranking)
+User-agent: Google-Extended
+Allow: /
+
+# Apple — TRAINING (Apple Intelligence opt-in)
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl — TRAINING (open dataset many models train on)
+User-agent: CCBot
+Allow: /
+
+# ── Everyone else, and what stays private ─────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /flagship/
+Disallow: /research/
+Disallow: /growth_engine/
+Disallow: /command/
+Disallow: /stocks/
+
+Sitemap: https://azrestaurantpartners.com/sitemap.xml
