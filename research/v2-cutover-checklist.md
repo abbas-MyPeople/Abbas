@@ -62,3 +62,21 @@ zero hits after `window.scrollTo`. Verify by scrolling, then dispatching
 - [ ] **Meta + Open Graph into `<head>`.** They exist but must sit in the head when
       this becomes a real document.
 - [ ] **Stage at a preview URL** for a click-through before replacing index.html.
+
+## The pinned button
+
+Full width of the bar, capped at the page's content measure so it aligns with
+everything else on a desktop instead of sprawling edge to edge. On a phone that cap
+never binds, so it is literally edge to edge.
+
+The border is live: a solid fill painted on the padding box, a conic gradient painted
+on the border box, and a transparent 2px border letting the gradient through as a rim.
+A registered `@property --sweep` rotates the gradient, so a warm highlight travels the
+perimeter every 4.6s. Where `@property` is unsupported the angle simply never moves and
+the rim renders as a static two-tone border, which is why the resting colours are set to
+look deliberate on their own. The site's global reduced-motion rule already stops it.
+
+Checked against DoorDash first, since that was the reference: **DoorDash does not do
+this.** doordash.com has zero animated elements and zero gradient buttons;
+merchants.doordash.com has only `fadeIn` keyframes. Whatever the reference was, it is
+not on their web surfaces.
