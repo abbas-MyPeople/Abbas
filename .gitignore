@@ -1,3 +1,6 @@
 __pycache__/
 analytics/__pycache__/
 growth_engine/__pycache__/
+
+# v2 build output — regenerate with v2/build.py
+v2/build/
