@@ -222,6 +222,10 @@ def city_page(c: dict, nav: str, footer: str) -> tuple[str, str]:
           <p>{others}</p>
           <h2>By service</h2>
           <p>{services}</p>
+          <h2>The engineering</h2>
+          <p><a href="investors.html" data-track="tech_behind_geo">What we actually built, in
+            engineering detail</a> &mdash; for anyone who wants the technical picture rather
+            than the summary.</p>
         </div>
       </div>
 {cta}    </article>
@@ -307,6 +311,8 @@ def service_page(s: dict, nav: str, footer: str) -> tuple[str, str]:
         <div class="guide__next">
           <h2>Read further</h2>
           <p>{reading}</p>
+          <p><a href="investors.html" data-track="tech_behind_geo">The tech behind it</a> &mdash;
+            what we built and how it is run.</p>
         </div>
       </div>
 {CTA.format(slug=s['slug'])}    </article>

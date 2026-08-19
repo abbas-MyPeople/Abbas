@@ -60,6 +60,7 @@ than any city in the US or Canada, Harris County leading every county
 ## Key pages
 - [Home — the platform + proof](https://azrestaurantpartners.com/)
 - [Full details & pricing](https://azrestaurantpartners.com/details.html)
+- [The tech behind it - for investors & accelerators](https://azrestaurantpartners.com/investors.html) - the forward-deployed engineering model, what is built and how it is operated
 - [Case study — proven on our own restaurant](https://azrestaurantpartners.com/case-study.html)
 - [Guides — plain-English playbooks](https://azrestaurantpartners.com/guides.html)
 - [Restaurant tool finder & directory (100+ tools)](https://azrestaurantpartners.com/toolbox.html)
