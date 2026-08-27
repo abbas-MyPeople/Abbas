@@ -1,7 +1,7 @@
 {
   "symbol": "SPY",
-  "asOf": "2026-08-27T21:04:29Z",
-  "spot": 770.28,
+  "asOf": "2026-08-27T23:13:09Z",
+  "spot": 770.12,
   "riskFree": 0.043,
   "maxDTE": 7,
   "source": "CBOE delayed (~15m)",
