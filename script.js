@@ -152,11 +152,19 @@
         _subject: 'New free-call request — AZ Restaurant Partners', _template: 'table', _captcha: 'false',
       };
       try {
-        const res = await fetch('https://formsubmit.co/ajax/azoeb27@gmail.com', {
+        /* THROUGH OUR OWN GATEWAY, not a public relay into a personal inbox.
+           This used to POST to formsubmit.co addressed to azoeb27@gmail.com. Two costs: the
+           delivery depended entirely on a third party we do not run and never hear from, so a
+           prospect who wrote in during an outage was simply never heard from and there was nothing
+           anywhere to find afterwards; and the person who filled it in got no acknowledgement at
+           all. The gateway journals every submission, emails AZ, and emails the prospect back from
+           AZ Restaurant Partners rather than from a personal Gmail. */
+        const res = await fetch(GATEWAY_FORM, {
           method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(payload),
         });
-        if (!res.ok) throw new Error('bad status');
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok || body.received !== true) throw new Error('bad status');
         form.classList.add('sent');
         const ok = document.createElement('div');
         ok.className = 'form__success';
@@ -173,7 +181,12 @@
     });
   }
 
-  /* ============ A/B EXPERIMENT RUNNER (client-side; static-site safe) ============ */
+  /* One door for everything that leaves any of these systems: it decides who the message is from
+   (a prospect hears from AZ Restaurant Partners, not from a personal mailbox), sends them an
+   acknowledgement, and writes the attempt down whether it lands or not. */
+const GATEWAY_FORM = 'https://wok-voice.fly.dev/gateway/form/az-lead';
+
+/* ============ A/B EXPERIMENT RUNNER (client-side; static-site safe) ============ */
   /* Reads /experiments.json (owner-gated, served at the site root), and for each `running`
      experiment whose `page` matches THIS page: assigns the visitor a STABLE A/B variant, applies
      variant B's DOM change (A = control, untouched), and tags GA4 — the experiment_id + variant
@@ -582,7 +595,7 @@
             _subject: 'Finder lead — AZ Restaurant Partners', _template: 'table', _captcha: 'false',
           };
           try {
-            const res = await fetch('https://formsubmit.co/ajax/azoeb27@gmail.com', {
+            const res = await fetch(GATEWAY_FORM, {
               method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
               body: JSON.stringify(payload),
             });

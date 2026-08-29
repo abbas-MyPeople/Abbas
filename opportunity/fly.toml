@@ -1,0 +1,37 @@
+app = "az-opportunity"
+primary_region = "dfw"
+
+[build]
+  dockerfile = "opportunity/Dockerfile"
+
+[env]
+  OPP_PER_IP_HOUR = "5"
+  OPP_GLOBAL_PER_MIN = "30"
+  CAP_PLACES_TEXT = "4000"
+  CAP_PLACES_NEARBY = "4000"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  # Unlike wok-voice and wok-admin, nothing here has to answer instantly, so the
+  # machine sleeps when idle. A stopped machine bills only its rootfs.
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[http_service.checks]]
+  interval = "30s"
+  timeout = "5s"
+  grace_period = "10s"
+  method = "GET"
+  path = "/health"
+
+# The spend counter must survive a restart, or the monthly cap resets itself
+# every time the machine sleeps and the ceiling stops being a ceiling.
+[mounts]
+  source = "opp_state"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

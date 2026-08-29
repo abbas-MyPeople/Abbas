@@ -1391,16 +1391,20 @@ if(dtabs.length)dpaint(0);
     if(!f.checkValidity()){ f.reportValidity(); track("form_invalid",{form:"pilot"}); return; }
     btn.disabled=true; btn.textContent="Sending\u2026"; note.className="leadnote";
     track("form_submit",{form:"pilot"});
-    var d={}; new FormData(f).forEach(function(v,k){ if(k!=="_honey") d[k]=v; });
+    var d={}; new FormData(f).forEach(function(v,k){ d[k]=v; });
+    d._website=d._honey||""; delete d._honey;   /* the gateway knows the honeypot by this name */
     d._subject="AZ pilot enquiry \u2014 "+(d.restaurant||d.name||"new");
     d.source=(window.azSource&&window.azSource())||"direct / none";  /* where the lead came from */
     d._template="table";
     d._captcha="false";
-    fetch("https://formsubmit.co/ajax/azoeb27@gmail.com",{
+    /* Our own gateway, not a public relay into a personal inbox — it journals the submission,
+       mails AZ, and mails the prospect back AS AZ Restaurant Partners. See script.js for the why. */
+    fetch("https://wok-voice.fly.dev/gateway/form/az-lead",{
       method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
       body:JSON.stringify(d)})
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(){
+      .then(function(b){
+        if(!b||b.received!==true) throw 0;
         f.reset(); btn.textContent="Sent"; note.className="leadnote ok";
         note.textContent="Got it \u2014 we\u2019ll come back to you today.";
         track("form_success",{form:"pilot"});

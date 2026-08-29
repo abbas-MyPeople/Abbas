@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Your Next $500+ Order — Local Group &amp; Catering Opportunities</title>
+  <meta name="description" content="Enter your restaurant. We'll find nearby businesses, organizations and upcoming events that could turn into group orders — ranked, with sources. Free, no signup." />
+  <meta name="theme-color" content="#f4eee2" />
+  <link rel="canonical" href="https://azrestaurantpartners.com/find-large-orders.html" />
+  <meta property="og:title" content="Find your next $500+ order" />
+  <meta property="og:description" content="Who near you is likely to need food? Enter your restaurant and see the nearby organizations and upcoming events worth your next 30 minutes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://azrestaurantpartners.com/find-large-orders.html" />
+  <meta property="og:image" content="https://azrestaurantpartners.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://azrestaurantpartners.com/assets/brand/logo-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://azrestaurantpartners.com/assets/brand/logo-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://azrestaurantpartners.com/assets/brand/logo-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Find your next $500+ order",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "url": "https://azrestaurantpartners.com/find-large-orders.html",
+      "description": "A free tool for independent restaurants that finds nearby organizations and upcoming local events that could turn into group or catering orders, ranked by likely value.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": { "@type": "Organization", "name": "AZ Restaurant Partners" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How do I find catering leads for my restaurant?", "acceptedAnswer": { "@type": "Answer", "text": "Start with what is already near you. Offices, medical practices, schools, places of worship and event venues within a few miles are the realistic buyers of group food, and most of them never hear from the restaurants closest to them. This tool looks at your specific address, finds those organizations and any upcoming public events nearby, and ranks them by likely order size, fit with your menu, timing, distance and whether there is a public way to reach them." } },
+        { "@type": "Question", "name": "Is it really free, and do I have to sign up?", "acceptedAnswer": { "@type": "Answer", "text": "It is free and there is no signup, no email and no card. You enter your restaurant and you get the full result. We would rather you see whether it is useful before we ask you for anything." } },
+        { "@type": "Question", "name": "Where does the information come from?", "acceptedAnswer": { "@type": "Answer", "text": "Public sources only — business listings, organization websites, public event and venue calendars. Every opportunity shows its sources so you can check it yourself. We do not invent attendance figures, headcounts, contact names or dates. Where something is not published, it says so rather than guessing." } },
+        { "@type": "Question", "name": "What counts as a $500 order?", "acceptedAnswer": { "@type": "Answer", "text": "Roughly a tray-level group order — an office lunch for twenty, a team meal, a family gathering at a tournament. The headline describes the type of opportunity we look for, not a guaranteed amount. We never put a fake dollar figure on an individual lead." } }
+      ]
+    }
+  ]
+}
+  </script>
+  <style>
+    /* Scoped to this tool. Uses the site tokens from styles.css. */
+    /* 118px matches .hero in styles.css — the fixed nav needs that clearance. */
+    .tool-hero { padding: 118px 0 10px; }
+    .tool-hero h1 { margin: 0 0 14px; }
+    .tool-hero .lede { font-size: 1.12rem; color: var(--body); max-width: 46ch; margin: 0 0 26px; }
+    .tool-form { display: flex; gap: 10px; flex-wrap: wrap; max-width: 620px; }
+    .tool-form input[type="text"] {
+      flex: 1 1 300px; min-width: 0; font: inherit; font-size: 1rem;
+      padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--card); color: var(--ink);
+    }
+    .tool-form input[type="text"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+    .tool-note { font-size: .88rem; color: var(--muted); margin: 12px 0 0; }
+
+    .stages { list-style: none; margin: 30px 0 0; padding: 0; max-width: 520px; }
+    .stages li {
+      display: flex; align-items: center; gap: 11px; padding: 9px 0;
+      color: var(--muted); font-size: .95rem; border-bottom: 1px solid var(--line-soft);
+    }
+    .stages li:last-child { border-bottom: 0; }
+    .stages li .dot {
+      width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto;
+      background: var(--line); transition: background .3s var(--ease);
+    }
+    .stages li[data-state="active"] { color: var(--ink); }
+    .stages li[data-state="active"] .dot { background: var(--accent); animation: pulse 1.1s infinite; }
+    .stages li[data-state="done"] { color: var(--body); }
+    .stages li[data-state="done"] .dot { background: var(--accent-deep); }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+    @media (prefers-reduced-motion: reduce) { .stages li .dot { animation: none !important; } }
+
+    .results-head { margin: 8px 0 22px; }
+    .results-head h2 { margin: 0 0 6px; }
+    .results-head p { color: var(--muted); margin: 0; }
+
+    .opp {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 20px 22px; margin-bottom: 14px;
+    }
+    .opp__top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+    .opp__name { font-family: Fraunces, Georgia, serif; font-size: 1.18rem; font-weight: 600; color: var(--ink); }
+    .opp__meta { font-size: .88rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .band {
+      display: inline-block; font-size: .7rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; padding: 3px 9px; border-radius: 999px;
+      background: rgba(192,73,43,.1); color: var(--accent-deep); white-space: nowrap;
+    }
+    .opp h4 { font-size: .78rem; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin: 16px 0 7px; font-weight: 600; }
+    .opp ul { margin: 0; padding-left: 19px; color: var(--body); }
+    .opp ul li { margin-bottom: 5px; }
+    .opp__sources { font-size: .86rem; margin-top: 14px; }
+    .opp__sources a { color: var(--accent-deep); }
+
+    .state {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 26px 24px; margin-top: 26px;
+    }
+    .state h3 { margin: 0 0 8px; }
+    .state p { color: var(--body); margin: 0 0 10px; }
+    .state p:last-child { margin-bottom: 0; }
+    .state a { color: var(--accent-deep); border-bottom: 1px solid rgba(192,73,43,.35); font-weight: 500; }
+    .state a:hover { border-bottom-color: var(--accent); }
+
+    .bridge {
+      background: var(--paper-2); border: 1px solid var(--line);
+      border-radius: 14px; padding: 28px 26px; margin-top: 34px;
+    }
+    .bridge h3 { margin: 0 0 10px; }
+    .bridge p { color: var(--body); max-width: 56ch; }
+
+    .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 12px; }
+    @media (max-width: 760px) { .how { grid-template-columns: 1fr; } }
+    .how h3 { font-size: 1rem; margin: 0 0 6px; }
+    .how p { color: var(--body); font-size: .95rem; margin: 0; }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="wrap nav__inner">
+      <a href="index.html" class="brand" aria-label="AZ Restaurant Partners">AZ&nbsp;Restaurant&nbsp;Partners</a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="toolbox.html">Toolbox</a>
+        <a href="guides.html">Guides</a>
+        <a href="details.html">Full details</a>
+        <a href="index.html#contact" class="nav__cta">Book a free call</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="tool-hero">
+      <div class="wrap">
+        <h1>Find your next $500+ order</h1>
+        <p class="lede">Enter your restaurant. We'll find nearby businesses, organizations and events that could turn into group orders.</p>
+
+        <form class="tool-form" id="oppForm" autocomplete="off">
+          <label for="oppInput" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Restaurant name or address</label>
+          <input type="text" id="oppInput" name="restaurant" placeholder="Your restaurant name or address" required />
+          <button type="submit" class="btn btn--primary" id="oppSubmit">Find opportunities</button>
+        </form>
+        <p class="tool-note">Free. No account, no email, no card. Results in under a minute.</p>
+
+        <ul class="stages hidden" id="oppStages" aria-live="polite">
+          <li data-stage="resolve"><span class="dot"></span>Finding your restaurant</li>
+          <li data-stage="context"><span class="dot"></span>Reading your menu and catering setup</li>
+          <li data-stage="nearby"><span class="dot"></span>Looking at nearby organizations</li>
+          <li data-stage="events"><span class="dot"></span>Checking upcoming local events</li>
+          <li data-stage="rank"><span class="dot"></span>Ranking the strongest opportunities</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section hidden" id="oppSection">
+      <div class="wrap">
+        <div id="oppResults" class="hidden">
+          <div class="results-head" id="oppResultsHead"></div>
+          <div id="oppCards"></div>
+
+          <div class="bridge">
+            <h3>Found some worth pursuing?</h3>
+            <p>AZ Restaurant Partners helps independent restaurants turn opportunities like these into repeatable systems — catering funnels, ordering flows, outreach and the automation around them.</p>
+            <a href="index.html#contact" class="btn btn--primary"
+               data-track="az_help_cta_clicked" data-track-source="find_large_orders">Help me turn these into orders</a>
+          </div>
+        </div>
+
+        <div id="oppState" class="hidden"></div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <div class="how">
+          <div>
+            <h3>It starts from your actual restaurant</h3>
+            <p>Not a generic list. We read your public menu, cuisine, hours and catering setup, so a tournament that needs family trays ranks differently than an office that wants weekday lunch.</p>
+          </div>
+          <div>
+            <h3>It ranks, it doesn't just list</h3>
+            <p>Anyone can find nearby offices. The useful question is which five deserve your next thirty minutes — scored on likely order size, fit, timing, distance and whether there's a public way to reach them.</p>
+          </div>
+          <div>
+            <h3>Everything shows its sources</h3>
+            <p>Each opportunity links to where we found it. We don't invent attendance numbers, headcounts, contact names or dates. If something isn't published, it says so.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Common questions</h2>
+        <div class="faq">
+          <details>
+            <summary>Is it really free, and do I have to sign up?</summary>
+            <p>Free, and no. No signup, no email, no card. You get the whole result. We'd rather you find out whether it's useful before we ask you for anything.</p>
+          </details>
+          <details>
+            <summary>Where does the information come from?</summary>
+            <p>Public sources only — business listings, organization websites, public event and venue calendars. Every opportunity shows its sources so you can check it yourself.</p>
+          </details>
+          <details>
+            <summary>What counts as a $500 order?</summary>
+            <p>Roughly a tray-level group order — an office lunch for twenty, a team meal, a family gathering at a tournament. The headline describes the type of opportunity we look for, not a guaranteed amount. We never put a fake dollar figure on an individual lead.</p>
+          </details>
+          <details>
+            <summary>Will you contact these businesses for me?</summary>
+            <p>Not from this tool. It shows you the public route in — a phone number, an organizer page, the right role to ask for. Doing the outreach and building the catering funnel around it is what we do as a paid engagement.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="brand">AZ&nbsp;Restaurant&nbsp;Partners</span>
+      <p><strong>Keep more of what you earn.</strong> For independent, family-run restaurants — a restaurant family + an engineering team · Spring &amp; Greater Houston, TX.</p>
+      <p class="footer__copy">© <span id="year"></span> AZ Restaurant Partners · <a href="index.html">Home</a> · <a href="toolbox.html">Toolbox</a> · <a href="details.html">Full details</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  (function () {
+    /* The backend that does restaurant resolution, nearby-organization lookup,
+       event discovery and ranking. GitHub Pages is static, so this must point at
+       a separate service. Empty until that service is deployed - and while it is
+       empty the tool says so honestly rather than showing invented results. */
+    var ENDPOINT = "";
+
+    var form     = document.getElementById("oppForm");
+    var input    = document.getElementById("oppInput");
+    var submit   = document.getElementById("oppSubmit");
+    var stages   = document.getElementById("oppStages");
+    var results  = document.getElementById("oppResults");
+    var head     = document.getElementById("oppResultsHead");
+    var cards    = document.getElementById("oppCards");
+    var stateBox = document.getElementById("oppState");
+    var section  = document.getElementById("oppSection");
+
+    function track(name, params) {
+      try { if (window.gtag) window.gtag("event", name, params || {}); } catch (e) {}
+    }
+    /* An owner scanning a list reads "Sat 24 Aug", not "2026-08-24". Anything
+       within the week gets the weekday alone, which is how they actually think. */
+    function when(iso) {
+      if (!iso) return null;
+      var d = new Date(iso + "T12:00:00");
+      if (isNaN(d)) return iso;
+      var days = Math.round((d - new Date().setHours(12, 0, 0, 0)) / 86400000);
+      if (days === 0) return "Today";
+      if (days === 1) return "Tomorrow";
+      if (days > 1 && days < 7) return d.toLocaleDateString(undefined, { weekday: "long" });
+      return d.toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short" });
+    }
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+
+    track("free_tool_view", { tool: "find_large_orders" });
+    input.addEventListener("focus", function once() {
+      track("restaurant_search_started", { tool: "find_large_orders" });
+      input.removeEventListener("focus", once);
+    });
+
+    var STAGES = ["resolve", "context", "nearby", "events", "rank"];
+    var timers = [];
+    function runStages() {
+      stages.classList.remove("hidden");
+      stages.querySelectorAll("li").forEach(function (li) { li.removeAttribute("data-state"); });
+      // Paced, not a fake percentage. Each stage marks done as the next begins.
+      STAGES.forEach(function (key, i) {
+        timers.push(setTimeout(function () {
+          var li = stages.querySelector('[data-stage="' + key + '"]');
+          if (!li) return;
+          li.setAttribute("data-state", "active");
+          var prev = stages.querySelector('[data-stage="' + STAGES[i - 1] + '"]');
+          if (prev) prev.setAttribute("data-state", "done");
+        }, i * 2200));
+      });
+    }
+    function stopStages() {
+      timers.forEach(clearTimeout);
+      timers = [];
+      stages.classList.add("hidden");
+    }
+
+    function showState(title, body) {
+      results.classList.add("hidden");
+      section.classList.remove("hidden");
+      stateBox.className = "state";
+      stateBox.innerHTML = "<h3>" + esc(title) + "</h3>" + body;
+    }
+
+    /* The service distinguishes why it has nothing, and so should the page.
+       Telling an owner "nothing found" when the real answer is "we couldn't
+       find your restaurant" or "we're over budget" is a lie by omission. */
+    var REASONS = {
+      not_configured: ["This tool isn't switched on yet",
+        "<p>The search service behind it isn't connected, so there is nothing real to show you — and we won't show you a made-up list to fill the space.</p>"],
+      not_found: ["We couldn't find that restaurant",
+        "<p>Try the full name with the city, or paste your address. If it still misses, your listing may be under a different name than the one on the sign.</p>"],
+      budget: ["This tool is resting until the first of the month",
+        "<p>It runs on a fixed monthly budget so it can stay free, and this month's is spent. It comes back on the 1st.</p>"],
+      busy: ["A lot of people are using this right now",
+        "<p>Give it a minute and try again.</p>"],
+      per_ip: ["That's a few searches in a row",
+        "<p>Take a short break and try again shortly — the limit resets within the hour.</p>"]
+    };
+
+    function render(data) {
+      if (data && data.ok === false) {
+        var r = REASONS[data.reason];
+        if (r) {
+          showState(r[0], r[1] +
+            '<p>If you want us to look at what\'s around your restaurant in the meantime, ' +
+            '<a href="index.html#contact">tell us where you are</a> and we\'ll do it by hand.</p>');
+          track("opportunity_search_failed", { reason: data.reason });
+          return;
+        }
+      }
+
+      var list = (data && data.opportunities) || [];
+      if (!list.length) {
+        showState("Nothing solid enough to show you",
+          "<p>We looked, but nothing nearby cleared the bar with evidence behind it. " +
+          "That happens in quieter areas and in slow weeks for local events.</p>" +
+          "<p>Rather than pad the list with offices you already know about, we'd rather show you nothing. Try again in a week, or " +
+          '<a href="index.html#contact">talk to us</a> and we\'ll look properly.</p>');
+        return;
+      }
+
+      var timed = list.filter(function (o) { return o.band === "Time-sensitive"; }).length;
+      var recurring = list.length - timed;
+      head.innerHTML =
+        "<h2>" + list.length + " opportunit" + (list.length === 1 ? "y" : "ies") +
+        " near " + esc(data.restaurant && data.restaurant.name || "your restaurant") + "</h2>" +
+        "<p>" + timed + " time-sensitive · " + recurring + " recurring group-order prospects</p>";
+
+      cards.innerHTML = list.map(function (o) {
+        var why = (o.why || []).map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("");
+        var src = (o.sources || []).map(function (s) {
+          return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow" ' +
+                 'data-track="opportunity_source_clicked">' + esc(s.title || s.url) + "</a>";
+        }).join(" · ");
+        var meta = [when(o.when), o.distance_miles != null ? o.distance_miles + " mi" : null]
+                     .filter(Boolean).join(" · ");
+        return '<article class="opp">' +
+            '<div class="opp__top">' +
+              '<span class="opp__name">' + esc(o.title) + "</span>" +
+              (o.band ? '<span class="band">' + esc(o.band) + "</span>" : "") +
+            "</div>" +
+            (meta ? '<div class="opp__meta">' + esc(meta) + "</div>" : "") +
+            (o.summary ? "<p>" + esc(o.summary) + "</p>" : "") +
+            (why ? "<h4>Why it fits</h4><ul>" + why + "</ul>" : "") +
+            (o.contact_route ? "<h4>Best route</h4><p>" + esc(o.contact_route) + "</p>" : "") +
+            (src ? '<div class="opp__sources"><h4>Sources</h4>' + src + "</div>" : "") +
+          "</article>";
+      }).join("");
+
+      stateBox.classList.add("hidden");
+      section.classList.remove("hidden");
+      results.classList.remove("hidden");
+      track("opportunity_search_completed", { tool: "find_large_orders" });
+      track("opportunity_result_count", { count: list.length, time_sensitive: timed });
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var q = input.value.trim();
+      if (!q) return;
+
+      submit.disabled = true;
+      stateBox.classList.add("hidden");
+      results.classList.add("hidden");
+      track("opportunity_search_started", { tool: "find_large_orders" });
+
+      if (!ENDPOINT) {
+        submit.disabled = false;
+        showState("This tool isn't switched on yet",
+          "<p>The search service behind it isn't connected, so there is nothing real to show you — " +
+          "and we won't show you a made-up list to fill the space.</p>" +
+          '<p>If you want us to look at what\'s around your restaurant in the meantime, ' +
+          '<a href="index.html#contact">tell us where you are</a> and we\'ll do it by hand.</p>');
+        track("opportunity_search_failed", { reason: "endpoint_not_configured" });
+        return;
+      }
+
+      runStages();
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q })
+      })
+        /* 429 and 503 carry a reason worth showing, so read the body on any
+           status and only fall to the catch when there is no usable JSON. */
+        .then(function (r) {
+          return r.json().catch(function () { throw new Error("http_" + r.status); });
+        })
+        .then(function (data) { stopStages(); render(data); })
+        .catch(function (err) {
+          stopStages();
+          showState("That didn't go through",
+            "<p>We couldn't finish the search. It's us, not you — try again in a moment.</p>" +
+            '<p>If it keeps failing, <a href="index.html#contact">let us know</a> and we\'ll look at your area by hand.</p>');
+          track("opportunity_search_failed", { reason: String(err && err.message || "unknown") });
+        })
+        .then(function () { submit.disabled = false; });
+    });
+
+    /* Delegated: card opens and source clicks. */
+    document.addEventListener("click", function (e) {
+      var el = e.target.closest && e.target.closest("[data-track]");
+      if (!el) return;
+      var params = {};
+      Array.prototype.forEach.call(el.attributes, function (a) {
+        if (a.name.indexOf("data-track-") === 0) params[a.name.slice(11).replace(/-/g, "_")] = a.value;
+      });
+      track(el.getAttribute("data-track"), params);
+    });
+  })();
+  </script>
+</body>
+</html>
